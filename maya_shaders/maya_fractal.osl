@@ -1,0 +1,180 @@
+/////////////////////////////////////////////////////////////////////////////
+// Copyright (c) 2009-2010 Sony Pictures Imageworks Inc., et al.
+// All Rights Reserved.
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions are
+// met:
+// * Redistributions of source code must retain the above copyright
+//   notice, this list of conditions and the following disclaimer.
+// * Redistributions in binary form must reproduce the above copyright
+//   notice, this list of conditions and the following disclaimer in the
+//   documentation and/or other materials provided with the distribution.
+// * Neither the name of Sony Pictures Imageworks nor the names of its
+//   contributors may be used to endorse or promote products derived from
+//   this software without specific prior written permission.
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#include "mayautil.h"
+#include "stdosl.h"
+
+float
+get2DNoise(float x, float y, float px, float py, float inflection)
+{
+	float noise;
+
+	if( inflection == 0 ) 
+		noise =  pnoise("uperlin", x, y, px, py) - 0.5;
+	else
+		noise = abs(pnoise("uperlin", x, y, px, py) - 0.5);
+
+	return noise;
+}
+
+float
+get3DNoise(float x, float y, float z, float px, float py, float pz, float inflection)
+{
+	float noise;  
+	point p = point(x, y, z);
+	 point period = point(px, py, pz);
+
+	if( inflection == 0 )
+		noise = pnoise("uperlin", p, period) - 0.5;
+	else
+		noise = abs(pnoise("uperlin", p, period) - 0.5);
+
+	return noise;
+}
+
+shader maya_fractal
+[[ string help = "Maya fractal"]]
+(
+	// Inputs
+	//
+        float i_alphaGain               =1.0,
+        float i_alphaIsLuminance        =1.0,
+        float i_alphaOffset             =0.0,
+        float i_amplitude               =1.0,
+        float i_bias                    =0.0,
+        color i_colorGain               =color(1.0, 1.0, 1.0),
+        color i_colorOffset             =0.0,
+        color i_defaultColor            =color(0.5, 0.5, 0.5),
+        float i_frequencyRatio          =2.0,
+        float i_invert                  =0,
+        float i_levelMin                =0.0,
+        float i_levelMax                =9.0,
+        float i_ratio                   =0.707,
+        float i_threshold               =0.0,
+        float i_inflection              =0,
+        float i_animated                =0,
+        float i_time                    =0,
+        float i_timeRatio               =2.0,
+        vector i_uvCoord				= vector(0, 0, 0),
+	
+	// Outputs
+	//
+	output float o_outAlpha             =0,
+	output color o_outColor             =color(1.0, 1.0, 1.0)
+	)
+{
+	float ss = i_uvCoord[0];
+	float tt = i_uvCoord[1]; // we invert v in place2dTexture, but this makes the checker different with Maya. so we have to imvert v back.
+
+
+	if(ISUVDEFINED(ss, tt))
+	{
+		ss = mod(ss, WRAPMAX);
+		tt = mod(tt, WRAPMAX);
+    
+		point pp = point( ss, tt, 0 ) * 15;
+
+		float result = 0;
+		float amp = i_amplitude*2; /* our noise is between -0.5 and 0.5 */
+		float curFreq = 10.0; /* 10 = Maya fudge factor */
+		float inv_frequencyRatio = 1.0 / i_frequencyRatio;
+
+		float pixel_size = max(filterwidth(tt*curFreq), filterwidth(ss*curFreq));
+		float pixel = 1.0;
+
+		float time = 0;
+		float timeRatio = 0;
+
+		if (i_animated != 0)
+		{
+			time = i_time;
+			timeRatio = i_timeRatio;
+		}
+ 
+		 float curTimeFreq = 10.0;
+
+		 float i=0;
+		while( (i<=i_levelMax && pixel>pixel_size) || (i<i_levelMin) ) 
+		{
+			float noise;
+			
+			if( i_animated != 0 )
+			{
+				noise = get3DNoise(ss * curFreq, tt * curFreq, time * curTimeFreq,
+													 curFreq, curFreq, curTimeFreq, i_inflection);
+				
+				curTimeFreq *= i_timeRatio;
+			}
+			else
+			{
+				noise = get2DNoise(ss * curFreq, tt * curFreq, curFreq, curFreq, i_inflection);
+			}
+
+			float next_pixel = pixel * inv_frequencyRatio;
+			if( next_pixel < pixel_size )
+			{
+				noise *= 1 - smoothstep( next_pixel, pixel, pixel_size );
+			}
+
+			result += amp * noise;
+			curFreq *= i_frequencyRatio;
+			amp *= i_ratio;
+			pixel = next_pixel;
+			i+=1.0;
+		}
+
+		/* center around 0.5 */
+		if( i_inflection == 0 )
+			result = (result*0.5 + 0.5);
+
+		result += i_threshold;
+		result = clamp(result, 0, 1);
+
+		o_outColor = color(result, result, result);
+		o_outAlpha = result;
+
+		colorBalance(o_outColor, 
+			o_outAlpha,
+			i_alphaIsLuminance,
+			i_alphaGain,
+			i_alphaOffset,
+			i_colorGain,
+			i_colorOffset,
+			i_invert);
+	}
+	else
+	{
+		o_outColor = i_defaultColor;
+		o_outAlpha = 1.0;
+	}
+}
+	
+
+
