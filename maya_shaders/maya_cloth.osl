@@ -14,24 +14,27 @@ shader maya_cloth
 [[ string help = "Maya Cloth"]]
 (
 	// Inputs
-	float i_alphaGain =1.0,
-	int		i_alphaIsLuminance			= 0,
-	float i_alphaOffset = 0.0,
+	color i_gapColor = 0.0,
+	color i_uColor = 1.0,
+	color i_vColor = 0.5,
+	float i_uWidth = 0.75,
+	float i_vWidth = 0.75,
+	float i_uWave = 0.0,
+	float i_vWave = 0.0,
+	float i_randomness = 0.0,
+	float i_widthSpread = 0.0,
 	float i_brightSpread = 0.0,
+	
+	color i_defaultColor = 0.5,
 	color i_colorGain = 1.0,
 	color i_colorOffset = 0.0,
-	color i_defaultColor = 0.5,
-	color i_gapColor = 0.0,
-	float i_invert = 0.0,
-	float i_randomness = 0.0,
-	color i_uColor = 1.0,
+	float i_alphaGain =1.0,
+	float i_alphaOffset = 0.0,
+	
+	int i_invert	= 0,
 	vector i_uvCoord = vector(0.0,0.0,0.0),
-	float i_uWave = 0.0,
-	float i_uWidth = 0.75,
-	color i_vColor = 0.5,
-	float i_vWave = 0.0,
-	float i_vWidth = 0.75,
-	float i_widthSpread = 0.0,
+	
+	int i_alphaIsLuminance = 0,
 	
 	// Outputs
 	output float o_outAlpha =1.0,
@@ -148,12 +151,14 @@ shader maya_cloth
 		
 		colorBalance(o_outColor, 
 			o_outAlpha,
-			1.0,
+			i_alphaIsLuminance,
 			i_alphaGain,
 			i_alphaOffset,
 			i_colorGain,
 			i_colorOffset,
-			i_invert);
+			i_invert
+		);
+		
 	}
 	else
 	{
