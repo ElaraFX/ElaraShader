@@ -1,0 +1,2693 @@
+# ess
+
+node "mtoer_error" "mtoer_error" # "osl_node"
+end
+node "osl_shadergroup" "mtoer_error_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #1
+		"mtoer_error"
+end
+node "material" "mtoer_error_mtl" # "material"
+	ref "surface_shader" "mtoer_error_osl"
+	ref "displace_shader" ""
+	ref "volume_shader" ""
+	ref "env_shader" ""
+end
+node "mtoer_sphereUV" "mtoer_sphereuv_shader" # "osl_node"
+end
+node "maya_ei_preset_aovs" "maya_ei_preset_aovs_0" # "osl_node"
+	color "aov_barycentric_coords" 0.000000 0.000000 0.000000
+	color "aov_bump_difference" 0.000000 0.000000 0.000000
+	color "aov_Ng" 0.000000 0.000000 0.000000
+	color "aov_N" 0.000000 0.000000 0.000000
+	color "aov_object_name" 0.000000 0.000000 0.000000
+	color "aov_material_id" 0.000000 0.000000 0.000000
+	color "aov_primitive_id" 0.000000 0.000000 0.000000
+	color "aov_shading_point" 0.000000 0.000000 0.000000
+	color "aov_u" 0.000000 0.000000 0.000000
+	color "aov_unbumped_N" 0.000000 0.000000 0.000000
+	color "aov_uniform_id" 0.000000 0.000000 0.000000
+	color "aov_dPdu" 0.000000 0.000000 0.000000
+	color "aov_uv" 0.000000 0.000000 0.000000
+	color "aov_v" 0.000000 0.000000 0.000000
+	color "aov_dPdv" 0.000000 0.000000 0.000000
+	color "aov_P" 0.000000 0.000000 0.000000
+	color "aov_Pref" 0.000000 0.000000 0.000000
+	color "aov_bad_uv" 0.000000 0.000000 0.000000
+	color "aov_subdiv_edge_length" 0.000000 0.000000 0.000000
+	color "aov_polygon_wireframe" 0.000000 0.000000 0.000000
+	color "aov_reflection_lines" 0.000000 0.000000 0.000000
+	color "aov_subdiv_pixel_error" 0.000000 0.000000 0.000000
+	color "aov_triangle_wireframe" 0.000000 0.000000 0.000000
+	color "aov_cputime" 0.000000 0.000000 0.000000
+	color "aov_motionvector" 0.000000 0.000000 0.000000
+	color "aov_raycount" 0.000000 0.000000 0.000000
+	color "aov_zdepth" 0.000000 0.000000 0.000000
+end
+node "approx" "defaultElaraApprox" # "approx"
+	enum "method" "regular"
+	bool "view_dep" off
+	scalar "sharp" 0.000000
+	int "min_subdiv" 0
+	int "max_subdiv" 5
+	int "max_grid_size" 65536
+	scalar "motion_factor" 16.000000
+	int "u_subdiv" 0
+	int "v_subdiv" 0
+	scalar "edge_length" 0.000000
+end
+node "options" "options" # "options"
+	int "min_samples" -3
+	int "max_samples" 16
+	bool "progressive" on
+	int "bucket_size" 64
+	enum "filter" "gaussian"
+	scalar "filter_size" 3.000000
+	ref "approx" ""
+	scalar "max_displace" 1.000000
+	bool "motion" off
+	int "glossy_samples" 4
+	int "diffuse_samples" 8
+	int "sss_samples" 16
+	int "volume_indirect_samples" 8
+	int "transp_depth" 10
+	int "reflect_depth" 2
+	int "glossy_depth" 1
+	int "diffuse_depth" 1
+	int "refract_depth" 8
+	int "sum_depth" 10
+	bool "shadow" on
+	bool "caustic" off
+	scalar "bias" 0.000000
+	scalar "step_size" 1.000000
+	bool "lens" on
+	bool "volume" on
+	bool "geometry" on
+	bool "displace" off
+	bool "imager" on
+	enum "face" "both"
+	ref "dicing_camera" ""
+	bool "use_clamp" off
+	scalar "clamp_value" 20.000000
+	scalar "light_cutoff" 0.001000
+	declare token "texture_searchpath" "R:/MyDocuments/maya/projects/default/sourceimages"
+	declare token "procedural_searchpath" "R:/MyDocuments/maya/projects/default/"
+	declare scalar "frame" 4.000000
+	declare token "render_layer" "defaultRenderLayer"
+	declare scalar "fps" 24.000000
+	declare token "render_camera" "cameraShape1_inst"
+	declare token "render_instgroup" "instgroup_00"
+end
+node "camera" "perspShape" # "camera"
+	#output_list is array but not valid, skip
+	ref "imager_shader" ""
+	ref "atmo_shader" ""
+	ref "env_shader" ""
+	ref "lens_shader" ""
+	scalar "focal" 35.000000
+	scalar "aperture" 36.000000
+	scalar "aspect" 1.333000
+	int "res_x" 320
+	int "res_y" 240
+	int "window_xmin" -2147483648
+	int "window_xmax" 2147483647
+	int "window_ymin" -2147483648
+	int "window_ymax" 2147483647
+	scalar "clip_hither" 0.100000
+	scalar "clip_yon" 10000.000000
+	declare scalar "eiAOVZDepthMin" 100.000000
+	declare scalar "eiAOVZDepthMax" 300.000000
+end
+node "instance" "perspShape_inst" # "instance"
+	ref "element" "perspShape"
+	matrix "transform"
+	0.998240 0.000000 -0.059306 0.000000
+	-0.058082 0.202132 -0.977634 0.000000
+	0.011988 0.979358 0.201776 0.000000
+	0.299275 24.449810 5.037364 1.000000
+	matrix "motion_transform"
+	0.998240 0.000000 -0.059306 0.000000
+	-0.058082 0.202132 -0.977634 0.000000
+	0.011988 0.979358 0.201776 0.000000
+	0.299275 24.449810 5.037364 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" on
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+	#mtl_list is array but not valid, skip
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 340282346638528860000000000000000000000.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "camera" "topShape" # "camera"
+	#output_list is array but not valid, skip
+	ref "imager_shader" ""
+	ref "atmo_shader" ""
+	ref "env_shader" ""
+	ref "lens_shader" ""
+	scalar "focal" 340282346638528860000000000000000000000.000000
+	scalar "aperture" 30.000000
+	scalar "aspect" 1.333000
+	int "res_x" 320
+	int "res_y" 240
+	int "window_xmin" -2147483648
+	int "window_xmax" 2147483647
+	int "window_ymin" -2147483648
+	int "window_ymax" 2147483647
+	scalar "clip_hither" 0.100000
+	scalar "clip_yon" 10000.000000
+	declare scalar "eiAOVZDepthMin" 100.000000
+	declare scalar "eiAOVZDepthMax" 300.000000
+end
+node "instance" "topShape_inst" # "instance"
+	ref "element" "topShape"
+	matrix "transform"
+	1.000000 0.000000 -0.000000 0.000000
+	-0.000000 0.000000 -1.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 100.099998 0.000000 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 -0.000000 0.000000
+	-0.000000 0.000000 -1.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 100.099998 0.000000 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" on
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+	#mtl_list is array but not valid, skip
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 340282346638528860000000000000000000000.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "camera" "frontShape" # "camera"
+	#output_list is array but not valid, skip
+	ref "imager_shader" ""
+	ref "atmo_shader" ""
+	ref "env_shader" ""
+	ref "lens_shader" ""
+	scalar "focal" 340282346638528860000000000000000000000.000000
+	scalar "aperture" 30.000000
+	scalar "aspect" 1.333000
+	int "res_x" 320
+	int "res_y" 240
+	int "window_xmin" -2147483648
+	int "window_xmax" 2147483647
+	int "window_ymin" -2147483648
+	int "window_ymax" 2147483647
+	scalar "clip_hither" 0.100000
+	scalar "clip_yon" 10000.000000
+	declare scalar "eiAOVZDepthMin" 100.000000
+	declare scalar "eiAOVZDepthMax" 300.000000
+end
+node "instance" "frontShape_inst" # "instance"
+	ref "element" "frontShape"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	0.000000 0.000000 100.099998 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	0.000000 0.000000 100.099998 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" on
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+	#mtl_list is array but not valid, skip
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 340282346638528860000000000000000000000.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "camera" "sideShape" # "camera"
+	#output_list is array but not valid, skip
+	ref "imager_shader" ""
+	ref "atmo_shader" ""
+	ref "env_shader" ""
+	ref "lens_shader" ""
+	scalar "focal" 340282346638528860000000000000000000000.000000
+	scalar "aperture" 30.000000
+	scalar "aspect" 1.333000
+	int "res_x" 320
+	int "res_y" 240
+	int "window_xmin" -2147483648
+	int "window_xmax" 2147483647
+	int "window_ymin" -2147483648
+	int "window_ymax" 2147483647
+	scalar "clip_hither" 0.100000
+	scalar "clip_yon" 10000.000000
+	declare scalar "eiAOVZDepthMin" 100.000000
+	declare scalar "eiAOVZDepthMax" 300.000000
+end
+node "instance" "sideShape_inst" # "instance"
+	ref "element" "sideShape"
+	matrix "transform"
+	0.000000 0.000000 -1.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	1.000000 0.000000 0.000000 0.000000
+	100.099998 0.000000 0.000000 1.000000
+	matrix "motion_transform"
+	0.000000 0.000000 -1.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	1.000000 0.000000 0.000000 0.000000
+	100.099998 0.000000 0.000000 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" on
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+	#mtl_list is array but not valid, skip
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 340282346638528860000000000000000000000.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "outvar" "output_default_color" # "outvar"
+	token "name" "color"
+	enum "type" "color"
+	bool "filter" on
+end
+node "outvar" "output_default_alpha" # "outvar"
+	token "name" "opacity"
+	enum "type" "color"
+	bool "filter" on
+end
+node "output" "output_default" # "output"
+	token "filename" "R:/MyDocuments/maya/projects/default/images/test.png"
+	enum "data_type" "rgba"
+		ref[] "var_list" 1  #2
+		"output_default_color"
+		"output_default_alpha"
+end
+node "outvar" "outvar_beauty" # "outvar"
+	token "name" "color"
+	enum "type" "color"
+	bool "filter" on
+end
+node "outvar" "outvar_beauty_alpha" # "outvar"
+	token "name" "opacity"
+	enum "type" "color"
+	bool "filter" on
+end
+node "output" "output_beauty" # "output"
+	token "filename" "R:/MyDocuments/maya/projects/default/images/beauty/test.png"
+	enum "data_type" "rgba"
+		ref[] "var_list" 1  #2
+		"outvar_beauty"
+		"outvar_beauty_alpha"
+end
+node "maya_envSphere" "mtoer_maya_envSphere" # "osl_node"
+	color "i_image" 0.000000 0.000000 0.000000
+	scalar "i_shearU" 0.000000
+	scalar "i_shearV" 0.000000
+	token "i_filename" ""
+	int "i_flip" 0
+end
+node "osl_shadergroup" "mtoer_maya_envSphere_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"mtoer_sphereuv_shader"
+		"mtoer_maya_envSphere"
+end
+node "camera" "cameraShape1" # "camera"
+		ref[] "output_list" 1  #2
+		"output_default"
+		"output_beauty"
+	ref "imager_shader" ""
+	ref "atmo_shader" ""
+	ref "env_shader" "mtoer_maya_envSphere_osl"
+	ref "lens_shader" ""
+	scalar "focal" 35.000000
+	scalar "aperture" 31.991999
+	scalar "aspect" 1.333000
+	int "res_x" 320
+	int "res_y" 240
+	int "window_xmin" -2147483648
+	int "window_xmax" 2147483647
+	int "window_ymin" -2147483648
+	int "window_ymax" 2147483647
+	scalar "clip_hither" 0.100000
+	scalar "clip_yon" 10000.000000
+	declare scalar "eiAOVZDepthMin" 100.000000
+	declare scalar "eiAOVZDepthMax" 300.000000
+end
+node "instance" "cameraShape1_inst" # "instance"
+	ref "element" "cameraShape1"
+	matrix "transform"
+	1.000000 0.000000 -0.000000 0.000000
+	-0.000000 0.000000 -1.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.232002 27.821072 -0.377003 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 -0.000000 0.000000
+	-0.000000 0.000000 -1.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.232002 27.821072 -0.377003 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" on
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+	#mtl_list is array but not valid, skip
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 340282346638528860000000000000000000000.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "pointlight" "pointLightShape1" # "light"
+	scalar "intensity" 250.000000
+	color "color" 1.000000 1.000000 1.000000
+	int "samples" 1
+	int "volume_samples" 16
+	ref "shader" ""
+end
+node "instance" "pointLightShape1_inst" # "instance"
+	ref "element" "pointLightShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	-2.276560 3.569489 0.000000 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	-2.276560 3.569489 0.000000 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" on
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+	#mtl_list is array but not valid, skip
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 340282346638528860000000000000000000000.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "pointlight" "default:pointLightShape1" # "light"
+	scalar "intensity" 10.000000
+	color "color" 1.000000 1.000000 1.000000
+	int "samples" 1
+	int "volume_samples" 16
+	ref "shader" ""
+end
+node "instance" "default:pointLightShape1_inst" # "instance"
+	ref "element" "default:pointLightShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	-2.878736 2.984419 -2.099408 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	-2.878736 2.984419 -2.099408 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" off
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" on
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+	#mtl_list is array but not valid, skip
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 340282346638528860000000000000000000000.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "pointlight" "contrast:pointLightShape1" # "light"
+	scalar "intensity" 10.000000
+	color "color" 1.000000 1.000000 1.000000
+	int "samples" 1
+	int "volume_samples" 16
+	ref "shader" ""
+end
+node "instance" "contrast:pointLightShape1_inst" # "instance"
+	ref "element" "contrast:pointLightShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	3.101830 2.984419 -2.099408 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	3.101830 2.984419 -2.099408 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" off
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" on
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+	#mtl_list is array but not valid, skip
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 340282346638528860000000000000000000000.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "pointlight" "color:pointLightShape1" # "light"
+	scalar "intensity" 10.000000
+	color "color" 1.000000 1.000000 1.000000
+	int "samples" 1
+	int "volume_samples" 16
+	ref "shader" ""
+end
+node "instance" "color:pointLightShape1_inst" # "instance"
+	ref "element" "color:pointLightShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	3.101830 2.984419 2.576897 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	3.101830 2.984419 2.576897 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" off
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" on
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+	#mtl_list is array but not valid, skip
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 340282346638528860000000000000000000000.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "pointlight" "color_gain:pointLightShape1" # "light"
+	scalar "intensity" 10.000000
+	color "color" 1.000000 1.000000 1.000000
+	int "samples" 1
+	int "volume_samples" 16
+	ref "shader" ""
+end
+node "instance" "color_gain:pointLightShape1_inst" # "instance"
+	ref "element" "color_gain:pointLightShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	-3.075457 2.984419 2.576897 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	-3.075457 2.984419 2.576897 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" off
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" on
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+	#mtl_list is array but not valid, skip
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 340282346638528860000000000000000000000.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "pointlight" "color_offset:pointLightShape1" # "light"
+	scalar "intensity" 10.000000
+	color "color" 1.000000 1.000000 1.000000
+	int "samples" 1
+	int "volume_samples" 16
+	ref "shader" ""
+end
+node "instance" "color_offset:pointLightShape1_inst" # "instance"
+	ref "element" "color_offset:pointLightShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	-3.075457 2.984419 6.987016 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	-3.075457 2.984419 6.987016 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" off
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" on
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+	#mtl_list is array but not valid, skip
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 340282346638528860000000000000000000000.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "pointlight" "alpha_gain:pointLightShape1" # "light"
+	scalar "intensity" 10.000000
+	color "color" 1.000000 1.000000 1.000000
+	int "samples" 1
+	int "volume_samples" 16
+	ref "shader" ""
+end
+node "instance" "alpha_gain:pointLightShape1_inst" # "instance"
+	ref "element" "alpha_gain:pointLightShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	8.210943 2.984419 6.987016 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	8.210943 2.984419 6.987016 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" off
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" on
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+	#mtl_list is array but not valid, skip
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 340282346638528860000000000000000000000.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "pointlight" "alpha_offset:pointLightShape1" # "light"
+	scalar "intensity" 10.000000
+	color "color" 1.000000 1.000000 1.000000
+	int "samples" 1
+	int "volume_samples" 16
+	ref "shader" ""
+end
+node "instance" "alpha_offset:pointLightShape1_inst" # "instance"
+	ref "element" "alpha_offset:pointLightShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	8.165483 3.943429 6.987016 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	8.165483 3.943429 6.987016 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" off
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" on
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+	#mtl_list is array but not valid, skip
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 340282346638528860000000000000000000000.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "pointlight" "alpha_invert:pointLightShape1" # "light"
+	scalar "intensity" 10.000000
+	color "color" 1.000000 1.000000 1.000000
+	int "samples" 1
+	int "volume_samples" 16
+	ref "shader" ""
+end
+node "instance" "alpha_invert:pointLightShape1_inst" # "instance"
+	ref "element" "alpha_invert:pointLightShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	8.165483 3.943429 2.789063 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	8.165483 3.943429 2.789063 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" off
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" on
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+	#mtl_list is array but not valid, skip
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 340282346638528860000000000000000000000.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "pointlight" "filter:pointLightShape1" # "light"
+	scalar "intensity" 10.000000
+	color "color" 1.000000 1.000000 1.000000
+	int "samples" 1
+	int "volume_samples" 16
+	ref "shader" ""
+end
+node "instance" "filter:pointLightShape1_inst" # "instance"
+	ref "element" "filter:pointLightShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	8.165483 3.943429 -2.260757 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	8.165483 3.943429 -2.260757 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" off
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" on
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+	#mtl_list is array but not valid, skip
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 340282346638528860000000000000000000000.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "pointlight" "filter_offset:pointLightShape1" # "light"
+	scalar "intensity" 10.000000
+	color "color" 1.000000 1.000000 1.000000
+	int "samples" 1
+	int "volume_samples" 16
+	ref "shader" ""
+end
+node "instance" "filter_offset:pointLightShape1_inst" # "instance"
+	ref "element" "filter_offset:pointLightShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	8.165483 3.943429 -6.552103 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	8.165483 3.943429 -6.552103 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" off
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" on
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+	#mtl_list is array but not valid, skip
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 340282346638528860000000000000000000000.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "pointlight" "filter_invert:pointLightShape1" # "light"
+	scalar "intensity" 10.000000
+	color "color" 1.000000 1.000000 1.000000
+	int "samples" 1
+	int "volume_samples" 16
+	ref "shader" ""
+end
+node "instance" "filter_invert:pointLightShape1_inst" # "instance"
+	ref "element" "filter_invert:pointLightShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	2.750184 3.943429 -7.382437 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	2.750184 3.943429 -7.382437 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" off
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" on
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+	#mtl_list is array but not valid, skip
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 340282346638528860000000000000000000000.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "poly" "default:pPlaneShape1" # "object"
+		point[] "pos_list" 1  #4
+		-2.500023 -0.000000 1.970286
+		2.500023 -0.000000 1.970286
+		-2.500023 0.000000 -1.970286
+		2.500023 0.000000 -1.970286
+		index[] "triangle_list" 1  #6
+		0
+		1
+		2
+		2
+		1
+		3
+	declare vector [] "N" varying
+		vector[] "N" 1  #4
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+	declare vector2 [] "uv" varying
+		vector2[] "uv" 1  #4
+		0.000000 0.000000
+		1.000000 0.000000
+		0.000000 0.788107
+		1.000000 0.788107
+end
+node "maya_place2dTexture" "default:place2dTexture1" # "osl_node"
+	scalar "i_coverageU" 1.000000
+	scalar "i_coverageV" 1.000000
+	int "i_mirrorU" 0
+	int "i_mirrorV" 0
+	scalar "i_noiseU" 0.000000
+	scalar "i_noiseV" 0.000000
+	scalar "i_offsetU" 0.000000
+	scalar "i_offsetV" 0.000000
+	scalar "i_repeatU" 4.000000
+	scalar "i_repeatV" 4.000000
+	scalar "i_rotateFrame" 0.000000
+	scalar "i_rotateUV" 0.000000
+	int "i_stagger" 0
+	scalar "i_translateFrameU" 0.000000
+	scalar "i_translateFrameV" 0.000000
+	int "i_wrapU" 1
+	int "i_wrapV" 1
+	token "i_mtoer_uvSetName" "uv"
+	vector "o_outUV" 0.000000 0.000000 0.000000
+end
+node "maya_checker" "default:checker1" # "osl_node"
+	scalar "i_alphaGain" 1.000000
+	int "i_alphaIsLuminance" 0
+	scalar "i_alphaOffset" 0.000000
+	color "i_color1" 1.000000 1.000000 1.000000
+	color "i_color2" 0.000000 0.000000 0.000000
+	color "i_colorGain" 1.000000 1.000000 1.000000
+	color "i_colorOffset" 0.000000 0.000000 0.000000
+	scalar "i_contrast" 1.000000
+	color "i_defaultColor" 0.500000 0.500000 0.500000
+	scalar "i_filter" 1.000000
+	scalar "i_filterOffset" 0.000000
+	int "i_invert" 0
+	param_link "i_uvCoord" "default:place2dTexture1" "o_outUV"
+	scalar "o_outAlpha" 0.000000
+	color "o_outColor" 0.000000 0.000000 0.000000
+end
+node "maya_lambert" "default:lambert2" # "osl_node"
+	color "i_ambientColor" 0.000000 0.000000 0.000000
+	param_link "i_color" "default:checker1" "o_outColor"
+	scalar "i_diffuse" 0.800000
+	color "i_incandescence" 0.000000 0.000000 0.000000
+	int "i_matteOpacityMode" 2
+	scalar "i_matteOpacity" 1.000000
+	int "i_refractions" 0
+	scalar "i_refractiveIndex" 1.000000
+	int "i_refractionLimit" 6
+	scalar "i_lightAbsorbance" 0.000000
+	scalar "i_shadowAttenuation" 0.500000
+	vector "i_normalCamera" 1.000000 1.000000 1.000000
+	color "i_transparency" 0.000000 0.000000 0.000000
+	scalar "i_translucence" 0.000000
+	scalar "i_translucenceDepth" 0.500000
+	scalar "i_translucenceFocus" 0.500000
+	int "i_mtoer_hasBump" 0
+	color "o_outColor" 0.000000 0.000000 0.000000
+	color "o_outTransparency" 0.000000 0.000000 0.000000
+	# not support param(o_outClosure) type((null))
+	# not support param(result) type((null))
+	scalar "result_alpha" 0.000000
+end
+node "osl_shadergroup" "default:lambert2_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"default:lambert2"
+		"maya_ei_preset_aovs_0"
+end
+node "material" "default:lambert2SG" # "material"
+	ref "surface_shader" "default:lambert2_osl"
+	ref "displace_shader" ""
+	ref "volume_shader" ""
+	ref "env_shader" ""
+end
+node "instance" "default:pPlaneShape1_inst" # "instance"
+	ref "element" "default:pPlaneShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	-3.305512 0.000000 -2.363814 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	-3.305512 0.000000 -2.363814 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" on
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+		ref[] "mtl_list" 1  #1
+		"default:lambert2SG"
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 1.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "poly" "contrast:pPlaneShape1" # "object"
+		point[] "pos_list" 1  #4
+		-2.500023 -0.000000 1.970286
+		2.500023 -0.000000 1.970286
+		-2.500023 0.000000 -1.970286
+		2.500023 0.000000 -1.970286
+		index[] "triangle_list" 1  #6
+		0
+		1
+		2
+		2
+		1
+		3
+	declare vector [] "N" varying
+		vector[] "N" 1  #4
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+	declare vector2 [] "uv" varying
+		vector2[] "uv" 1  #4
+		0.000000 0.000000
+		1.000000 0.000000
+		0.000000 0.788107
+		1.000000 0.788107
+end
+node "maya_place2dTexture" "contrast:place2dTexture1" # "osl_node"
+	scalar "i_coverageU" 1.000000
+	scalar "i_coverageV" 1.000000
+	int "i_mirrorU" 0
+	int "i_mirrorV" 0
+	scalar "i_noiseU" 0.000000
+	scalar "i_noiseV" 0.000000
+	scalar "i_offsetU" 0.000000
+	scalar "i_offsetV" 0.000000
+	scalar "i_repeatU" 4.000000
+	scalar "i_repeatV" 4.000000
+	scalar "i_rotateFrame" 0.000000
+	scalar "i_rotateUV" 0.000000
+	int "i_stagger" 0
+	scalar "i_translateFrameU" 0.000000
+	scalar "i_translateFrameV" 0.000000
+	int "i_wrapU" 1
+	int "i_wrapV" 1
+	token "i_mtoer_uvSetName" "uv"
+	vector "o_outUV" 0.000000 0.000000 0.000000
+end
+node "maya_checker" "contrast:checker1" # "osl_node"
+	scalar "i_alphaGain" 1.000000
+	int "i_alphaIsLuminance" 0
+	scalar "i_alphaOffset" 0.000000
+	color "i_color1" 1.000000 1.000000 1.000000
+	color "i_color2" 0.000000 0.000000 0.000000
+	color "i_colorGain" 1.000000 1.000000 1.000000
+	color "i_colorOffset" 0.000000 0.000000 0.000000
+	scalar "i_contrast" 0.500000
+	color "i_defaultColor" 0.500000 0.500000 0.500000
+	scalar "i_filter" 1.000000
+	scalar "i_filterOffset" 0.000000
+	int "i_invert" 0
+	param_link "i_uvCoord" "contrast:place2dTexture1" "o_outUV"
+	scalar "o_outAlpha" 0.000000
+	color "o_outColor" 0.000000 0.000000 0.000000
+end
+node "maya_lambert" "contrast:lambert2" # "osl_node"
+	color "i_ambientColor" 0.000000 0.000000 0.000000
+	param_link "i_color" "contrast:checker1" "o_outColor"
+	scalar "i_diffuse" 0.800000
+	color "i_incandescence" 0.000000 0.000000 0.000000
+	int "i_matteOpacityMode" 2
+	scalar "i_matteOpacity" 1.000000
+	int "i_refractions" 0
+	scalar "i_refractiveIndex" 1.000000
+	int "i_refractionLimit" 6
+	scalar "i_lightAbsorbance" 0.000000
+	scalar "i_shadowAttenuation" 0.500000
+	vector "i_normalCamera" 1.000000 1.000000 1.000000
+	color "i_transparency" 0.000000 0.000000 0.000000
+	scalar "i_translucence" 0.000000
+	scalar "i_translucenceDepth" 0.500000
+	scalar "i_translucenceFocus" 0.500000
+	int "i_mtoer_hasBump" 0
+	color "o_outColor" 0.000000 0.000000 0.000000
+	color "o_outTransparency" 0.000000 0.000000 0.000000
+	# not support param(o_outClosure) type((null))
+	# not support param(result) type((null))
+	scalar "result_alpha" 0.000000
+end
+node "osl_shadergroup" "contrast:lambert2_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"contrast:lambert2"
+		"maya_ei_preset_aovs_0"
+end
+node "material" "contrast:lambert2SG" # "material"
+	ref "surface_shader" "contrast:lambert2_osl"
+	ref "displace_shader" ""
+	ref "volume_shader" ""
+	ref "env_shader" ""
+end
+node "instance" "contrast:pPlaneShape1_inst" # "instance"
+	ref "element" "contrast:pPlaneShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	3.125266 0.000000 -2.363814 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	3.125266 0.000000 -2.363814 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" on
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+		ref[] "mtl_list" 1  #1
+		"contrast:lambert2SG"
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 1.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "poly" "color:pPlaneShape1" # "object"
+		point[] "pos_list" 1  #4
+		-2.500023 -0.000000 1.970286
+		2.500023 -0.000000 1.970286
+		-2.500023 0.000000 -1.970286
+		2.500023 0.000000 -1.970286
+		index[] "triangle_list" 1  #6
+		0
+		1
+		2
+		2
+		1
+		3
+	declare vector [] "N" varying
+		vector[] "N" 1  #4
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+	declare vector2 [] "uv" varying
+		vector2[] "uv" 1  #4
+		0.000000 0.000000
+		1.000000 0.000000
+		0.000000 0.788107
+		1.000000 0.788107
+end
+node "maya_place2dTexture" "color:place2dTexture1" # "osl_node"
+	scalar "i_coverageU" 1.000000
+	scalar "i_coverageV" 1.000000
+	int "i_mirrorU" 0
+	int "i_mirrorV" 0
+	scalar "i_noiseU" 0.000000
+	scalar "i_noiseV" 0.000000
+	scalar "i_offsetU" 0.000000
+	scalar "i_offsetV" 0.000000
+	scalar "i_repeatU" 4.000000
+	scalar "i_repeatV" 4.000000
+	scalar "i_rotateFrame" 0.000000
+	scalar "i_rotateUV" 0.000000
+	int "i_stagger" 0
+	scalar "i_translateFrameU" 0.000000
+	scalar "i_translateFrameV" 0.000000
+	int "i_wrapU" 1
+	int "i_wrapV" 1
+	token "i_mtoer_uvSetName" "uv"
+	vector "o_outUV" 0.000000 0.000000 0.000000
+end
+node "maya_checker" "color:checker1" # "osl_node"
+	scalar "i_alphaGain" 1.000000
+	int "i_alphaIsLuminance" 0
+	scalar "i_alphaOffset" 0.000000
+	color "i_color1" 1.000000 1.000000 0.000000
+	color "i_color2" 1.000000 0.000000 0.000000
+	color "i_colorGain" 1.000000 1.000000 1.000000
+	color "i_colorOffset" 0.000000 0.000000 0.000000
+	scalar "i_contrast" 1.000000
+	color "i_defaultColor" 0.500000 0.500000 0.500000
+	scalar "i_filter" 1.000000
+	scalar "i_filterOffset" 0.000000
+	int "i_invert" 0
+	param_link "i_uvCoord" "color:place2dTexture1" "o_outUV"
+	scalar "o_outAlpha" 0.000000
+	color "o_outColor" 0.000000 0.000000 0.000000
+end
+node "maya_lambert" "color:lambert2" # "osl_node"
+	color "i_ambientColor" 0.000000 0.000000 0.000000
+	param_link "i_color" "color:checker1" "o_outColor"
+	scalar "i_diffuse" 0.800000
+	color "i_incandescence" 0.000000 0.000000 0.000000
+	int "i_matteOpacityMode" 2
+	scalar "i_matteOpacity" 1.000000
+	int "i_refractions" 0
+	scalar "i_refractiveIndex" 1.000000
+	int "i_refractionLimit" 6
+	scalar "i_lightAbsorbance" 0.000000
+	scalar "i_shadowAttenuation" 0.500000
+	vector "i_normalCamera" 1.000000 1.000000 1.000000
+	color "i_transparency" 0.000000 0.000000 0.000000
+	scalar "i_translucence" 0.000000
+	scalar "i_translucenceDepth" 0.500000
+	scalar "i_translucenceFocus" 0.500000
+	int "i_mtoer_hasBump" 0
+	color "o_outColor" 0.000000 0.000000 0.000000
+	color "o_outTransparency" 0.000000 0.000000 0.000000
+	# not support param(o_outClosure) type((null))
+	# not support param(result) type((null))
+	scalar "result_alpha" 0.000000
+end
+node "osl_shadergroup" "color:lambert2_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"color:lambert2"
+		"maya_ei_preset_aovs_0"
+end
+node "material" "color:lambert2SG" # "material"
+	ref "surface_shader" "color:lambert2_osl"
+	ref "displace_shader" ""
+	ref "volume_shader" ""
+	ref "env_shader" ""
+end
+node "instance" "color:pPlaneShape1_inst" # "instance"
+	ref "element" "color:pPlaneShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	3.125266 0.000000 2.312491 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	3.125266 0.000000 2.312491 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" on
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+		ref[] "mtl_list" 1  #1
+		"color:lambert2SG"
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 1.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "poly" "color_gain:pPlaneShape1" # "object"
+		point[] "pos_list" 1  #4
+		-2.500023 -0.000000 1.970286
+		2.500023 -0.000000 1.970286
+		-2.500023 0.000000 -1.970286
+		2.500023 0.000000 -1.970286
+		index[] "triangle_list" 1  #6
+		0
+		1
+		2
+		2
+		1
+		3
+	declare vector [] "N" varying
+		vector[] "N" 1  #4
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+	declare vector2 [] "uv" varying
+		vector2[] "uv" 1  #4
+		0.000000 0.000000
+		1.000000 0.000000
+		0.000000 0.788107
+		1.000000 0.788107
+end
+node "maya_place2dTexture" "color_gain:place2dTexture1" # "osl_node"
+	scalar "i_coverageU" 1.000000
+	scalar "i_coverageV" 1.000000
+	int "i_mirrorU" 0
+	int "i_mirrorV" 0
+	scalar "i_noiseU" 0.000000
+	scalar "i_noiseV" 0.000000
+	scalar "i_offsetU" 0.000000
+	scalar "i_offsetV" 0.000000
+	scalar "i_repeatU" 1.000000
+	scalar "i_repeatV" 2.000000
+	scalar "i_rotateFrame" 0.000000
+	scalar "i_rotateUV" 0.000000
+	int "i_stagger" 0
+	scalar "i_translateFrameU" 0.000000
+	scalar "i_translateFrameV" 0.000000
+	int "i_wrapU" 1
+	int "i_wrapV" 1
+	token "i_mtoer_uvSetName" "uv"
+	vector "o_outUV" 0.000000 0.000000 0.000000
+end
+node "maya_checker" "color_gain:checker1" # "osl_node"
+	scalar "i_alphaGain" 1.000000
+	int "i_alphaIsLuminance" 0
+	scalar "i_alphaOffset" 0.000000
+	color "i_color1" 1.000000 1.000000 0.000000
+	color "i_color2" 1.000000 0.000000 0.000000
+	color "i_colorGain" 0.496239 0.496239 0.496239
+	color "i_colorOffset" 0.000000 0.000000 0.000000
+	scalar "i_contrast" 1.000000
+	color "i_defaultColor" 0.500000 0.500000 0.500000
+	scalar "i_filter" 1.000000
+	scalar "i_filterOffset" 0.000000
+	int "i_invert" 0
+	param_link "i_uvCoord" "color_gain:place2dTexture1" "o_outUV"
+	scalar "o_outAlpha" 0.000000
+	color "o_outColor" 0.000000 0.000000 0.000000
+end
+node "maya_lambert" "color_gain:lambert2" # "osl_node"
+	color "i_ambientColor" 0.000000 0.000000 0.000000
+	param_link "i_color" "color_gain:checker1" "o_outColor"
+	scalar "i_diffuse" 0.800000
+	color "i_incandescence" 0.000000 0.000000 0.000000
+	int "i_matteOpacityMode" 2
+	scalar "i_matteOpacity" 1.000000
+	int "i_refractions" 0
+	scalar "i_refractiveIndex" 1.000000
+	int "i_refractionLimit" 6
+	scalar "i_lightAbsorbance" 0.000000
+	scalar "i_shadowAttenuation" 0.500000
+	vector "i_normalCamera" 1.000000 1.000000 1.000000
+	color "i_transparency" 0.000000 0.000000 0.000000
+	scalar "i_translucence" 0.000000
+	scalar "i_translucenceDepth" 0.500000
+	scalar "i_translucenceFocus" 0.500000
+	int "i_mtoer_hasBump" 0
+	color "o_outColor" 0.000000 0.000000 0.000000
+	color "o_outTransparency" 0.000000 0.000000 0.000000
+	# not support param(o_outClosure) type((null))
+	# not support param(result) type((null))
+	scalar "result_alpha" 0.000000
+end
+node "osl_shadergroup" "color_gain:lambert2_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"color_gain:lambert2"
+		"maya_ei_preset_aovs_0"
+end
+node "material" "color_gain:lambert2SG" # "material"
+	ref "surface_shader" "color_gain:lambert2_osl"
+	ref "displace_shader" ""
+	ref "volume_shader" ""
+	ref "env_shader" ""
+end
+node "instance" "color_gain:pPlaneShape1_inst" # "instance"
+	ref "element" "color_gain:pPlaneShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	-3.052021 0.000000 2.312491 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	-3.052021 0.000000 2.312491 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" on
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+		ref[] "mtl_list" 1  #1
+		"color_gain:lambert2SG"
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 1.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "poly" "color_offset:pPlaneShape1" # "object"
+		point[] "pos_list" 1  #4
+		-2.500023 -0.000000 1.970286
+		2.500023 -0.000000 1.970286
+		-2.500023 0.000000 -1.970286
+		2.500023 0.000000 -1.970286
+		index[] "triangle_list" 1  #6
+		0
+		1
+		2
+		2
+		1
+		3
+	declare vector [] "N" varying
+		vector[] "N" 1  #4
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+	declare vector2 [] "uv" varying
+		vector2[] "uv" 1  #4
+		0.000000 0.000000
+		1.000000 0.000000
+		0.000000 0.788107
+		1.000000 0.788107
+end
+node "maya_place2dTexture" "color_offset:place2dTexture1" # "osl_node"
+	scalar "i_coverageU" 1.000000
+	scalar "i_coverageV" 1.000000
+	int "i_mirrorU" 0
+	int "i_mirrorV" 0
+	scalar "i_noiseU" 0.000000
+	scalar "i_noiseV" 0.000000
+	scalar "i_offsetU" 0.000000
+	scalar "i_offsetV" 0.000000
+	scalar "i_repeatU" 1.000000
+	scalar "i_repeatV" 2.000000
+	scalar "i_rotateFrame" 0.000000
+	scalar "i_rotateUV" 0.000000
+	int "i_stagger" 0
+	scalar "i_translateFrameU" 0.000000
+	scalar "i_translateFrameV" 0.000000
+	int "i_wrapU" 1
+	int "i_wrapV" 1
+	token "i_mtoer_uvSetName" "uv"
+	vector "o_outUV" 0.000000 0.000000 0.000000
+end
+node "maya_checker" "color_offset:checker1" # "osl_node"
+	scalar "i_alphaGain" 1.000000
+	int "i_alphaIsLuminance" 0
+	scalar "i_alphaOffset" 0.000000
+	color "i_color1" 1.000000 1.000000 0.000000
+	color "i_color2" 1.000000 0.000000 0.000000
+	color "i_colorGain" 1.000000 1.000000 1.000000
+	color "i_colorOffset" 0.360906 0.360906 0.360906
+	scalar "i_contrast" 1.000000
+	color "i_defaultColor" 0.500000 0.500000 0.500000
+	scalar "i_filter" 1.000000
+	scalar "i_filterOffset" 0.000000
+	int "i_invert" 0
+	param_link "i_uvCoord" "color_offset:place2dTexture1" "o_outUV"
+	scalar "o_outAlpha" 0.000000
+	color "o_outColor" 0.000000 0.000000 0.000000
+end
+node "maya_lambert" "color_offset:lambert2" # "osl_node"
+	color "i_ambientColor" 0.000000 0.000000 0.000000
+	param_link "i_color" "color_offset:checker1" "o_outColor"
+	scalar "i_diffuse" 0.800000
+	color "i_incandescence" 0.000000 0.000000 0.000000
+	int "i_matteOpacityMode" 2
+	scalar "i_matteOpacity" 1.000000
+	int "i_refractions" 0
+	scalar "i_refractiveIndex" 1.000000
+	int "i_refractionLimit" 6
+	scalar "i_lightAbsorbance" 0.000000
+	scalar "i_shadowAttenuation" 0.500000
+	vector "i_normalCamera" 1.000000 1.000000 1.000000
+	color "i_transparency" 0.000000 0.000000 0.000000
+	scalar "i_translucence" 0.000000
+	scalar "i_translucenceDepth" 0.500000
+	scalar "i_translucenceFocus" 0.500000
+	int "i_mtoer_hasBump" 0
+	color "o_outColor" 0.000000 0.000000 0.000000
+	color "o_outTransparency" 0.000000 0.000000 0.000000
+	# not support param(o_outClosure) type((null))
+	# not support param(result) type((null))
+	scalar "result_alpha" 0.000000
+end
+node "osl_shadergroup" "color_offset:lambert2_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"color_offset:lambert2"
+		"maya_ei_preset_aovs_0"
+end
+node "material" "color_offset:lambert2SG" # "material"
+	ref "surface_shader" "color_offset:lambert2_osl"
+	ref "displace_shader" ""
+	ref "volume_shader" ""
+	ref "env_shader" ""
+end
+node "instance" "color_offset:pPlaneShape1_inst" # "instance"
+	ref "element" "color_offset:pPlaneShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	-3.052021 0.000000 6.722610 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	-3.052021 0.000000 6.722610 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" on
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+		ref[] "mtl_list" 1  #1
+		"color_offset:lambert2SG"
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 1.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "poly" "alpha_gain:pPlaneShape1" # "object"
+		point[] "pos_list" 1  #4
+		-2.500023 -0.000000 1.970286
+		2.500023 -0.000000 1.970286
+		-2.500023 0.000000 -1.970286
+		2.500023 0.000000 -1.970286
+		index[] "triangle_list" 1  #6
+		0
+		1
+		2
+		2
+		1
+		3
+	declare vector [] "N" varying
+		vector[] "N" 1  #4
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+	declare vector2 [] "uv" varying
+		vector2[] "uv" 1  #4
+		0.000000 0.000000
+		1.000000 0.000000
+		0.000000 0.788107
+		1.000000 0.788107
+end
+node "maya_place2dTexture" "alpha_gain:place2dTexture1" # "osl_node"
+	scalar "i_coverageU" 1.000000
+	scalar "i_coverageV" 1.000000
+	int "i_mirrorU" 0
+	int "i_mirrorV" 0
+	scalar "i_noiseU" 0.000000
+	scalar "i_noiseV" 0.000000
+	scalar "i_offsetU" 0.000000
+	scalar "i_offsetV" 0.000000
+	scalar "i_repeatU" 1.000000
+	scalar "i_repeatV" 2.000000
+	scalar "i_rotateFrame" 0.000000
+	scalar "i_rotateUV" 0.000000
+	int "i_stagger" 0
+	scalar "i_translateFrameU" 0.000000
+	scalar "i_translateFrameV" 0.000000
+	int "i_wrapU" 1
+	int "i_wrapV" 1
+	token "i_mtoer_uvSetName" "uv"
+	vector "o_outUV" 0.000000 0.000000 0.000000
+end
+node "maya_checker" "alpha_gain:checker1" # "osl_node"
+	scalar "i_alphaGain" 2.000000
+	int "i_alphaIsLuminance" 0
+	scalar "i_alphaOffset" 1.000000
+	color "i_color1" 1.000000 1.000000 0.000000
+	color "i_color2" 1.000000 0.000000 0.000000
+	color "i_colorGain" 1.000000 1.000000 1.000000
+	color "i_colorOffset" 0.000000 0.000000 0.000000
+	scalar "i_contrast" 1.000000
+	color "i_defaultColor" 0.500000 0.500000 0.500000
+	scalar "i_filter" 1.000000
+	scalar "i_filterOffset" 0.000000
+	int "i_invert" 0
+	param_link "i_uvCoord" "alpha_gain:place2dTexture1" "o_outUV"
+	scalar "o_outAlpha" 0.000000
+	color "o_outColor" 0.000000 0.000000 0.000000
+end
+node "maya_lambert" "alpha_gain:lambert2" # "osl_node"
+	color "i_ambientColor" 0.000000 0.000000 0.000000
+	param_link "i_color" "alpha_gain:checker1" "o_outColor"
+	scalar "i_diffuse" 0.800000
+	color "i_incandescence" 0.000000 0.000000 0.000000
+	int "i_matteOpacityMode" 2
+	scalar "i_matteOpacity" 1.000000
+	int "i_refractions" 0
+	scalar "i_refractiveIndex" 1.000000
+	int "i_refractionLimit" 6
+	scalar "i_lightAbsorbance" 0.000000
+	scalar "i_shadowAttenuation" 0.500000
+	vector "i_normalCamera" 1.000000 1.000000 1.000000
+	color "i_transparency" 0.000000 0.000000 0.000000
+	scalar "i_translucence" 0.000000
+	scalar "i_translucenceDepth" 0.500000
+	scalar "i_translucenceFocus" 0.500000
+	int "i_mtoer_hasBump" 0
+	color "o_outColor" 0.000000 0.000000 0.000000
+	color "o_outTransparency" 0.000000 0.000000 0.000000
+	# not support param(o_outClosure) type((null))
+	# not support param(result) type((null))
+	scalar "result_alpha" 0.000000
+end
+node "osl_shadergroup" "alpha_gain:lambert2_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"alpha_gain:lambert2"
+		"maya_ei_preset_aovs_0"
+end
+node "material" "alpha_gain:lambert2SG" # "material"
+	ref "surface_shader" "alpha_gain:lambert2_osl"
+	ref "displace_shader" ""
+	ref "volume_shader" ""
+	ref "env_shader" ""
+end
+node "instance" "alpha_gain:pPlaneShape1_inst" # "instance"
+	ref "element" "alpha_gain:pPlaneShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	8.234379 0.000000 6.722610 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	8.234379 0.000000 6.722610 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" on
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+		ref[] "mtl_list" 1  #1
+		"alpha_gain:lambert2SG"
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 1.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "poly" "alpha_offset:pPlaneShape1" # "object"
+		point[] "pos_list" 1  #4
+		-2.500023 -0.000000 1.970286
+		2.500023 -0.000000 1.970286
+		-2.500023 0.000000 -1.970286
+		2.500023 0.000000 -1.970286
+		index[] "triangle_list" 1  #6
+		0
+		1
+		2
+		2
+		1
+		3
+	declare vector [] "N" varying
+		vector[] "N" 1  #4
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+	declare vector2 [] "uv" varying
+		vector2[] "uv" 1  #4
+		0.000000 0.000000
+		1.000000 0.000000
+		0.000000 0.788107
+		1.000000 0.788107
+end
+node "maya_place2dTexture" "alpha_offset:place2dTexture1" # "osl_node"
+	scalar "i_coverageU" 1.000000
+	scalar "i_coverageV" 1.000000
+	int "i_mirrorU" 0
+	int "i_mirrorV" 0
+	scalar "i_noiseU" 0.000000
+	scalar "i_noiseV" 0.000000
+	scalar "i_offsetU" 0.000000
+	scalar "i_offsetV" 0.000000
+	scalar "i_repeatU" 1.000000
+	scalar "i_repeatV" 2.000000
+	scalar "i_rotateFrame" 0.000000
+	scalar "i_rotateUV" 0.000000
+	int "i_stagger" 0
+	scalar "i_translateFrameU" 0.000000
+	scalar "i_translateFrameV" 0.000000
+	int "i_wrapU" 1
+	int "i_wrapV" 1
+	token "i_mtoer_uvSetName" "uv"
+	vector "o_outUV" 0.000000 0.000000 0.000000
+end
+node "maya_checker" "alpha_offset:checker1" # "osl_node"
+	scalar "i_alphaGain" 2.000000
+	int "i_alphaIsLuminance" 0
+	scalar "i_alphaOffset" 0.500000
+	color "i_color1" 1.000000 1.000000 0.000000
+	color "i_color2" 1.000000 0.000000 0.000000
+	color "i_colorGain" 1.000000 1.000000 1.000000
+	color "i_colorOffset" 0.000000 0.000000 0.000000
+	scalar "i_contrast" 1.000000
+	color "i_defaultColor" 0.500000 0.500000 0.500000
+	scalar "i_filter" 1.000000
+	scalar "i_filterOffset" 0.000000
+	int "i_invert" 0
+	param_link "i_uvCoord" "alpha_offset:place2dTexture1" "o_outUV"
+	scalar "o_outAlpha" 0.000000
+	color "o_outColor" 0.000000 0.000000 0.000000
+end
+node "maya_lambert" "alpha_offset:lambert2" # "osl_node"
+	color "i_ambientColor" 0.000000 0.000000 0.000000
+	param_link "i_color" "alpha_offset:checker1" "o_outColor"
+	scalar "i_diffuse" 0.800000
+	color "i_incandescence" 0.000000 0.000000 0.000000
+	int "i_matteOpacityMode" 2
+	scalar "i_matteOpacity" 1.000000
+	int "i_refractions" 0
+	scalar "i_refractiveIndex" 1.000000
+	int "i_refractionLimit" 6
+	scalar "i_lightAbsorbance" 0.000000
+	scalar "i_shadowAttenuation" 0.500000
+	vector "i_normalCamera" 1.000000 1.000000 1.000000
+	color "i_transparency" 0.000000 0.000000 0.000000
+	scalar "i_translucence" 0.000000
+	scalar "i_translucenceDepth" 0.500000
+	scalar "i_translucenceFocus" 0.500000
+	int "i_mtoer_hasBump" 0
+	color "o_outColor" 0.000000 0.000000 0.000000
+	color "o_outTransparency" 0.000000 0.000000 0.000000
+	# not support param(o_outClosure) type((null))
+	# not support param(result) type((null))
+	scalar "result_alpha" 0.000000
+end
+node "osl_shadergroup" "alpha_offset:lambert2_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"alpha_offset:lambert2"
+		"maya_ei_preset_aovs_0"
+end
+node "material" "alpha_offset:lambert2SG" # "material"
+	ref "surface_shader" "alpha_offset:lambert2_osl"
+	ref "displace_shader" ""
+	ref "volume_shader" ""
+	ref "env_shader" ""
+end
+node "instance" "alpha_offset:pPlaneShape1_inst" # "instance"
+	ref "element" "alpha_offset:pPlaneShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	8.188918 0.000000 6.722610 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	8.188918 0.000000 6.722610 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" on
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+		ref[] "mtl_list" 1  #1
+		"alpha_offset:lambert2SG"
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 1.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "poly" "alpha_invert:pPlaneShape1" # "object"
+		point[] "pos_list" 1  #4
+		-2.500023 -0.000000 1.970286
+		2.500023 -0.000000 1.970286
+		-2.500023 0.000000 -1.970286
+		2.500023 0.000000 -1.970286
+		index[] "triangle_list" 1  #6
+		0
+		1
+		2
+		2
+		1
+		3
+	declare vector [] "N" varying
+		vector[] "N" 1  #4
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+	declare vector2 [] "uv" varying
+		vector2[] "uv" 1  #4
+		0.000000 0.000000
+		1.000000 0.000000
+		0.000000 0.788107
+		1.000000 0.788107
+end
+node "maya_place2dTexture" "alpha_invert:place2dTexture1" # "osl_node"
+	scalar "i_coverageU" 1.000000
+	scalar "i_coverageV" 1.000000
+	int "i_mirrorU" 0
+	int "i_mirrorV" 0
+	scalar "i_noiseU" 0.000000
+	scalar "i_noiseV" 0.000000
+	scalar "i_offsetU" 0.000000
+	scalar "i_offsetV" 0.000000
+	scalar "i_repeatU" 1.000000
+	scalar "i_repeatV" 2.000000
+	scalar "i_rotateFrame" 0.000000
+	scalar "i_rotateUV" 0.000000
+	int "i_stagger" 0
+	scalar "i_translateFrameU" 0.000000
+	scalar "i_translateFrameV" 0.000000
+	int "i_wrapU" 1
+	int "i_wrapV" 1
+	token "i_mtoer_uvSetName" "uv"
+	vector "o_outUV" 0.000000 0.000000 0.000000
+end
+node "maya_checker" "alpha_invert:checker1" # "osl_node"
+	scalar "i_alphaGain" 2.000000
+	int "i_alphaIsLuminance" 0
+	scalar "i_alphaOffset" 0.500000
+	color "i_color1" 1.000000 1.000000 0.000000
+	color "i_color2" 1.000000 0.000000 0.000000
+	color "i_colorGain" 1.000000 1.000000 1.000000
+	color "i_colorOffset" 0.000000 0.000000 0.000000
+	scalar "i_contrast" 1.000000
+	color "i_defaultColor" 0.500000 0.500000 0.500000
+	scalar "i_filter" 1.000000
+	scalar "i_filterOffset" 0.000000
+	int "i_invert" 0
+	param_link "i_uvCoord" "alpha_invert:place2dTexture1" "o_outUV"
+	scalar "o_outAlpha" 0.000000
+	color "o_outColor" 0.000000 0.000000 0.000000
+end
+node "maya_lambert" "alpha_invert:lambert2" # "osl_node"
+	color "i_ambientColor" 0.000000 0.000000 0.000000
+	param_link "i_color" "alpha_invert:checker1" "o_outColor"
+	scalar "i_diffuse" 0.800000
+	color "i_incandescence" 0.000000 0.000000 0.000000
+	int "i_matteOpacityMode" 2
+	scalar "i_matteOpacity" 1.000000
+	int "i_refractions" 0
+	scalar "i_refractiveIndex" 1.000000
+	int "i_refractionLimit" 6
+	scalar "i_lightAbsorbance" 0.000000
+	scalar "i_shadowAttenuation" 0.500000
+	vector "i_normalCamera" 1.000000 1.000000 1.000000
+	color "i_transparency" 0.000000 0.000000 0.000000
+	scalar "i_translucence" 0.000000
+	scalar "i_translucenceDepth" 0.500000
+	scalar "i_translucenceFocus" 0.500000
+	int "i_mtoer_hasBump" 0
+	color "o_outColor" 0.000000 0.000000 0.000000
+	color "o_outTransparency" 0.000000 0.000000 0.000000
+	# not support param(o_outClosure) type((null))
+	# not support param(result) type((null))
+	scalar "result_alpha" 0.000000
+end
+node "osl_shadergroup" "alpha_invert:lambert2_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"alpha_invert:lambert2"
+		"maya_ei_preset_aovs_0"
+end
+node "material" "alpha_invert:lambert2SG" # "material"
+	ref "surface_shader" "alpha_invert:lambert2_osl"
+	ref "displace_shader" ""
+	ref "volume_shader" ""
+	ref "env_shader" ""
+end
+node "instance" "alpha_invert:pPlaneShape1_inst" # "instance"
+	ref "element" "alpha_invert:pPlaneShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	8.188918 0.000000 2.524657 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	8.188918 0.000000 2.524657 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" on
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+		ref[] "mtl_list" 1  #1
+		"alpha_invert:lambert2SG"
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 1.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "poly" "filter:pPlaneShape1" # "object"
+		point[] "pos_list" 1  #4
+		-2.500023 -0.000000 1.970286
+		2.500023 -0.000000 1.970286
+		-2.500023 0.000000 -1.970286
+		2.500023 0.000000 -1.970286
+		index[] "triangle_list" 1  #6
+		0
+		1
+		2
+		2
+		1
+		3
+	declare vector [] "N" varying
+		vector[] "N" 1  #4
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+	declare vector2 [] "uv" varying
+		vector2[] "uv" 1  #4
+		0.000000 0.000000
+		1.000000 0.000000
+		0.000000 0.788107
+		1.000000 0.788107
+end
+node "maya_place2dTexture" "filter:place2dTexture1" # "osl_node"
+	scalar "i_coverageU" 1.000000
+	scalar "i_coverageV" 1.000000
+	int "i_mirrorU" 0
+	int "i_mirrorV" 0
+	scalar "i_noiseU" 0.000000
+	scalar "i_noiseV" 0.000000
+	scalar "i_offsetU" 0.000000
+	scalar "i_offsetV" 0.000000
+	scalar "i_repeatU" 1.000000
+	scalar "i_repeatV" 2.000000
+	scalar "i_rotateFrame" 0.000000
+	scalar "i_rotateUV" 0.000000
+	int "i_stagger" 0
+	scalar "i_translateFrameU" 0.000000
+	scalar "i_translateFrameV" 0.000000
+	int "i_wrapU" 1
+	int "i_wrapV" 1
+	token "i_mtoer_uvSetName" "uv"
+	vector "o_outUV" 0.000000 0.000000 0.000000
+end
+node "maya_checker" "filter:checker1" # "osl_node"
+	scalar "i_alphaGain" 2.000000
+	int "i_alphaIsLuminance" 0
+	scalar "i_alphaOffset" 0.500000
+	color "i_color1" 1.000000 1.000000 0.000000
+	color "i_color2" 1.000000 0.000000 0.000000
+	color "i_colorGain" 1.000000 1.000000 1.000000
+	color "i_colorOffset" 0.000000 0.000000 0.000000
+	scalar "i_contrast" 1.000000
+	color "i_defaultColor" 0.500000 0.500000 0.500000
+	scalar "i_filter" 0.500000
+	scalar "i_filterOffset" 0.000000
+	int "i_invert" 0
+	param_link "i_uvCoord" "filter:place2dTexture1" "o_outUV"
+	scalar "o_outAlpha" 0.000000
+	color "o_outColor" 0.000000 0.000000 0.000000
+end
+node "maya_lambert" "filter:lambert2" # "osl_node"
+	color "i_ambientColor" 0.000000 0.000000 0.000000
+	param_link "i_color" "filter:checker1" "o_outColor"
+	scalar "i_diffuse" 0.800000
+	color "i_incandescence" 0.000000 0.000000 0.000000
+	int "i_matteOpacityMode" 2
+	scalar "i_matteOpacity" 1.000000
+	int "i_refractions" 0
+	scalar "i_refractiveIndex" 1.000000
+	int "i_refractionLimit" 6
+	scalar "i_lightAbsorbance" 0.000000
+	scalar "i_shadowAttenuation" 0.500000
+	vector "i_normalCamera" 1.000000 1.000000 1.000000
+	color "i_transparency" 0.000000 0.000000 0.000000
+	scalar "i_translucence" 0.000000
+	scalar "i_translucenceDepth" 0.500000
+	scalar "i_translucenceFocus" 0.500000
+	int "i_mtoer_hasBump" 0
+	color "o_outColor" 0.000000 0.000000 0.000000
+	color "o_outTransparency" 0.000000 0.000000 0.000000
+	# not support param(o_outClosure) type((null))
+	# not support param(result) type((null))
+	scalar "result_alpha" 0.000000
+end
+node "osl_shadergroup" "filter:lambert2_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"filter:lambert2"
+		"maya_ei_preset_aovs_0"
+end
+node "material" "filter:lambert2SG" # "material"
+	ref "surface_shader" "filter:lambert2_osl"
+	ref "displace_shader" ""
+	ref "volume_shader" ""
+	ref "env_shader" ""
+end
+node "instance" "filter:pPlaneShape1_inst" # "instance"
+	ref "element" "filter:pPlaneShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	8.188918 0.000000 -2.525163 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	8.188918 0.000000 -2.525163 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" on
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+		ref[] "mtl_list" 1  #1
+		"filter:lambert2SG"
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 1.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "poly" "filter_offset:pPlaneShape1" # "object"
+		point[] "pos_list" 1  #4
+		-2.500023 -0.000000 1.970286
+		2.500023 -0.000000 1.970286
+		-2.500023 0.000000 -1.970286
+		2.500023 0.000000 -1.970286
+		index[] "triangle_list" 1  #6
+		0
+		1
+		2
+		2
+		1
+		3
+	declare vector [] "N" varying
+		vector[] "N" 1  #4
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+	declare vector2 [] "uv" varying
+		vector2[] "uv" 1  #4
+		0.000000 0.000000
+		1.000000 0.000000
+		0.000000 0.788107
+		1.000000 0.788107
+end
+node "maya_place2dTexture" "filter_offset:place2dTexture1" # "osl_node"
+	scalar "i_coverageU" 1.000000
+	scalar "i_coverageV" 1.000000
+	int "i_mirrorU" 0
+	int "i_mirrorV" 0
+	scalar "i_noiseU" 0.000000
+	scalar "i_noiseV" 0.000000
+	scalar "i_offsetU" 0.000000
+	scalar "i_offsetV" 0.000000
+	scalar "i_repeatU" 1.000000
+	scalar "i_repeatV" 2.000000
+	scalar "i_rotateFrame" 0.000000
+	scalar "i_rotateUV" 0.000000
+	int "i_stagger" 0
+	scalar "i_translateFrameU" 0.000000
+	scalar "i_translateFrameV" 0.000000
+	int "i_wrapU" 1
+	int "i_wrapV" 1
+	token "i_mtoer_uvSetName" "uv"
+	vector "o_outUV" 0.000000 0.000000 0.000000
+end
+node "maya_checker" "filter_offset:checker1" # "osl_node"
+	scalar "i_alphaGain" 1.000000
+	int "i_alphaIsLuminance" 0
+	scalar "i_alphaOffset" 0.000000
+	color "i_color1" 1.000000 1.000000 0.000000
+	color "i_color2" 1.000000 0.000000 0.000000
+	color "i_colorGain" 1.000000 1.000000 1.000000
+	color "i_colorOffset" 0.000000 0.000000 0.000000
+	scalar "i_contrast" 1.000000
+	color "i_defaultColor" 0.500000 0.500000 0.500000
+	scalar "i_filter" 1.000000
+	scalar "i_filterOffset" 0.100000
+	int "i_invert" 0
+	param_link "i_uvCoord" "filter_offset:place2dTexture1" "o_outUV"
+	scalar "o_outAlpha" 0.000000
+	color "o_outColor" 0.000000 0.000000 0.000000
+end
+node "maya_lambert" "filter_offset:lambert2" # "osl_node"
+	color "i_ambientColor" 0.000000 0.000000 0.000000
+	param_link "i_color" "filter_offset:checker1" "o_outColor"
+	scalar "i_diffuse" 0.800000
+	color "i_incandescence" 0.000000 0.000000 0.000000
+	int "i_matteOpacityMode" 2
+	scalar "i_matteOpacity" 1.000000
+	int "i_refractions" 0
+	scalar "i_refractiveIndex" 1.000000
+	int "i_refractionLimit" 6
+	scalar "i_lightAbsorbance" 0.000000
+	scalar "i_shadowAttenuation" 0.500000
+	vector "i_normalCamera" 1.000000 1.000000 1.000000
+	color "i_transparency" 0.000000 0.000000 0.000000
+	scalar "i_translucence" 0.000000
+	scalar "i_translucenceDepth" 0.500000
+	scalar "i_translucenceFocus" 0.500000
+	int "i_mtoer_hasBump" 0
+	color "o_outColor" 0.000000 0.000000 0.000000
+	color "o_outTransparency" 0.000000 0.000000 0.000000
+	# not support param(o_outClosure) type((null))
+	# not support param(result) type((null))
+	scalar "result_alpha" 0.000000
+end
+node "osl_shadergroup" "filter_offset:lambert2_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"filter_offset:lambert2"
+		"maya_ei_preset_aovs_0"
+end
+node "material" "filter_offset:lambert2SG" # "material"
+	ref "surface_shader" "filter_offset:lambert2_osl"
+	ref "displace_shader" ""
+	ref "volume_shader" ""
+	ref "env_shader" ""
+end
+node "instance" "filter_offset:pPlaneShape1_inst" # "instance"
+	ref "element" "filter_offset:pPlaneShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	8.188918 0.000000 -6.816509 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	8.188918 0.000000 -6.816509 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" on
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+		ref[] "mtl_list" 1  #1
+		"filter_offset:lambert2SG"
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 1.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "poly" "filter_invert:pPlaneShape1" # "object"
+		point[] "pos_list" 1  #4
+		-2.500023 -0.000000 1.970286
+		2.500023 -0.000000 1.970286
+		-2.500023 0.000000 -1.970286
+		2.500023 0.000000 -1.970286
+		index[] "triangle_list" 1  #6
+		0
+		1
+		2
+		2
+		1
+		3
+	declare vector [] "N" varying
+		vector[] "N" 1  #4
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+	declare vector2 [] "uv" varying
+		vector2[] "uv" 1  #4
+		0.000000 0.000000
+		1.000000 0.000000
+		0.000000 0.788107
+		1.000000 0.788107
+end
+node "maya_place2dTexture" "filter_invert:place2dTexture1" # "osl_node"
+	scalar "i_coverageU" 1.000000
+	scalar "i_coverageV" 1.000000
+	int "i_mirrorU" 0
+	int "i_mirrorV" 0
+	scalar "i_noiseU" 0.000000
+	scalar "i_noiseV" 0.000000
+	scalar "i_offsetU" 0.000000
+	scalar "i_offsetV" 0.000000
+	scalar "i_repeatU" 1.000000
+	scalar "i_repeatV" 2.000000
+	scalar "i_rotateFrame" 0.000000
+	scalar "i_rotateUV" 0.000000
+	int "i_stagger" 0
+	scalar "i_translateFrameU" 0.000000
+	scalar "i_translateFrameV" 0.000000
+	int "i_wrapU" 1
+	int "i_wrapV" 1
+	token "i_mtoer_uvSetName" "uv"
+	vector "o_outUV" 0.000000 0.000000 0.000000
+end
+node "maya_checker" "filter_invert:checker1" # "osl_node"
+	scalar "i_alphaGain" 1.000000
+	int "i_alphaIsLuminance" 0
+	scalar "i_alphaOffset" 0.000000
+	color "i_color1" 1.000000 1.000000 0.000000
+	color "i_color2" 1.000000 0.000000 0.000000
+	color "i_colorGain" 1.000000 1.000000 1.000000
+	color "i_colorOffset" 0.000000 0.000000 0.000000
+	scalar "i_contrast" 1.000000
+	color "i_defaultColor" 0.500000 0.500000 0.500000
+	scalar "i_filter" 1.000000
+	scalar "i_filterOffset" 0.100000
+	int "i_invert" 1
+	param_link "i_uvCoord" "filter_invert:place2dTexture1" "o_outUV"
+	scalar "o_outAlpha" 0.000000
+	color "o_outColor" 0.000000 0.000000 0.000000
+end
+node "maya_lambert" "filter_invert:lambert2" # "osl_node"
+	color "i_ambientColor" 0.000000 0.000000 0.000000
+	param_link "i_color" "filter_invert:checker1" "o_outColor"
+	scalar "i_diffuse" 0.800000
+	color "i_incandescence" 0.000000 0.000000 0.000000
+	int "i_matteOpacityMode" 2
+	scalar "i_matteOpacity" 1.000000
+	int "i_refractions" 0
+	scalar "i_refractiveIndex" 1.000000
+	int "i_refractionLimit" 6
+	scalar "i_lightAbsorbance" 0.000000
+	scalar "i_shadowAttenuation" 0.500000
+	vector "i_normalCamera" 1.000000 1.000000 1.000000
+	color "i_transparency" 0.000000 0.000000 0.000000
+	scalar "i_translucence" 0.000000
+	scalar "i_translucenceDepth" 0.500000
+	scalar "i_translucenceFocus" 0.500000
+	int "i_mtoer_hasBump" 0
+	color "o_outColor" 0.000000 0.000000 0.000000
+	color "o_outTransparency" 0.000000 0.000000 0.000000
+	# not support param(o_outClosure) type((null))
+	# not support param(result) type((null))
+	scalar "result_alpha" 0.000000
+end
+node "osl_shadergroup" "filter_invert:lambert2_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"filter_invert:lambert2"
+		"maya_ei_preset_aovs_0"
+end
+node "material" "filter_invert:lambert2SG" # "material"
+	ref "surface_shader" "filter_invert:lambert2_osl"
+	ref "displace_shader" ""
+	ref "volume_shader" ""
+	ref "env_shader" ""
+end
+node "instance" "filter_invert:pPlaneShape1_inst" # "instance"
+	ref "element" "filter_invert:pPlaneShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	2.773619 0.000000 -7.646843 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	2.773619 0.000000 -7.646843 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" on
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+		ref[] "mtl_list" 1  #1
+		"filter_invert:lambert2SG"
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 1.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "osl_shadergroup" "default:checker1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"default:checker1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "default:place2dTexture1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"default:place2dTexture1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "contrast:checker1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"contrast:checker1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "contrast:place2dTexture1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"contrast:place2dTexture1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "color:checker1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"color:checker1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "color:place2dTexture1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"color:place2dTexture1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "color_gain:checker1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"color_gain:checker1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "color_gain:place2dTexture1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"color_gain:place2dTexture1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "color_offset:checker1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"color_offset:checker1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "color_offset:place2dTexture1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"color_offset:place2dTexture1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "alpha_gain:checker1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"alpha_gain:checker1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "alpha_gain:place2dTexture1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"alpha_gain:place2dTexture1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "alpha_offset:checker1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"alpha_offset:checker1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "alpha_offset:place2dTexture1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"alpha_offset:place2dTexture1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "alpha_invert:checker1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"alpha_invert:checker1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "alpha_invert:place2dTexture1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"alpha_invert:place2dTexture1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "filter:checker1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"filter:checker1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "filter:place2dTexture1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"filter:place2dTexture1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "filter_offset:checker1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"filter_offset:checker1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "filter_offset:place2dTexture1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"filter_offset:place2dTexture1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "filter_invert:checker1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"filter_invert:checker1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "filter_invert:place2dTexture1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"filter_invert:place2dTexture1"
+		"maya_ei_preset_aovs_0"
+end
+node "instgroup" "instgroup_00" # "instgroup"
+		ref[] "instance_list" 1  #28
+		"alpha_gain:pPlaneShape1_inst"
+		"alpha_gain:pointLightShape1_inst"
+		"alpha_invert:pPlaneShape1_inst"
+		"alpha_invert:pointLightShape1_inst"
+		"alpha_offset:pPlaneShape1_inst"
+		"alpha_offset:pointLightShape1_inst"
+		"cameraShape1_inst"
+		"color:pPlaneShape1_inst"
+		"color:pointLightShape1_inst"
+		"color_gain:pPlaneShape1_inst"
+		"color_gain:pointLightShape1_inst"
+		"color_offset:pPlaneShape1_inst"
+		"color_offset:pointLightShape1_inst"
+		"contrast:pPlaneShape1_inst"
+		"contrast:pointLightShape1_inst"
+		"default:pPlaneShape1_inst"
+		"default:pointLightShape1_inst"
+		"filter:pPlaneShape1_inst"
+		"filter:pointLightShape1_inst"
+		"filter_invert:pPlaneShape1_inst"
+		"filter_invert:pointLightShape1_inst"
+		"filter_offset:pPlaneShape1_inst"
+		"filter_offset:pointLightShape1_inst"
+		"frontShape_inst"
+		"perspShape_inst"
+		"pointLightShape1_inst"
+		"sideShape_inst"
+		"topShape_inst"
+end
+render "instgroup_00" "cameraShape1_inst" "options"

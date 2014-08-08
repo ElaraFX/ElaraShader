@@ -1,0 +1,250 @@
+WARNING> Declaring duplicated node parameter texture_searchpath
+WARNING> Declaring duplicated node parameter procedural_searchpath
+INFO> 
+INFO> *********************************************
+INFO> Current local time: Thu Aug 07 13:46:36 2014
+
+INFO> Start rendering...
+INFO> framebuffer memory used: 3.576050 MB
+INFO> Pre-processing...
+INFO> Loaded "E:/dev/work/osl/current/bin/../shaders\maya_place2dTexture.oso" (took 0.01s)
+INFO> Loaded "E:/dev/work/osl/current/bin/../shaders\maya_checker.oso" (took 0.01s)
+INFO> Loaded "E:/dev/work/osl/current/bin/../shaders\maya_lambert.oso" (took 0.00s)
+WARNING> attempting to set parameter with wrong type: i_normalCamera (exepected 'normal', received 'vector')
+INFO> Loaded "E:/dev/work/osl/current/bin/../shaders\maya_ei_preset_aovs.oso" (took 0.02s)
+INFO> Finished pre-processing in 0 hours 0 minutes 0.042000 seconds.
+INFO> Building initial acceleration structures...
+INFO> num object instances: 11
+INFO> num source triangles: 22
+INFO> glob. average size: 1.000000
+INFO> glob. average depth: 3.545455
+INFO> glob. max size: 1
+INFO> glob. max depth: 4
+INFO> glob. num leaves: 11
+INFO> glob. num empty leaves: 0
+INFO> glob. num nodes: 5
+INFO> glob. tree memory used: 0.001144 MB
+INFO> glob. build primitives per second: 11000.000000
+INFO> Finished building initial acceleration structures in 0 hours 0 minutes 0.002000 seconds.
+INFO> Rendering the frame...
+INFO> Running #1 initial pass...
+INFO> Loaded "E:/dev/work/osl/current/bin/../shaders\mtoer_sphereUV.oso" (took 0.00s)
+INFO> Loaded "E:/dev/work/osl/current/bin/../shaders\maya_envSphere.oso" (took 0.02s)
+INFO> Running #2 initial pass...
+INFO> Running #3 initial pass...
+INFO> Running #4 initial pass...
+INFO> Running #1 refinement pass...
+INFO> Running #2 refinement pass...
+INFO> Running #3 refinement pass...
+INFO> Finished frame rendering in 0 hours 0 minutes 2.853000 seconds.
+INFO> tessel. vertex count: 44
+INFO> tessel. vertex memory used: 0.000504 MB
+INFO> tessel. vertex data memory used: 0.000839 MB
+INFO> tessel. triangle count: 22
+INFO> tessel. triangle memory used: 0.000336 MB
+INFO> hair. curve count: 0
+INFO> hair. curve memory used: 0.000000 MB
+INFO> hair. vertex count: 0
+INFO> hair. vertex memory used: 0.000000 MB
+INFO> parti. count: 0
+INFO> parti. memory used: 0.000000 MB
+INFO> accel. average size: 2.000000
+INFO> accel. average depth: 0.000000
+INFO> accel. max size: 2
+INFO> accel. max depth: 0
+INFO> accel. num leaves: 11
+INFO> accel. num empty leaves: 0
+INFO> accel. num nodes: 11
+INFO> accel. tree memory used: 0.002518 MB
+INFO> accel. GPIT memory used: 0.000839 MB
+INFO> num total rays: 15833766
+INFO> num total traced rays: 7681482
+INFO> rays per second: 2692422.712934
+INFO> rays per second per core: 336552.839117
+INFO> num eye rays: 1667185
+INFO> num shadow rays: 679357
+INFO> num reflection rays: 0
+INFO> num indirect illumination rays: 5334940
+INFO> num transmission rays: 0
+INFO> num glossy transmission rays: 0
+INFO> num diffuse transmission rays: 0
+INFO> num transparent rays: 0
+INFO> num light rays: 8152284
+INFO> num environment rays: 0
+INFO> num probe rays: 0
+INFO> num sub-surface scattering rays: 0
+INFO> num volume scattering rays: 0
+INFO> num traversal steps: 11862735
+INFO> num traversal steps per traced ray: 1.544329
+INFO> num triangle intersections: 4238600
+INFO> num triangle intersections per traced ray: 0.551795
+INFO> num motion triangle intersections: 0
+INFO> num motion triangle intersections per traced ray: 0.000000
+INFO> num hair intersections: 0
+INFO> num hair intersections per traced ray: 0.000000
+INFO> num motion hair intersections: 0
+INFO> num motion hair intersections per traced ray: 0.000000
+INFO> num parti intersections: 0
+INFO> num parti intersections per traced ray: 0.000000
+INFO> num motion parti intersections: 0
+INFO> num motion parti intersections per traced ray: 0.000000
+INFO> total subtree size: 0.002560 MB
+INFO> average subtree size: 0.238281 KB
+INFO> max subtree size: 0.238281 KB
+INFO> tree construction time: 0 hours 0 minutes 0.006000 seconds.
+INFO> Finished rendering in 0 hours 0 minutes 2.906000 seconds.
+INFO> db memory peak: 3.927831 MB
+INFO> Current local time: Thu Aug 07 13:46:39 2014
+
+INFO> Outputing images...
+INFO> Finished outputing images in 0 hours 0 minutes 0.155000 seconds.
+INFO> 
+OSL ShadingSystem statistics (000000004AE06EC0)
+  Shaders:
+    Requested: 90
+    Loaded:    6
+    Masters:   6
+    Instances: 90 requested, 50 peak, 46 current
+  Shading groups:   23
+    Total instances in all groups: 90
+    Avg instances per group: 3.9
+  Shading contexts: 16 requested, 16 peak, 16 current
+  Compiled 12 groups, 46 instances
+  Merged 0 instances (0 initial, 0 after opt) in 0.00s
+  After optimization, 0 empty instances (0%)
+  After optimization, 0 empty groups (0%)
+  Optimized 10828 ops to 6918 (-36.1%)
+  Optimized 10367 symbols to 4510 (-56.5%)
+  Runtime optimization cost: 2.66s
+    locking:                   1.77s
+    runtime specialization:    0.09s
+    LLVM setup:                0.03s
+    LLVM IR gen:               0.05s
+    LLVM optimize:             0.19s
+    LLVM JIT:                  0.54s
+  Regex's compiled: 0
+  Largest generated function local memory size: 1 KB
+  Memory total: 1.3 MB requested, 782 KB peak, 649 KB current
+    Master memory: 198 KB requested, 198 KB peak, 198 KB current
+        Master ops:            74 KB requested, 74 KB peak, 74 KB current
+        Master args:           12 KB requested, 12 KB peak, 12 KB current
+        Master syms:           105 KB requested, 105 KB peak, 105 KB current
+        Master defaults:       836 B requested, 836 B peak, 836 B current
+        Master consts:         2 KB requested, 2 KB peak, 2 KB current
+    Instance memory: 1.1 MB requested, 583 KB peak, 450 KB current
+        Instance syms:         1.0 MB requested, 556 KB peak, 422 KB current
+        Instance param values: 14 KB requested, 8 KB peak, 7 KB current
+        Instance connections:  1 KB requested, 1 KB peak, 968 B current
+    LLVM JIT memory: 3.9 MB
+
+INFO> 
+OpenImageIO Texture statistics (0000000041295420, cache = 0000000022626A90)
+  Queries/batches : 
+    texture     :  877652 queries in 877652 batches
+    texture 3d  :  0 queries in 0 batches
+    shadow      :  0 queries in 0 batches
+    environment :  0 queries in 0 batches
+  Interpolations :
+    closest  : 0
+    bilinear : 2368913
+    bicubic  : 920123
+  Average anisotropic probes : 1.9
+  Max anisotropy in the wild : 1e+006
+
+OpenImageIO ImageCache statistics (0000000022626A90) ver 1.1.11
+  Images : 1 unique
+    ImageInputs : 1 created, 1 current, 1 peak
+    Total size of all images referenced : 64 KB
+    Read from disk : 96 KB
+    File I/O time : 0.1s (0.0s average per thread)
+    File open time only : 0.0s
+  Tiles: 10 created, 8 current, 9 peak
+    total tile requests : 4667847
+    micro-cache misses : 100574 (2.15461%)
+    main cache misses : 9 (0.000192808%)
+    Peak cache memory : 85 KB
+  Image file statistics:
+        opens   tiles  MB read  I/O time  res              File
+      1    1        3      0.1      0.1s   128x 128x4.u8   E:/dev/work/mercury/test/automation/elara/test_5003/data/sourceimages/test_er_file_0005.png UNTILED UNMIPPED MIP-COUNT [3,2,1,1,1,0,0,0]
+
+  Tot:     1        3      0.1      0.1s
+  1 not tiled, 1 not MIP-mapped
+
+INFO> Number of completed jobs: 910
+INFO> Number of failed jobs: 0
+WARNING> Declaring duplicated node parameter texture_searchpath
+WARNING> Declaring duplicated node parameter procedural_searchpath
+INFO> Loaded "E:/dev/work/osl/current/bin/../shaders\mtoer_error.oso" (took 0.00s)
+INFO> Loaded "E:/dev/work/osl/current/bin/../shaders\mtoer_sphereUV.oso" (took 0.00s)
+INFO> Loaded "E:/dev/work/osl/current/bin/../shaders\maya_envSphere.oso" (took 0.00s)
+INFO> Loaded "E:/dev/work/osl/current/bin/../shaders\maya_place2dTexture.oso" (took 0.01s)
+INFO> Loaded "E:/dev/work/osl/current/bin/../shaders\maya_checker.oso" (took 0.00s)
+INFO> Loaded "E:/dev/work/osl/current/bin/../shaders\maya_lambert.oso" (took 0.00s)
+WARNING> attempting to set parameter with wrong type: i_normalCamera (exepected 'normal', received 'vector')
+INFO> Loaded "E:/dev/work/osl/current/bin/../shaders\maya_ei_preset_aovs.oso" (took 0.02s)
+INFO> 
+OSL ShadingSystem statistics (00000000413D5040)
+  Shaders:
+    Requested: 102
+    Loaded:    7
+    Masters:   7
+    Instances: 102 requested, 102 peak, 102 current
+  Shading groups:   35
+    Total instances in all groups: 102
+    Avg instances per group: 2.9
+  Shading contexts: 9 requested, 9 peak, 9 current
+  Compiled 0 groups, 0 instances
+  Merged 0 instances (0 initial, 0 after opt) in 0.00s
+  Runtime optimization cost: 0.00s
+    locking:                   0.00s
+    runtime specialization:    0.00s
+  Regex's compiled: 0
+  Largest generated function local memory size: 0 KB
+  Memory total: 266 KB requested, 266 KB peak, 266 KB current
+    Master memory: 200 KB requested, 200 KB peak, 200 KB current
+        Master ops:            74 KB requested, 74 KB peak, 74 KB current
+        Master args:           12 KB requested, 12 KB peak, 12 KB current
+        Master syms:           106 KB requested, 106 KB peak, 106 KB current
+        Master defaults:       836 B requested, 836 B peak, 836 B current
+        Master consts:         2 KB requested, 2 KB peak, 2 KB current
+    Instance memory: 65 KB requested, 65 KB peak, 65 KB current
+        Instance syms:         4 KB requested, 4 KB peak, 4 KB current
+        Instance param values: 17 KB requested, 17 KB peak, 17 KB current
+        Instance connections:  1 KB requested, 1 KB peak, 1 KB current
+    LLVM JIT memory: 0 B
+
+INFO> 
+OpenImageIO Texture statistics (0000000041295420, cache = 0000000022626A90)
+  Queries/batches : 
+    texture     :  877652 queries in 877652 batches
+    texture 3d  :  0 queries in 0 batches
+    shadow      :  0 queries in 0 batches
+    environment :  0 queries in 0 batches
+  Interpolations :
+    closest  : 0
+    bilinear : 2368913
+    bicubic  : 920123
+  Average anisotropic probes : 1.9
+  Max anisotropy in the wild : 1e+006
+
+OpenImageIO ImageCache statistics (0000000022626A90) ver 1.1.11
+  Images : 1 unique
+    ImageInputs : 1 created, 1 current, 1 peak
+    Total size of all images referenced : 64 KB
+    Read from disk : 96 KB
+    File I/O time : 0.1s (0.0s average per thread)
+    File open time only : 0.0s
+  Tiles: 10 created, 8 current, 9 peak
+    total tile requests : 4667847
+    micro-cache misses : 100574 (2.15461%)
+    main cache misses : 9 (0.000192808%)
+    Peak cache memory : 85 KB
+  Image file statistics:
+        opens   tiles  MB read  I/O time  res              File
+      1    1        3      0.1      0.1s   128x 128x4.u8   E:/dev/work/mercury/test/automation/elara/test_5003/data/sourceimages/test_er_file_0005.png UNTILED UNMIPPED MIP-COUNT [3,2,1,1,1,0,0,0]
+
+  Tot:     1        3      0.1      0.1s
+  1 not tiled, 1 not MIP-mapped
+
+INFO> Number of completed jobs: 0
+INFO> Number of failed jobs: 0
