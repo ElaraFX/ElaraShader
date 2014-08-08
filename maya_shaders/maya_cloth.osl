@@ -83,11 +83,26 @@ shader maya_cloth
 
 		if(i_widthSpread > 0)
 		{
-			float spread = noise(0.5 * point(i_uvCoord[0], 0.5 * i_uvCoord[1], 1));
-			uWidth -= i_widthSpread * spread;
+			float spread = 0.0;
+			point pp = point(2*i_uvCoord[0], 0.1 * i_uvCoord[1], 1);
+			float jj = 0.5;
+			for(int ii=0; ii<4; ii+=1){
+				spread += jj*noise(0.5 * pp);
+				jj*=0.7;
+				pp*=2;
+			}
+			uWidth -= i_widthSpread * smoothstep(0.4,0.9,spread);
 
-			spread = noise(0.5 * point(0.5 * i_uvCoord[0], i_uvCoord[1], 2));
-			vWidth -= i_widthSpread * spread;
+			//~ spread = noise(0.5 * point(0.3 * i_uvCoord[0], 2*i_uvCoord[1], 2));
+			spread = 0.0;
+			pp = point(0.1 * i_uvCoord[0], 2*i_uvCoord[1], 2);
+			jj = 0.5;
+			for(int ii=0; ii<4; ii+=1){
+				spread += jj*noise(0.5 * pp);
+				jj*=0.7;
+				pp*=2;
+			}
+			vWidth -= i_widthSpread * smoothstep(0.4,0.9,spread);
 		}
 		
 		ss = mod(ss, 1);
@@ -151,7 +166,7 @@ shader maya_cloth
 		
 		colorBalance(o_outColor, 
 			o_outAlpha,
-			i_alphaIsLuminance,
+			1,
 			i_alphaGain,
 			i_alphaOffset,
 			i_colorGain,
@@ -165,7 +180,6 @@ shader maya_cloth
 		o_outColor = i_defaultColor;
 		o_outAlpha = 1.0;
 	}
-	o_outAlpha = 1.0;
 }
 
 
