@@ -1,14 +1,11 @@
 // -------------for mtoer.xml------------------------------
 // <maya_cloth>
-	//~ <maya.name type="STRING">cloth</maya.name>
+	// <maya.name type="STRING">cloth</maya.name>
 // </maya_cloth>
 
 #include "mayautil.h"
 
 #define SQR(i) ( (i) * (i) )
-#ifndef PI
-#define PI 3.1415926536
-#endif
 
 shader maya_cloth
 [[ string help = "Maya Cloth"]]
@@ -59,7 +56,7 @@ shader maya_cloth
 
 		if(i_randomness > 0)
 		{
-			point nn = noise(point(i_uvCoord[0], i_uvCoord[1], 0));
+			point nn = noise(point(i_uvCoord[0], i_uvCoord[1], 0.5)); //0.5 in z to make the noise a little more smooth, more close to maya's look
 
 			ss += nn[0] * i_randomness * 2;
 			tt += nn[1] * i_randomness * 2;
@@ -69,12 +66,12 @@ shader maya_cloth
 		
 		if(i_uWave > 0.0)
 		{
-			ss -= i_uWave * sin(tt * 2 * PI);
+			ss -= i_uWave * sin(tt * 2 * M_PI);
 		}
 
 		if(i_vWave > 0.0)
 		{
-			tt += i_vWave * sin(prewaved_ss * 2 * PI);
+			tt += i_vWave * sin(prewaved_ss * 2 * M_PI);
 		}
 
 
@@ -83,26 +80,24 @@ shader maya_cloth
 
 		if(i_widthSpread > 0)
 		{
-			float spread = 0.0;
-			point pp = point(2*i_uvCoord[0], 0.1 * i_uvCoord[1], 1);
-			float jj = 0.5;
-			for(int ii=0; ii<4; ii+=1){
-				spread += jj*noise(0.5 * pp);
-				jj*=0.7;
-				pp*=2;
-			}
-			uWidth -= i_widthSpread * smoothstep(0.4,0.9,spread);
-
 			//~ spread = noise(0.5 * point(0.3 * i_uvCoord[0], 2*i_uvCoord[1], 2));
-			spread = 0.0;
-			pp = point(0.1 * i_uvCoord[0], 2*i_uvCoord[1], 2);
-			jj = 0.5;
-			for(int ii=0; ii<4; ii+=1){
-				spread += jj*noise(0.5 * pp);
+			// changed the noise to fractal, so it's more close to maya's look
+			float spread = 0.0;
+			float spreadU = 0.0;
+			float spreadV = 0.0;
+			point ppU = point(1*i_uvCoord[0], 0.075 * i_uvCoord[1], 1);
+			point ppV = point(0.075 * i_uvCoord[0], 1*i_uvCoord[1], 2);
+			float jj = 0.5;
+			for(int ii=0; ii<2; ii+=1){
+				spreadU += jj*noise( ppU);
+				spreadV += jj*noise( ppV);
 				jj*=0.7;
-				pp*=2;
+				ppU*=2;
+				ppV*=2;
 			}
-			vWidth -= i_widthSpread * smoothstep(0.4,0.9,spread);
+
+			uWidth -= i_widthSpread * smoothstep(0.45,0.9,spreadU*1.5);
+			vWidth -= i_widthSpread * smoothstep(0.45,0.9,spreadV*1.5);
 		}
 		
 		ss = mod(ss, 1);
@@ -154,8 +149,22 @@ shader maya_cloth
 			
 			if (i_brightSpread > 0)
 			{
-				float spread = noise(2 * (thread_color ? i_uvCoord[0] : i_uvCoord[1]));
-				cloth = mix(cloth, cloth * spread, i_brightSpread);
+				// differ the brightSpread to u and v direction, that will be more close to maya's look, better than 3delight version (uniform noise)
+				float spreadU = 0;
+				float spreadV = 0;
+				point ppU = point(0.7*i_uvCoord[0], 0.05 * i_uvCoord[1], 1);
+				point ppV = point(0.05*i_uvCoord[0], 0.7 * i_uvCoord[1], 1);
+				float jj = 0.5;
+				for(int ii=0; ii<2; ii+=1){
+					spreadU += jj*noise( ppU);
+					spreadV += jj*noise( ppV);
+					jj*=0.7;
+					ppU*=2;
+					ppV*=2;
+				}
+				spreadU = smoothstep(0.2,0.5,spreadU);
+				spreadV = smoothstep(0.2,0.5,spreadV);
+				cloth *= mix(1.0, 1.0 * thread_color? spreadU:spreadV, i_brightSpread);
 			}
 		}
 		
@@ -173,7 +182,6 @@ shader maya_cloth
 			i_colorOffset,
 			i_invert
 		);
-		
 	}
 	else
 	{
