@@ -64,25 +64,25 @@ shader maya_fractal
 (
 	// Inputs
 	//
-        float i_alphaGain               =1.0,
-        float i_alphaIsLuminance        =1.0,
-        float i_alphaOffset             =0.0,
-        float i_amplitude               =1.0,
-        float i_bias                    =0.0,
-        color i_colorGain               =color(1.0, 1.0, 1.0),
-        color i_colorOffset             =0.0,
-        color i_defaultColor            =color(0.5, 0.5, 0.5),
-        float i_frequencyRatio          =2.0,
-        float i_invert                  =0,
-        float i_levelMin                =0.0,
-        float i_levelMax                =9.0,
-        float i_ratio                   =0.707,
-        float i_threshold               =0.0,
-        float i_inflection              =0,
-        float i_animated                =0,
-        float i_time                    =0,
-        float i_timeRatio               =2.0,
-        vector i_uvCoord				= vector(0, 0, 0),
+            float i_alphaGain               =1.0,
+            float i_alphaIsLuminance        =1.0,
+            float i_alphaOffset             =0.0,
+            float i_amplitude               =1.0,
+            float i_bias                    =0.0,
+            color i_colorGain               =color(1.0, 1.0, 1.0),
+            color i_colorOffset             =0.0,
+            color i_defaultColor            =color(0.5, 0.5, 0.5),
+            float i_frequencyRatio          =2.0,
+            int   i_invert                  =0,
+            float i_levelMin                =0.0,
+            float i_levelMax                =9.0,
+            float i_ratio                   =0.707,
+            float i_threshold               =0.0,
+            int   i_inflection              =0,
+            int   i_animated                =0,
+            float i_time                    =0,
+            float i_timeRatio               =2.0,
+            vector i_uvCoord				= vector(0, 0, 0),
 	
 	// Outputs
 	//
@@ -91,7 +91,7 @@ shader maya_fractal
 	)
 {
 	float ss = i_uvCoord[0];
-	float tt = i_uvCoord[1]; // we invert v in place2dTexture, but this makes the checker different with Maya. so we have to imvert v back.
+	float tt = i_uvCoord[1]; // can not invert this value with 1.
 
 
 	if(ISUVDEFINED(ss, tt))
@@ -102,7 +102,7 @@ shader maya_fractal
 		point pp = point( ss, tt, 0 ) * 15;
 
 		float result = 0;
-		float amp = i_amplitude*2; /* our noise is between -0.5 and 0.5 */
+		float amp = i_amplitude*2.0; /* our noise is between -0.5 and 0.5 */
 		float curFreq = 10.0; /* 10 = Maya fudge factor */
 		float inv_frequencyRatio = 1.0 / i_frequencyRatio;
 
