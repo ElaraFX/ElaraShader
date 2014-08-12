@@ -1,0 +1,141 @@
+// -------------for mtoer.xml------------------------------
+// <maya_marble>
+	// <maya.name type="STRING">marble</maya.name>
+// </maya_marble>
+
+
+#include "mayautil.h"
+
+#define vsnoise(p) ( noise(p)*2.0 - 1);
+
+/* A vector-valued fBm. */
+vector vfBm( point p, 
+					vector octaves, 
+					float lacunarity, 
+					float ratio,
+					vector i_ripples)
+{
+	vector sum = 0;
+	float i = 0;
+	float amp = 1;
+
+	point pp = p * point(i_ripples[0], i_ripples[1], i_ripples[2]) / 2;
+
+	float pixel_size = sqrt( area(pp) );
+	float nyquist = 2 * pixel_size;
+	float pixel = 1.0;
+
+	while( (i<octaves[1] && pixel>pixel_size) || i<octaves[0] )
+	{
+		sum += amp * vsnoise( pp );
+		amp *= ratio;
+		pp *= lacunarity;
+
+		i += 1.0;
+		pixel /= lacunarity;
+	}
+
+	if( pixel>pixel_size && i<=octaves[1])
+	{
+		float weight = clamp(pixel/pixel_size - 1, 0, 1);
+		sum += weight * amp * vsnoise(pp);
+	}
+
+	return sum;
+}
+
+shader maya_marble
+[[ string help = "Maya Marble"]]
+(
+	/* "marble" parameters */
+	color i_fillerColor = 1.0,
+	color i_veinColor = 1.0,
+	float i_veinWidth = 0.1,
+	float i_diffusion = 0.5,
+	float i_contrast = 0.5,
+
+	/* "noise" parameters */
+	float i_amplitude = 1.5,
+	float i_ratio = 0.707,
+	vector i_ripples = vector(1.0, 1.0, 1.0),
+	vector i_depth = vector(0.0, 20.0, 0.0),
+	
+	/* "Color Balance" related parameters */
+	color i_defaultColor = 0.5, 
+	color i_colorGain = 1.0, 
+	color i_colorOffset = 0.0,
+	float i_alphaGain = 1.0, 
+	float i_alphaOffset = 0.0,
+	float i_alphaIsLuminance = 0.0,
+
+	/* "Effects" related parameters */
+	int i_invert = 0,
+	int i_local = 0,
+	int i_wrap = 1, 
+	float i_blend = 0.0,
+
+	/* geomtric inputs */
+	matrix i_placementMatrix = matrix( 1, 0, 0, 0,   0, 1, 0, 0,   0, 0, 1, 0,   0, 0, 0, 1),
+
+	/* outputs */
+	output color o_outColor = 1.0,
+	output float o_outAlpha = 1.0
+)
+{
+	float outside = 0;
+	float edgeDist = 0;
+
+	point pp = P;
+	if(i_local==1){
+		pp = transform("object",pp);
+	}
+	pp = transform(i_placementMatrix,pp);
+	if(i_wrap==0 &&(pp[0]>1 || pp[1]>1 || pp[2]>1||pp[0]<-1 || pp[1]<-1 || pp[2]<-1))
+		outside = 1;
+
+	edgeDist = pow(pow(1.0-abs(pp[0]),0.5)
+							* pow(1.0-abs(pp[1]),0.5)
+							* pow(1.0-abs(pp[2]),0.5)
+						,2);
+	edgeDist = smoothstep(0,i_blend,edgeDist);
+	
+	if(outside < 1)
+	{
+		/* Perturb P's position */
+		pp += vfBm( pp, i_depth, 2, i_ratio, i_ripples ) * i_amplitude;
+
+		float yy = pp[1];
+		//float dyy = float(filterwidth(yy)); // this can not to be pre-calculated, has to be computed inside later expression, or it ends up with wrong result
+
+		/* d = distance to vein center */
+		float d = min(1, (yy - floor(yy)) / (1-i_veinWidth));
+		if (d > 0.5)
+			d = 1.0 - d;
+
+		float mixer = (1- filteredpulsetrain(1 - i_veinWidth, 1, yy , filterwidth(pp[1])*0.2) / (1 - i_veinWidth)) * i_contrast 
+							+(1 - i_contrast) *  pow(2*d, i_diffusion) * (1 - i_diffusion * .3);
+		o_outColor = mix(i_fillerColor, i_veinColor, 1.0-mixer);
+		
+		if(i_wrap==0){
+			o_outColor = mix(i_defaultColor,o_outColor,edgeDist);
+		}
+		
+		o_outAlpha = luminance(o_outColor);
+		colorBalance(o_outColor, 
+			o_outAlpha,
+			1,
+			i_alphaGain,
+			i_alphaOffset,
+			i_colorGain,
+			i_colorOffset,
+			i_invert
+		);
+	}
+	else
+	{
+		o_outColor = i_defaultColor;
+		o_outAlpha = 0;
+	}
+}
+
+
