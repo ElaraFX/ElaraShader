@@ -15,6 +15,8 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *************************************************************************/
+
+
 #ifndef MAYAUTIL_H
 #define MAYAUTIL_H
 
@@ -24,6 +26,7 @@
 #define BUILTIN [[ int builtin = 1 ]]
 #endif
 
+#define LOG05 -0.693147180559945  /* log(0.5) */
 #define WRAPMAX (1.000001)
 #define EPSILON 1e-6
 #define UNDEFINED_UV -1000000
@@ -208,4 +211,14 @@ color IntToColor(int value)
 		((float)SHUFFLE_ARRAY[S])/255.0 * 0.5 + 0.5,
 		((float)SHUFFLE_ARRAY[V])/255.0 * 0.5 + 0.5);
 }
+
+/*
+	Perlin's bias function
+*/
+float bias(float b, float x)
+{
+    return pow(x, log(b)/LOG05);
+}
+
+
 #endif
