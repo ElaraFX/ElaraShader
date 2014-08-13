@@ -1,0 +1,113 @@
+/////////////////////////////////////////////////////////////////////////////
+// Copyright (c) 2009-2010 Sony Pictures Imageworks Inc., et al.
+// All Rights Reserved.
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions are
+// met:
+// * Redistributions of source code must retain the above copyright
+//   notice, this list of conditions and the following disclaimer.
+// * Redistributions in binary form must reproduce the above copyright
+//   notice, this list of conditions and the following disclaimer in the
+//   documentation and/or other materials provided with the distribution.
+// * Neither the name of Sony Pictures Imageworks nor the names of its
+//   contributors may be used to endorse or promote products derived from
+//   this software without specific prior written permission.
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+/////////////////////////////////////////////////////////////////////////////
+
+#include "texture3d.h"
+#include "mayautil.h"
+#include "noise_utils.h"
+
+shader maya_brownian
+[[ string help = "Maya fractal"]]
+(
+            // Inputs
+            //
+            float   i_alphaGain=1.0,
+            int     i_alphaIsLuminance=0,
+            float   i_alphaOffset=1.0,
+            float   i_blend=0.0,
+            color   i_colorGain=1.0,
+            color   i_colorOffset=0,
+            color   i_defaultColor=0.5,
+            float   i_filter=1.0,
+            float   i_filterOffset=0.0,
+            vector  i_filterSize=1.0,
+            float   i_increment=0.1,
+            int     i_invert=0,
+            int     i_local=0,
+            float   i_lacunarity=4.0,
+            float   i_octaves=3.0,
+            vector  i_weight3d=1.0,
+            matrix  i_placementMatrix=0.0,
+            int     i_wrap=0,
+
+	// Outputs
+	//
+	output color o_outColor=1.0,
+	output float o_outAlpha=0)
+{
+	float edgeDist;
+	float outside;
+    
+    point pp = transformP(i_blend, 
+		i_local, 
+		i_placementMatrix, 
+		i_wrap, edgeDist, 
+		outside);
+
+	if(outside < 1)
+	{
+		point pn = pp * point(i_weight3d[0], i_weight3d[1], i_weight3d[2]);
+
+		float i = 1;
+		float amp = 1;
+		float sum = 0;
+		point pq = pn;
+		float filterWidth = area(pq);
+		float inc = (i_increment < 1.0 ? 1.0 - i_increment : i_increment);
+
+		for(i = 0.99; i < i_octaves; i += inc)
+		{
+			sum += amp * filteredsnoise(pq, filterWidth);
+			amp *= inc;
+			pq *= i_lacunarity;
+			filterWidth *= i_lacunarity;
+		}
+
+		o_outAlpha = sum;
+		o_outColor = clamp((o_outAlpha + 1) / 2, 0, 1);
+
+		colorBalance(o_outColor, 
+			o_outAlpha, 
+			i_alphaIsLuminance, 
+			i_alphaGain, 
+			i_alphaOffset, 
+			i_colorGain, 
+			i_colorOffset, 
+			i_invert);
+
+		if(i_blend > 0 && edgeDist >= 0)
+		{
+			o_outColor = blendDefaultColor(i_blend, i_defaultColor, edgeDist, o_outColor);
+		}
+	}
+	else
+	{
+		o_outColor = i_defaultColor;
+		o_outAlpha = 0;
+	}
+}
+	
