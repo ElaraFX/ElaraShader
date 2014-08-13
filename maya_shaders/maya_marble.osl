@@ -8,12 +8,15 @@
 
 #define vsnoise(p) ( noise(p)*2.0 - 1);
 
-/* A vector-valued fBm. */
-vector vfBm( point p, 
+/* A vector-valued fBm with filter and filterOffset. */
+vector filteredVfBm( point p, 
 					vector octaves, 
 					float lacunarity, 
 					float ratio,
-					vector i_ripples)
+					vector i_ripples,
+					float filter,
+					float filterOffset
+					)
 {
 	vector sum = 0;
 	float i = 0;
@@ -21,13 +24,17 @@ vector vfBm( point p,
 
 	point pp = p * point(i_ripples[0], i_ripples[1], i_ripples[2]) / 2;
 
-	float pixel_size = sqrt( area(pp) );
+	
+	float pixel_size = sqrt( area(pp) )*filter*4 +filterOffset*0.4; // multiply by 4 makes it more close to maya's result
 	float nyquist = 2 * pixel_size;
 	float pixel = 1.0;
 
+
 	while( (i<octaves[1] && pixel>pixel_size) || i<octaves[0] )
 	{
-		sum += amp * vsnoise( pp );
+		sum += amp 
+					*clamp((pixel-pixel_size)/pixel*20,0.0,1.0 ) //make a gradient falloff for layer filtering
+					* vsnoise( pp )  ;
 		amp *= ratio;
 		pp *= lacunarity;
 
@@ -73,6 +80,8 @@ shader maya_marble
 	int i_local = 0,
 	int i_wrap = 1, 
 	float i_blend = 0.0,
+	float i_filter = 1.0,
+	float i_filterOffset = 0.0,
 
 	/* geomtric inputs */
 	matrix i_placementMatrix = matrix( 1, 0, 0, 0,   0, 1, 0, 0,   0, 0, 1, 0,   0, 0, 0, 1),
@@ -102,7 +111,7 @@ shader maya_marble
 	if(outside < 1)
 	{
 		/* Perturb P's position */
-		pp += vfBm( pp, i_depth, 2, i_ratio, i_ripples ) * i_amplitude;
+		pp += filteredVfBm( pp*0.5, i_depth, 2, i_ratio, i_ripples, i_filter, i_filterOffset ) * i_amplitude;
 
 		float yy = pp[1];
 		//float dyy = float(filterwidth(yy)); // this can not to be pre-calculated, has to be computed inside later expression, or it ends up with wrong result
