@@ -1,17 +1,8 @@
-/*
-	Copyright (c) 2006 soho vfx inc.
-	Copyright (c) 2006 The 3Delight Team.
-*/
 
 #ifndef __texture3d_h
 #define __texture3d_h
 
 #include "stdosl.h"
-
-
-#ifdef SHADER_TYPE_light
-#define P Ps
-#endif
 
 point
 transformP(
@@ -77,9 +68,6 @@ transformP(
 	return pq;
 }
 
-#ifdef SHADER_TYPE_light
-#undef P
-#endif
 
 color
 blendDefaultColor(

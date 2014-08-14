@@ -91,7 +91,7 @@ shader maya_fractal
 	)
 {
 	float ss = i_uvCoord[0];
-	float tt = i_uvCoord[1]; // can not invert this value with 1.
+	float tt = 1-i_uvCoord[1]; // can not invert this value with 1.
 
 
 	if(ISUVDEFINED(ss, tt))

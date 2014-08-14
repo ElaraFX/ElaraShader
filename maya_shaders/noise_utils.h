@@ -15,7 +15,6 @@
 #define snoisexy(x,y) (2 * (float noise(x,y)) - 1)
 #define vsnoise(p) (2 * (vector noise(p)) - 1) */
 
-
 #define filteredsnoise(p,width) (snoise(p) * (1-smoothstep (0.2,0.75,width)))
 #define filterwidth(x)  max(abs(Dx(x)*du) + abs(Dy(x)*dv), 1e-6)
 
