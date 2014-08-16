@@ -1,0 +1,6058 @@
+# ess
+
+node "mtoer_error" "mtoer_error" # "osl_node"
+end
+node "osl_shadergroup" "mtoer_error_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #1
+		"mtoer_error"
+end
+node "material" "mtoer_error_mtl" # "material"
+	ref "surface_shader" "mtoer_error_osl"
+	ref "displace_shader" ""
+	ref "volume_shader" ""
+	ref "env_shader" ""
+end
+node "mtoer_sphereUV" "mtoer_sphereuv_shader" # "osl_node"
+end
+node "maya_ei_preset_aovs" "maya_ei_preset_aovs_0" # "osl_node"
+	color "aov_barycentric_coords" 0.000000 0.000000 0.000000
+	color "aov_bump_difference" 0.000000 0.000000 0.000000
+	color "aov_Ng" 0.000000 0.000000 0.000000
+	color "aov_N" 0.000000 0.000000 0.000000
+	color "aov_object_name" 0.000000 0.000000 0.000000
+	color "aov_material_id" 0.000000 0.000000 0.000000
+	color "aov_primitive_id" 0.000000 0.000000 0.000000
+	color "aov_shading_point" 0.000000 0.000000 0.000000
+	color "aov_u" 0.000000 0.000000 0.000000
+	color "aov_unbumped_N" 0.000000 0.000000 0.000000
+	color "aov_uniform_id" 0.000000 0.000000 0.000000
+	color "aov_dPdu" 0.000000 0.000000 0.000000
+	color "aov_uv" 0.000000 0.000000 0.000000
+	color "aov_v" 0.000000 0.000000 0.000000
+	color "aov_dPdv" 0.000000 0.000000 0.000000
+	color "aov_P" 0.000000 0.000000 0.000000
+	color "aov_Pref" 0.000000 0.000000 0.000000
+	color "aov_bad_uv" 0.000000 0.000000 0.000000
+	color "aov_subdiv_edge_length" 0.000000 0.000000 0.000000
+	color "aov_polygon_wireframe" 0.000000 0.000000 0.000000
+	color "aov_reflection_lines" 0.000000 0.000000 0.000000
+	color "aov_subdiv_pixel_error" 0.000000 0.000000 0.000000
+	color "aov_triangle_wireframe" 0.000000 0.000000 0.000000
+	color "aov_cputime" 0.000000 0.000000 0.000000
+	color "aov_motionvector" 0.000000 0.000000 0.000000
+	color "aov_raycount" 0.000000 0.000000 0.000000
+	color "aov_zdepth" 0.000000 0.000000 0.000000
+end
+node "approx" "defaultElaraApprox" # "approx"
+	enum "method" "regular"
+	bool "view_dep" off
+	scalar "sharp" 0.000000
+	int "min_subdiv" 0
+	int "max_subdiv" 5
+	int "max_grid_size" 65536
+	scalar "motion_factor" 16.000000
+	int "u_subdiv" 0
+	int "v_subdiv" 0
+	scalar "edge_length" 0.000000
+end
+node "options" "options" # "options"
+	int "min_samples" -3
+	int "max_samples" 16
+	bool "progressive" on
+	int "bucket_size" 64
+	enum "filter" "gaussian"
+	scalar "filter_size" 3.000000
+	ref "approx" ""
+	scalar "max_displace" 1.000000
+	bool "motion" off
+	int "glossy_samples" 4
+	int "diffuse_samples" 8
+	int "sss_samples" 16
+	int "volume_indirect_samples" 8
+	int "transp_depth" 10
+	int "reflect_depth" 2
+	int "glossy_depth" 1
+	int "diffuse_depth" 1
+	int "refract_depth" 8
+	int "sum_depth" 10
+	bool "shadow" on
+	bool "caustic" off
+	scalar "bias" 0.000000
+	scalar "step_size" 1.000000
+	bool "lens" on
+	bool "volume" on
+	bool "geometry" on
+	bool "displace" off
+	bool "imager" on
+	enum "face" "both"
+	ref "dicing_camera" ""
+	bool "use_clamp" off
+	scalar "clamp_value" 20.000000
+	scalar "light_cutoff" 0.001000
+	declare token "texture_searchpath" "E:/elaraShaderDev/sourceimages"
+	declare token "procedural_searchpath" "E:/elaraShaderDev/"
+	declare scalar "frame" 4.000000
+	declare token "render_layer" "defaultRenderLayer"
+	declare scalar "fps" 24.000000
+	declare token "render_camera" "cameraShape1_inst"
+	declare token "render_instgroup" "instgroup_00"
+end
+node "camera" "perspShape" # "camera"
+	#output_list is array but not valid, skip
+	ref "imager_shader" ""
+	ref "atmo_shader" ""
+	ref "env_shader" ""
+	ref "lens_shader" ""
+	scalar "focal" 35.000000
+	scalar "aperture" 36.000000
+	scalar "aspect" 1.333000
+	int "res_x" 320
+	int "res_y" 240
+	int "window_xmin" -2147483648
+	int "window_xmax" 2147483647
+	int "window_ymin" -2147483648
+	int "window_ymax" 2147483647
+	scalar "clip_hither" 0.100000
+	scalar "clip_yon" 10000.000000
+	declare scalar "eiAOVZDepthMin" 100.000000
+	declare scalar "eiAOVZDepthMax" 300.000000
+end
+node "instance" "perspShape_inst" # "instance"
+	ref "element" "perspShape"
+	matrix "transform"
+	0.958323 0.000000 -0.285688 0.000000
+	-0.265143 0.372367 -0.889405 0.000000
+	0.106381 0.928086 0.356847 0.000000
+	10.474248 65.923309 15.902994 1.000000
+	matrix "motion_transform"
+	0.958323 0.000000 -0.285688 0.000000
+	-0.265143 0.372367 -0.889405 0.000000
+	0.106381 0.928086 0.356847 0.000000
+	10.474248 65.923309 15.902994 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" on
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	bool "surface_emission" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+	#mtl_list is array but not valid, skip
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 340282346638528860000000000000000000000.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "camera" "topShape" # "camera"
+	#output_list is array but not valid, skip
+	ref "imager_shader" ""
+	ref "atmo_shader" ""
+	ref "env_shader" ""
+	ref "lens_shader" ""
+	scalar "focal" 340282346638528860000000000000000000000.000000
+	scalar "aperture" 30.000000
+	scalar "aspect" 1.333000
+	int "res_x" 320
+	int "res_y" 240
+	int "window_xmin" -2147483648
+	int "window_xmax" 2147483647
+	int "window_ymin" -2147483648
+	int "window_ymax" 2147483647
+	scalar "clip_hither" 0.100000
+	scalar "clip_yon" 10000.000000
+	declare scalar "eiAOVZDepthMin" 100.000000
+	declare scalar "eiAOVZDepthMax" 300.000000
+end
+node "instance" "topShape_inst" # "instance"
+	ref "element" "topShape"
+	matrix "transform"
+	1.000000 0.000000 -0.000000 0.000000
+	-0.000000 0.000000 -1.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 100.099998 0.000000 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 -0.000000 0.000000
+	-0.000000 0.000000 -1.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 100.099998 0.000000 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" on
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	bool "surface_emission" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+	#mtl_list is array but not valid, skip
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 340282346638528860000000000000000000000.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "camera" "frontShape" # "camera"
+	#output_list is array but not valid, skip
+	ref "imager_shader" ""
+	ref "atmo_shader" ""
+	ref "env_shader" ""
+	ref "lens_shader" ""
+	scalar "focal" 340282346638528860000000000000000000000.000000
+	scalar "aperture" 30.000000
+	scalar "aspect" 1.333000
+	int "res_x" 320
+	int "res_y" 240
+	int "window_xmin" -2147483648
+	int "window_xmax" 2147483647
+	int "window_ymin" -2147483648
+	int "window_ymax" 2147483647
+	scalar "clip_hither" 0.100000
+	scalar "clip_yon" 10000.000000
+	declare scalar "eiAOVZDepthMin" 100.000000
+	declare scalar "eiAOVZDepthMax" 300.000000
+end
+node "instance" "frontShape_inst" # "instance"
+	ref "element" "frontShape"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	0.000000 0.000000 100.099998 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	0.000000 0.000000 100.099998 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" on
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	bool "surface_emission" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+	#mtl_list is array but not valid, skip
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 340282346638528860000000000000000000000.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "camera" "sideShape" # "camera"
+	#output_list is array but not valid, skip
+	ref "imager_shader" ""
+	ref "atmo_shader" ""
+	ref "env_shader" ""
+	ref "lens_shader" ""
+	scalar "focal" 340282346638528860000000000000000000000.000000
+	scalar "aperture" 30.000000
+	scalar "aspect" 1.333000
+	int "res_x" 320
+	int "res_y" 240
+	int "window_xmin" -2147483648
+	int "window_xmax" 2147483647
+	int "window_ymin" -2147483648
+	int "window_ymax" 2147483647
+	scalar "clip_hither" 0.100000
+	scalar "clip_yon" 10000.000000
+	declare scalar "eiAOVZDepthMin" 100.000000
+	declare scalar "eiAOVZDepthMax" 300.000000
+end
+node "instance" "sideShape_inst" # "instance"
+	ref "element" "sideShape"
+	matrix "transform"
+	0.000000 0.000000 -1.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	1.000000 0.000000 0.000000 0.000000
+	100.099998 0.000000 0.000000 1.000000
+	matrix "motion_transform"
+	0.000000 0.000000 -1.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	1.000000 0.000000 0.000000 0.000000
+	100.099998 0.000000 0.000000 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" on
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	bool "surface_emission" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+	#mtl_list is array but not valid, skip
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 340282346638528860000000000000000000000.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "outvar" "output_default_color" # "outvar"
+	token "name" "color"
+	enum "type" "color"
+	bool "filter" on
+end
+node "outvar" "output_default_alpha" # "outvar"
+	token "name" "opacity"
+	enum "type" "color"
+	bool "filter" on
+end
+node "output" "output_default" # "output"
+	token "filename" "E:/elaraShaderDev/images/test.png"
+	enum "data_type" "rgba"
+		ref[] "var_list" 1  #2
+		"output_default_color"
+		"output_default_alpha"
+end
+node "outvar" "outvar_beauty" # "outvar"
+	token "name" "color"
+	enum "type" "color"
+	bool "filter" on
+end
+node "outvar" "outvar_beauty_alpha" # "outvar"
+	token "name" "opacity"
+	enum "type" "color"
+	bool "filter" on
+end
+node "output" "output_beauty" # "output"
+	token "filename" "E:/elaraShaderDev/images/beauty/test.png"
+	enum "data_type" "rgba"
+		ref[] "var_list" 1  #2
+		"outvar_beauty"
+		"outvar_beauty_alpha"
+end
+node "maya_envSphere" "mtoer_maya_envSphere" # "osl_node"
+	color "i_image" 0.000000 0.000000 0.000000
+	scalar "i_shearU" 0.000000
+	scalar "i_shearV" 0.000000
+	token "i_filename" ""
+	int "i_flip" 0
+end
+node "osl_shadergroup" "mtoer_maya_envSphere_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"mtoer_sphereuv_shader"
+		"mtoer_maya_envSphere"
+end
+node "camera" "cameraShape1" # "camera"
+		ref[] "output_list" 1  #2
+		"output_default"
+		"output_beauty"
+	ref "imager_shader" ""
+	ref "atmo_shader" ""
+	ref "env_shader" "mtoer_maya_envSphere_osl"
+	ref "lens_shader" ""
+	scalar "focal" 35.000000
+	scalar "aperture" 31.991999
+	scalar "aspect" 1.333000
+	int "res_x" 320
+	int "res_y" 240
+	int "window_xmin" -2147483648
+	int "window_xmax" 2147483647
+	int "window_ymin" -2147483648
+	int "window_ymax" 2147483647
+	scalar "clip_hither" 0.100000
+	scalar "clip_yon" 10000.000000
+	declare scalar "eiAOVZDepthMin" 100.000000
+	declare scalar "eiAOVZDepthMax" 300.000000
+end
+node "instance" "cameraShape1_inst" # "instance"
+	ref "element" "cameraShape1"
+	matrix "transform"
+	1.000000 0.000000 -0.000000 0.000000
+	-0.000000 0.000000 -1.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	-0.040854 44.443565 -4.360693 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 -0.000000 0.000000
+	-0.000000 0.000000 -1.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	-0.040854 44.443565 -4.360693 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" on
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	bool "surface_emission" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+	#mtl_list is array but not valid, skip
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 340282346638528860000000000000000000000.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "directlight" "billow_patten:directionalLightShape1" # "light"
+	scalar "intensity" 3.807339
+	color "color" 1.000000 1.000000 1.000000
+	int "samples" 1
+	int "volume_samples" 0
+	ref "shader" ""
+	scalar "deltacone" 1.000000
+	scalar "spread" 0.000000
+	enum "face" "both"
+end
+node "instance" "billow_patten:directionalLightShape1_inst" # "instance"
+	ref "element" "billow_patten:directionalLightShape1"
+	matrix "transform"
+	1.000000 0.000000 -0.000000 0.000000
+	-0.000000 0.607707 -0.794161 0.000000
+	0.000000 0.794161 0.607707 0.000000
+	0.000000 0.000000 1.052676 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 -0.000000 0.000000
+	-0.000000 0.607707 -0.794161 0.000000
+	0.000000 0.794161 0.607707 0.000000
+	0.000000 0.000000 1.052676 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" off
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" on
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	bool "surface_emission" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+	#mtl_list is array but not valid, skip
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 340282346638528860000000000000000000000.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "poly" "billow_patten:pPlaneShape1" # "object"
+		point[] "pos_list" 1  #121
+		-5.950000 -0.000000 5.950000
+		-4.760000 -0.000000 5.950000
+		-3.570000 -0.000000 5.950000
+		-2.380000 -0.000000 5.950000
+		-1.190000 -0.000000 5.950000
+		0.000000 -0.000000 5.950000
+		1.190000 -0.000000 5.950000
+		2.380000 -0.000000 5.950000
+		3.570000 -0.000000 5.950000
+		4.759999 -0.000000 5.950000
+		5.950000 -0.000000 5.950000
+		-5.950000 -0.000000 4.760000
+		-4.760000 -0.000000 4.760000
+		-3.570000 -0.000000 4.760000
+		-2.380000 -0.000000 4.760000
+		-1.190000 -0.000000 4.760000
+		0.000000 -0.000000 4.760000
+		1.190000 -0.000000 4.760000
+		2.380000 -0.000000 4.760000
+		3.570000 -0.000000 4.760000
+		4.759999 -0.000000 4.760000
+		5.950000 -0.000000 4.760000
+		-5.950000 -0.000000 3.570000
+		-4.760000 -0.000000 3.570000
+		-3.570000 -0.000000 3.570000
+		-2.380000 -0.000000 3.570000
+		-1.190000 -0.000000 3.570000
+		0.000000 -0.000000 3.570000
+		1.190000 -0.000000 3.570000
+		2.380000 -0.000000 3.570000
+		3.570000 -0.000000 3.570000
+		4.759999 -0.000000 3.570000
+		5.950000 -0.000000 3.570000
+		-5.950000 -0.000000 2.380000
+		-4.760000 -0.000000 2.380000
+		-3.570000 -0.000000 2.380000
+		-2.380000 -0.000000 2.380000
+		-1.190000 -0.000000 2.380000
+		0.000000 -0.000000 2.380000
+		1.190000 -0.000000 2.380000
+		2.380000 -0.000000 2.380000
+		3.570000 -0.000000 2.380000
+		4.759999 -0.000000 2.380000
+		5.950000 -0.000000 2.380000
+		-5.950000 -0.000000 1.190000
+		-4.760000 -0.000000 1.190000
+		-3.570000 -0.000000 1.190000
+		-2.380000 -0.000000 1.190000
+		-1.190000 -0.000000 1.190000
+		0.000000 -0.000000 1.190000
+		1.190000 -0.000000 1.190000
+		2.380000 -0.000000 1.190000
+		3.570000 -0.000000 1.190000
+		4.759999 -0.000000 1.190000
+		5.950000 -0.000000 1.190000
+		-5.950000 0.000000 0.000000
+		-4.760000 0.000000 0.000000
+		-3.570000 0.000000 0.000000
+		-2.380000 0.000000 0.000000
+		-1.190000 0.000000 0.000000
+		0.000000 0.000000 0.000000
+		1.190000 0.000000 0.000000
+		2.380000 0.000000 0.000000
+		3.570000 0.000000 0.000000
+		4.759999 0.000000 0.000000
+		5.950000 0.000000 0.000000
+		-5.950000 0.000000 -1.190000
+		-4.760000 0.000000 -1.190000
+		-3.570000 0.000000 -1.190000
+		-2.380000 0.000000 -1.190000
+		-1.190000 0.000000 -1.190000
+		0.000000 0.000000 -1.190000
+		1.190000 0.000000 -1.190000
+		2.380000 0.000000 -1.190000
+		3.570000 0.000000 -1.190000
+		4.759999 0.000000 -1.190000
+		5.950000 0.000000 -1.190000
+		-5.950000 0.000000 -2.380000
+		-4.760000 0.000000 -2.380000
+		-3.570000 0.000000 -2.380000
+		-2.380000 0.000000 -2.380000
+		-1.190000 0.000000 -2.380000
+		0.000000 0.000000 -2.380000
+		1.190000 0.000000 -2.380000
+		2.380000 0.000000 -2.380000
+		3.570000 0.000000 -2.380000
+		4.759999 0.000000 -2.380000
+		5.950000 0.000000 -2.380000
+		-5.950000 0.000000 -3.570000
+		-4.760000 0.000000 -3.570000
+		-3.570000 0.000000 -3.570000
+		-2.380000 0.000000 -3.570000
+		-1.190000 0.000000 -3.570000
+		0.000000 0.000000 -3.570000
+		1.190000 0.000000 -3.570000
+		2.380000 0.000000 -3.570000
+		3.570000 0.000000 -3.570000
+		4.759999 0.000000 -3.570000
+		5.950000 0.000000 -3.570000
+		-5.950000 0.000000 -4.759999
+		-4.760000 0.000000 -4.759999
+		-3.570000 0.000000 -4.759999
+		-2.380000 0.000000 -4.759999
+		-1.190000 0.000000 -4.759999
+		0.000000 0.000000 -4.759999
+		1.190000 0.000000 -4.759999
+		2.380000 0.000000 -4.759999
+		3.570000 0.000000 -4.759999
+		4.759999 0.000000 -4.759999
+		5.950000 0.000000 -4.759999
+		-5.950000 0.000000 -5.950000
+		-4.760000 0.000000 -5.950000
+		-3.570000 0.000000 -5.950000
+		-2.380000 0.000000 -5.950000
+		-1.190000 0.000000 -5.950000
+		0.000000 0.000000 -5.950000
+		1.190000 0.000000 -5.950000
+		2.380000 0.000000 -5.950000
+		3.570000 0.000000 -5.950000
+		4.759999 0.000000 -5.950000
+		5.950000 0.000000 -5.950000
+		index[] "triangle_list" 1  #600
+		0
+		1
+		11
+		11
+		1
+		12
+		1
+		2
+		12
+		12
+		2
+		13
+		2
+		3
+		13
+		13
+		3
+		14
+		3
+		4
+		14
+		14
+		4
+		15
+		4
+		5
+		15
+		15
+		5
+		16
+		5
+		6
+		16
+		16
+		6
+		17
+		6
+		7
+		17
+		17
+		7
+		18
+		7
+		8
+		18
+		18
+		8
+		19
+		8
+		9
+		19
+		19
+		9
+		20
+		9
+		10
+		20
+		20
+		10
+		21
+		11
+		12
+		22
+		22
+		12
+		23
+		12
+		13
+		23
+		23
+		13
+		24
+		13
+		14
+		24
+		24
+		14
+		25
+		14
+		15
+		25
+		25
+		15
+		26
+		15
+		16
+		26
+		26
+		16
+		27
+		16
+		17
+		27
+		27
+		17
+		28
+		17
+		18
+		28
+		28
+		18
+		29
+		18
+		19
+		29
+		29
+		19
+		30
+		19
+		20
+		30
+		30
+		20
+		31
+		20
+		21
+		31
+		31
+		21
+		32
+		22
+		23
+		33
+		33
+		23
+		34
+		23
+		24
+		34
+		34
+		24
+		35
+		24
+		25
+		35
+		35
+		25
+		36
+		25
+		26
+		36
+		36
+		26
+		37
+		26
+		27
+		37
+		37
+		27
+		38
+		27
+		28
+		38
+		38
+		28
+		39
+		28
+		29
+		39
+		39
+		29
+		40
+		29
+		30
+		40
+		40
+		30
+		41
+		30
+		31
+		41
+		41
+		31
+		42
+		31
+		32
+		42
+		42
+		32
+		43
+		33
+		34
+		44
+		44
+		34
+		45
+		34
+		35
+		45
+		45
+		35
+		46
+		35
+		36
+		46
+		46
+		36
+		47
+		36
+		37
+		47
+		47
+		37
+		48
+		37
+		38
+		48
+		48
+		38
+		49
+		38
+		39
+		49
+		49
+		39
+		50
+		39
+		40
+		50
+		50
+		40
+		51
+		40
+		41
+		51
+		51
+		41
+		52
+		41
+		42
+		52
+		52
+		42
+		53
+		42
+		43
+		53
+		53
+		43
+		54
+		44
+		45
+		55
+		55
+		45
+		56
+		45
+		46
+		56
+		56
+		46
+		57
+		46
+		47
+		57
+		57
+		47
+		58
+		47
+		48
+		58
+		58
+		48
+		59
+		48
+		49
+		59
+		59
+		49
+		60
+		49
+		50
+		60
+		60
+		50
+		61
+		50
+		51
+		61
+		61
+		51
+		62
+		51
+		52
+		62
+		62
+		52
+		63
+		52
+		53
+		63
+		63
+		53
+		64
+		53
+		54
+		64
+		64
+		54
+		65
+		55
+		56
+		66
+		66
+		56
+		67
+		56
+		57
+		67
+		67
+		57
+		68
+		57
+		58
+		68
+		68
+		58
+		69
+		58
+		59
+		69
+		69
+		59
+		70
+		59
+		60
+		70
+		70
+		60
+		71
+		60
+		61
+		71
+		71
+		61
+		72
+		61
+		62
+		72
+		72
+		62
+		73
+		62
+		63
+		73
+		73
+		63
+		74
+		63
+		64
+		74
+		74
+		64
+		75
+		64
+		65
+		75
+		75
+		65
+		76
+		66
+		67
+		77
+		77
+		67
+		78
+		67
+		68
+		78
+		78
+		68
+		79
+		68
+		69
+		79
+		79
+		69
+		80
+		69
+		70
+		80
+		80
+		70
+		81
+		70
+		71
+		81
+		81
+		71
+		82
+		71
+		72
+		82
+		82
+		72
+		83
+		72
+		73
+		83
+		83
+		73
+		84
+		73
+		74
+		84
+		84
+		74
+		85
+		74
+		75
+		85
+		85
+		75
+		86
+		75
+		76
+		86
+		86
+		76
+		87
+		77
+		78
+		88
+		88
+		78
+		89
+		78
+		79
+		89
+		89
+		79
+		90
+		79
+		80
+		90
+		90
+		80
+		91
+		80
+		81
+		91
+		91
+		81
+		92
+		81
+		82
+		92
+		92
+		82
+		93
+		82
+		83
+		93
+		93
+		83
+		94
+		83
+		84
+		94
+		94
+		84
+		95
+		84
+		85
+		95
+		95
+		85
+		96
+		85
+		86
+		96
+		96
+		86
+		97
+		86
+		87
+		97
+		97
+		87
+		98
+		88
+		89
+		99
+		99
+		89
+		100
+		89
+		90
+		100
+		100
+		90
+		101
+		90
+		91
+		101
+		101
+		91
+		102
+		91
+		92
+		102
+		102
+		92
+		103
+		92
+		93
+		103
+		103
+		93
+		104
+		93
+		94
+		104
+		104
+		94
+		105
+		94
+		95
+		105
+		105
+		95
+		106
+		95
+		96
+		106
+		106
+		96
+		107
+		96
+		97
+		107
+		107
+		97
+		108
+		97
+		98
+		108
+		108
+		98
+		109
+		99
+		100
+		110
+		110
+		100
+		111
+		100
+		101
+		111
+		111
+		101
+		112
+		101
+		102
+		112
+		112
+		102
+		113
+		102
+		103
+		113
+		113
+		103
+		114
+		103
+		104
+		114
+		114
+		104
+		115
+		104
+		105
+		115
+		115
+		105
+		116
+		105
+		106
+		116
+		116
+		106
+		117
+		106
+		107
+		117
+		117
+		107
+		118
+		107
+		108
+		118
+		118
+		108
+		119
+		108
+		109
+		119
+		119
+		109
+		120
+	declare vector [] "N" varying
+		vector[] "N" 1  #121
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+	declare vector2 [] "uv" varying
+		vector2[] "uv" 1  #121
+		0.000000 0.000000
+		0.100000 0.000000
+		0.200000 0.000000
+		0.300000 0.000000
+		0.400000 0.000000
+		0.500000 0.000000
+		0.600000 0.000000
+		0.700000 0.000000
+		0.800000 0.000000
+		0.900000 0.000000
+		1.000000 0.000000
+		0.000000 0.100000
+		0.100000 0.100000
+		0.200000 0.100000
+		0.300000 0.100000
+		0.400000 0.100000
+		0.500000 0.100000
+		0.600000 0.100000
+		0.700000 0.100000
+		0.800000 0.100000
+		0.900000 0.100000
+		1.000000 0.100000
+		0.000000 0.200000
+		0.100000 0.200000
+		0.200000 0.200000
+		0.300000 0.200000
+		0.400000 0.200000
+		0.500000 0.200000
+		0.600000 0.200000
+		0.700000 0.200000
+		0.800000 0.200000
+		0.900000 0.200000
+		1.000000 0.200000
+		0.000000 0.300000
+		0.100000 0.300000
+		0.200000 0.300000
+		0.300000 0.300000
+		0.400000 0.300000
+		0.500000 0.300000
+		0.600000 0.300000
+		0.700000 0.300000
+		0.800000 0.300000
+		0.900000 0.300000
+		1.000000 0.300000
+		0.000000 0.400000
+		0.100000 0.400000
+		0.200000 0.400000
+		0.300000 0.400000
+		0.400000 0.400000
+		0.500000 0.400000
+		0.600000 0.400000
+		0.700000 0.400000
+		0.800000 0.400000
+		0.900000 0.400000
+		1.000000 0.400000
+		0.000000 0.500000
+		0.100000 0.500000
+		0.200000 0.500000
+		0.300000 0.500000
+		0.400000 0.500000
+		0.500000 0.500000
+		0.600000 0.500000
+		0.700000 0.500000
+		0.800000 0.500000
+		0.900000 0.500000
+		1.000000 0.500000
+		0.000000 0.600000
+		0.100000 0.600000
+		0.200000 0.600000
+		0.300000 0.600000
+		0.400000 0.600000
+		0.500000 0.600000
+		0.600000 0.600000
+		0.700000 0.600000
+		0.800000 0.600000
+		0.900000 0.600000
+		1.000000 0.600000
+		0.000000 0.700000
+		0.100000 0.700000
+		0.200000 0.700000
+		0.300000 0.700000
+		0.400000 0.700000
+		0.500000 0.700000
+		0.600000 0.700000
+		0.700000 0.700000
+		0.800000 0.700000
+		0.900000 0.700000
+		1.000000 0.700000
+		0.000000 0.800000
+		0.100000 0.800000
+		0.200000 0.800000
+		0.300000 0.800000
+		0.400000 0.800000
+		0.500000 0.800000
+		0.600000 0.800000
+		0.700000 0.800000
+		0.800000 0.800000
+		0.900000 0.800000
+		1.000000 0.800000
+		0.000000 0.900000
+		0.100000 0.900000
+		0.200000 0.900000
+		0.300000 0.900000
+		0.400000 0.900000
+		0.500000 0.900000
+		0.600000 0.900000
+		0.700000 0.900000
+		0.800000 0.900000
+		0.900000 0.900000
+		1.000000 0.900000
+		0.000000 1.000000
+		0.100000 1.000000
+		0.200000 1.000000
+		0.300000 1.000000
+		0.400000 1.000000
+		0.500000 1.000000
+		0.600000 1.000000
+		0.700000 1.000000
+		0.800000 1.000000
+		0.900000 1.000000
+		1.000000 1.000000
+end
+node "maya_place2dTexture" "billow_patten:place2dTexture2" # "osl_node"
+	scalar "i_coverageU" 1.000000
+	scalar "i_coverageV" 1.000000
+	int "i_mirrorU" 0
+	int "i_mirrorV" 0
+	scalar "i_noiseU" 0.000000
+	scalar "i_noiseV" 0.000000
+	scalar "i_offsetU" 0.000000
+	scalar "i_offsetV" 0.000000
+	scalar "i_repeatU" 1.000000
+	scalar "i_repeatV" 1.000000
+	scalar "i_rotateFrame" 0.000000
+	scalar "i_rotateUV" 0.000000
+	int "i_stagger" 0
+	scalar "i_translateFrameU" 0.000000
+	scalar "i_translateFrameV" 0.000000
+	int "i_wrapU" 1
+	int "i_wrapV" 1
+	token "i_mtoer_uvSetName" "uv"
+	vector "o_outUV" 0.000000 0.000000 0.000000
+end
+node "maya_noise" "billow_patten:noise2" # "osl_node"
+	scalar "i_threshold" 0.000000
+	scalar "i_amplitude" 1.000000
+	scalar "i_ratio" 0.707000
+	scalar "i_frequencyRatio" 2.000000
+	int "i_depthMax" 3
+	int "i_inflection" 0
+	scalar "i_time" 0.000000
+	scalar "i_frequency" 8.000000
+	scalar "i_implode" 0.000000
+	vector "i_implodeCenter" 0.500000 0.500000 0.000000
+	int "i_noiseType" 1
+	scalar "i_density" 1.000000
+	scalar "i_spottyness" 0.100000
+	scalar "i_sizeRand" 0.000000
+	scalar "i_randomness" 1.000000
+	int "i_falloff" 2
+	int "i_numWaves" 5
+	color "i_defaultColor" 0.500000 0.500000 0.500000
+	color "i_colorGain" 1.000000 1.000000 1.000000
+	color "i_colorOffset" 0.000000 0.000000 0.000000
+	scalar "i_alphaGain" 1.000000
+	scalar "i_alphaOffset" 0.000000
+	int "i_alphaIsLuminance" 0
+	int "i_invert" 0
+	param_link "i_uvCoord" "billow_patten:place2dTexture2" "o_outUV"
+	scalar "o_outAlpha" 0.200595
+	color "o_outColor" 0.200595 0.200595 0.200595
+end
+node "maya_lambert" "billow_patten:lambert2" # "osl_node"
+	color "i_ambientColor" 0.000000 0.000000 0.000000
+	param_link "i_color" "billow_patten:noise2" "o_outColor"
+	scalar "i_diffuse" 0.800000
+	color "i_incandescence" 0.000000 0.000000 0.000000
+	int "i_matteOpacityMode" 2
+	scalar "i_matteOpacity" 1.000000
+	int "i_refractions" 0
+	scalar "i_refractiveIndex" 1.000000
+	int "i_refractionLimit" 6
+	scalar "i_lightAbsorbance" 0.000000
+	scalar "i_shadowAttenuation" 0.500000
+	vector "i_normalCamera" 1.000000 1.000000 1.000000
+	color "i_transparency" 0.000000 0.000000 0.000000
+	scalar "i_translucence" 0.000000
+	scalar "i_translucenceDepth" 0.500000
+	scalar "i_translucenceFocus" 0.500000
+	int "i_mtoer_hasBump" 0
+	color "o_outColor" 0.000000 0.000000 0.000000
+	color "o_outTransparency" 0.000000 0.000000 0.000000
+	# not support param(o_outClosure) type((null))
+	# not support param(result) type((null))
+	scalar "result_alpha" 0.000000
+end
+node "osl_shadergroup" "billow_patten:lambert2_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"billow_patten:lambert2"
+		"maya_ei_preset_aovs_0"
+end
+node "material" "billow_patten:lambert2SG" # "material"
+	ref "surface_shader" "billow_patten:lambert2_osl"
+	ref "displace_shader" ""
+	ref "volume_shader" ""
+	ref "env_shader" ""
+end
+node "instance" "billow_patten:pPlaneShape1_inst" # "instance"
+	ref "element" "billow_patten:pPlaneShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	-9.394820 0.000000 -11.355578 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	-9.394820 0.000000 -11.355578 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" off
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	bool "surface_emission" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+		ref[] "mtl_list" 1  #1
+		"billow_patten:lambert2SG"
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 1.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "poly" "perlin_patten:pPlaneShape1" # "object"
+		point[] "pos_list" 1  #121
+		-5.950000 -0.000000 5.950000
+		-4.760000 -0.000000 5.950000
+		-3.570000 -0.000000 5.950000
+		-2.380000 -0.000000 5.950000
+		-1.190000 -0.000000 5.950000
+		0.000000 -0.000000 5.950000
+		1.190000 -0.000000 5.950000
+		2.380000 -0.000000 5.950000
+		3.570000 -0.000000 5.950000
+		4.759999 -0.000000 5.950000
+		5.950000 -0.000000 5.950000
+		-5.950000 -0.000000 4.760000
+		-4.760000 -0.000000 4.760000
+		-3.570000 -0.000000 4.760000
+		-2.380000 -0.000000 4.760000
+		-1.190000 -0.000000 4.760000
+		0.000000 -0.000000 4.760000
+		1.190000 -0.000000 4.760000
+		2.380000 -0.000000 4.760000
+		3.570000 -0.000000 4.760000
+		4.759999 -0.000000 4.760000
+		5.950000 -0.000000 4.760000
+		-5.950000 -0.000000 3.570000
+		-4.760000 -0.000000 3.570000
+		-3.570000 -0.000000 3.570000
+		-2.380000 -0.000000 3.570000
+		-1.190000 -0.000000 3.570000
+		0.000000 -0.000000 3.570000
+		1.190000 -0.000000 3.570000
+		2.380000 -0.000000 3.570000
+		3.570000 -0.000000 3.570000
+		4.759999 -0.000000 3.570000
+		5.950000 -0.000000 3.570000
+		-5.950000 -0.000000 2.380000
+		-4.760000 -0.000000 2.380000
+		-3.570000 -0.000000 2.380000
+		-2.380000 -0.000000 2.380000
+		-1.190000 -0.000000 2.380000
+		0.000000 -0.000000 2.380000
+		1.190000 -0.000000 2.380000
+		2.380000 -0.000000 2.380000
+		3.570000 -0.000000 2.380000
+		4.759999 -0.000000 2.380000
+		5.950000 -0.000000 2.380000
+		-5.950000 -0.000000 1.190000
+		-4.760000 -0.000000 1.190000
+		-3.570000 -0.000000 1.190000
+		-2.380000 -0.000000 1.190000
+		-1.190000 -0.000000 1.190000
+		0.000000 -0.000000 1.190000
+		1.190000 -0.000000 1.190000
+		2.380000 -0.000000 1.190000
+		3.570000 -0.000000 1.190000
+		4.759999 -0.000000 1.190000
+		5.950000 -0.000000 1.190000
+		-5.950000 0.000000 0.000000
+		-4.760000 0.000000 0.000000
+		-3.570000 0.000000 0.000000
+		-2.380000 0.000000 0.000000
+		-1.190000 0.000000 0.000000
+		0.000000 0.000000 0.000000
+		1.190000 0.000000 0.000000
+		2.380000 0.000000 0.000000
+		3.570000 0.000000 0.000000
+		4.759999 0.000000 0.000000
+		5.950000 0.000000 0.000000
+		-5.950000 0.000000 -1.190000
+		-4.760000 0.000000 -1.190000
+		-3.570000 0.000000 -1.190000
+		-2.380000 0.000000 -1.190000
+		-1.190000 0.000000 -1.190000
+		0.000000 0.000000 -1.190000
+		1.190000 0.000000 -1.190000
+		2.380000 0.000000 -1.190000
+		3.570000 0.000000 -1.190000
+		4.759999 0.000000 -1.190000
+		5.950000 0.000000 -1.190000
+		-5.950000 0.000000 -2.380000
+		-4.760000 0.000000 -2.380000
+		-3.570000 0.000000 -2.380000
+		-2.380000 0.000000 -2.380000
+		-1.190000 0.000000 -2.380000
+		0.000000 0.000000 -2.380000
+		1.190000 0.000000 -2.380000
+		2.380000 0.000000 -2.380000
+		3.570000 0.000000 -2.380000
+		4.759999 0.000000 -2.380000
+		5.950000 0.000000 -2.380000
+		-5.950000 0.000000 -3.570000
+		-4.760000 0.000000 -3.570000
+		-3.570000 0.000000 -3.570000
+		-2.380000 0.000000 -3.570000
+		-1.190000 0.000000 -3.570000
+		0.000000 0.000000 -3.570000
+		1.190000 0.000000 -3.570000
+		2.380000 0.000000 -3.570000
+		3.570000 0.000000 -3.570000
+		4.759999 0.000000 -3.570000
+		5.950000 0.000000 -3.570000
+		-5.950000 0.000000 -4.759999
+		-4.760000 0.000000 -4.759999
+		-3.570000 0.000000 -4.759999
+		-2.380000 0.000000 -4.759999
+		-1.190000 0.000000 -4.759999
+		0.000000 0.000000 -4.759999
+		1.190000 0.000000 -4.759999
+		2.380000 0.000000 -4.759999
+		3.570000 0.000000 -4.759999
+		4.759999 0.000000 -4.759999
+		5.950000 0.000000 -4.759999
+		-5.950000 0.000000 -5.950000
+		-4.760000 0.000000 -5.950000
+		-3.570000 0.000000 -5.950000
+		-2.380000 0.000000 -5.950000
+		-1.190000 0.000000 -5.950000
+		0.000000 0.000000 -5.950000
+		1.190000 0.000000 -5.950000
+		2.380000 0.000000 -5.950000
+		3.570000 0.000000 -5.950000
+		4.759999 0.000000 -5.950000
+		5.950000 0.000000 -5.950000
+		index[] "triangle_list" 1  #600
+		0
+		1
+		11
+		11
+		1
+		12
+		1
+		2
+		12
+		12
+		2
+		13
+		2
+		3
+		13
+		13
+		3
+		14
+		3
+		4
+		14
+		14
+		4
+		15
+		4
+		5
+		15
+		15
+		5
+		16
+		5
+		6
+		16
+		16
+		6
+		17
+		6
+		7
+		17
+		17
+		7
+		18
+		7
+		8
+		18
+		18
+		8
+		19
+		8
+		9
+		19
+		19
+		9
+		20
+		9
+		10
+		20
+		20
+		10
+		21
+		11
+		12
+		22
+		22
+		12
+		23
+		12
+		13
+		23
+		23
+		13
+		24
+		13
+		14
+		24
+		24
+		14
+		25
+		14
+		15
+		25
+		25
+		15
+		26
+		15
+		16
+		26
+		26
+		16
+		27
+		16
+		17
+		27
+		27
+		17
+		28
+		17
+		18
+		28
+		28
+		18
+		29
+		18
+		19
+		29
+		29
+		19
+		30
+		19
+		20
+		30
+		30
+		20
+		31
+		20
+		21
+		31
+		31
+		21
+		32
+		22
+		23
+		33
+		33
+		23
+		34
+		23
+		24
+		34
+		34
+		24
+		35
+		24
+		25
+		35
+		35
+		25
+		36
+		25
+		26
+		36
+		36
+		26
+		37
+		26
+		27
+		37
+		37
+		27
+		38
+		27
+		28
+		38
+		38
+		28
+		39
+		28
+		29
+		39
+		39
+		29
+		40
+		29
+		30
+		40
+		40
+		30
+		41
+		30
+		31
+		41
+		41
+		31
+		42
+		31
+		32
+		42
+		42
+		32
+		43
+		33
+		34
+		44
+		44
+		34
+		45
+		34
+		35
+		45
+		45
+		35
+		46
+		35
+		36
+		46
+		46
+		36
+		47
+		36
+		37
+		47
+		47
+		37
+		48
+		37
+		38
+		48
+		48
+		38
+		49
+		38
+		39
+		49
+		49
+		39
+		50
+		39
+		40
+		50
+		50
+		40
+		51
+		40
+		41
+		51
+		51
+		41
+		52
+		41
+		42
+		52
+		52
+		42
+		53
+		42
+		43
+		53
+		53
+		43
+		54
+		44
+		45
+		55
+		55
+		45
+		56
+		45
+		46
+		56
+		56
+		46
+		57
+		46
+		47
+		57
+		57
+		47
+		58
+		47
+		48
+		58
+		58
+		48
+		59
+		48
+		49
+		59
+		59
+		49
+		60
+		49
+		50
+		60
+		60
+		50
+		61
+		50
+		51
+		61
+		61
+		51
+		62
+		51
+		52
+		62
+		62
+		52
+		63
+		52
+		53
+		63
+		63
+		53
+		64
+		53
+		54
+		64
+		64
+		54
+		65
+		55
+		56
+		66
+		66
+		56
+		67
+		56
+		57
+		67
+		67
+		57
+		68
+		57
+		58
+		68
+		68
+		58
+		69
+		58
+		59
+		69
+		69
+		59
+		70
+		59
+		60
+		70
+		70
+		60
+		71
+		60
+		61
+		71
+		71
+		61
+		72
+		61
+		62
+		72
+		72
+		62
+		73
+		62
+		63
+		73
+		73
+		63
+		74
+		63
+		64
+		74
+		74
+		64
+		75
+		64
+		65
+		75
+		75
+		65
+		76
+		66
+		67
+		77
+		77
+		67
+		78
+		67
+		68
+		78
+		78
+		68
+		79
+		68
+		69
+		79
+		79
+		69
+		80
+		69
+		70
+		80
+		80
+		70
+		81
+		70
+		71
+		81
+		81
+		71
+		82
+		71
+		72
+		82
+		82
+		72
+		83
+		72
+		73
+		83
+		83
+		73
+		84
+		73
+		74
+		84
+		84
+		74
+		85
+		74
+		75
+		85
+		85
+		75
+		86
+		75
+		76
+		86
+		86
+		76
+		87
+		77
+		78
+		88
+		88
+		78
+		89
+		78
+		79
+		89
+		89
+		79
+		90
+		79
+		80
+		90
+		90
+		80
+		91
+		80
+		81
+		91
+		91
+		81
+		92
+		81
+		82
+		92
+		92
+		82
+		93
+		82
+		83
+		93
+		93
+		83
+		94
+		83
+		84
+		94
+		94
+		84
+		95
+		84
+		85
+		95
+		95
+		85
+		96
+		85
+		86
+		96
+		96
+		86
+		97
+		86
+		87
+		97
+		97
+		87
+		98
+		88
+		89
+		99
+		99
+		89
+		100
+		89
+		90
+		100
+		100
+		90
+		101
+		90
+		91
+		101
+		101
+		91
+		102
+		91
+		92
+		102
+		102
+		92
+		103
+		92
+		93
+		103
+		103
+		93
+		104
+		93
+		94
+		104
+		104
+		94
+		105
+		94
+		95
+		105
+		105
+		95
+		106
+		95
+		96
+		106
+		106
+		96
+		107
+		96
+		97
+		107
+		107
+		97
+		108
+		97
+		98
+		108
+		108
+		98
+		109
+		99
+		100
+		110
+		110
+		100
+		111
+		100
+		101
+		111
+		111
+		101
+		112
+		101
+		102
+		112
+		112
+		102
+		113
+		102
+		103
+		113
+		113
+		103
+		114
+		103
+		104
+		114
+		114
+		104
+		115
+		104
+		105
+		115
+		115
+		105
+		116
+		105
+		106
+		116
+		116
+		106
+		117
+		106
+		107
+		117
+		117
+		107
+		118
+		107
+		108
+		118
+		118
+		108
+		119
+		108
+		109
+		119
+		119
+		109
+		120
+	declare vector [] "N" varying
+		vector[] "N" 1  #121
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+	declare vector2 [] "uv" varying
+		vector2[] "uv" 1  #121
+		0.000000 0.000000
+		0.100000 0.000000
+		0.200000 0.000000
+		0.300000 0.000000
+		0.400000 0.000000
+		0.500000 0.000000
+		0.600000 0.000000
+		0.700000 0.000000
+		0.800000 0.000000
+		0.900000 0.000000
+		1.000000 0.000000
+		0.000000 0.100000
+		0.100000 0.100000
+		0.200000 0.100000
+		0.300000 0.100000
+		0.400000 0.100000
+		0.500000 0.100000
+		0.600000 0.100000
+		0.700000 0.100000
+		0.800000 0.100000
+		0.900000 0.100000
+		1.000000 0.100000
+		0.000000 0.200000
+		0.100000 0.200000
+		0.200000 0.200000
+		0.300000 0.200000
+		0.400000 0.200000
+		0.500000 0.200000
+		0.600000 0.200000
+		0.700000 0.200000
+		0.800000 0.200000
+		0.900000 0.200000
+		1.000000 0.200000
+		0.000000 0.300000
+		0.100000 0.300000
+		0.200000 0.300000
+		0.300000 0.300000
+		0.400000 0.300000
+		0.500000 0.300000
+		0.600000 0.300000
+		0.700000 0.300000
+		0.800000 0.300000
+		0.900000 0.300000
+		1.000000 0.300000
+		0.000000 0.400000
+		0.100000 0.400000
+		0.200000 0.400000
+		0.300000 0.400000
+		0.400000 0.400000
+		0.500000 0.400000
+		0.600000 0.400000
+		0.700000 0.400000
+		0.800000 0.400000
+		0.900000 0.400000
+		1.000000 0.400000
+		0.000000 0.500000
+		0.100000 0.500000
+		0.200000 0.500000
+		0.300000 0.500000
+		0.400000 0.500000
+		0.500000 0.500000
+		0.600000 0.500000
+		0.700000 0.500000
+		0.800000 0.500000
+		0.900000 0.500000
+		1.000000 0.500000
+		0.000000 0.600000
+		0.100000 0.600000
+		0.200000 0.600000
+		0.300000 0.600000
+		0.400000 0.600000
+		0.500000 0.600000
+		0.600000 0.600000
+		0.700000 0.600000
+		0.800000 0.600000
+		0.900000 0.600000
+		1.000000 0.600000
+		0.000000 0.700000
+		0.100000 0.700000
+		0.200000 0.700000
+		0.300000 0.700000
+		0.400000 0.700000
+		0.500000 0.700000
+		0.600000 0.700000
+		0.700000 0.700000
+		0.800000 0.700000
+		0.900000 0.700000
+		1.000000 0.700000
+		0.000000 0.800000
+		0.100000 0.800000
+		0.200000 0.800000
+		0.300000 0.800000
+		0.400000 0.800000
+		0.500000 0.800000
+		0.600000 0.800000
+		0.700000 0.800000
+		0.800000 0.800000
+		0.900000 0.800000
+		1.000000 0.800000
+		0.000000 0.900000
+		0.100000 0.900000
+		0.200000 0.900000
+		0.300000 0.900000
+		0.400000 0.900000
+		0.500000 0.900000
+		0.600000 0.900000
+		0.700000 0.900000
+		0.800000 0.900000
+		0.900000 0.900000
+		1.000000 0.900000
+		0.000000 1.000000
+		0.100000 1.000000
+		0.200000 1.000000
+		0.300000 1.000000
+		0.400000 1.000000
+		0.500000 1.000000
+		0.600000 1.000000
+		0.700000 1.000000
+		0.800000 1.000000
+		0.900000 1.000000
+		1.000000 1.000000
+end
+node "maya_place2dTexture" "perlin_patten:place2dTexture2" # "osl_node"
+	scalar "i_coverageU" 1.000000
+	scalar "i_coverageV" 1.000000
+	int "i_mirrorU" 0
+	int "i_mirrorV" 0
+	scalar "i_noiseU" 0.000000
+	scalar "i_noiseV" 0.000000
+	scalar "i_offsetU" 0.000000
+	scalar "i_offsetV" 0.000000
+	scalar "i_repeatU" 1.000000
+	scalar "i_repeatV" 1.000000
+	scalar "i_rotateFrame" 0.000000
+	scalar "i_rotateUV" 0.000000
+	int "i_stagger" 0
+	scalar "i_translateFrameU" 0.000000
+	scalar "i_translateFrameV" 0.000000
+	int "i_wrapU" 1
+	int "i_wrapV" 1
+	token "i_mtoer_uvSetName" "uv"
+	vector "o_outUV" 0.000000 0.000000 0.000000
+end
+node "maya_noise" "perlin_patten:noise2" # "osl_node"
+	scalar "i_threshold" 0.000000
+	scalar "i_amplitude" 1.000000
+	scalar "i_ratio" 0.707000
+	scalar "i_frequencyRatio" 2.000000
+	int "i_depthMax" 3
+	int "i_inflection" 0
+	scalar "i_time" 0.000000
+	scalar "i_frequency" 8.000000
+	scalar "i_implode" 0.000000
+	vector "i_implodeCenter" 0.500000 0.500000 0.000000
+	int "i_noiseType" 0
+	scalar "i_density" 1.000000
+	scalar "i_spottyness" 0.100000
+	scalar "i_sizeRand" 0.000000
+	scalar "i_randomness" 1.000000
+	int "i_falloff" 2
+	int "i_numWaves" 5
+	color "i_defaultColor" 0.500000 0.500000 0.500000
+	color "i_colorGain" 1.000000 1.000000 1.000000
+	color "i_colorOffset" 0.000000 0.000000 0.000000
+	scalar "i_alphaGain" 1.000000
+	scalar "i_alphaOffset" 0.000000
+	int "i_alphaIsLuminance" 0
+	int "i_invert" 0
+	param_link "i_uvCoord" "perlin_patten:place2dTexture2" "o_outUV"
+	scalar "o_outAlpha" -0.008895
+	color "o_outColor" -0.008895 -0.008895 -0.008895
+end
+node "maya_lambert" "perlin_patten:lambert2" # "osl_node"
+	color "i_ambientColor" 0.000000 0.000000 0.000000
+	param_link "i_color" "perlin_patten:noise2" "o_outColor"
+	scalar "i_diffuse" 0.800000
+	color "i_incandescence" 0.000000 0.000000 0.000000
+	int "i_matteOpacityMode" 2
+	scalar "i_matteOpacity" 1.000000
+	int "i_refractions" 0
+	scalar "i_refractiveIndex" 1.000000
+	int "i_refractionLimit" 6
+	scalar "i_lightAbsorbance" 0.000000
+	scalar "i_shadowAttenuation" 0.500000
+	vector "i_normalCamera" 1.000000 1.000000 1.000000
+	color "i_transparency" 0.000000 0.000000 0.000000
+	scalar "i_translucence" 0.000000
+	scalar "i_translucenceDepth" 0.500000
+	scalar "i_translucenceFocus" 0.500000
+	int "i_mtoer_hasBump" 0
+	color "o_outColor" 0.000000 0.000000 0.000000
+	color "o_outTransparency" 0.000000 0.000000 0.000000
+	# not support param(o_outClosure) type((null))
+	# not support param(result) type((null))
+	scalar "result_alpha" 0.000000
+end
+node "osl_shadergroup" "perlin_patten:lambert2_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"perlin_patten:lambert2"
+		"maya_ei_preset_aovs_0"
+end
+node "material" "perlin_patten:lambert2SG" # "material"
+	ref "surface_shader" "perlin_patten:lambert2_osl"
+	ref "displace_shader" ""
+	ref "volume_shader" ""
+	ref "env_shader" ""
+end
+node "instance" "perlin_patten:pPlaneShape1_inst" # "instance"
+	ref "element" "perlin_patten:pPlaneShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	7.354043 0.000000 -11.443727 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	7.354043 0.000000 -11.443727 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" off
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	bool "surface_emission" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+		ref[] "mtl_list" 1  #1
+		"perlin_patten:lambert2SG"
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 1.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "poly" "spacetime_patten:pPlaneShape1" # "object"
+		point[] "pos_list" 1  #121
+		-5.950000 -0.000000 5.950000
+		-4.760000 -0.000000 5.950000
+		-3.570000 -0.000000 5.950000
+		-2.380000 -0.000000 5.950000
+		-1.190000 -0.000000 5.950000
+		0.000000 -0.000000 5.950000
+		1.190000 -0.000000 5.950000
+		2.380000 -0.000000 5.950000
+		3.570000 -0.000000 5.950000
+		4.759999 -0.000000 5.950000
+		5.950000 -0.000000 5.950000
+		-5.950000 -0.000000 4.760000
+		-4.760000 -0.000000 4.760000
+		-3.570000 -0.000000 4.760000
+		-2.380000 -0.000000 4.760000
+		-1.190000 -0.000000 4.760000
+		0.000000 -0.000000 4.760000
+		1.190000 -0.000000 4.760000
+		2.380000 -0.000000 4.760000
+		3.570000 -0.000000 4.760000
+		4.759999 -0.000000 4.760000
+		5.950000 -0.000000 4.760000
+		-5.950000 -0.000000 3.570000
+		-4.760000 -0.000000 3.570000
+		-3.570000 -0.000000 3.570000
+		-2.380000 -0.000000 3.570000
+		-1.190000 -0.000000 3.570000
+		0.000000 -0.000000 3.570000
+		1.190000 -0.000000 3.570000
+		2.380000 -0.000000 3.570000
+		3.570000 -0.000000 3.570000
+		4.759999 -0.000000 3.570000
+		5.950000 -0.000000 3.570000
+		-5.950000 -0.000000 2.380000
+		-4.760000 -0.000000 2.380000
+		-3.570000 -0.000000 2.380000
+		-2.380000 -0.000000 2.380000
+		-1.190000 -0.000000 2.380000
+		0.000000 -0.000000 2.380000
+		1.190000 -0.000000 2.380000
+		2.380000 -0.000000 2.380000
+		3.570000 -0.000000 2.380000
+		4.759999 -0.000000 2.380000
+		5.950000 -0.000000 2.380000
+		-5.950000 -0.000000 1.190000
+		-4.760000 -0.000000 1.190000
+		-3.570000 -0.000000 1.190000
+		-2.380000 -0.000000 1.190000
+		-1.190000 -0.000000 1.190000
+		0.000000 -0.000000 1.190000
+		1.190000 -0.000000 1.190000
+		2.380000 -0.000000 1.190000
+		3.570000 -0.000000 1.190000
+		4.759999 -0.000000 1.190000
+		5.950000 -0.000000 1.190000
+		-5.950000 0.000000 0.000000
+		-4.760000 0.000000 0.000000
+		-3.570000 0.000000 0.000000
+		-2.380000 0.000000 0.000000
+		-1.190000 0.000000 0.000000
+		0.000000 0.000000 0.000000
+		1.190000 0.000000 0.000000
+		2.380000 0.000000 0.000000
+		3.570000 0.000000 0.000000
+		4.759999 0.000000 0.000000
+		5.950000 0.000000 0.000000
+		-5.950000 0.000000 -1.190000
+		-4.760000 0.000000 -1.190000
+		-3.570000 0.000000 -1.190000
+		-2.380000 0.000000 -1.190000
+		-1.190000 0.000000 -1.190000
+		0.000000 0.000000 -1.190000
+		1.190000 0.000000 -1.190000
+		2.380000 0.000000 -1.190000
+		3.570000 0.000000 -1.190000
+		4.759999 0.000000 -1.190000
+		5.950000 0.000000 -1.190000
+		-5.950000 0.000000 -2.380000
+		-4.760000 0.000000 -2.380000
+		-3.570000 0.000000 -2.380000
+		-2.380000 0.000000 -2.380000
+		-1.190000 0.000000 -2.380000
+		0.000000 0.000000 -2.380000
+		1.190000 0.000000 -2.380000
+		2.380000 0.000000 -2.380000
+		3.570000 0.000000 -2.380000
+		4.759999 0.000000 -2.380000
+		5.950000 0.000000 -2.380000
+		-5.950000 0.000000 -3.570000
+		-4.760000 0.000000 -3.570000
+		-3.570000 0.000000 -3.570000
+		-2.380000 0.000000 -3.570000
+		-1.190000 0.000000 -3.570000
+		0.000000 0.000000 -3.570000
+		1.190000 0.000000 -3.570000
+		2.380000 0.000000 -3.570000
+		3.570000 0.000000 -3.570000
+		4.759999 0.000000 -3.570000
+		5.950000 0.000000 -3.570000
+		-5.950000 0.000000 -4.759999
+		-4.760000 0.000000 -4.759999
+		-3.570000 0.000000 -4.759999
+		-2.380000 0.000000 -4.759999
+		-1.190000 0.000000 -4.759999
+		0.000000 0.000000 -4.759999
+		1.190000 0.000000 -4.759999
+		2.380000 0.000000 -4.759999
+		3.570000 0.000000 -4.759999
+		4.759999 0.000000 -4.759999
+		5.950000 0.000000 -4.759999
+		-5.950000 0.000000 -5.950000
+		-4.760000 0.000000 -5.950000
+		-3.570000 0.000000 -5.950000
+		-2.380000 0.000000 -5.950000
+		-1.190000 0.000000 -5.950000
+		0.000000 0.000000 -5.950000
+		1.190000 0.000000 -5.950000
+		2.380000 0.000000 -5.950000
+		3.570000 0.000000 -5.950000
+		4.759999 0.000000 -5.950000
+		5.950000 0.000000 -5.950000
+		index[] "triangle_list" 1  #600
+		0
+		1
+		11
+		11
+		1
+		12
+		1
+		2
+		12
+		12
+		2
+		13
+		2
+		3
+		13
+		13
+		3
+		14
+		3
+		4
+		14
+		14
+		4
+		15
+		4
+		5
+		15
+		15
+		5
+		16
+		5
+		6
+		16
+		16
+		6
+		17
+		6
+		7
+		17
+		17
+		7
+		18
+		7
+		8
+		18
+		18
+		8
+		19
+		8
+		9
+		19
+		19
+		9
+		20
+		9
+		10
+		20
+		20
+		10
+		21
+		11
+		12
+		22
+		22
+		12
+		23
+		12
+		13
+		23
+		23
+		13
+		24
+		13
+		14
+		24
+		24
+		14
+		25
+		14
+		15
+		25
+		25
+		15
+		26
+		15
+		16
+		26
+		26
+		16
+		27
+		16
+		17
+		27
+		27
+		17
+		28
+		17
+		18
+		28
+		28
+		18
+		29
+		18
+		19
+		29
+		29
+		19
+		30
+		19
+		20
+		30
+		30
+		20
+		31
+		20
+		21
+		31
+		31
+		21
+		32
+		22
+		23
+		33
+		33
+		23
+		34
+		23
+		24
+		34
+		34
+		24
+		35
+		24
+		25
+		35
+		35
+		25
+		36
+		25
+		26
+		36
+		36
+		26
+		37
+		26
+		27
+		37
+		37
+		27
+		38
+		27
+		28
+		38
+		38
+		28
+		39
+		28
+		29
+		39
+		39
+		29
+		40
+		29
+		30
+		40
+		40
+		30
+		41
+		30
+		31
+		41
+		41
+		31
+		42
+		31
+		32
+		42
+		42
+		32
+		43
+		33
+		34
+		44
+		44
+		34
+		45
+		34
+		35
+		45
+		45
+		35
+		46
+		35
+		36
+		46
+		46
+		36
+		47
+		36
+		37
+		47
+		47
+		37
+		48
+		37
+		38
+		48
+		48
+		38
+		49
+		38
+		39
+		49
+		49
+		39
+		50
+		39
+		40
+		50
+		50
+		40
+		51
+		40
+		41
+		51
+		51
+		41
+		52
+		41
+		42
+		52
+		52
+		42
+		53
+		42
+		43
+		53
+		53
+		43
+		54
+		44
+		45
+		55
+		55
+		45
+		56
+		45
+		46
+		56
+		56
+		46
+		57
+		46
+		47
+		57
+		57
+		47
+		58
+		47
+		48
+		58
+		58
+		48
+		59
+		48
+		49
+		59
+		59
+		49
+		60
+		49
+		50
+		60
+		60
+		50
+		61
+		50
+		51
+		61
+		61
+		51
+		62
+		51
+		52
+		62
+		62
+		52
+		63
+		52
+		53
+		63
+		63
+		53
+		64
+		53
+		54
+		64
+		64
+		54
+		65
+		55
+		56
+		66
+		66
+		56
+		67
+		56
+		57
+		67
+		67
+		57
+		68
+		57
+		58
+		68
+		68
+		58
+		69
+		58
+		59
+		69
+		69
+		59
+		70
+		59
+		60
+		70
+		70
+		60
+		71
+		60
+		61
+		71
+		71
+		61
+		72
+		61
+		62
+		72
+		72
+		62
+		73
+		62
+		63
+		73
+		73
+		63
+		74
+		63
+		64
+		74
+		74
+		64
+		75
+		64
+		65
+		75
+		75
+		65
+		76
+		66
+		67
+		77
+		77
+		67
+		78
+		67
+		68
+		78
+		78
+		68
+		79
+		68
+		69
+		79
+		79
+		69
+		80
+		69
+		70
+		80
+		80
+		70
+		81
+		70
+		71
+		81
+		81
+		71
+		82
+		71
+		72
+		82
+		82
+		72
+		83
+		72
+		73
+		83
+		83
+		73
+		84
+		73
+		74
+		84
+		84
+		74
+		85
+		74
+		75
+		85
+		85
+		75
+		86
+		75
+		76
+		86
+		86
+		76
+		87
+		77
+		78
+		88
+		88
+		78
+		89
+		78
+		79
+		89
+		89
+		79
+		90
+		79
+		80
+		90
+		90
+		80
+		91
+		80
+		81
+		91
+		91
+		81
+		92
+		81
+		82
+		92
+		92
+		82
+		93
+		82
+		83
+		93
+		93
+		83
+		94
+		83
+		84
+		94
+		94
+		84
+		95
+		84
+		85
+		95
+		95
+		85
+		96
+		85
+		86
+		96
+		96
+		86
+		97
+		86
+		87
+		97
+		97
+		87
+		98
+		88
+		89
+		99
+		99
+		89
+		100
+		89
+		90
+		100
+		100
+		90
+		101
+		90
+		91
+		101
+		101
+		91
+		102
+		91
+		92
+		102
+		102
+		92
+		103
+		92
+		93
+		103
+		103
+		93
+		104
+		93
+		94
+		104
+		104
+		94
+		105
+		94
+		95
+		105
+		105
+		95
+		106
+		95
+		96
+		106
+		106
+		96
+		107
+		96
+		97
+		107
+		107
+		97
+		108
+		97
+		98
+		108
+		108
+		98
+		109
+		99
+		100
+		110
+		110
+		100
+		111
+		100
+		101
+		111
+		111
+		101
+		112
+		101
+		102
+		112
+		112
+		102
+		113
+		102
+		103
+		113
+		113
+		103
+		114
+		103
+		104
+		114
+		114
+		104
+		115
+		104
+		105
+		115
+		115
+		105
+		116
+		105
+		106
+		116
+		116
+		106
+		117
+		106
+		107
+		117
+		117
+		107
+		118
+		107
+		108
+		118
+		118
+		108
+		119
+		108
+		109
+		119
+		119
+		109
+		120
+	declare vector [] "N" varying
+		vector[] "N" 1  #121
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+	declare vector2 [] "uv" varying
+		vector2[] "uv" 1  #121
+		0.000000 0.000000
+		0.100000 0.000000
+		0.200000 0.000000
+		0.300000 0.000000
+		0.400000 0.000000
+		0.500000 0.000000
+		0.600000 0.000000
+		0.700000 0.000000
+		0.800000 0.000000
+		0.900000 0.000000
+		1.000000 0.000000
+		0.000000 0.100000
+		0.100000 0.100000
+		0.200000 0.100000
+		0.300000 0.100000
+		0.400000 0.100000
+		0.500000 0.100000
+		0.600000 0.100000
+		0.700000 0.100000
+		0.800000 0.100000
+		0.900000 0.100000
+		1.000000 0.100000
+		0.000000 0.200000
+		0.100000 0.200000
+		0.200000 0.200000
+		0.300000 0.200000
+		0.400000 0.200000
+		0.500000 0.200000
+		0.600000 0.200000
+		0.700000 0.200000
+		0.800000 0.200000
+		0.900000 0.200000
+		1.000000 0.200000
+		0.000000 0.300000
+		0.100000 0.300000
+		0.200000 0.300000
+		0.300000 0.300000
+		0.400000 0.300000
+		0.500000 0.300000
+		0.600000 0.300000
+		0.700000 0.300000
+		0.800000 0.300000
+		0.900000 0.300000
+		1.000000 0.300000
+		0.000000 0.400000
+		0.100000 0.400000
+		0.200000 0.400000
+		0.300000 0.400000
+		0.400000 0.400000
+		0.500000 0.400000
+		0.600000 0.400000
+		0.700000 0.400000
+		0.800000 0.400000
+		0.900000 0.400000
+		1.000000 0.400000
+		0.000000 0.500000
+		0.100000 0.500000
+		0.200000 0.500000
+		0.300000 0.500000
+		0.400000 0.500000
+		0.500000 0.500000
+		0.600000 0.500000
+		0.700000 0.500000
+		0.800000 0.500000
+		0.900000 0.500000
+		1.000000 0.500000
+		0.000000 0.600000
+		0.100000 0.600000
+		0.200000 0.600000
+		0.300000 0.600000
+		0.400000 0.600000
+		0.500000 0.600000
+		0.600000 0.600000
+		0.700000 0.600000
+		0.800000 0.600000
+		0.900000 0.600000
+		1.000000 0.600000
+		0.000000 0.700000
+		0.100000 0.700000
+		0.200000 0.700000
+		0.300000 0.700000
+		0.400000 0.700000
+		0.500000 0.700000
+		0.600000 0.700000
+		0.700000 0.700000
+		0.800000 0.700000
+		0.900000 0.700000
+		1.000000 0.700000
+		0.000000 0.800000
+		0.100000 0.800000
+		0.200000 0.800000
+		0.300000 0.800000
+		0.400000 0.800000
+		0.500000 0.800000
+		0.600000 0.800000
+		0.700000 0.800000
+		0.800000 0.800000
+		0.900000 0.800000
+		1.000000 0.800000
+		0.000000 0.900000
+		0.100000 0.900000
+		0.200000 0.900000
+		0.300000 0.900000
+		0.400000 0.900000
+		0.500000 0.900000
+		0.600000 0.900000
+		0.700000 0.900000
+		0.800000 0.900000
+		0.900000 0.900000
+		1.000000 0.900000
+		0.000000 1.000000
+		0.100000 1.000000
+		0.200000 1.000000
+		0.300000 1.000000
+		0.400000 1.000000
+		0.500000 1.000000
+		0.600000 1.000000
+		0.700000 1.000000
+		0.800000 1.000000
+		0.900000 1.000000
+		1.000000 1.000000
+end
+node "maya_place2dTexture" "spacetime_patten:place2dTexture2" # "osl_node"
+	scalar "i_coverageU" 1.000000
+	scalar "i_coverageV" 1.000000
+	int "i_mirrorU" 0
+	int "i_mirrorV" 0
+	scalar "i_noiseU" 0.000000
+	scalar "i_noiseV" 0.000000
+	scalar "i_offsetU" 0.000000
+	scalar "i_offsetV" 0.000000
+	scalar "i_repeatU" 1.000000
+	scalar "i_repeatV" 1.000000
+	scalar "i_rotateFrame" 0.000000
+	scalar "i_rotateUV" 0.000000
+	int "i_stagger" 0
+	scalar "i_translateFrameU" 0.000000
+	scalar "i_translateFrameV" 0.000000
+	int "i_wrapU" 1
+	int "i_wrapV" 1
+	token "i_mtoer_uvSetName" "uv"
+	vector "o_outUV" 0.000000 0.000000 0.000000
+end
+node "maya_noise" "spacetime_patten:noise2" # "osl_node"
+	scalar "i_threshold" 0.000000
+	scalar "i_amplitude" 1.000000
+	scalar "i_ratio" 0.707000
+	scalar "i_frequencyRatio" 2.000000
+	int "i_depthMax" 3
+	int "i_inflection" 0
+	scalar "i_time" 0.000000
+	scalar "i_frequency" 8.000000
+	scalar "i_implode" 0.000000
+	vector "i_implodeCenter" 0.500000 0.500000 0.000000
+	int "i_noiseType" 4
+	scalar "i_density" 1.000000
+	scalar "i_spottyness" 0.100000
+	scalar "i_sizeRand" 0.000000
+	scalar "i_randomness" 1.000000
+	int "i_falloff" 2
+	int "i_numWaves" 5
+	color "i_defaultColor" 0.500000 0.500000 0.500000
+	color "i_colorGain" 1.000000 1.000000 1.000000
+	color "i_colorOffset" 0.000000 0.000000 0.000000
+	scalar "i_alphaGain" 1.000000
+	scalar "i_alphaOffset" 0.000000
+	int "i_alphaIsLuminance" 0
+	int "i_invert" 0
+	param_link "i_uvCoord" "spacetime_patten:place2dTexture2" "o_outUV"
+	scalar "o_outAlpha" 0.361160
+	color "o_outColor" 0.361160 0.361160 0.361160
+end
+node "maya_lambert" "spacetime_patten:lambert2" # "osl_node"
+	color "i_ambientColor" 0.000000 0.000000 0.000000
+	param_link "i_color" "spacetime_patten:noise2" "o_outColor"
+	scalar "i_diffuse" 0.800000
+	color "i_incandescence" 0.000000 0.000000 0.000000
+	int "i_matteOpacityMode" 2
+	scalar "i_matteOpacity" 1.000000
+	int "i_refractions" 0
+	scalar "i_refractiveIndex" 1.000000
+	int "i_refractionLimit" 6
+	scalar "i_lightAbsorbance" 0.000000
+	scalar "i_shadowAttenuation" 0.500000
+	vector "i_normalCamera" 1.000000 1.000000 1.000000
+	color "i_transparency" 0.000000 0.000000 0.000000
+	scalar "i_translucence" 0.000000
+	scalar "i_translucenceDepth" 0.500000
+	scalar "i_translucenceFocus" 0.500000
+	int "i_mtoer_hasBump" 0
+	color "o_outColor" 0.000000 0.000000 0.000000
+	color "o_outTransparency" 0.000000 0.000000 0.000000
+	# not support param(o_outClosure) type((null))
+	# not support param(result) type((null))
+	scalar "result_alpha" 0.000000
+end
+node "osl_shadergroup" "spacetime_patten:lambert2_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"spacetime_patten:lambert2"
+		"maya_ei_preset_aovs_0"
+end
+node "material" "spacetime_patten:lambert2SG" # "material"
+	ref "surface_shader" "spacetime_patten:lambert2_osl"
+	ref "displace_shader" ""
+	ref "volume_shader" ""
+	ref "env_shader" ""
+end
+node "instance" "spacetime_patten:pPlaneShape1_inst" # "instance"
+	ref "element" "spacetime_patten:pPlaneShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	-12.402194 0.000000 1.183074 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	-12.402194 0.000000 1.183074 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" off
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	bool "surface_emission" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+		ref[] "mtl_list" 1  #1
+		"spacetime_patten:lambert2SG"
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 1.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "poly" "wave_patten:pPlaneShape1" # "object"
+		point[] "pos_list" 1  #121
+		-5.950000 -0.000000 5.950000
+		-4.760000 -0.000000 5.950000
+		-3.570000 -0.000000 5.950000
+		-2.380000 -0.000000 5.950000
+		-1.190000 -0.000000 5.950000
+		0.000000 -0.000000 5.950000
+		1.190000 -0.000000 5.950000
+		2.380000 -0.000000 5.950000
+		3.570000 -0.000000 5.950000
+		4.759999 -0.000000 5.950000
+		5.950000 -0.000000 5.950000
+		-5.950000 -0.000000 4.760000
+		-4.760000 -0.000000 4.760000
+		-3.570000 -0.000000 4.760000
+		-2.380000 -0.000000 4.760000
+		-1.190000 -0.000000 4.760000
+		0.000000 -0.000000 4.760000
+		1.190000 -0.000000 4.760000
+		2.380000 -0.000000 4.760000
+		3.570000 -0.000000 4.760000
+		4.759999 -0.000000 4.760000
+		5.950000 -0.000000 4.760000
+		-5.950000 -0.000000 3.570000
+		-4.760000 -0.000000 3.570000
+		-3.570000 -0.000000 3.570000
+		-2.380000 -0.000000 3.570000
+		-1.190000 -0.000000 3.570000
+		0.000000 -0.000000 3.570000
+		1.190000 -0.000000 3.570000
+		2.380000 -0.000000 3.570000
+		3.570000 -0.000000 3.570000
+		4.759999 -0.000000 3.570000
+		5.950000 -0.000000 3.570000
+		-5.950000 -0.000000 2.380000
+		-4.760000 -0.000000 2.380000
+		-3.570000 -0.000000 2.380000
+		-2.380000 -0.000000 2.380000
+		-1.190000 -0.000000 2.380000
+		0.000000 -0.000000 2.380000
+		1.190000 -0.000000 2.380000
+		2.380000 -0.000000 2.380000
+		3.570000 -0.000000 2.380000
+		4.759999 -0.000000 2.380000
+		5.950000 -0.000000 2.380000
+		-5.950000 -0.000000 1.190000
+		-4.760000 -0.000000 1.190000
+		-3.570000 -0.000000 1.190000
+		-2.380000 -0.000000 1.190000
+		-1.190000 -0.000000 1.190000
+		0.000000 -0.000000 1.190000
+		1.190000 -0.000000 1.190000
+		2.380000 -0.000000 1.190000
+		3.570000 -0.000000 1.190000
+		4.759999 -0.000000 1.190000
+		5.950000 -0.000000 1.190000
+		-5.950000 0.000000 0.000000
+		-4.760000 0.000000 0.000000
+		-3.570000 0.000000 0.000000
+		-2.380000 0.000000 0.000000
+		-1.190000 0.000000 0.000000
+		0.000000 0.000000 0.000000
+		1.190000 0.000000 0.000000
+		2.380000 0.000000 0.000000
+		3.570000 0.000000 0.000000
+		4.759999 0.000000 0.000000
+		5.950000 0.000000 0.000000
+		-5.950000 0.000000 -1.190000
+		-4.760000 0.000000 -1.190000
+		-3.570000 0.000000 -1.190000
+		-2.380000 0.000000 -1.190000
+		-1.190000 0.000000 -1.190000
+		0.000000 0.000000 -1.190000
+		1.190000 0.000000 -1.190000
+		2.380000 0.000000 -1.190000
+		3.570000 0.000000 -1.190000
+		4.759999 0.000000 -1.190000
+		5.950000 0.000000 -1.190000
+		-5.950000 0.000000 -2.380000
+		-4.760000 0.000000 -2.380000
+		-3.570000 0.000000 -2.380000
+		-2.380000 0.000000 -2.380000
+		-1.190000 0.000000 -2.380000
+		0.000000 0.000000 -2.380000
+		1.190000 0.000000 -2.380000
+		2.380000 0.000000 -2.380000
+		3.570000 0.000000 -2.380000
+		4.759999 0.000000 -2.380000
+		5.950000 0.000000 -2.380000
+		-5.950000 0.000000 -3.570000
+		-4.760000 0.000000 -3.570000
+		-3.570000 0.000000 -3.570000
+		-2.380000 0.000000 -3.570000
+		-1.190000 0.000000 -3.570000
+		0.000000 0.000000 -3.570000
+		1.190000 0.000000 -3.570000
+		2.380000 0.000000 -3.570000
+		3.570000 0.000000 -3.570000
+		4.759999 0.000000 -3.570000
+		5.950000 0.000000 -3.570000
+		-5.950000 0.000000 -4.759999
+		-4.760000 0.000000 -4.759999
+		-3.570000 0.000000 -4.759999
+		-2.380000 0.000000 -4.759999
+		-1.190000 0.000000 -4.759999
+		0.000000 0.000000 -4.759999
+		1.190000 0.000000 -4.759999
+		2.380000 0.000000 -4.759999
+		3.570000 0.000000 -4.759999
+		4.759999 0.000000 -4.759999
+		5.950000 0.000000 -4.759999
+		-5.950000 0.000000 -5.950000
+		-4.760000 0.000000 -5.950000
+		-3.570000 0.000000 -5.950000
+		-2.380000 0.000000 -5.950000
+		-1.190000 0.000000 -5.950000
+		0.000000 0.000000 -5.950000
+		1.190000 0.000000 -5.950000
+		2.380000 0.000000 -5.950000
+		3.570000 0.000000 -5.950000
+		4.759999 0.000000 -5.950000
+		5.950000 0.000000 -5.950000
+		index[] "triangle_list" 1  #600
+		0
+		1
+		11
+		11
+		1
+		12
+		1
+		2
+		12
+		12
+		2
+		13
+		2
+		3
+		13
+		13
+		3
+		14
+		3
+		4
+		14
+		14
+		4
+		15
+		4
+		5
+		15
+		15
+		5
+		16
+		5
+		6
+		16
+		16
+		6
+		17
+		6
+		7
+		17
+		17
+		7
+		18
+		7
+		8
+		18
+		18
+		8
+		19
+		8
+		9
+		19
+		19
+		9
+		20
+		9
+		10
+		20
+		20
+		10
+		21
+		11
+		12
+		22
+		22
+		12
+		23
+		12
+		13
+		23
+		23
+		13
+		24
+		13
+		14
+		24
+		24
+		14
+		25
+		14
+		15
+		25
+		25
+		15
+		26
+		15
+		16
+		26
+		26
+		16
+		27
+		16
+		17
+		27
+		27
+		17
+		28
+		17
+		18
+		28
+		28
+		18
+		29
+		18
+		19
+		29
+		29
+		19
+		30
+		19
+		20
+		30
+		30
+		20
+		31
+		20
+		21
+		31
+		31
+		21
+		32
+		22
+		23
+		33
+		33
+		23
+		34
+		23
+		24
+		34
+		34
+		24
+		35
+		24
+		25
+		35
+		35
+		25
+		36
+		25
+		26
+		36
+		36
+		26
+		37
+		26
+		27
+		37
+		37
+		27
+		38
+		27
+		28
+		38
+		38
+		28
+		39
+		28
+		29
+		39
+		39
+		29
+		40
+		29
+		30
+		40
+		40
+		30
+		41
+		30
+		31
+		41
+		41
+		31
+		42
+		31
+		32
+		42
+		42
+		32
+		43
+		33
+		34
+		44
+		44
+		34
+		45
+		34
+		35
+		45
+		45
+		35
+		46
+		35
+		36
+		46
+		46
+		36
+		47
+		36
+		37
+		47
+		47
+		37
+		48
+		37
+		38
+		48
+		48
+		38
+		49
+		38
+		39
+		49
+		49
+		39
+		50
+		39
+		40
+		50
+		50
+		40
+		51
+		40
+		41
+		51
+		51
+		41
+		52
+		41
+		42
+		52
+		52
+		42
+		53
+		42
+		43
+		53
+		53
+		43
+		54
+		44
+		45
+		55
+		55
+		45
+		56
+		45
+		46
+		56
+		56
+		46
+		57
+		46
+		47
+		57
+		57
+		47
+		58
+		47
+		48
+		58
+		58
+		48
+		59
+		48
+		49
+		59
+		59
+		49
+		60
+		49
+		50
+		60
+		60
+		50
+		61
+		50
+		51
+		61
+		61
+		51
+		62
+		51
+		52
+		62
+		62
+		52
+		63
+		52
+		53
+		63
+		63
+		53
+		64
+		53
+		54
+		64
+		64
+		54
+		65
+		55
+		56
+		66
+		66
+		56
+		67
+		56
+		57
+		67
+		67
+		57
+		68
+		57
+		58
+		68
+		68
+		58
+		69
+		58
+		59
+		69
+		69
+		59
+		70
+		59
+		60
+		70
+		70
+		60
+		71
+		60
+		61
+		71
+		71
+		61
+		72
+		61
+		62
+		72
+		72
+		62
+		73
+		62
+		63
+		73
+		73
+		63
+		74
+		63
+		64
+		74
+		74
+		64
+		75
+		64
+		65
+		75
+		75
+		65
+		76
+		66
+		67
+		77
+		77
+		67
+		78
+		67
+		68
+		78
+		78
+		68
+		79
+		68
+		69
+		79
+		79
+		69
+		80
+		69
+		70
+		80
+		80
+		70
+		81
+		70
+		71
+		81
+		81
+		71
+		82
+		71
+		72
+		82
+		82
+		72
+		83
+		72
+		73
+		83
+		83
+		73
+		84
+		73
+		74
+		84
+		84
+		74
+		85
+		74
+		75
+		85
+		85
+		75
+		86
+		75
+		76
+		86
+		86
+		76
+		87
+		77
+		78
+		88
+		88
+		78
+		89
+		78
+		79
+		89
+		89
+		79
+		90
+		79
+		80
+		90
+		90
+		80
+		91
+		80
+		81
+		91
+		91
+		81
+		92
+		81
+		82
+		92
+		92
+		82
+		93
+		82
+		83
+		93
+		93
+		83
+		94
+		83
+		84
+		94
+		94
+		84
+		95
+		84
+		85
+		95
+		95
+		85
+		96
+		85
+		86
+		96
+		96
+		86
+		97
+		86
+		87
+		97
+		97
+		87
+		98
+		88
+		89
+		99
+		99
+		89
+		100
+		89
+		90
+		100
+		100
+		90
+		101
+		90
+		91
+		101
+		101
+		91
+		102
+		91
+		92
+		102
+		102
+		92
+		103
+		92
+		93
+		103
+		103
+		93
+		104
+		93
+		94
+		104
+		104
+		94
+		105
+		94
+		95
+		105
+		105
+		95
+		106
+		95
+		96
+		106
+		106
+		96
+		107
+		96
+		97
+		107
+		107
+		97
+		108
+		97
+		98
+		108
+		108
+		98
+		109
+		99
+		100
+		110
+		110
+		100
+		111
+		100
+		101
+		111
+		111
+		101
+		112
+		101
+		102
+		112
+		112
+		102
+		113
+		102
+		103
+		113
+		113
+		103
+		114
+		103
+		104
+		114
+		114
+		104
+		115
+		104
+		105
+		115
+		115
+		105
+		116
+		105
+		106
+		116
+		116
+		106
+		117
+		106
+		107
+		117
+		117
+		107
+		118
+		107
+		108
+		118
+		118
+		108
+		119
+		108
+		109
+		119
+		119
+		109
+		120
+	declare vector [] "N" varying
+		vector[] "N" 1  #121
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+	declare vector2 [] "uv" varying
+		vector2[] "uv" 1  #121
+		0.000000 0.000000
+		0.100000 0.000000
+		0.200000 0.000000
+		0.300000 0.000000
+		0.400000 0.000000
+		0.500000 0.000000
+		0.600000 0.000000
+		0.700000 0.000000
+		0.800000 0.000000
+		0.900000 0.000000
+		1.000000 0.000000
+		0.000000 0.100000
+		0.100000 0.100000
+		0.200000 0.100000
+		0.300000 0.100000
+		0.400000 0.100000
+		0.500000 0.100000
+		0.600000 0.100000
+		0.700000 0.100000
+		0.800000 0.100000
+		0.900000 0.100000
+		1.000000 0.100000
+		0.000000 0.200000
+		0.100000 0.200000
+		0.200000 0.200000
+		0.300000 0.200000
+		0.400000 0.200000
+		0.500000 0.200000
+		0.600000 0.200000
+		0.700000 0.200000
+		0.800000 0.200000
+		0.900000 0.200000
+		1.000000 0.200000
+		0.000000 0.300000
+		0.100000 0.300000
+		0.200000 0.300000
+		0.300000 0.300000
+		0.400000 0.300000
+		0.500000 0.300000
+		0.600000 0.300000
+		0.700000 0.300000
+		0.800000 0.300000
+		0.900000 0.300000
+		1.000000 0.300000
+		0.000000 0.400000
+		0.100000 0.400000
+		0.200000 0.400000
+		0.300000 0.400000
+		0.400000 0.400000
+		0.500000 0.400000
+		0.600000 0.400000
+		0.700000 0.400000
+		0.800000 0.400000
+		0.900000 0.400000
+		1.000000 0.400000
+		0.000000 0.500000
+		0.100000 0.500000
+		0.200000 0.500000
+		0.300000 0.500000
+		0.400000 0.500000
+		0.500000 0.500000
+		0.600000 0.500000
+		0.700000 0.500000
+		0.800000 0.500000
+		0.900000 0.500000
+		1.000000 0.500000
+		0.000000 0.600000
+		0.100000 0.600000
+		0.200000 0.600000
+		0.300000 0.600000
+		0.400000 0.600000
+		0.500000 0.600000
+		0.600000 0.600000
+		0.700000 0.600000
+		0.800000 0.600000
+		0.900000 0.600000
+		1.000000 0.600000
+		0.000000 0.700000
+		0.100000 0.700000
+		0.200000 0.700000
+		0.300000 0.700000
+		0.400000 0.700000
+		0.500000 0.700000
+		0.600000 0.700000
+		0.700000 0.700000
+		0.800000 0.700000
+		0.900000 0.700000
+		1.000000 0.700000
+		0.000000 0.800000
+		0.100000 0.800000
+		0.200000 0.800000
+		0.300000 0.800000
+		0.400000 0.800000
+		0.500000 0.800000
+		0.600000 0.800000
+		0.700000 0.800000
+		0.800000 0.800000
+		0.900000 0.800000
+		1.000000 0.800000
+		0.000000 0.900000
+		0.100000 0.900000
+		0.200000 0.900000
+		0.300000 0.900000
+		0.400000 0.900000
+		0.500000 0.900000
+		0.600000 0.900000
+		0.700000 0.900000
+		0.800000 0.900000
+		0.900000 0.900000
+		1.000000 0.900000
+		0.000000 1.000000
+		0.100000 1.000000
+		0.200000 1.000000
+		0.300000 1.000000
+		0.400000 1.000000
+		0.500000 1.000000
+		0.600000 1.000000
+		0.700000 1.000000
+		0.800000 1.000000
+		0.900000 1.000000
+		1.000000 1.000000
+end
+node "maya_place2dTexture" "wave_patten:place2dTexture2" # "osl_node"
+	scalar "i_coverageU" 1.000000
+	scalar "i_coverageV" 1.000000
+	int "i_mirrorU" 0
+	int "i_mirrorV" 0
+	scalar "i_noiseU" 0.000000
+	scalar "i_noiseV" 0.000000
+	scalar "i_offsetU" 0.000000
+	scalar "i_offsetV" 0.000000
+	scalar "i_repeatU" 1.000000
+	scalar "i_repeatV" 1.000000
+	scalar "i_rotateFrame" 0.000000
+	scalar "i_rotateUV" 0.000000
+	int "i_stagger" 0
+	scalar "i_translateFrameU" 0.000000
+	scalar "i_translateFrameV" 0.000000
+	int "i_wrapU" 1
+	int "i_wrapV" 1
+	token "i_mtoer_uvSetName" "uv"
+	vector "o_outUV" 0.000000 0.000000 0.000000
+end
+node "maya_noise" "wave_patten:noise2" # "osl_node"
+	scalar "i_threshold" 0.000000
+	scalar "i_amplitude" 1.000000
+	scalar "i_ratio" 0.707000
+	scalar "i_frequencyRatio" 2.000000
+	int "i_depthMax" 3
+	int "i_inflection" 0
+	scalar "i_time" 0.000000
+	scalar "i_frequency" 8.000000
+	scalar "i_implode" 0.000000
+	vector "i_implodeCenter" 0.500000 0.500000 0.000000
+	int "i_noiseType" 2
+	scalar "i_density" 1.000000
+	scalar "i_spottyness" 0.100000
+	scalar "i_sizeRand" 0.000000
+	scalar "i_randomness" 1.000000
+	int "i_falloff" 2
+	int "i_numWaves" 5
+	color "i_defaultColor" 0.500000 0.500000 0.500000
+	color "i_colorGain" 1.000000 1.000000 1.000000
+	color "i_colorOffset" 0.000000 0.000000 0.000000
+	scalar "i_alphaGain" 1.000000
+	scalar "i_alphaOffset" 0.000000
+	int "i_alphaIsLuminance" 0
+	int "i_invert" 0
+	param_link "i_uvCoord" "wave_patten:place2dTexture2" "o_outUV"
+	scalar "o_outAlpha" 0.382726
+	color "o_outColor" 0.382726 0.382726 0.382726
+end
+node "maya_lambert" "wave_patten:lambert2" # "osl_node"
+	color "i_ambientColor" 0.000000 0.000000 0.000000
+	param_link "i_color" "wave_patten:noise2" "o_outColor"
+	scalar "i_diffuse" 0.800000
+	color "i_incandescence" 0.000000 0.000000 0.000000
+	int "i_matteOpacityMode" 2
+	scalar "i_matteOpacity" 1.000000
+	int "i_refractions" 0
+	scalar "i_refractiveIndex" 1.000000
+	int "i_refractionLimit" 6
+	scalar "i_lightAbsorbance" 0.000000
+	scalar "i_shadowAttenuation" 0.500000
+	vector "i_normalCamera" 1.000000 1.000000 1.000000
+	color "i_transparency" 0.000000 0.000000 0.000000
+	scalar "i_translucence" 0.000000
+	scalar "i_translucenceDepth" 0.500000
+	scalar "i_translucenceFocus" 0.500000
+	int "i_mtoer_hasBump" 0
+	color "o_outColor" 0.000000 0.000000 0.000000
+	color "o_outTransparency" 0.000000 0.000000 0.000000
+	# not support param(o_outClosure) type((null))
+	# not support param(result) type((null))
+	scalar "result_alpha" 0.000000
+end
+node "osl_shadergroup" "wave_patten:lambert2_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"wave_patten:lambert2"
+		"maya_ei_preset_aovs_0"
+end
+node "material" "wave_patten:lambert2SG" # "material"
+	ref "surface_shader" "wave_patten:lambert2_osl"
+	ref "displace_shader" ""
+	ref "volume_shader" ""
+	ref "env_shader" ""
+end
+node "instance" "wave_patten:pPlaneShape1_inst" # "instance"
+	ref "element" "wave_patten:pPlaneShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	12.255576 0.000000 0.000000 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	12.255576 0.000000 0.000000 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" off
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	bool "surface_emission" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+		ref[] "mtl_list" 1  #1
+		"wave_patten:lambert2SG"
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 1.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "poly" "wispy_patten:pPlaneShape1" # "object"
+		point[] "pos_list" 1  #121
+		-5.950000 -0.000000 5.950000
+		-4.760000 -0.000000 5.950000
+		-3.570000 -0.000000 5.950000
+		-2.380000 -0.000000 5.950000
+		-1.190000 -0.000000 5.950000
+		0.000000 -0.000000 5.950000
+		1.190000 -0.000000 5.950000
+		2.380000 -0.000000 5.950000
+		3.570000 -0.000000 5.950000
+		4.759999 -0.000000 5.950000
+		5.950000 -0.000000 5.950000
+		-5.950000 -0.000000 4.760000
+		-4.760000 -0.000000 4.760000
+		-3.570000 -0.000000 4.760000
+		-2.380000 -0.000000 4.760000
+		-1.190000 -0.000000 4.760000
+		0.000000 -0.000000 4.760000
+		1.190000 -0.000000 4.760000
+		2.380000 -0.000000 4.760000
+		3.570000 -0.000000 4.760000
+		4.759999 -0.000000 4.760000
+		5.950000 -0.000000 4.760000
+		-5.950000 -0.000000 3.570000
+		-4.760000 -0.000000 3.570000
+		-3.570000 -0.000000 3.570000
+		-2.380000 -0.000000 3.570000
+		-1.190000 -0.000000 3.570000
+		0.000000 -0.000000 3.570000
+		1.190000 -0.000000 3.570000
+		2.380000 -0.000000 3.570000
+		3.570000 -0.000000 3.570000
+		4.759999 -0.000000 3.570000
+		5.950000 -0.000000 3.570000
+		-5.950000 -0.000000 2.380000
+		-4.760000 -0.000000 2.380000
+		-3.570000 -0.000000 2.380000
+		-2.380000 -0.000000 2.380000
+		-1.190000 -0.000000 2.380000
+		0.000000 -0.000000 2.380000
+		1.190000 -0.000000 2.380000
+		2.380000 -0.000000 2.380000
+		3.570000 -0.000000 2.380000
+		4.759999 -0.000000 2.380000
+		5.950000 -0.000000 2.380000
+		-5.950000 -0.000000 1.190000
+		-4.760000 -0.000000 1.190000
+		-3.570000 -0.000000 1.190000
+		-2.380000 -0.000000 1.190000
+		-1.190000 -0.000000 1.190000
+		0.000000 -0.000000 1.190000
+		1.190000 -0.000000 1.190000
+		2.380000 -0.000000 1.190000
+		3.570000 -0.000000 1.190000
+		4.759999 -0.000000 1.190000
+		5.950000 -0.000000 1.190000
+		-5.950000 0.000000 0.000000
+		-4.760000 0.000000 0.000000
+		-3.570000 0.000000 0.000000
+		-2.380000 0.000000 0.000000
+		-1.190000 0.000000 0.000000
+		0.000000 0.000000 0.000000
+		1.190000 0.000000 0.000000
+		2.380000 0.000000 0.000000
+		3.570000 0.000000 0.000000
+		4.759999 0.000000 0.000000
+		5.950000 0.000000 0.000000
+		-5.950000 0.000000 -1.190000
+		-4.760000 0.000000 -1.190000
+		-3.570000 0.000000 -1.190000
+		-2.380000 0.000000 -1.190000
+		-1.190000 0.000000 -1.190000
+		0.000000 0.000000 -1.190000
+		1.190000 0.000000 -1.190000
+		2.380000 0.000000 -1.190000
+		3.570000 0.000000 -1.190000
+		4.759999 0.000000 -1.190000
+		5.950000 0.000000 -1.190000
+		-5.950000 0.000000 -2.380000
+		-4.760000 0.000000 -2.380000
+		-3.570000 0.000000 -2.380000
+		-2.380000 0.000000 -2.380000
+		-1.190000 0.000000 -2.380000
+		0.000000 0.000000 -2.380000
+		1.190000 0.000000 -2.380000
+		2.380000 0.000000 -2.380000
+		3.570000 0.000000 -2.380000
+		4.759999 0.000000 -2.380000
+		5.950000 0.000000 -2.380000
+		-5.950000 0.000000 -3.570000
+		-4.760000 0.000000 -3.570000
+		-3.570000 0.000000 -3.570000
+		-2.380000 0.000000 -3.570000
+		-1.190000 0.000000 -3.570000
+		0.000000 0.000000 -3.570000
+		1.190000 0.000000 -3.570000
+		2.380000 0.000000 -3.570000
+		3.570000 0.000000 -3.570000
+		4.759999 0.000000 -3.570000
+		5.950000 0.000000 -3.570000
+		-5.950000 0.000000 -4.759999
+		-4.760000 0.000000 -4.759999
+		-3.570000 0.000000 -4.759999
+		-2.380000 0.000000 -4.759999
+		-1.190000 0.000000 -4.759999
+		0.000000 0.000000 -4.759999
+		1.190000 0.000000 -4.759999
+		2.380000 0.000000 -4.759999
+		3.570000 0.000000 -4.759999
+		4.759999 0.000000 -4.759999
+		5.950000 0.000000 -4.759999
+		-5.950000 0.000000 -5.950000
+		-4.760000 0.000000 -5.950000
+		-3.570000 0.000000 -5.950000
+		-2.380000 0.000000 -5.950000
+		-1.190000 0.000000 -5.950000
+		0.000000 0.000000 -5.950000
+		1.190000 0.000000 -5.950000
+		2.380000 0.000000 -5.950000
+		3.570000 0.000000 -5.950000
+		4.759999 0.000000 -5.950000
+		5.950000 0.000000 -5.950000
+		index[] "triangle_list" 1  #600
+		0
+		1
+		11
+		11
+		1
+		12
+		1
+		2
+		12
+		12
+		2
+		13
+		2
+		3
+		13
+		13
+		3
+		14
+		3
+		4
+		14
+		14
+		4
+		15
+		4
+		5
+		15
+		15
+		5
+		16
+		5
+		6
+		16
+		16
+		6
+		17
+		6
+		7
+		17
+		17
+		7
+		18
+		7
+		8
+		18
+		18
+		8
+		19
+		8
+		9
+		19
+		19
+		9
+		20
+		9
+		10
+		20
+		20
+		10
+		21
+		11
+		12
+		22
+		22
+		12
+		23
+		12
+		13
+		23
+		23
+		13
+		24
+		13
+		14
+		24
+		24
+		14
+		25
+		14
+		15
+		25
+		25
+		15
+		26
+		15
+		16
+		26
+		26
+		16
+		27
+		16
+		17
+		27
+		27
+		17
+		28
+		17
+		18
+		28
+		28
+		18
+		29
+		18
+		19
+		29
+		29
+		19
+		30
+		19
+		20
+		30
+		30
+		20
+		31
+		20
+		21
+		31
+		31
+		21
+		32
+		22
+		23
+		33
+		33
+		23
+		34
+		23
+		24
+		34
+		34
+		24
+		35
+		24
+		25
+		35
+		35
+		25
+		36
+		25
+		26
+		36
+		36
+		26
+		37
+		26
+		27
+		37
+		37
+		27
+		38
+		27
+		28
+		38
+		38
+		28
+		39
+		28
+		29
+		39
+		39
+		29
+		40
+		29
+		30
+		40
+		40
+		30
+		41
+		30
+		31
+		41
+		41
+		31
+		42
+		31
+		32
+		42
+		42
+		32
+		43
+		33
+		34
+		44
+		44
+		34
+		45
+		34
+		35
+		45
+		45
+		35
+		46
+		35
+		36
+		46
+		46
+		36
+		47
+		36
+		37
+		47
+		47
+		37
+		48
+		37
+		38
+		48
+		48
+		38
+		49
+		38
+		39
+		49
+		49
+		39
+		50
+		39
+		40
+		50
+		50
+		40
+		51
+		40
+		41
+		51
+		51
+		41
+		52
+		41
+		42
+		52
+		52
+		42
+		53
+		42
+		43
+		53
+		53
+		43
+		54
+		44
+		45
+		55
+		55
+		45
+		56
+		45
+		46
+		56
+		56
+		46
+		57
+		46
+		47
+		57
+		57
+		47
+		58
+		47
+		48
+		58
+		58
+		48
+		59
+		48
+		49
+		59
+		59
+		49
+		60
+		49
+		50
+		60
+		60
+		50
+		61
+		50
+		51
+		61
+		61
+		51
+		62
+		51
+		52
+		62
+		62
+		52
+		63
+		52
+		53
+		63
+		63
+		53
+		64
+		53
+		54
+		64
+		64
+		54
+		65
+		55
+		56
+		66
+		66
+		56
+		67
+		56
+		57
+		67
+		67
+		57
+		68
+		57
+		58
+		68
+		68
+		58
+		69
+		58
+		59
+		69
+		69
+		59
+		70
+		59
+		60
+		70
+		70
+		60
+		71
+		60
+		61
+		71
+		71
+		61
+		72
+		61
+		62
+		72
+		72
+		62
+		73
+		62
+		63
+		73
+		73
+		63
+		74
+		63
+		64
+		74
+		74
+		64
+		75
+		64
+		65
+		75
+		75
+		65
+		76
+		66
+		67
+		77
+		77
+		67
+		78
+		67
+		68
+		78
+		78
+		68
+		79
+		68
+		69
+		79
+		79
+		69
+		80
+		69
+		70
+		80
+		80
+		70
+		81
+		70
+		71
+		81
+		81
+		71
+		82
+		71
+		72
+		82
+		82
+		72
+		83
+		72
+		73
+		83
+		83
+		73
+		84
+		73
+		74
+		84
+		84
+		74
+		85
+		74
+		75
+		85
+		85
+		75
+		86
+		75
+		76
+		86
+		86
+		76
+		87
+		77
+		78
+		88
+		88
+		78
+		89
+		78
+		79
+		89
+		89
+		79
+		90
+		79
+		80
+		90
+		90
+		80
+		91
+		80
+		81
+		91
+		91
+		81
+		92
+		81
+		82
+		92
+		92
+		82
+		93
+		82
+		83
+		93
+		93
+		83
+		94
+		83
+		84
+		94
+		94
+		84
+		95
+		84
+		85
+		95
+		95
+		85
+		96
+		85
+		86
+		96
+		96
+		86
+		97
+		86
+		87
+		97
+		97
+		87
+		98
+		88
+		89
+		99
+		99
+		89
+		100
+		89
+		90
+		100
+		100
+		90
+		101
+		90
+		91
+		101
+		101
+		91
+		102
+		91
+		92
+		102
+		102
+		92
+		103
+		92
+		93
+		103
+		103
+		93
+		104
+		93
+		94
+		104
+		104
+		94
+		105
+		94
+		95
+		105
+		105
+		95
+		106
+		95
+		96
+		106
+		106
+		96
+		107
+		96
+		97
+		107
+		107
+		97
+		108
+		97
+		98
+		108
+		108
+		98
+		109
+		99
+		100
+		110
+		110
+		100
+		111
+		100
+		101
+		111
+		111
+		101
+		112
+		101
+		102
+		112
+		112
+		102
+		113
+		102
+		103
+		113
+		113
+		103
+		114
+		103
+		104
+		114
+		114
+		104
+		115
+		104
+		105
+		115
+		115
+		105
+		116
+		105
+		106
+		116
+		116
+		106
+		117
+		106
+		107
+		117
+		117
+		107
+		118
+		107
+		108
+		118
+		118
+		108
+		119
+		108
+		109
+		119
+		119
+		109
+		120
+	declare vector [] "N" varying
+		vector[] "N" 1  #121
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+	declare vector2 [] "uv" varying
+		vector2[] "uv" 1  #121
+		0.000000 0.000000
+		0.100000 0.000000
+		0.200000 0.000000
+		0.300000 0.000000
+		0.400000 0.000000
+		0.500000 0.000000
+		0.600000 0.000000
+		0.700000 0.000000
+		0.800000 0.000000
+		0.900000 0.000000
+		1.000000 0.000000
+		0.000000 0.100000
+		0.100000 0.100000
+		0.200000 0.100000
+		0.300000 0.100000
+		0.400000 0.100000
+		0.500000 0.100000
+		0.600000 0.100000
+		0.700000 0.100000
+		0.800000 0.100000
+		0.900000 0.100000
+		1.000000 0.100000
+		0.000000 0.200000
+		0.100000 0.200000
+		0.200000 0.200000
+		0.300000 0.200000
+		0.400000 0.200000
+		0.500000 0.200000
+		0.600000 0.200000
+		0.700000 0.200000
+		0.800000 0.200000
+		0.900000 0.200000
+		1.000000 0.200000
+		0.000000 0.300000
+		0.100000 0.300000
+		0.200000 0.300000
+		0.300000 0.300000
+		0.400000 0.300000
+		0.500000 0.300000
+		0.600000 0.300000
+		0.700000 0.300000
+		0.800000 0.300000
+		0.900000 0.300000
+		1.000000 0.300000
+		0.000000 0.400000
+		0.100000 0.400000
+		0.200000 0.400000
+		0.300000 0.400000
+		0.400000 0.400000
+		0.500000 0.400000
+		0.600000 0.400000
+		0.700000 0.400000
+		0.800000 0.400000
+		0.900000 0.400000
+		1.000000 0.400000
+		0.000000 0.500000
+		0.100000 0.500000
+		0.200000 0.500000
+		0.300000 0.500000
+		0.400000 0.500000
+		0.500000 0.500000
+		0.600000 0.500000
+		0.700000 0.500000
+		0.800000 0.500000
+		0.900000 0.500000
+		1.000000 0.500000
+		0.000000 0.600000
+		0.100000 0.600000
+		0.200000 0.600000
+		0.300000 0.600000
+		0.400000 0.600000
+		0.500000 0.600000
+		0.600000 0.600000
+		0.700000 0.600000
+		0.800000 0.600000
+		0.900000 0.600000
+		1.000000 0.600000
+		0.000000 0.700000
+		0.100000 0.700000
+		0.200000 0.700000
+		0.300000 0.700000
+		0.400000 0.700000
+		0.500000 0.700000
+		0.600000 0.700000
+		0.700000 0.700000
+		0.800000 0.700000
+		0.900000 0.700000
+		1.000000 0.700000
+		0.000000 0.800000
+		0.100000 0.800000
+		0.200000 0.800000
+		0.300000 0.800000
+		0.400000 0.800000
+		0.500000 0.800000
+		0.600000 0.800000
+		0.700000 0.800000
+		0.800000 0.800000
+		0.900000 0.800000
+		1.000000 0.800000
+		0.000000 0.900000
+		0.100000 0.900000
+		0.200000 0.900000
+		0.300000 0.900000
+		0.400000 0.900000
+		0.500000 0.900000
+		0.600000 0.900000
+		0.700000 0.900000
+		0.800000 0.900000
+		0.900000 0.900000
+		1.000000 0.900000
+		0.000000 1.000000
+		0.100000 1.000000
+		0.200000 1.000000
+		0.300000 1.000000
+		0.400000 1.000000
+		0.500000 1.000000
+		0.600000 1.000000
+		0.700000 1.000000
+		0.800000 1.000000
+		0.900000 1.000000
+		1.000000 1.000000
+end
+node "maya_place2dTexture" "wispy_patten:place2dTexture2" # "osl_node"
+	scalar "i_coverageU" 1.000000
+	scalar "i_coverageV" 1.000000
+	int "i_mirrorU" 0
+	int "i_mirrorV" 0
+	scalar "i_noiseU" 0.000000
+	scalar "i_noiseV" 0.000000
+	scalar "i_offsetU" 0.000000
+	scalar "i_offsetV" 0.000000
+	scalar "i_repeatU" 1.000000
+	scalar "i_repeatV" 1.000000
+	scalar "i_rotateFrame" 0.000000
+	scalar "i_rotateUV" 0.000000
+	int "i_stagger" 0
+	scalar "i_translateFrameU" 0.000000
+	scalar "i_translateFrameV" 0.000000
+	int "i_wrapU" 1
+	int "i_wrapV" 1
+	token "i_mtoer_uvSetName" "uv"
+	vector "o_outUV" 0.000000 0.000000 0.000000
+end
+node "maya_noise" "wispy_patten:noise2" # "osl_node"
+	scalar "i_threshold" 0.000000
+	scalar "i_amplitude" 1.000000
+	scalar "i_ratio" 0.707000
+	scalar "i_frequencyRatio" 2.000000
+	int "i_depthMax" 3
+	int "i_inflection" 0
+	scalar "i_time" 0.000000
+	scalar "i_frequency" 8.000000
+	scalar "i_implode" 0.000000
+	vector "i_implodeCenter" 0.500000 0.500000 0.000000
+	int "i_noiseType" 3
+	scalar "i_density" 1.000000
+	scalar "i_spottyness" 0.100000
+	scalar "i_sizeRand" 0.000000
+	scalar "i_randomness" 1.000000
+	int "i_falloff" 2
+	int "i_numWaves" 5
+	color "i_defaultColor" 0.500000 0.500000 0.500000
+	color "i_colorGain" 1.000000 1.000000 1.000000
+	color "i_colorOffset" 0.000000 0.000000 0.000000
+	scalar "i_alphaGain" 1.000000
+	scalar "i_alphaOffset" 0.000000
+	int "i_alphaIsLuminance" 0
+	int "i_invert" 0
+	param_link "i_uvCoord" "wispy_patten:place2dTexture2" "o_outUV"
+	scalar "o_outAlpha" 0.496069
+	color "o_outColor" 0.496069 0.496069 0.496069
+end
+node "maya_lambert" "wispy_patten:lambert2" # "osl_node"
+	color "i_ambientColor" 0.000000 0.000000 0.000000
+	param_link "i_color" "wispy_patten:noise2" "o_outColor"
+	scalar "i_diffuse" 0.800000
+	color "i_incandescence" 0.000000 0.000000 0.000000
+	int "i_matteOpacityMode" 2
+	scalar "i_matteOpacity" 1.000000
+	int "i_refractions" 0
+	scalar "i_refractiveIndex" 1.000000
+	int "i_refractionLimit" 6
+	scalar "i_lightAbsorbance" 0.000000
+	scalar "i_shadowAttenuation" 0.500000
+	vector "i_normalCamera" 1.000000 1.000000 1.000000
+	color "i_transparency" 0.000000 0.000000 0.000000
+	scalar "i_translucence" 0.000000
+	scalar "i_translucenceDepth" 0.500000
+	scalar "i_translucenceFocus" 0.500000
+	int "i_mtoer_hasBump" 0
+	color "o_outColor" 0.000000 0.000000 0.000000
+	color "o_outTransparency" 0.000000 0.000000 0.000000
+	# not support param(o_outClosure) type((null))
+	# not support param(result) type((null))
+	scalar "result_alpha" 0.000000
+end
+node "osl_shadergroup" "wispy_patten:lambert2_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"wispy_patten:lambert2"
+		"maya_ei_preset_aovs_0"
+end
+node "material" "wispy_patten:lambert2SG" # "material"
+	ref "surface_shader" "wispy_patten:lambert2_osl"
+	ref "displace_shader" ""
+	ref "volume_shader" ""
+	ref "env_shader" ""
+end
+node "instance" "wispy_patten:pPlaneShape1_inst" # "instance"
+	ref "element" "wispy_patten:pPlaneShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	0.000000 0.000000 0.000000 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	0.000000 0.000000 0.000000 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" off
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	bool "surface_emission" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+		ref[] "mtl_list" 1  #1
+		"wispy_patten:lambert2SG"
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 1.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "osl_shadergroup" "billow_patten:noise2_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"billow_patten:noise2"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "billow_patten:place2dTexture2_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"billow_patten:place2dTexture2"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "perlin_patten:noise2_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"perlin_patten:noise2"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "perlin_patten:place2dTexture2_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"perlin_patten:place2dTexture2"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "spacetime_patten:noise2_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"spacetime_patten:noise2"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "spacetime_patten:place2dTexture2_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"spacetime_patten:place2dTexture2"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "wave_patten:noise2_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"wave_patten:noise2"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "wave_patten:place2dTexture2_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"wave_patten:place2dTexture2"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "wispy_patten:noise2_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"wispy_patten:noise2"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "wispy_patten:place2dTexture2_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"wispy_patten:place2dTexture2"
+		"maya_ei_preset_aovs_0"
+end
+node "instgroup" "instgroup_00" # "instgroup"
+		ref[] "instance_list" 1  #11
+		"billow_patten:directionalLightShape1_inst"
+		"billow_patten:pPlaneShape1_inst"
+		"cameraShape1_inst"
+		"frontShape_inst"
+		"perlin_patten:pPlaneShape1_inst"
+		"perspShape_inst"
+		"sideShape_inst"
+		"spacetime_patten:pPlaneShape1_inst"
+		"topShape_inst"
+		"wave_patten:pPlaneShape1_inst"
+		"wispy_patten:pPlaneShape1_inst"
+end
+render "instgroup_00" "cameraShape1_inst" "options"
