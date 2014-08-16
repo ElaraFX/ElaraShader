@@ -1,3 +1,32 @@
+/////////////////////////////////////////////////////////////////////////////
+// Copyright (c) 2009-2010 Sony Pictures Imageworks Inc., et al.
+// All Rights Reserved.
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions are
+// met:
+// * Redistributions of source code must retain the above copyright
+//   notice, this list of conditions and the following disclaimer.
+// * Redistributions in binary form must reproduce the above copyright
+//   notice, this list of conditions and the following disclaimer in the
+//   documentation and/or other materials provided with the distribution.
+// * Neither the name of Sony Pictures Imageworks nor the names of its
+//   contributors may be used to endorse or promote products derived from
+//   this software without specific prior written permission.
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+/////////////////////////////////////////////////////////////////////////////
+
+
 
 #ifndef _noise_utils_h
 #define _noise_utils_h
@@ -178,7 +207,9 @@ fTurbulence(
 	point parameter but smooth noise by its float parameter. So you can think
 	of it as a 3D cell noise which changes smoothly in the 4th dimension.
 */
-point animatedcellnoise( point i_p, float i_t )
+point animatedcellnoise( point i_p, 
+                         float i_t 
+                         )
 {
 	/* This is so each cell changes direction at a different time. */
 	float t = cellnoise(i_p) + i_t;
@@ -316,7 +347,8 @@ ParticleDensity(
 	float     i_falloff,
 	point   i_particleCenter, 
     point   i_P,
-	float   i_radius)
+	float   i_radius
+    )
 {
 	float distanceToCenter = distance( i_particleCenter, i_P );
 	float fadeout = 0;
@@ -353,12 +385,12 @@ float BillowNoise(
     float sizeRand, 
     float jitter, 
     float falloff, 
-    float spottyness,
-    
+    float spottyness,    
 	float octaves, 
     float frequencyRatio, 
     float ratio, 
-    float amplitude )
+    float amplitude 
+    )
 {
 	point pp = p + vector(0.425, 0.6, i_dim == 3 ? 0.215 : 0);
     
@@ -430,7 +462,8 @@ cos_waves(
 	float i_x,
 	float i_y,
 	float i_time,
-	float i_numWaves)
+	float i_numWaves
+    )
 {
 	float x = i_x * 2 * M_PI;
 	float y = i_y * 2 * M_PI;

@@ -32,7 +32,10 @@
 #include "stdosl.h"
 
 float
-get2DNoise(float x, float y, float px, float py, float inflection)
+get2DNoise( float x, float y, 
+            float px, float py, 
+            float inflection
+            )
 {
 	float noise;
 
@@ -45,7 +48,10 @@ get2DNoise(float x, float y, float px, float py, float inflection)
 }
 
 float
-get3DNoise(float x, float y, float z, float px, float py, float pz, float inflection)
+get3DNoise(float x, float y, float z, 
+            float px, float py, float pz, 
+            float inflection
+            )
 {
 	float noise;  
 	point p = point(x, y, z);
@@ -64,25 +70,25 @@ shader maya_fractal
 (
 	// Inputs
 	//
-            float i_alphaGain               =1.0,
-            float i_alphaIsLuminance        =1.0,
-            float i_alphaOffset             =0.0,
-            float i_amplitude               =1.0,
-            float i_bias                    =0.0,
-            color i_colorGain               =color(1.0, 1.0, 1.0),
-            color i_colorOffset             =0.0,
-            color i_defaultColor            =color(0.5, 0.5, 0.5),
-            float i_frequencyRatio          =2.0,
-            int   i_invert                  =0,
-            float i_levelMin                =0.0,
-            float i_levelMax                =9.0,
-            float i_ratio                   =0.707,
-            float i_threshold               =0.0,
-            int   i_inflection              =0,
-            int   i_animated                =0,
-            float i_time                    =0,
-            float i_timeRatio               =2.0,
-            vector i_uvCoord				= vector(0, 0, 0),
+                float i_alphaGain               =1.0,
+                float i_alphaIsLuminance        =1.0,
+                float i_alphaOffset             =0.0,
+                float i_amplitude               =1.0,
+                float i_bias                    =0.0,
+                color i_colorGain               =color(1.0, 1.0, 1.0),
+                color i_colorOffset             =0.0,
+                color i_defaultColor            =color(0.5, 0.5, 0.5),
+                float i_frequencyRatio          =2.0,
+                int   i_invert                  =0,
+                float i_levelMin                =0.0,
+                float i_levelMax                =9.0,
+                float i_ratio                   =0.707,
+                float i_threshold               =0.0,
+                int   i_inflection              =0,
+                int   i_animated                =0,
+                float i_time                    =0,
+                float i_timeRatio               =2.0,
+                vector i_uvCoord				= vector(0, 0, 0),
 	
 	// Outputs
 	//
