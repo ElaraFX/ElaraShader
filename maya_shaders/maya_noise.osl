@@ -33,41 +33,41 @@ shader maya_noise
 [[ string help = "Maya noise"]]
 (
 	// Inputs
-            float   i_threshold=0.0,
-            float   i_amplitude=1.0,
-            float   i_ratio=0.707,
-            float   i_frequencyRatio=2.0,
-            int     i_depthMax=3,
-            int     i_inflection=0,
-            float   i_time=0,
-            float   i_frequency=8.0,
-            float   i_implode=0.0,
-            vector  i_implodeCenter=0.5,
-            int     i_noiseType=1,
-            float   i_density=1.0,
-            float   i_spottyness=0.1,
-            float   i_sizeRand=0.0,
-            float   i_randomness=1.0,
-            int     i_falloff=2,
-            int     i_numWaves=5,
+            float   i_threshold=                0.0,
+            float   i_amplitude=                1.0,
+            float   i_ratio=                    0.707,
+            float   i_frequencyRatio=           2.0,
+            int     i_depthMax=                 3,
+            int     i_inflection=               0,
+            float   i_time=                     0,
+            float   i_frequency=                8.0,
+            float   i_implode=                  0.0,
+            vector  i_implodeCenter=            0.5,
+            int     i_noiseType=                1,
+            float   i_density=                  1.0,
+            float   i_spottyness=               0.1,
+            float   i_sizeRand=                 0.0,
+            float   i_randomness=               1.0,
+            int     i_falloff=                  2,
+            int     i_numWaves=                 5,
             
-            color   i_defaultColor=0.5,
-            color   i_colorGain=1.0,
-            color   i_colorOffset=0.0,
-            float   i_alphaGain=1.0,
-            float   i_alphaOffset=0.0,
-            int     i_alphaIsLuminance=0,
-            int     i_invert=0,
+            color   i_defaultColor=             0.5,
+            color   i_colorGain=                1.0,
+            color   i_colorOffset=              0.0,
+            float   i_alphaGain=                1.0,
+            float   i_alphaOffset=              0.0,
+            int     i_alphaIsLuminance=         0,
+            int     i_invert=                   0,
 
-            vector  i_uvCoord=0,
+            vector  i_uvCoord=                  0,
 
 	// Outputs
-	output float o_outAlpha=0.0,
-	output color o_outColor=1.0
+	output float o_outAlpha=                    0.0,
+	output color o_outColor=                    1.0
 	)
 {
 	float ss = i_uvCoord[0];
-	float tt = 1-i_uvCoord[1];
+	float tt = 1-i_uvCoord[1];//reverse the direction
 
 	if(ISUVDEFINED(ss, tt))
 	{

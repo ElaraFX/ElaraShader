@@ -1,7 +1,3 @@
-/*
-	Copyright (c) 2006 soho vfx inc.
-	Copyright (c) 2006 The 3Delight Team.
-*/
 
 #ifndef _noise_utils_h
 #define _noise_utils_h
@@ -41,7 +37,7 @@ fBrownianNoise(
 
 	while( (i<i_octaves[1] && M_PIxel>nyquist) || i<i_octaves[0] )
 	{
-		mix += amp * snoise((vector(pp) + noise(lacunarity)) * lacunarity, i_time);
+		mix += amp * snoise((vector(pp) + noise("uperlin", lacunarity)) * lacunarity, i_time);
 		lacunarity *= i_frequencyRatio;
 		amp *= i_ratio;
 		M_PIxel /= i_frequencyRatio;
@@ -53,7 +49,7 @@ fBrownianNoise(
 	{
 		float weight = clamp(M_PIxel/M_PIxel_size - 1, 0, 1);
 		mix += weight * amp *
-			snoise((vector(pp) + noise(lacunarity)) * lacunarity, i_time);
+			snoise((vector(pp) + noise("uperlin", lacunarity)) * lacunarity, i_time);
 	}
 
 	return mix * 0.5 + 0.5;
@@ -157,7 +153,7 @@ fTurbulence(
 
 	while( (i<i_octaves[1] && M_PIxel>nyquist) || i<i_octaves[0] )
 	{
-		mix += amp * abs(snoise((vector(pp) + noise(lacunarity)) * lacunarity, i_time));
+		mix += amp * abs(snoise((vector(pp) + noise("uperlin", lacunarity)) * lacunarity, i_time));
 		lacunarity *= i_frequencyRatio;
 		amp *= i_ratio;
 		M_PIxel /= i_frequencyRatio;
@@ -169,7 +165,7 @@ fTurbulence(
 	{
 		float weight = clamp(M_PIxel/M_PIxel_size - 1, 0, 1);
 		mix += weight * amp *
-			abs(snoise((vector(pp) + noise(lacunarity)) * lacunarity, i_time));
+			abs(snoise((vector(pp) + noise("uperlin", lacunarity)) * lacunarity, i_time));
 	}
 
 	return mix;
@@ -397,7 +393,7 @@ float BillowNoise(
 
 				if( sizeRand != 0 )
 				{
-					radiusScale = (0.5 - clamp( noise( particles[j] ) * 0.75 - 0.25, 0, 0.5 ) * sizeRand) * 2;
+					radiusScale = (0.5 - clamp( noise( "uperlin", particles[j] ) * 0.75 - 0.25, 0, 0.5 ) * sizeRand) * 2;
 				}
 
 				float density = 
@@ -448,12 +444,15 @@ cos_waves(
 
 	for(i = 1; i <= i_numWaves; i += 1)
 	{
-		point noisePoint = noise(i * M_PI / i_numWaves);
-				
+		point noisePoint=0;
+        noisePoint[0] = noise("uperlin",  i * M_PI / i_numWaves+123);
+		noisePoint[1] = noise("uperlin",  i * M_PI / i_numWaves);
+        noisePoint[2] = noise("uperlin",  i * M_PI / i_numWaves-123);
+		
 		dirX = 2 * noisePoint[0] - 1;
-		dirY = 2 * noisePoint[1] - 1;
+		dirY = 2 * noisePoint[1] - 1;                
 		float offset = 2 * noisePoint[2] - 1;
-		float freqNoise = noise(50 * dirX * dirY);
+		float freqNoise = noise("uperlin", 50 * dirX * dirY);
 
 		norm = sqrt(dirX * dirX + dirY * dirY);
 		
