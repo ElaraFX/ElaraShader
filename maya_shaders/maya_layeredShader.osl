@@ -1,0 +1,100 @@
+// -------------for mtoer.xml------------------------------
+// <maya_layeredShader>
+	// <maya.name type="STRING">layeredShader</maya.name>
+// </maya_layeredShader>
+
+void
+computeSurfaceTransparency(
+				float		i_matteOpacityMode,
+				float		i_matteOpacity,
+				color		i_transparency,
+	output		color		o_outTransparency 
+)
+{
+	if(i_matteOpacityMode == 0)
+	{
+		// This is the "Black Hole" Maya setting
+		o_outTransparency = 0;
+	}
+	else if(i_matteOpacityMode == 1)
+	{
+		// This is the "Solid Matte" Maya setting
+		o_outTransparency = i_matteOpacity;
+	}
+	else
+	{
+		// This is the "Opacity Gain" Maya setting (and the default value)
+		o_outTransparency = (1 - i_transparency) * i_matteOpacity;
+	}
+
+	o_outTransparency = 1.0 - o_outTransparency;
+}
+
+shader maya_layeredShader
+[[ string help = "Maya LayeredShader"]]
+(
+	// Inputs
+	/*uniform*/	float		i_compositingFlag				= 0.0,
+				
+				//~ color		i_inputs_color[],
+				//~ color		i_inputs_transparency[],
+				
+				//~ color		i_inputs_color[1],
+				//~ color		i_inputs_transparency[1],
+				
+				//~ color		i_inputs_color[]				= {},
+				//~ color		i_inputs_transparency[]	= {},
+				
+				//~ color		i_inputs_color[]				= {color(-99)},
+				//~ color		i_inputs_transparency[]	= {color(-99)},
+				
+				color		i_inputs_color[2]				= {color(-99),color(-99)},
+				color		i_inputs_transparency[2]	= {color(-99),color(-99)},
+				
+				float		i_matteOpacityMode				= 2.0,
+				float		i_matteOpacity						= 1.0,
+
+	// Outputs
+	output		color		o_outColor						= 0.0,
+	output		color		o_outTransparency			= 0.0
+	)
+{
+	color transparency;
+
+	/*uniform*/ float nlayers = arraylength( i_inputs_color );
+	/*uniform*/ int i;
+
+	o_outColor = 0;
+	o_outTransparency = 1;
+
+	for( i = 0; i<nlayers; i += 1 )
+	{
+		color trs = i_inputs_transparency[i];
+		color col = i_inputs_color[i];
+		
+		if(trs!=color(-99) || col!=color(-99))
+		{
+			if( i_compositingFlag == 1 )
+			{
+				// Layer texture mode
+				col *= (1 - trs);
+			}
+			
+			o_outColor += col * o_outTransparency;
+			o_outTransparency *= trs;
+		}
+	}
+
+	computeSurfaceTransparency(
+		i_matteOpacityMode, 
+		i_matteOpacity,
+		o_outTransparency, 
+		o_outTransparency 
+	);
+	
+	//
+	//~ o_outColor = color(1.0,0.5,0.5);
+	//~ o_outTransparency = 0.5;
+}
+
+
