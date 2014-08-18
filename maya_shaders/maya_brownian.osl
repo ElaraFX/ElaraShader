@@ -33,26 +33,29 @@
 shader maya_brownian
 [[ string help = "Maya fractal"]]
 (
-            // Inputs
-            //
-            float   i_alphaGain=1.0,
-            int     i_alphaIsLuminance=0,
-            float   i_alphaOffset=1.0,
-            float   i_blend=0.0,
-            color   i_colorGain=1.0,
-            color   i_colorOffset=0,
-            color   i_defaultColor=0.5,
-            float   i_filter=1.0,
-            float   i_filterOffset=0.0,
-            vector  i_filterSize=1.0,
-            float   i_increment=0.1,
-            int     i_invert=0,
-            int     i_local=0,
-            float   i_lacunarity=4.0,
-            float   i_octaves=3.0,
-            vector  i_weight3d=1.0,
-            matrix  i_placementMatrix=0.0,
-            int     i_wrap=0,
+                // Inputs
+                //
+                float   i_alphaGain=1.0,
+                int     i_alphaIsLuminance=0,
+                float   i_alphaOffset=1.0,
+                float   i_blend=0.0,
+                color   i_colorGain=1.0,
+                color   i_colorOffset=0,
+                color   i_defaultColor=0.5,
+                float   i_filter=1.0,
+                float   i_filterOffset=0.0,
+                vector  i_filterSize=1.0,
+                float   i_increment=0.1,
+                int     i_invert=0,
+                int     i_local=0,
+                float   i_lacunarity=4.0,
+                float   i_octaves=3.0,
+                vector  i_weight3d=1.0,
+                matrix  i_placementMatrix=matrix(1.0, 0.0, 0.0, 0.0,
+                                                 0.0, 1.0, 0.0, 0.0,
+                                                 0.0, 0.0, 1.0, 0.0,
+                                                 0.0, 0.0, 0.0, 1.0),
+                int     i_wrap=0,
 
 	// Outputs
 	//

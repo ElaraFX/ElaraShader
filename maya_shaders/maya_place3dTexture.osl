@@ -31,11 +31,16 @@ shader maya_place3dTexture
 [[ string help = "Maya place3dTexture"]]
 (
         // Inputs
-        //
-        matrix i_trs=0.0,
+        matrix i_trs=matrix(1.0, 0.0, 0.0, 0.0,
+                            0.0, 1.0, 0.0, 0.0,
+                            0.0, 0.0, 1.0, 0.0,
+                            0.0, 0.0, 0.0, 1.0),
 	// Outputs
 	//
-	output  matrix o_worldInverseMatrix=0.0)
+	output  matrix o_worldInverseMatrix=matrix( 1.0, 0.0, 0.0, 0.0,
+                                                0.0, 1.0, 0.0, 0.0,
+                                                0.0, 0.0, 1.0, 0.0,
+                                                0.0, 0.0, 0.0, 1.0)
 {
 	o_worldInverseMatrix = i_trs;
 }
