@@ -11,31 +11,30 @@ shader maya_cloth
 [[ string help = "Maya Cloth"]]
 (
 	// Inputs
-	color i_gapColor = 0.0,
-	color i_uColor = 1.0,
-	color i_vColor = 0.5,
-	float i_uWidth = 0.75,
-	float i_vWidth = 0.75,
-	float i_uWave = 0.0,
-	float i_vWave = 0.0,
-	float i_randomness = 0.0,
-	float i_widthSpread = 0.0,
-	float i_brightSpread = 0.0,
-	
-	color i_defaultColor = 0.5,
-	color i_colorGain = 1.0,
-	color i_colorOffset = 0.0,
-	float i_alphaGain =1.0,
-	float i_alphaOffset = 0.0,
-	
-	int i_invert	= 0,
-	vector i_uvCoord = vector(0.0,0.0,0.0),
-	
-	int i_alphaIsLuminance = 0,
+					color		i_gapColor				= 0.0,
+					color		i_uColor				= 1.0,
+					color		i_vColor				= 0.5,
+					float		i_uWidth				= 0.75,
+					float		i_vWidth				= 0.75,
+					float		i_uWave					= 0.0,
+					float		i_vWave					= 0.0,
+					float		i_randomness			= 0.0,
+					float		i_widthSpread			= 0.0,
+					float		i_brightSpread			= 0.0,
+					
+					color		i_defaultColor			= 0.5,
+					color		i_colorGain				= 1.0,
+					color		i_colorOffset			= 0.0,
+					float		i_alphaGain				= 1.0,
+					float		i_alphaOffset			= 0.0,
+					
+	/*uniform*/		int			i_invert				= 0,
+					vector		i_uvCoord				= vector(0.0,0.0,0.0),
+					int			i_alphaIsLuminance		= 0,
 	
 	// Outputs
-	output float o_outAlpha =1.0,
-	output color o_outColor = 1.0
+	output			float		o_outAlpha				= 1.0,
+	output			color		o_outColor				= 1.0
 	)
 {
 	
@@ -80,7 +79,7 @@ shader maya_cloth
 
 		if(i_widthSpread > 0)
 		{
-			//~ spread = noise(0.5 * point(0.3 * i_uvCoord[0], 2*i_uvCoord[1], 2));
+			//~ spread = noise(0.5 * point(0.3 * i_uvCoord[0], 2*i_uvCoord[1], 2)); 
 			// changed the noise to fractal, so it's more close to maya's look
 			float spread = 0.0;
 			float spreadU = 0.0;
@@ -187,7 +186,7 @@ shader maya_cloth
 	{
 		o_outColor = i_defaultColor;
 		o_outAlpha = 1.0;
-	}
+}
 }
 
 

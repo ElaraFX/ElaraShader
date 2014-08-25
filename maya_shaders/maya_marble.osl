@@ -9,13 +9,14 @@
 #define vsnoise(p) ( noise(p)*2.0 - 1);
 
 /* A vector-valued fBm with filter and filterOffset. */
-vector filteredVfBm( point p, 
-					vector octaves, 
-					float lacunarity, 
-					float ratio,
-					vector i_ripples,
-					float filter,
-					float filterOffset
+vector filteredVfBm(
+					point		p, 
+					vector		octaves, 
+					float		lacunarity, 
+					float		ratio,
+					vector		i_ripples,
+					float		filter,
+					float		filterOffset
 					)
 {
 	vector sum = 0;
@@ -55,40 +56,40 @@ shader maya_marble
 [[ string help = "Maya Marble"]]
 (
 	/* "marble" parameters */
-	color i_fillerColor = 1.0,
-	color i_veinColor = 1.0,
-	float i_veinWidth = 0.1,
-	float i_diffusion = 0.5,
-	float i_contrast = 0.5,
+				color		i_fillerColor		= 1.0,
+				color		i_veinColor			= 1.0,
+				float		i_veinWidth			= 0.1,
+				float		i_diffusion			= 0.5,
+				float		i_contrast			= 0.5,
 
 	/* "noise" parameters */
-	float i_amplitude = 1.5,
-	float i_ratio = 0.707,
-	vector i_ripples = vector(1.0, 1.0, 1.0),
-	vector i_depth = vector(0.0, 20.0, 0.0),
+				float		i_amplitude			= 1.5,
+				float		i_ratio				= 0.707,
+				vector		i_ripples			= vector(1.0, 1.0, 1.0),
+				vector		i_depth				= vector(0.0, 20.0, 0.0),
 	
 	/* "Color Balance" related parameters */
-	color i_defaultColor = 0.5, 
-	color i_colorGain = 1.0, 
-	color i_colorOffset = 0.0,
-	float i_alphaGain = 1.0, 
-	float i_alphaOffset = 0.0,
-	float i_alphaIsLuminance = 0.0,
+				color		i_defaultColor		= 0.5, 
+				color		i_colorGain			= 1.0, 
+				color		i_colorOffset		= 0.0,
+				float		i_alphaGain			= 1.0, 
+				float		i_alphaOffset		= 0.0,
+				float		i_alphaIsLuminance	= 0.0,
 
 	/* "Effects" related parameters */
-	int i_invert = 0,
-	int i_local = 0,
-	int i_wrap = 1, 
-	float i_blend = 0.0,
-	float i_filter = 1.0,
-	float i_filterOffset = 0.0,
+	/*uniform*/	int		i_invert				= 0,
+				int		i_local					= 0,
+				int		i_wrap					= 1, 
+				float	i_blend					= 0.0,
+				float	i_filter				= 1.0,
+				float	i_filterOffset			= 0.0,
 
 	/* geomtric inputs */
-	matrix i_placementMatrix = matrix( 1, 0, 0, 0,   0, 1, 0, 0,   0, 0, 1, 0,   0, 0, 0, 1),
+				matrix	i_placementMatrix		= matrix( 1, 0, 0, 0,   0, 1, 0, 0,   0, 0, 1, 0,   0, 0, 0, 1),
 
 	/* outputs */
-	output color o_outColor = 1.0,
-	output float o_outAlpha = 1.0
+	output		color		o_outColor				= 1.0,
+	output 		float		o_outAlpha				= 1.0
 )
 {
 	float outside = 0;
