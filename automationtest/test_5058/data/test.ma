@@ -1,6 +1,6 @@
 //Maya ASCII 2013 scene
 //Name: test.ma
-//Last modified: Wed, Sep 03, 2014 10:19:47 AM
+//Last modified: Wed, Sep 03, 2014 10:26:09 AM
 //Codeset: 936
 file -rdi 1 -ns "fractal_threshhold" -rfn "fractal_threshholdRN" "E:/OSLShader/ElaraShader/automationtest/test_5058/data/fractal_threshhold.ma";
 file -rdi 1 -ns "fractal_ratio" -rfn "fractal_ratioRN" "E:/OSLShader/ElaraShader/automationtest/test_5058/data/fractal_ratio.ma";
