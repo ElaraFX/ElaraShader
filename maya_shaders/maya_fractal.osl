@@ -1,41 +1,8 @@
-/////////////////////////////////////////////////////////////////////////////
-// Copyright (c) 2009-2010 Sony Pictures Imageworks Inc., et al.
-// All Rights Reserved.
-//
-// Redistribution and use in source and binary forms, with or without
-// modification, are permitted provided that the following conditions are
-// met:
-// * Redistributions of source code must retain the above copyright
-//   notice, this list of conditions and the following disclaimer.
-// * Redistributions in binary form must reproduce the above copyright
-//   notice, this list of conditions and the following disclaimer in the
-//   documentation and/or other materials provided with the distribution.
-// * Neither the name of Sony Pictures Imageworks nor the names of its
-//   contributors may be used to endorse or promote products derived from
-//   this software without specific prior written permission.
-// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
-// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-/////////////////////////////////////////////////////////////////////////////
-
-
-
 #include "mayautil.h"
 #include "stdosl.h"
 
 float
-get2DNoise( float x, float y, 
-            float px, float py, 
-            float inflection
-            )
+get2DNoise(float x, float y, float px, float py, float inflection)
 {
 	float noise;
 
@@ -48,10 +15,7 @@ get2DNoise( float x, float y,
 }
 
 float
-get3DNoise(float x, float y, float z, 
-            float px, float py, float pz, 
-            float inflection
-            )
+get3DNoise(float x, float y, float z, float px, float py, float pz, float inflection)
 {
 	float noise;  
 	point p = point(x, y, z);
@@ -70,25 +34,25 @@ shader maya_fractal
 (
 	// Inputs
 	//
-                float i_alphaGain               =1.0,
-                float i_alphaIsLuminance        =1.0,
-                float i_alphaOffset             =0.0,
-                float i_amplitude               =1.0,
-                float i_bias                    =0.0,
-                color i_colorGain               =color(1.0, 1.0, 1.0),
-                color i_colorOffset             =0.0,
-                color i_defaultColor            =color(0.5, 0.5, 0.5),
-                float i_frequencyRatio          =2.0,
-                int   i_invert                  =0,
-                float i_levelMin                =0.0,
-                float i_levelMax                =9.0,
-                float i_ratio                   =0.707,
-                float i_threshold               =0.0,
-                int   i_inflection              =0,
-                int   i_animated                =0,
-                float i_time                    =0,
-                float i_timeRatio               =2.0,
-                vector i_uvCoord				= vector(0, 0, 0),
+            float i_alphaGain               =1.0,
+            float i_alphaIsLuminance        =1.0,
+            float i_alphaOffset             =0.0,
+            float i_amplitude               =1.0,
+            float i_bias                    =0.0,
+            color i_colorGain               =color(1.0, 1.0, 1.0),
+            color i_colorOffset             =0.0,
+            color i_defaultColor            =color(0.5, 0.5, 0.5),
+            float i_frequencyRatio          =2.0,
+            int   i_invert                  =0,
+            float i_levelMin                =0.0,
+            float i_levelMax                =9.0,
+            float i_ratio                   =0.707,
+            float i_threshold               =0.0,
+            int   i_inflection              =0,
+            int   i_animated                =0,
+            float i_time                    =0,
+            float i_timeRatio               =2.0,
+            vector i_uvCoord				= vector(0, 0, 0),
 	
 	// Outputs
 	//
@@ -161,6 +125,7 @@ shader maya_fractal
 			result = (result*0.5 + 0.5);
 
 		result += i_threshold;
+        result += i_bias;
 		result = clamp(result, 0, 1);
 
 		o_outColor = color(result, result, result);
