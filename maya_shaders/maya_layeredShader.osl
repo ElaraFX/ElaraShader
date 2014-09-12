@@ -36,8 +36,9 @@ shader maya_layeredShader
 [[ string help = "Maya LayeredShader"]]
 (
 	// Inputs
-	/*uniform*/	float		i_compositingFlag				= 0.0,
-				
+	/*uniform*/	float		i_compositingFlag			= 0.0,
+	/*uniform*/ int			i_mtoer_nlayers				= 0,	// how many layers are used
+
 				// inputs[].color
 				color		i_inputs_color_0			= color(1,0,0),
 				color		i_inputs_color_1			= color(0,1,0),
