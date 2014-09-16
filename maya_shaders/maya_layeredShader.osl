@@ -36,11 +36,12 @@ shader maya_layeredShader
 [[ string help = "Maya LayeredShader"]]
 (
 	// Inputs
-	/*uniform*/	int		i_compositingFlag				= 0,
-				
+	/*uniform*/	int			i_compositingFlag			= 0,
+	/*uniform*/ int			i_mtoer_nlayers				= 0,
+
 				// inputs[].color
-				color		i_inputs_color_0			= color(1,0,0),
-				color		i_inputs_color_1			= color(0,1,0),
+				color		i_inputs_color_0			= color(-99),
+				color		i_inputs_color_1			= color(-99),
 				color		i_inputs_color_2			= color(-99),
 				color		i_inputs_color_3			= color(-99),
 				color		i_inputs_color_4			= color(-99),
@@ -57,8 +58,8 @@ shader maya_layeredShader
 				color		i_inputs_color_15			= color(-99),
 				
 				//inputs[].transparency
-				color		i_inputs_transparency_0		= color(0.5),
-				color		i_inputs_transparency_1		= color(0.0),
+				color		i_inputs_transparency_0		= color(-99),
+				color		i_inputs_transparency_1		= color(-99),
 				color		i_inputs_transparency_2		= color(-99),
 				color		i_inputs_transparency_3		= color(-99),
 				color		i_inputs_transparency_4		= color(-99),
@@ -122,19 +123,18 @@ shader maya_layeredShader
 								i_inputs_transparency_15
 							};
 	
-	/*uniform*/ float nlayers = arraylength( i_inputs_color );
 	/*uniform*/ int i;
 
 	o_outColor = 0;
 	o_outTransparency = 1;
 
-	for( i = 0; i<nlayers; i += 1 )
+	for( i = 0; i<i_mtoer_nlayers; i += 1 )
 	{
 		color trs = i_inputs_transparency[i];
 		color col = i_inputs_color[i];
 		
-		if(trs!=color(-99) || col!=color(-99))
-		{
+		//~ if(trs!=color(-99) || col!=color(-99))
+		//~ {
 			if( i_compositingFlag == 1 )
 			{
 				// Layer texture mode
@@ -143,7 +143,7 @@ shader maya_layeredShader
 			
 			o_outColor += col * o_outTransparency;
 			o_outTransparency *= trs;
-		}
+		//~ }
 	}
 
 	computeSurfaceTransparency(
