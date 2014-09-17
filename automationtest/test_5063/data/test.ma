@@ -1,6 +1,11 @@
 //Maya ASCII 2013 scene
+<<<<<<< HEAD
+//Name: test.ma
+//Last modified: Thu, Sep 04, 2014 08:05:57 PM
+=======
 //Name: test_elara.ma
 //Last modified: Tue, Aug 12, 2014 02:19:03 AM
+>>>>>>> dee2a8a537c3b1d47bd1294bfa4874289323d030
 //Codeset: 936
 file -rdi 1 -ns "alphaGain" -rfn "alphaGainRN" "D:/Projects/2014/osl/testCase//test_5059/data/alphaGain.ma";
 file -rdi 2 -ns "objects" -rfn "alphaGain:objectsRN" "D:/Projects/2014/osl/testCase//test_5059/data/objects.ma";
