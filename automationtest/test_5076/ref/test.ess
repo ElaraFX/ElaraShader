@@ -1,0 +1,5991 @@
+# ess
+
+node "mtoer_error" "mtoer_error" # "osl_node"
+end
+node "osl_shadergroup" "mtoer_error_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #1
+		"mtoer_error"
+end
+node "material" "mtoer_error_mtl" # "material"
+	ref "surface_shader" "mtoer_error_osl"
+	ref "displace_shader" ""
+	ref "volume_shader" ""
+	ref "env_shader" ""
+end
+node "mtoer_sphereUV" "mtoer_sphereuv_shader" # "osl_node"
+end
+node "maya_ei_preset_aovs" "maya_ei_preset_aovs_0" # "osl_node"
+	color "aov_barycentric_coords" 0.000000 0.000000 0.000000
+	color "aov_bump_difference" 0.000000 0.000000 0.000000
+	color "aov_Ng" 0.000000 0.000000 0.000000
+	color "aov_N" 0.000000 0.000000 0.000000
+	color "aov_object_name" 0.000000 0.000000 0.000000
+	color "aov_material_id" 0.000000 0.000000 0.000000
+	color "aov_primitive_id" 0.000000 0.000000 0.000000
+	color "aov_shading_point" 0.000000 0.000000 0.000000
+	color "aov_u" 0.000000 0.000000 0.000000
+	color "aov_unbumped_N" 0.000000 0.000000 0.000000
+	color "aov_uniform_id" 0.000000 0.000000 0.000000
+	color "aov_dPdu" 0.000000 0.000000 0.000000
+	color "aov_uv" 0.000000 0.000000 0.000000
+	color "aov_v" 0.000000 0.000000 0.000000
+	color "aov_dPdv" 0.000000 0.000000 0.000000
+	color "aov_P" 0.000000 0.000000 0.000000
+	color "aov_Pref" 0.000000 0.000000 0.000000
+	color "aov_bad_uv" 0.000000 0.000000 0.000000
+	color "aov_subdiv_edge_length" 0.000000 0.000000 0.000000
+	color "aov_polygon_wireframe" 0.000000 0.000000 0.000000
+	color "aov_reflection_lines" 0.000000 0.000000 0.000000
+	color "aov_subdiv_pixel_error" 0.000000 0.000000 0.000000
+	color "aov_triangle_wireframe" 0.000000 0.000000 0.000000
+	color "aov_cputime" 0.000000 0.000000 0.000000
+	color "aov_motionvector" 0.000000 0.000000 0.000000
+	color "aov_raycount" 0.000000 0.000000 0.000000
+	color "aov_zdepth" 0.000000 0.000000 0.000000
+end
+node "approx" "defaultElaraApprox" # "approx"
+	enum "method" "regular"
+	bool "view_dep" off
+	scalar "sharp" 0.000000
+	int "min_subdiv" 0
+	int "max_subdiv" 5
+	int "max_grid_size" 65536
+	scalar "motion_factor" 16.000000
+	int "u_subdiv" 0
+	int "v_subdiv" 0
+	scalar "edge_length" 0.000000
+end
+node "options" "options" # "options"
+	int "min_samples" -3
+	int "max_samples" 16
+	bool "progressive" on
+	int "bucket_size" 64
+	enum "filter" "gaussian"
+	scalar "filter_size" 3.000000
+	ref "approx" ""
+	scalar "max_displace" 1.000000
+	bool "motion" on
+	int "glossy_samples" 4
+	int "diffuse_samples" 8
+	int "sss_samples" 16
+	int "volume_indirect_samples" 8
+	int "transp_depth" 10
+	int "reflect_depth" 2
+	int "glossy_depth" 1
+	int "diffuse_depth" 1
+	int "refract_depth" 8
+	int "sum_depth" 10
+	bool "shadow" on
+	bool "caustic" off
+	scalar "bias" 0.000000
+	scalar "step_size" 1.000000
+	bool "lens" on
+	bool "volume" on
+	bool "geometry" on
+	bool "displace" off
+	bool "imager" on
+	enum "face" "both"
+	ref "dicing_camera" ""
+	bool "use_clamp" off
+	scalar "clamp_value" 20.000000
+	scalar "light_cutoff" 0.000001
+	bool "path_cache" off
+	scalar "path_cache_density" 1.000000
+	int "path_cache_passes" 64
+	scalar "path_cache_radius" 1.000000
+	int "path_cache_points" 100
+	bool "path_cache_secondary_only" off
+	declare token "texture_searchpath" "E:/elaraShaderDev/sourceimages"
+	declare token "procedural_searchpath" "E:/elaraShaderDev/"
+	declare scalar "frame" 1.000000
+	declare token "render_layer" "defaultRenderLayer"
+	declare scalar "fps" 24.000000
+	declare token "render_camera" "perspShape_inst"
+	declare token "render_instgroup" "mtoer_instgroup_00"
+end
+node "directlight" "ramp_vramp:directionalLightShape1" # "light"
+	scalar "intensity" 3.000000
+	color "color" 1.000000 1.000000 1.000000
+	int "samples" 1
+	int "volume_samples" 0
+	ref "shader" ""
+	scalar "deltacone" 1.000000
+	scalar "spread" 0.000000
+	enum "face" "both"
+end
+node "instance" "ramp_vramp:directionalLightShape1_inst" # "instance"
+	ref "element" "ramp_vramp:directionalLightShape1"
+	matrix "transform"
+	1.000000 0.000000 -0.000000 0.000000
+	-0.000000 0.476598 -0.879121 0.000000
+	0.000000 0.879121 0.476598 0.000000
+	0.000000 0.000000 0.000000 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 -0.000000 0.000000
+	-0.000000 0.476598 -0.879121 0.000000
+	0.000000 0.879121 0.476598 0.000000
+	0.000000 0.000000 0.000000 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" off
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" on
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	bool "surface_emission" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+	#mtl_list is array but not valid, skip
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 340282346638528860000000000000000000000.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "poly" "ramp_vramp:nurbsPlaneShape1" # "object"
+		point[] "pos_list" 2  #16
+		-12.000000 -0.000000 12.000000
+		-12.000000 -0.000000 12.000000
+		12.000000 -0.000000 12.000000
+		12.000000 -0.000000 12.000000
+		12.000000 0.000000 -12.000000
+		12.000000 0.000000 -12.000000
+		-12.000000 0.000000 -12.000000
+		-12.000000 0.000000 -12.000000
+		12.000000 -0.000000 4.000000
+		12.000000 -0.000000 4.000000
+		-12.000000 -0.000000 4.000000
+		-12.000000 -0.000000 4.000000
+		-4.000000 -0.000000 12.000000
+		-4.000000 -0.000000 12.000000
+		-4.000000 -0.000000 4.000000
+		-4.000000 -0.000000 4.000000
+		4.000000 -0.000000 12.000000
+		4.000000 -0.000000 12.000000
+		4.000000 -0.000000 4.000000
+		4.000000 -0.000000 4.000000
+		-4.000000 0.000000 -12.000000
+		-4.000000 0.000000 -12.000000
+		-12.000000 0.000000 -4.000000
+		-12.000000 0.000000 -4.000000
+		-4.000000 0.000000 -4.000000
+		-4.000000 0.000000 -4.000000
+		12.000000 0.000000 -4.000000
+		12.000000 0.000000 -4.000000
+		4.000000 0.000000 -4.000000
+		4.000000 0.000000 -4.000000
+		4.000000 0.000000 -12.000000
+		4.000000 0.000000 -12.000000
+		index[] "triangle_list" 1  #54
+		13
+		2
+		14
+		8
+		1
+		4
+		0
+		6
+		7
+		6
+		8
+		9
+		11
+		12
+		10
+		5
+		7
+		12
+		4
+		13
+		9
+		7
+		9
+		14
+		12
+		14
+		15
+		2
+		15
+		14
+		4
+		9
+		8
+		7
+		5
+		0
+		9
+		7
+		6
+		10
+		3
+		11
+		12
+		11
+		5
+		13
+		14
+		9
+		14
+		12
+		7
+		15
+		10
+		12
+	declare vector [] "N" varying
+		vector[] "N" 1  #16
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+	declare vector2 [] "uv" varying
+		vector2[] "uv" 1  #16
+		0.000000 0.000000
+		1.000000 0.000000
+		1.000000 1.000000
+		0.000000 1.000000
+		1.000000 0.333333
+		0.000000 0.333333
+		0.333333 0.000000
+		0.333333 0.333333
+		0.666667 0.000000
+		0.666667 0.333333
+		0.333333 1.000000
+		0.000000 0.666667
+		0.333333 0.666667
+		1.000000 0.666667
+		0.666667 0.666667
+		0.666667 1.000000
+end
+node "maya_place2dTexture" "ramp_vramp:place2dTexture1" # "osl_node"
+	scalar "i_coverageU" 1.000000
+	scalar "i_coverageV" 1.000000
+	int "i_mirrorU" 0
+	int "i_mirrorV" 0
+	scalar "i_noiseU" 0.000000
+	scalar "i_noiseV" 0.000000
+	scalar "i_offsetU" 0.000000
+	scalar "i_offsetV" 0.000000
+	scalar "i_repeatU" 1.000000
+	scalar "i_repeatV" 1.000000
+	scalar "i_rotateFrame" 0.000000
+	scalar "i_rotateUV" 0.000000
+	int "i_stagger" 0
+	scalar "i_translateFrameU" 0.000000
+	scalar "i_translateFrameV" 0.000000
+	int "i_wrapU" 1
+	int "i_wrapV" 1
+	token "i_mtoer_uvSetName" "uv"
+	vector "o_outUV" 0.000000 0.000000 0.000000
+end
+node "maya_ramp" "ramp_vramp:ramp1" # "osl_node"
+	scalar "i_alphaGain" 1.000000
+	scalar "i_alphaOffset" 0.000000
+	#i_colorPositions is array but not valid, skip
+	#i_colors is array but not valid, skip
+	color "i_colorGain" 1.000000 1.000000 1.000000
+	color "i_colorOffset" 0.000000 0.000000 0.000000
+	color "i_defaultColor" 0.500000 0.500000 0.500000
+	scalar "i_hueNoise" 0.000000
+	scalar "i_hueNoiseFreq" 0.500000
+	int "i_interpolation" 1
+	int "i_invert" 0
+	scalar "i_noise" 0.000000
+	scalar "i_noiseFreq" 0.876238
+	scalar "i_satNoise" 0.000000
+	scalar "i_satNoiseFreq" 0.500000
+	int "i_type" 0
+	scalar "i_uWave" 0.000000
+	param_link "i_uvCoord" "ramp_vramp:place2dTexture1" "o_outUV"
+	scalar "i_vWave" 0.000000
+	scalar "i_valNoise" 0.000000
+	scalar "i_valNoiseFreq" 0.500000
+	scalar "o_outAlpha" 0.590000
+	color "o_outColor" 0.000000 1.000000 0.000000
+end
+node "maya_lambert" "ramp_vramp:ramp1Material" # "osl_node"
+	color "i_ambientColor" 0.000000 0.000000 0.000000
+	param_link "i_color" "ramp_vramp:ramp1" "o_outColor"
+	scalar "i_diffuse" 0.800000
+	color "i_incandescence" 0.000000 0.000000 0.000000
+	int "i_matteOpacityMode" 2
+	scalar "i_matteOpacity" 1.000000
+	int "i_refractions" 0
+	scalar "i_refractiveIndex" 1.000000
+	int "i_refractionLimit" 6
+	scalar "i_lightAbsorbance" 0.000000
+	scalar "i_shadowAttenuation" 0.500000
+	vector "i_normalCamera" 1.000000 1.000000 1.000000
+	color "i_transparency" 0.000000 0.000000 0.000000
+	scalar "i_translucence" 0.000000
+	scalar "i_translucenceDepth" 0.500000
+	scalar "i_translucenceFocus" 0.500000
+	int "i_mtoer_hasBump" 0
+	color "o_outColor" 0.000000 0.000000 0.000000
+	color "o_outTransparency" 0.000000 0.000000 0.000000
+	# not support param(o_outClosure) type((null))
+	# not support param(result) type((null))
+	scalar "result_alpha" 0.000000
+end
+node "osl_shadergroup" "ramp_vramp:ramp1Material_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_vramp:ramp1Material"
+		"maya_ei_preset_aovs_0"
+end
+node "material" "ramp_vramp:ramp1SG" # "material"
+	ref "surface_shader" "ramp_vramp:ramp1Material_osl"
+	ref "displace_shader" ""
+	ref "volume_shader" ""
+	ref "env_shader" ""
+end
+node "instance" "ramp_vramp:nurbsPlaneShape1_inst" # "instance"
+	ref "element" "ramp_vramp:nurbsPlaneShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	-68.704231 0.000000 -43.037365 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	-68.704231 0.000000 -43.037365 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" off
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	bool "surface_emission" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+		ref[] "mtl_list" 1  #1
+		"ramp_vramp:ramp1SG"
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 1.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "poly" "ramp_uramp:nurbsPlaneShape1" # "object"
+		point[] "pos_list" 2  #16
+		-12.000000 -0.000000 12.000000
+		-12.000000 -0.000000 12.000000
+		12.000000 -0.000000 12.000000
+		12.000000 -0.000000 12.000000
+		12.000000 0.000000 -12.000000
+		12.000000 0.000000 -12.000000
+		-12.000000 0.000000 -12.000000
+		-12.000000 0.000000 -12.000000
+		12.000000 -0.000000 4.000000
+		12.000000 -0.000000 4.000000
+		-12.000000 -0.000000 4.000000
+		-12.000000 -0.000000 4.000000
+		-4.000000 -0.000000 12.000000
+		-4.000000 -0.000000 12.000000
+		-4.000000 -0.000000 4.000000
+		-4.000000 -0.000000 4.000000
+		4.000000 -0.000000 12.000000
+		4.000000 -0.000000 12.000000
+		4.000000 -0.000000 4.000000
+		4.000000 -0.000000 4.000000
+		-4.000000 0.000000 -12.000000
+		-4.000000 0.000000 -12.000000
+		-12.000000 0.000000 -4.000000
+		-12.000000 0.000000 -4.000000
+		-4.000000 0.000000 -4.000000
+		-4.000000 0.000000 -4.000000
+		12.000000 0.000000 -4.000000
+		12.000000 0.000000 -4.000000
+		4.000000 0.000000 -4.000000
+		4.000000 0.000000 -4.000000
+		4.000000 0.000000 -12.000000
+		4.000000 0.000000 -12.000000
+		index[] "triangle_list" 1  #54
+		13
+		2
+		14
+		8
+		1
+		4
+		0
+		6
+		7
+		6
+		8
+		9
+		11
+		12
+		10
+		5
+		7
+		12
+		4
+		13
+		9
+		7
+		9
+		14
+		12
+		14
+		15
+		2
+		15
+		14
+		4
+		9
+		8
+		7
+		5
+		0
+		9
+		7
+		6
+		10
+		3
+		11
+		12
+		11
+		5
+		13
+		14
+		9
+		14
+		12
+		7
+		15
+		10
+		12
+	declare vector [] "N" varying
+		vector[] "N" 1  #16
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+	declare vector2 [] "uv" varying
+		vector2[] "uv" 1  #16
+		0.000000 0.000000
+		1.000000 0.000000
+		1.000000 1.000000
+		0.000000 1.000000
+		1.000000 0.333333
+		0.000000 0.333333
+		0.333333 0.000000
+		0.333333 0.333333
+		0.666667 0.000000
+		0.666667 0.333333
+		0.333333 1.000000
+		0.000000 0.666667
+		0.333333 0.666667
+		1.000000 0.666667
+		0.666667 0.666667
+		0.666667 1.000000
+end
+node "maya_place2dTexture" "ramp_uramp:place2dTexture1" # "osl_node"
+	scalar "i_coverageU" 1.000000
+	scalar "i_coverageV" 1.000000
+	int "i_mirrorU" 0
+	int "i_mirrorV" 0
+	scalar "i_noiseU" 0.000000
+	scalar "i_noiseV" 0.000000
+	scalar "i_offsetU" 0.000000
+	scalar "i_offsetV" 0.000000
+	scalar "i_repeatU" 1.000000
+	scalar "i_repeatV" 1.000000
+	scalar "i_rotateFrame" 0.000000
+	scalar "i_rotateUV" 0.000000
+	int "i_stagger" 0
+	scalar "i_translateFrameU" 0.000000
+	scalar "i_translateFrameV" 0.000000
+	int "i_wrapU" 1
+	int "i_wrapV" 1
+	token "i_mtoer_uvSetName" "uv"
+	vector "o_outUV" 0.000000 0.000000 0.000000
+end
+node "maya_ramp" "ramp_uramp:ramp1" # "osl_node"
+	scalar "i_alphaGain" 1.000000
+	scalar "i_alphaOffset" 0.000000
+	#i_colorPositions is array but not valid, skip
+	#i_colors is array but not valid, skip
+	color "i_colorGain" 1.000000 1.000000 1.000000
+	color "i_colorOffset" 0.000000 0.000000 0.000000
+	color "i_defaultColor" 0.500000 0.500000 0.500000
+	scalar "i_hueNoise" 0.000000
+	scalar "i_hueNoiseFreq" 0.500000
+	int "i_interpolation" 1
+	int "i_invert" 0
+	scalar "i_noise" 0.000000
+	scalar "i_noiseFreq" 0.876238
+	scalar "i_satNoise" 0.000000
+	scalar "i_satNoiseFreq" 0.500000
+	int "i_type" 1
+	scalar "i_uWave" 0.000000
+	param_link "i_uvCoord" "ramp_uramp:place2dTexture1" "o_outUV"
+	scalar "i_vWave" 0.000000
+	scalar "i_valNoise" 0.000000
+	scalar "i_valNoiseFreq" 0.500000
+	scalar "o_outAlpha" 0.590000
+	color "o_outColor" 0.000000 1.000000 0.000000
+end
+node "maya_lambert" "ramp_uramp:ramp1Material" # "osl_node"
+	color "i_ambientColor" 0.000000 0.000000 0.000000
+	param_link "i_color" "ramp_uramp:ramp1" "o_outColor"
+	scalar "i_diffuse" 0.800000
+	color "i_incandescence" 0.000000 0.000000 0.000000
+	int "i_matteOpacityMode" 2
+	scalar "i_matteOpacity" 1.000000
+	int "i_refractions" 0
+	scalar "i_refractiveIndex" 1.000000
+	int "i_refractionLimit" 6
+	scalar "i_lightAbsorbance" 0.000000
+	scalar "i_shadowAttenuation" 0.500000
+	vector "i_normalCamera" 1.000000 1.000000 1.000000
+	color "i_transparency" 0.000000 0.000000 0.000000
+	scalar "i_translucence" 0.000000
+	scalar "i_translucenceDepth" 0.500000
+	scalar "i_translucenceFocus" 0.500000
+	int "i_mtoer_hasBump" 0
+	color "o_outColor" 0.000000 0.000000 0.000000
+	color "o_outTransparency" 0.000000 0.000000 0.000000
+	# not support param(o_outClosure) type((null))
+	# not support param(result) type((null))
+	scalar "result_alpha" 0.000000
+end
+node "osl_shadergroup" "ramp_uramp:ramp1Material_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_uramp:ramp1Material"
+		"maya_ei_preset_aovs_0"
+end
+node "material" "ramp_uramp:ramp1SG" # "material"
+	ref "surface_shader" "ramp_uramp:ramp1Material_osl"
+	ref "displace_shader" ""
+	ref "volume_shader" ""
+	ref "env_shader" ""
+end
+node "instance" "ramp_uramp:nurbsPlaneShape1_inst" # "instance"
+	ref "element" "ramp_uramp:nurbsPlaneShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	-38.111401 0.000000 -44.333672 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	-38.111401 0.000000 -44.333672 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" off
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	bool "surface_emission" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+		ref[] "mtl_list" 1  #1
+		"ramp_uramp:ramp1SG"
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 1.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "poly" "ramp_diagonalramp:nurbsPlaneShape1" # "object"
+		point[] "pos_list" 2  #16
+		-12.000000 -0.000000 12.000000
+		-12.000000 -0.000000 12.000000
+		12.000000 -0.000000 12.000000
+		12.000000 -0.000000 12.000000
+		12.000000 0.000000 -12.000000
+		12.000000 0.000000 -12.000000
+		-12.000000 0.000000 -12.000000
+		-12.000000 0.000000 -12.000000
+		12.000000 -0.000000 4.000000
+		12.000000 -0.000000 4.000000
+		-12.000000 -0.000000 4.000000
+		-12.000000 -0.000000 4.000000
+		-4.000000 -0.000000 12.000000
+		-4.000000 -0.000000 12.000000
+		-4.000000 -0.000000 4.000000
+		-4.000000 -0.000000 4.000000
+		4.000000 -0.000000 12.000000
+		4.000000 -0.000000 12.000000
+		4.000000 -0.000000 4.000000
+		4.000000 -0.000000 4.000000
+		-4.000000 0.000000 -12.000000
+		-4.000000 0.000000 -12.000000
+		-12.000000 0.000000 -4.000000
+		-12.000000 0.000000 -4.000000
+		-4.000000 0.000000 -4.000000
+		-4.000000 0.000000 -4.000000
+		12.000000 0.000000 -4.000000
+		12.000000 0.000000 -4.000000
+		4.000000 0.000000 -4.000000
+		4.000000 0.000000 -4.000000
+		4.000000 0.000000 -12.000000
+		4.000000 0.000000 -12.000000
+		index[] "triangle_list" 1  #54
+		13
+		2
+		14
+		8
+		1
+		4
+		0
+		6
+		7
+		6
+		8
+		9
+		11
+		12
+		10
+		5
+		7
+		12
+		4
+		13
+		9
+		7
+		9
+		14
+		12
+		14
+		15
+		2
+		15
+		14
+		4
+		9
+		8
+		7
+		5
+		0
+		9
+		7
+		6
+		10
+		3
+		11
+		12
+		11
+		5
+		13
+		14
+		9
+		14
+		12
+		7
+		15
+		10
+		12
+	declare vector [] "N" varying
+		vector[] "N" 1  #16
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+	declare vector2 [] "uv" varying
+		vector2[] "uv" 1  #16
+		0.000000 0.000000
+		1.000000 0.000000
+		1.000000 1.000000
+		0.000000 1.000000
+		1.000000 0.333333
+		0.000000 0.333333
+		0.333333 0.000000
+		0.333333 0.333333
+		0.666667 0.000000
+		0.666667 0.333333
+		0.333333 1.000000
+		0.000000 0.666667
+		0.333333 0.666667
+		1.000000 0.666667
+		0.666667 0.666667
+		0.666667 1.000000
+end
+node "maya_place2dTexture" "ramp_diagonalramp:place2dTexture1" # "osl_node"
+	scalar "i_coverageU" 1.000000
+	scalar "i_coverageV" 1.000000
+	int "i_mirrorU" 0
+	int "i_mirrorV" 0
+	scalar "i_noiseU" 0.000000
+	scalar "i_noiseV" 0.000000
+	scalar "i_offsetU" 0.000000
+	scalar "i_offsetV" 0.000000
+	scalar "i_repeatU" 1.000000
+	scalar "i_repeatV" 1.000000
+	scalar "i_rotateFrame" 0.000000
+	scalar "i_rotateUV" 0.000000
+	int "i_stagger" 0
+	scalar "i_translateFrameU" 0.000000
+	scalar "i_translateFrameV" 0.000000
+	int "i_wrapU" 1
+	int "i_wrapV" 1
+	token "i_mtoer_uvSetName" "uv"
+	vector "o_outUV" 0.000000 0.000000 0.000000
+end
+node "maya_ramp" "ramp_diagonalramp:ramp1" # "osl_node"
+	scalar "i_alphaGain" 1.000000
+	scalar "i_alphaOffset" 0.000000
+	#i_colorPositions is array but not valid, skip
+	#i_colors is array but not valid, skip
+	color "i_colorGain" 1.000000 1.000000 1.000000
+	color "i_colorOffset" 0.000000 0.000000 0.000000
+	color "i_defaultColor" 0.500000 0.500000 0.500000
+	scalar "i_hueNoise" 0.000000
+	scalar "i_hueNoiseFreq" 0.500000
+	int "i_interpolation" 1
+	int "i_invert" 0
+	scalar "i_noise" 0.000000
+	scalar "i_noiseFreq" 0.876238
+	scalar "i_satNoise" 0.000000
+	scalar "i_satNoiseFreq" 0.500000
+	int "i_type" 2
+	scalar "i_uWave" 0.000000
+	param_link "i_uvCoord" "ramp_diagonalramp:place2dTexture1" "o_outUV"
+	scalar "i_vWave" 0.000000
+	scalar "i_valNoise" 0.000000
+	scalar "i_valNoiseFreq" 0.500000
+	scalar "o_outAlpha" 0.590000
+	color "o_outColor" 0.000000 1.000000 0.000000
+end
+node "maya_lambert" "ramp_diagonalramp:ramp1Material" # "osl_node"
+	color "i_ambientColor" 0.000000 0.000000 0.000000
+	param_link "i_color" "ramp_diagonalramp:ramp1" "o_outColor"
+	scalar "i_diffuse" 0.800000
+	color "i_incandescence" 0.000000 0.000000 0.000000
+	int "i_matteOpacityMode" 2
+	scalar "i_matteOpacity" 1.000000
+	int "i_refractions" 0
+	scalar "i_refractiveIndex" 1.000000
+	int "i_refractionLimit" 6
+	scalar "i_lightAbsorbance" 0.000000
+	scalar "i_shadowAttenuation" 0.500000
+	vector "i_normalCamera" 1.000000 1.000000 1.000000
+	color "i_transparency" 0.000000 0.000000 0.000000
+	scalar "i_translucence" 0.000000
+	scalar "i_translucenceDepth" 0.500000
+	scalar "i_translucenceFocus" 0.500000
+	int "i_mtoer_hasBump" 0
+	color "o_outColor" 0.000000 0.000000 0.000000
+	color "o_outTransparency" 0.000000 0.000000 0.000000
+	# not support param(o_outClosure) type((null))
+	# not support param(result) type((null))
+	scalar "result_alpha" 0.000000
+end
+node "osl_shadergroup" "ramp_diagonalramp:ramp1Material_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_diagonalramp:ramp1Material"
+		"maya_ei_preset_aovs_0"
+end
+node "material" "ramp_diagonalramp:ramp1SG" # "material"
+	ref "surface_shader" "ramp_diagonalramp:ramp1Material_osl"
+	ref "displace_shader" ""
+	ref "volume_shader" ""
+	ref "env_shader" ""
+end
+node "instance" "ramp_diagonalramp:nurbsPlaneShape1_inst" # "instance"
+	ref "element" "ramp_diagonalramp:nurbsPlaneShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	-13.206095 -2.124604 -44.466553 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	-13.206095 -2.124604 -44.466553 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" off
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	bool "surface_emission" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+		ref[] "mtl_list" 1  #1
+		"ramp_diagonalramp:ramp1SG"
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 1.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "poly" "ramp_radialramp:nurbsPlaneShape1" # "object"
+		point[] "pos_list" 2  #16
+		-12.000000 -0.000000 12.000000
+		-12.000000 -0.000000 12.000000
+		12.000000 -0.000000 12.000000
+		12.000000 -0.000000 12.000000
+		12.000000 0.000000 -12.000000
+		12.000000 0.000000 -12.000000
+		-12.000000 0.000000 -12.000000
+		-12.000000 0.000000 -12.000000
+		12.000000 -0.000000 4.000000
+		12.000000 -0.000000 4.000000
+		-12.000000 -0.000000 4.000000
+		-12.000000 -0.000000 4.000000
+		-4.000000 -0.000000 12.000000
+		-4.000000 -0.000000 12.000000
+		-4.000000 -0.000000 4.000000
+		-4.000000 -0.000000 4.000000
+		4.000000 -0.000000 12.000000
+		4.000000 -0.000000 12.000000
+		4.000000 -0.000000 4.000000
+		4.000000 -0.000000 4.000000
+		-4.000000 0.000000 -12.000000
+		-4.000000 0.000000 -12.000000
+		-12.000000 0.000000 -4.000000
+		-12.000000 0.000000 -4.000000
+		-4.000000 0.000000 -4.000000
+		-4.000000 0.000000 -4.000000
+		12.000000 0.000000 -4.000000
+		12.000000 0.000000 -4.000000
+		4.000000 0.000000 -4.000000
+		4.000000 0.000000 -4.000000
+		4.000000 0.000000 -12.000000
+		4.000000 0.000000 -12.000000
+		index[] "triangle_list" 1  #54
+		13
+		2
+		14
+		8
+		1
+		4
+		0
+		6
+		7
+		6
+		8
+		9
+		11
+		12
+		10
+		5
+		7
+		12
+		4
+		13
+		9
+		7
+		9
+		14
+		12
+		14
+		15
+		2
+		15
+		14
+		4
+		9
+		8
+		7
+		5
+		0
+		9
+		7
+		6
+		10
+		3
+		11
+		12
+		11
+		5
+		13
+		14
+		9
+		14
+		12
+		7
+		15
+		10
+		12
+	declare vector [] "N" varying
+		vector[] "N" 1  #16
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+	declare vector2 [] "uv" varying
+		vector2[] "uv" 1  #16
+		0.000000 0.000000
+		1.000000 0.000000
+		1.000000 1.000000
+		0.000000 1.000000
+		1.000000 0.333333
+		0.000000 0.333333
+		0.333333 0.000000
+		0.333333 0.333333
+		0.666667 0.000000
+		0.666667 0.333333
+		0.333333 1.000000
+		0.000000 0.666667
+		0.333333 0.666667
+		1.000000 0.666667
+		0.666667 0.666667
+		0.666667 1.000000
+end
+node "maya_place2dTexture" "ramp_radialramp:place2dTexture1" # "osl_node"
+	scalar "i_coverageU" 1.000000
+	scalar "i_coverageV" 1.000000
+	int "i_mirrorU" 0
+	int "i_mirrorV" 0
+	scalar "i_noiseU" 0.000000
+	scalar "i_noiseV" 0.000000
+	scalar "i_offsetU" 0.000000
+	scalar "i_offsetV" 0.000000
+	scalar "i_repeatU" 1.000000
+	scalar "i_repeatV" 1.000000
+	scalar "i_rotateFrame" 0.000000
+	scalar "i_rotateUV" 0.000000
+	int "i_stagger" 0
+	scalar "i_translateFrameU" 0.000000
+	scalar "i_translateFrameV" 0.000000
+	int "i_wrapU" 1
+	int "i_wrapV" 1
+	token "i_mtoer_uvSetName" "uv"
+	vector "o_outUV" 0.000000 0.000000 0.000000
+end
+node "maya_ramp" "ramp_radialramp:ramp1" # "osl_node"
+	scalar "i_alphaGain" 1.000000
+	scalar "i_alphaOffset" 0.000000
+	#i_colorPositions is array but not valid, skip
+	#i_colors is array but not valid, skip
+	color "i_colorGain" 1.000000 1.000000 1.000000
+	color "i_colorOffset" 0.000000 0.000000 0.000000
+	color "i_defaultColor" 0.500000 0.500000 0.500000
+	scalar "i_hueNoise" 0.000000
+	scalar "i_hueNoiseFreq" 0.500000
+	int "i_interpolation" 1
+	int "i_invert" 0
+	scalar "i_noise" 0.000000
+	scalar "i_noiseFreq" 0.876238
+	scalar "i_satNoise" 0.000000
+	scalar "i_satNoiseFreq" 0.500000
+	int "i_type" 3
+	scalar "i_uWave" 0.000000
+	param_link "i_uvCoord" "ramp_radialramp:place2dTexture1" "o_outUV"
+	scalar "i_vWave" 0.000000
+	scalar "i_valNoise" 0.000000
+	scalar "i_valNoiseFreq" 0.500000
+	scalar "o_outAlpha" 0.528356
+	color "o_outColor" 0.342466 0.657534 0.342466
+end
+node "maya_lambert" "ramp_radialramp:ramp1Material" # "osl_node"
+	color "i_ambientColor" 0.000000 0.000000 0.000000
+	param_link "i_color" "ramp_radialramp:ramp1" "o_outColor"
+	scalar "i_diffuse" 0.800000
+	color "i_incandescence" 0.000000 0.000000 0.000000
+	int "i_matteOpacityMode" 2
+	scalar "i_matteOpacity" 1.000000
+	int "i_refractions" 0
+	scalar "i_refractiveIndex" 1.000000
+	int "i_refractionLimit" 6
+	scalar "i_lightAbsorbance" 0.000000
+	scalar "i_shadowAttenuation" 0.500000
+	vector "i_normalCamera" 1.000000 1.000000 1.000000
+	color "i_transparency" 0.000000 0.000000 0.000000
+	scalar "i_translucence" 0.000000
+	scalar "i_translucenceDepth" 0.500000
+	scalar "i_translucenceFocus" 0.500000
+	int "i_mtoer_hasBump" 0
+	color "o_outColor" 0.000000 0.000000 0.000000
+	color "o_outTransparency" 0.000000 0.000000 0.000000
+	# not support param(o_outClosure) type((null))
+	# not support param(result) type((null))
+	scalar "result_alpha" 0.000000
+end
+node "osl_shadergroup" "ramp_radialramp:ramp1Material_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_radialramp:ramp1Material"
+		"maya_ei_preset_aovs_0"
+end
+node "material" "ramp_radialramp:ramp1SG" # "material"
+	ref "surface_shader" "ramp_radialramp:ramp1Material_osl"
+	ref "displace_shader" ""
+	ref "volume_shader" ""
+	ref "env_shader" ""
+end
+node "instance" "ramp_radialramp:nurbsPlaneShape1_inst" # "instance"
+	ref "element" "ramp_radialramp:nurbsPlaneShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	12.520495 -2.143659 -44.775139 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	12.520495 -2.143659 -44.775139 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" off
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	bool "surface_emission" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+		ref[] "mtl_list" 1  #1
+		"ramp_radialramp:ramp1SG"
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 1.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "poly" "ramp_circularramp:nurbsPlaneShape1" # "object"
+		point[] "pos_list" 2  #16
+		-12.000000 -0.000000 12.000000
+		-12.000000 -0.000000 12.000000
+		12.000000 -0.000000 12.000000
+		12.000000 -0.000000 12.000000
+		12.000000 0.000000 -12.000000
+		12.000000 0.000000 -12.000000
+		-12.000000 0.000000 -12.000000
+		-12.000000 0.000000 -12.000000
+		12.000000 -0.000000 4.000000
+		12.000000 -0.000000 4.000000
+		-12.000000 -0.000000 4.000000
+		-12.000000 -0.000000 4.000000
+		-4.000000 -0.000000 12.000000
+		-4.000000 -0.000000 12.000000
+		-4.000000 -0.000000 4.000000
+		-4.000000 -0.000000 4.000000
+		4.000000 -0.000000 12.000000
+		4.000000 -0.000000 12.000000
+		4.000000 -0.000000 4.000000
+		4.000000 -0.000000 4.000000
+		-4.000000 0.000000 -12.000000
+		-4.000000 0.000000 -12.000000
+		-12.000000 0.000000 -4.000000
+		-12.000000 0.000000 -4.000000
+		-4.000000 0.000000 -4.000000
+		-4.000000 0.000000 -4.000000
+		12.000000 0.000000 -4.000000
+		12.000000 0.000000 -4.000000
+		4.000000 0.000000 -4.000000
+		4.000000 0.000000 -4.000000
+		4.000000 0.000000 -12.000000
+		4.000000 0.000000 -12.000000
+		index[] "triangle_list" 1  #54
+		13
+		2
+		14
+		8
+		1
+		4
+		0
+		6
+		7
+		6
+		8
+		9
+		11
+		12
+		10
+		5
+		7
+		12
+		4
+		13
+		9
+		7
+		9
+		14
+		12
+		14
+		15
+		2
+		15
+		14
+		4
+		9
+		8
+		7
+		5
+		0
+		9
+		7
+		6
+		10
+		3
+		11
+		12
+		11
+		5
+		13
+		14
+		9
+		14
+		12
+		7
+		15
+		10
+		12
+	declare vector [] "N" varying
+		vector[] "N" 1  #16
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+	declare vector2 [] "uv" varying
+		vector2[] "uv" 1  #16
+		0.000000 0.000000
+		1.000000 0.000000
+		1.000000 1.000000
+		0.000000 1.000000
+		1.000000 0.333333
+		0.000000 0.333333
+		0.333333 0.000000
+		0.333333 0.333333
+		0.666667 0.000000
+		0.666667 0.333333
+		0.333333 1.000000
+		0.000000 0.666667
+		0.333333 0.666667
+		1.000000 0.666667
+		0.666667 0.666667
+		0.666667 1.000000
+end
+node "maya_place2dTexture" "ramp_circularramp:place2dTexture1" # "osl_node"
+	scalar "i_coverageU" 1.000000
+	scalar "i_coverageV" 1.000000
+	int "i_mirrorU" 0
+	int "i_mirrorV" 0
+	scalar "i_noiseU" 0.000000
+	scalar "i_noiseV" 0.000000
+	scalar "i_offsetU" 0.000000
+	scalar "i_offsetV" 0.000000
+	scalar "i_repeatU" 1.000000
+	scalar "i_repeatV" 1.000000
+	scalar "i_rotateFrame" 0.000000
+	scalar "i_rotateUV" 0.000000
+	int "i_stagger" 0
+	scalar "i_translateFrameU" 0.000000
+	scalar "i_translateFrameV" 0.000000
+	int "i_wrapU" 1
+	int "i_wrapV" 1
+	token "i_mtoer_uvSetName" "uv"
+	vector "o_outUV" 0.000000 0.000000 0.000000
+end
+node "maya_ramp" "ramp_circularramp:ramp1" # "osl_node"
+	scalar "i_alphaGain" 1.000000
+	scalar "i_alphaOffset" 0.000000
+	#i_colorPositions is array but not valid, skip
+	#i_colors is array but not valid, skip
+	color "i_colorGain" 1.000000 1.000000 1.000000
+	color "i_colorOffset" 0.000000 0.000000 0.000000
+	color "i_defaultColor" 0.500000 0.500000 0.500000
+	scalar "i_hueNoise" 0.000000
+	scalar "i_hueNoiseFreq" 0.500000
+	int "i_interpolation" 1
+	int "i_invert" 0
+	scalar "i_noise" 0.000000
+	scalar "i_noiseFreq" 0.876238
+	scalar "i_satNoise" 0.000000
+	scalar "i_satNoiseFreq" 0.500000
+	int "i_type" 4
+	scalar "i_uWave" 0.000000
+	param_link "i_uvCoord" "ramp_circularramp:place2dTexture1" "o_outUV"
+	scalar "i_vWave" 0.000000
+	scalar "i_valNoise" 0.000000
+	scalar "i_valNoiseFreq" 0.500000
+	scalar "o_outAlpha" 0.890000
+	color "o_outColor" 1.000000 1.000000 0.000000
+end
+node "maya_lambert" "ramp_circularramp:ramp1Material" # "osl_node"
+	color "i_ambientColor" 0.000000 0.000000 0.000000
+	param_link "i_color" "ramp_circularramp:ramp1" "o_outColor"
+	scalar "i_diffuse" 0.800000
+	color "i_incandescence" 0.000000 0.000000 0.000000
+	int "i_matteOpacityMode" 2
+	scalar "i_matteOpacity" 1.000000
+	int "i_refractions" 0
+	scalar "i_refractiveIndex" 1.000000
+	int "i_refractionLimit" 6
+	scalar "i_lightAbsorbance" 0.000000
+	scalar "i_shadowAttenuation" 0.500000
+	vector "i_normalCamera" 1.000000 1.000000 1.000000
+	color "i_transparency" 0.000000 0.000000 0.000000
+	scalar "i_translucence" 0.000000
+	scalar "i_translucenceDepth" 0.500000
+	scalar "i_translucenceFocus" 0.500000
+	int "i_mtoer_hasBump" 0
+	color "o_outColor" 0.000000 0.000000 0.000000
+	color "o_outTransparency" 0.000000 0.000000 0.000000
+	# not support param(o_outClosure) type((null))
+	# not support param(result) type((null))
+	scalar "result_alpha" 0.000000
+end
+node "osl_shadergroup" "ramp_circularramp:ramp1Material_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_circularramp:ramp1Material"
+		"maya_ei_preset_aovs_0"
+end
+node "material" "ramp_circularramp:ramp1SG" # "material"
+	ref "surface_shader" "ramp_circularramp:ramp1Material_osl"
+	ref "displace_shader" ""
+	ref "volume_shader" ""
+	ref "env_shader" ""
+end
+node "instance" "ramp_circularramp:nurbsPlaneShape1_inst" # "instance"
+	ref "element" "ramp_circularramp:nurbsPlaneShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	-68.738068 -0.847936 -17.968285 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	-68.738068 -0.847936 -17.968285 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" off
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	bool "surface_emission" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+		ref[] "mtl_list" 1  #1
+		"ramp_circularramp:ramp1SG"
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 1.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "poly" "ramp_boxramp:nurbsPlaneShape1" # "object"
+		point[] "pos_list" 2  #16
+		-12.000000 -0.000000 12.000000
+		-12.000000 -0.000000 12.000000
+		12.000000 -0.000000 12.000000
+		12.000000 -0.000000 12.000000
+		12.000000 0.000000 -12.000000
+		12.000000 0.000000 -12.000000
+		-12.000000 0.000000 -12.000000
+		-12.000000 0.000000 -12.000000
+		12.000000 -0.000000 4.000000
+		12.000000 -0.000000 4.000000
+		-12.000000 -0.000000 4.000000
+		-12.000000 -0.000000 4.000000
+		-4.000000 -0.000000 12.000000
+		-4.000000 -0.000000 12.000000
+		-4.000000 -0.000000 4.000000
+		-4.000000 -0.000000 4.000000
+		4.000000 -0.000000 12.000000
+		4.000000 -0.000000 12.000000
+		4.000000 -0.000000 4.000000
+		4.000000 -0.000000 4.000000
+		-4.000000 0.000000 -12.000000
+		-4.000000 0.000000 -12.000000
+		-12.000000 0.000000 -4.000000
+		-12.000000 0.000000 -4.000000
+		-4.000000 0.000000 -4.000000
+		-4.000000 0.000000 -4.000000
+		12.000000 0.000000 -4.000000
+		12.000000 0.000000 -4.000000
+		4.000000 0.000000 -4.000000
+		4.000000 0.000000 -4.000000
+		4.000000 0.000000 -12.000000
+		4.000000 0.000000 -12.000000
+		index[] "triangle_list" 1  #54
+		13
+		2
+		14
+		8
+		1
+		4
+		0
+		6
+		7
+		6
+		8
+		9
+		11
+		12
+		10
+		5
+		7
+		12
+		4
+		13
+		9
+		7
+		9
+		14
+		12
+		14
+		15
+		2
+		15
+		14
+		4
+		9
+		8
+		7
+		5
+		0
+		9
+		7
+		6
+		10
+		3
+		11
+		12
+		11
+		5
+		13
+		14
+		9
+		14
+		12
+		7
+		15
+		10
+		12
+	declare vector [] "N" varying
+		vector[] "N" 1  #16
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+	declare vector2 [] "uv" varying
+		vector2[] "uv" 1  #16
+		0.000000 0.000000
+		1.000000 0.000000
+		1.000000 1.000000
+		0.000000 1.000000
+		1.000000 0.333333
+		0.000000 0.333333
+		0.333333 0.000000
+		0.333333 0.333333
+		0.666667 0.000000
+		0.666667 0.333333
+		0.333333 1.000000
+		0.000000 0.666667
+		0.333333 0.666667
+		1.000000 0.666667
+		0.666667 0.666667
+		0.666667 1.000000
+end
+node "maya_place2dTexture" "ramp_boxramp:place2dTexture1" # "osl_node"
+	scalar "i_coverageU" 1.000000
+	scalar "i_coverageV" 1.000000
+	int "i_mirrorU" 0
+	int "i_mirrorV" 0
+	scalar "i_noiseU" 0.000000
+	scalar "i_noiseV" 0.000000
+	scalar "i_offsetU" 0.000000
+	scalar "i_offsetV" 0.000000
+	scalar "i_repeatU" 1.000000
+	scalar "i_repeatV" 1.000000
+	scalar "i_rotateFrame" 0.000000
+	scalar "i_rotateUV" 0.000000
+	int "i_stagger" 0
+	scalar "i_translateFrameU" 0.000000
+	scalar "i_translateFrameV" 0.000000
+	int "i_wrapU" 1
+	int "i_wrapV" 1
+	token "i_mtoer_uvSetName" "uv"
+	vector "o_outUV" 0.000000 0.000000 0.000000
+end
+node "maya_ramp" "ramp_boxramp:ramp1" # "osl_node"
+	scalar "i_alphaGain" 1.000000
+	scalar "i_alphaOffset" 0.000000
+	#i_colorPositions is array but not valid, skip
+	#i_colors is array but not valid, skip
+	color "i_colorGain" 1.000000 1.000000 1.000000
+	color "i_colorOffset" 0.000000 0.000000 0.000000
+	color "i_defaultColor" 0.500000 0.500000 0.500000
+	scalar "i_hueNoise" 0.000000
+	scalar "i_hueNoiseFreq" 0.500000
+	int "i_interpolation" 1
+	int "i_invert" 0
+	scalar "i_noise" 0.000000
+	scalar "i_noiseFreq" 0.876238
+	scalar "i_satNoise" 0.000000
+	scalar "i_satNoiseFreq" 0.500000
+	int "i_type" 5
+	scalar "i_uWave" 0.000000
+	param_link "i_uvCoord" "ramp_boxramp:place2dTexture1" "o_outUV"
+	scalar "i_vWave" 0.000000
+	scalar "i_valNoise" 0.000000
+	scalar "i_valNoiseFreq" 0.500000
+	scalar "o_outAlpha" 0.890000
+	color "o_outColor" 1.000000 1.000000 0.000000
+end
+node "maya_lambert" "ramp_boxramp:ramp1Material" # "osl_node"
+	color "i_ambientColor" 0.000000 0.000000 0.000000
+	param_link "i_color" "ramp_boxramp:ramp1" "o_outColor"
+	scalar "i_diffuse" 0.800000
+	color "i_incandescence" 0.000000 0.000000 0.000000
+	int "i_matteOpacityMode" 2
+	scalar "i_matteOpacity" 1.000000
+	int "i_refractions" 0
+	scalar "i_refractiveIndex" 1.000000
+	int "i_refractionLimit" 6
+	scalar "i_lightAbsorbance" 0.000000
+	scalar "i_shadowAttenuation" 0.500000
+	vector "i_normalCamera" 1.000000 1.000000 1.000000
+	color "i_transparency" 0.000000 0.000000 0.000000
+	scalar "i_translucence" 0.000000
+	scalar "i_translucenceDepth" 0.500000
+	scalar "i_translucenceFocus" 0.500000
+	int "i_mtoer_hasBump" 0
+	color "o_outColor" 0.000000 0.000000 0.000000
+	color "o_outTransparency" 0.000000 0.000000 0.000000
+	# not support param(o_outClosure) type((null))
+	# not support param(result) type((null))
+	scalar "result_alpha" 0.000000
+end
+node "osl_shadergroup" "ramp_boxramp:ramp1Material_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_boxramp:ramp1Material"
+		"maya_ei_preset_aovs_0"
+end
+node "material" "ramp_boxramp:ramp1SG" # "material"
+	ref "surface_shader" "ramp_boxramp:ramp1Material_osl"
+	ref "displace_shader" ""
+	ref "volume_shader" ""
+	ref "env_shader" ""
+end
+node "instance" "ramp_boxramp:nurbsPlaneShape1_inst" # "instance"
+	ref "element" "ramp_boxramp:nurbsPlaneShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	-42.213104 -0.876518 -18.473280 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	-42.213104 -0.876518 -18.473280 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" off
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	bool "surface_emission" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+		ref[] "mtl_list" 1  #1
+		"ramp_boxramp:ramp1SG"
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 1.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "poly" "ramp_uvramp:nurbsPlaneShape1" # "object"
+		point[] "pos_list" 2  #16
+		-12.000000 -0.000000 12.000000
+		-12.000000 -0.000000 12.000000
+		12.000000 -0.000000 12.000000
+		12.000000 -0.000000 12.000000
+		12.000000 0.000000 -12.000000
+		12.000000 0.000000 -12.000000
+		-12.000000 0.000000 -12.000000
+		-12.000000 0.000000 -12.000000
+		12.000000 -0.000000 4.000000
+		12.000000 -0.000000 4.000000
+		-12.000000 -0.000000 4.000000
+		-12.000000 -0.000000 4.000000
+		-4.000000 -0.000000 12.000000
+		-4.000000 -0.000000 12.000000
+		-4.000000 -0.000000 4.000000
+		-4.000000 -0.000000 4.000000
+		4.000000 -0.000000 12.000000
+		4.000000 -0.000000 12.000000
+		4.000000 -0.000000 4.000000
+		4.000000 -0.000000 4.000000
+		-4.000000 0.000000 -12.000000
+		-4.000000 0.000000 -12.000000
+		-12.000000 0.000000 -4.000000
+		-12.000000 0.000000 -4.000000
+		-4.000000 0.000000 -4.000000
+		-4.000000 0.000000 -4.000000
+		12.000000 0.000000 -4.000000
+		12.000000 0.000000 -4.000000
+		4.000000 0.000000 -4.000000
+		4.000000 0.000000 -4.000000
+		4.000000 0.000000 -12.000000
+		4.000000 0.000000 -12.000000
+		index[] "triangle_list" 1  #54
+		13
+		2
+		14
+		8
+		1
+		4
+		0
+		6
+		7
+		6
+		8
+		9
+		11
+		12
+		10
+		5
+		7
+		12
+		4
+		13
+		9
+		7
+		9
+		14
+		12
+		14
+		15
+		2
+		15
+		14
+		4
+		9
+		8
+		7
+		5
+		0
+		9
+		7
+		6
+		10
+		3
+		11
+		12
+		11
+		5
+		13
+		14
+		9
+		14
+		12
+		7
+		15
+		10
+		12
+	declare vector [] "N" varying
+		vector[] "N" 1  #16
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+	declare vector2 [] "uv" varying
+		vector2[] "uv" 1  #16
+		0.000000 0.000000
+		1.000000 0.000000
+		1.000000 1.000000
+		0.000000 1.000000
+		1.000000 0.333333
+		0.000000 0.333333
+		0.333333 0.000000
+		0.333333 0.333333
+		0.666667 0.000000
+		0.666667 0.333333
+		0.333333 1.000000
+		0.000000 0.666667
+		0.333333 0.666667
+		1.000000 0.666667
+		0.666667 0.666667
+		0.666667 1.000000
+end
+node "maya_place2dTexture" "ramp_uvramp:place2dTexture1" # "osl_node"
+	scalar "i_coverageU" 1.000000
+	scalar "i_coverageV" 1.000000
+	int "i_mirrorU" 0
+	int "i_mirrorV" 0
+	scalar "i_noiseU" 0.000000
+	scalar "i_noiseV" 0.000000
+	scalar "i_offsetU" 0.000000
+	scalar "i_offsetV" 0.000000
+	scalar "i_repeatU" 1.000000
+	scalar "i_repeatV" 1.000000
+	scalar "i_rotateFrame" 0.000000
+	scalar "i_rotateUV" 0.000000
+	int "i_stagger" 0
+	scalar "i_translateFrameU" 0.000000
+	scalar "i_translateFrameV" 0.000000
+	int "i_wrapU" 1
+	int "i_wrapV" 1
+	token "i_mtoer_uvSetName" "uv"
+	vector "o_outUV" 0.000000 0.000000 0.000000
+end
+node "maya_ramp" "ramp_uvramp:ramp1" # "osl_node"
+	scalar "i_alphaGain" 1.000000
+	scalar "i_alphaOffset" 0.000000
+	#i_colorPositions is array but not valid, skip
+	#i_colors is array but not valid, skip
+	color "i_colorGain" 1.000000 1.000000 1.000000
+	color "i_colorOffset" 0.000000 0.000000 0.000000
+	color "i_defaultColor" 0.500000 0.500000 0.500000
+	scalar "i_hueNoise" 0.000000
+	scalar "i_hueNoiseFreq" 0.500000
+	int "i_interpolation" 1
+	int "i_invert" 0
+	scalar "i_noise" 0.000000
+	scalar "i_noiseFreq" 0.876238
+	scalar "i_satNoise" 0.000000
+	scalar "i_satNoiseFreq" 0.500000
+	int "i_type" 6
+	scalar "i_uWave" 0.000000
+	param_link "i_uvCoord" "ramp_uvramp:place2dTexture1" "o_outUV"
+	scalar "i_vWave" 0.000000
+	scalar "i_valNoise" 0.000000
+	scalar "i_valNoiseFreq" 0.500000
+	scalar "o_outAlpha" 0.890000
+	color "o_outColor" 1.000000 1.000000 0.000000
+end
+node "maya_lambert" "ramp_uvramp:ramp1Material" # "osl_node"
+	color "i_ambientColor" 0.000000 0.000000 0.000000
+	param_link "i_color" "ramp_uvramp:ramp1" "o_outColor"
+	scalar "i_diffuse" 0.800000
+	color "i_incandescence" 0.000000 0.000000 0.000000
+	int "i_matteOpacityMode" 2
+	scalar "i_matteOpacity" 1.000000
+	int "i_refractions" 0
+	scalar "i_refractiveIndex" 1.000000
+	int "i_refractionLimit" 6
+	scalar "i_lightAbsorbance" 0.000000
+	scalar "i_shadowAttenuation" 0.500000
+	vector "i_normalCamera" 1.000000 1.000000 1.000000
+	color "i_transparency" 0.000000 0.000000 0.000000
+	scalar "i_translucence" 0.000000
+	scalar "i_translucenceDepth" 0.500000
+	scalar "i_translucenceFocus" 0.500000
+	int "i_mtoer_hasBump" 0
+	color "o_outColor" 0.000000 0.000000 0.000000
+	color "o_outTransparency" 0.000000 0.000000 0.000000
+	# not support param(o_outClosure) type((null))
+	# not support param(result) type((null))
+	scalar "result_alpha" 0.000000
+end
+node "osl_shadergroup" "ramp_uvramp:ramp1Material_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_uvramp:ramp1Material"
+		"maya_ei_preset_aovs_0"
+end
+node "material" "ramp_uvramp:ramp1SG" # "material"
+	ref "surface_shader" "ramp_uvramp:ramp1Material_osl"
+	ref "displace_shader" ""
+	ref "volume_shader" ""
+	ref "env_shader" ""
+end
+node "instance" "ramp_uvramp:nurbsPlaneShape1_inst" # "instance"
+	ref "element" "ramp_uvramp:nurbsPlaneShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	-16.085587 -0.924155 -19.378052 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	-16.085587 -0.924155 -19.378052 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" off
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	bool "surface_emission" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+		ref[] "mtl_list" 1  #1
+		"ramp_uvramp:ramp1SG"
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 1.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "poly" "ramp_fourcornerramp:nurbsPlaneShape1" # "object"
+		point[] "pos_list" 2  #16
+		-12.000000 -0.000000 12.000000
+		-12.000000 -0.000000 12.000000
+		12.000000 -0.000000 12.000000
+		12.000000 -0.000000 12.000000
+		12.000000 0.000000 -12.000000
+		12.000000 0.000000 -12.000000
+		-12.000000 0.000000 -12.000000
+		-12.000000 0.000000 -12.000000
+		12.000000 -0.000000 4.000000
+		12.000000 -0.000000 4.000000
+		-12.000000 -0.000000 4.000000
+		-12.000000 -0.000000 4.000000
+		-4.000000 -0.000000 12.000000
+		-4.000000 -0.000000 12.000000
+		-4.000000 -0.000000 4.000000
+		-4.000000 -0.000000 4.000000
+		4.000000 -0.000000 12.000000
+		4.000000 -0.000000 12.000000
+		4.000000 -0.000000 4.000000
+		4.000000 -0.000000 4.000000
+		-4.000000 0.000000 -12.000000
+		-4.000000 0.000000 -12.000000
+		-12.000000 0.000000 -4.000000
+		-12.000000 0.000000 -4.000000
+		-4.000000 0.000000 -4.000000
+		-4.000000 0.000000 -4.000000
+		12.000000 0.000000 -4.000000
+		12.000000 0.000000 -4.000000
+		4.000000 0.000000 -4.000000
+		4.000000 0.000000 -4.000000
+		4.000000 0.000000 -12.000000
+		4.000000 0.000000 -12.000000
+		index[] "triangle_list" 1  #54
+		13
+		2
+		14
+		8
+		1
+		4
+		0
+		6
+		7
+		6
+		8
+		9
+		11
+		12
+		10
+		5
+		7
+		12
+		4
+		13
+		9
+		7
+		9
+		14
+		12
+		14
+		15
+		2
+		15
+		14
+		4
+		9
+		8
+		7
+		5
+		0
+		9
+		7
+		6
+		10
+		3
+		11
+		12
+		11
+		5
+		13
+		14
+		9
+		14
+		12
+		7
+		15
+		10
+		12
+	declare vector [] "N" varying
+		vector[] "N" 1  #16
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+	declare vector2 [] "uv" varying
+		vector2[] "uv" 1  #16
+		0.000000 0.000000
+		1.000000 0.000000
+		1.000000 1.000000
+		0.000000 1.000000
+		1.000000 0.333333
+		0.000000 0.333333
+		0.333333 0.000000
+		0.333333 0.333333
+		0.666667 0.000000
+		0.666667 0.333333
+		0.333333 1.000000
+		0.000000 0.666667
+		0.333333 0.666667
+		1.000000 0.666667
+		0.666667 0.666667
+		0.666667 1.000000
+end
+node "maya_place2dTexture" "ramp_fourcornerramp:place2dTexture1" # "osl_node"
+	scalar "i_coverageU" 1.000000
+	scalar "i_coverageV" 1.000000
+	int "i_mirrorU" 0
+	int "i_mirrorV" 0
+	scalar "i_noiseU" 0.000000
+	scalar "i_noiseV" 0.000000
+	scalar "i_offsetU" 0.000000
+	scalar "i_offsetV" 0.000000
+	scalar "i_repeatU" 1.000000
+	scalar "i_repeatV" 1.000000
+	scalar "i_rotateFrame" 0.000000
+	scalar "i_rotateUV" 0.000000
+	int "i_stagger" 0
+	scalar "i_translateFrameU" 0.000000
+	scalar "i_translateFrameV" 0.000000
+	int "i_wrapU" 1
+	int "i_wrapV" 1
+	token "i_mtoer_uvSetName" "uv"
+	vector "o_outUV" 0.000000 0.000000 0.000000
+end
+node "maya_ramp" "ramp_fourcornerramp:ramp1" # "osl_node"
+	scalar "i_alphaGain" 1.000000
+	scalar "i_alphaOffset" 0.000000
+	#i_colorPositions is array but not valid, skip
+	#i_colors is array but not valid, skip
+	color "i_colorGain" 1.000000 1.000000 1.000000
+	color "i_colorOffset" 0.000000 0.000000 0.000000
+	color "i_defaultColor" 0.500000 0.500000 0.500000
+	scalar "i_hueNoise" 0.000000
+	scalar "i_hueNoiseFreq" 0.500000
+	int "i_interpolation" 1
+	int "i_invert" 0
+	scalar "i_noise" 0.000000
+	scalar "i_noiseFreq" 0.876238
+	scalar "i_satNoise" 0.000000
+	scalar "i_satNoiseFreq" 0.500000
+	int "i_type" 7
+	scalar "i_uWave" 0.000000
+	param_link "i_uvCoord" "ramp_fourcornerramp:place2dTexture1" "o_outUV"
+	scalar "i_vWave" 0.000000
+	scalar "i_valNoise" 0.000000
+	scalar "i_valNoiseFreq" 0.500000
+	scalar "o_outAlpha" 0.590000
+	color "o_outColor" 0.000000 1.000000 0.000000
+end
+node "maya_lambert" "ramp_fourcornerramp:ramp1Material" # "osl_node"
+	color "i_ambientColor" 0.000000 0.000000 0.000000
+	param_link "i_color" "ramp_fourcornerramp:ramp1" "o_outColor"
+	scalar "i_diffuse" 0.800000
+	color "i_incandescence" 0.000000 0.000000 0.000000
+	int "i_matteOpacityMode" 2
+	scalar "i_matteOpacity" 1.000000
+	int "i_refractions" 0
+	scalar "i_refractiveIndex" 1.000000
+	int "i_refractionLimit" 6
+	scalar "i_lightAbsorbance" 0.000000
+	scalar "i_shadowAttenuation" 0.500000
+	vector "i_normalCamera" 1.000000 1.000000 1.000000
+	color "i_transparency" 0.000000 0.000000 0.000000
+	scalar "i_translucence" 0.000000
+	scalar "i_translucenceDepth" 0.500000
+	scalar "i_translucenceFocus" 0.500000
+	int "i_mtoer_hasBump" 0
+	color "o_outColor" 0.000000 0.000000 0.000000
+	color "o_outTransparency" 0.000000 0.000000 0.000000
+	# not support param(o_outClosure) type((null))
+	# not support param(result) type((null))
+	scalar "result_alpha" 0.000000
+end
+node "osl_shadergroup" "ramp_fourcornerramp:ramp1Material_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_fourcornerramp:ramp1Material"
+		"maya_ei_preset_aovs_0"
+end
+node "material" "ramp_fourcornerramp:ramp1SG" # "material"
+	ref "surface_shader" "ramp_fourcornerramp:ramp1Material_osl"
+	ref "displace_shader" ""
+	ref "volume_shader" ""
+	ref "env_shader" ""
+end
+node "instance" "ramp_fourcornerramp:nurbsPlaneShape1_inst" # "instance"
+	ref "element" "ramp_fourcornerramp:nurbsPlaneShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	9.438107 -0.895573 -18.691372 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	9.438107 -0.895573 -18.691372 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" off
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	bool "surface_emission" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+		ref[] "mtl_list" 1  #1
+		"ramp_fourcornerramp:ramp1SG"
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 1.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "poly" "ramp_tartanramp:nurbsPlaneShape1" # "object"
+		point[] "pos_list" 2  #16
+		-12.000000 -0.000000 12.000000
+		-12.000000 -0.000000 12.000000
+		12.000000 -0.000000 12.000000
+		12.000000 -0.000000 12.000000
+		12.000000 0.000000 -12.000000
+		12.000000 0.000000 -12.000000
+		-12.000000 0.000000 -12.000000
+		-12.000000 0.000000 -12.000000
+		12.000000 -0.000000 4.000000
+		12.000000 -0.000000 4.000000
+		-12.000000 -0.000000 4.000000
+		-12.000000 -0.000000 4.000000
+		-4.000000 -0.000000 12.000000
+		-4.000000 -0.000000 12.000000
+		-4.000000 -0.000000 4.000000
+		-4.000000 -0.000000 4.000000
+		4.000000 -0.000000 12.000000
+		4.000000 -0.000000 12.000000
+		4.000000 -0.000000 4.000000
+		4.000000 -0.000000 4.000000
+		-4.000000 0.000000 -12.000000
+		-4.000000 0.000000 -12.000000
+		-12.000000 0.000000 -4.000000
+		-12.000000 0.000000 -4.000000
+		-4.000000 0.000000 -4.000000
+		-4.000000 0.000000 -4.000000
+		12.000000 0.000000 -4.000000
+		12.000000 0.000000 -4.000000
+		4.000000 0.000000 -4.000000
+		4.000000 0.000000 -4.000000
+		4.000000 0.000000 -12.000000
+		4.000000 0.000000 -12.000000
+		index[] "triangle_list" 1  #54
+		13
+		2
+		14
+		8
+		1
+		4
+		0
+		6
+		7
+		6
+		8
+		9
+		11
+		12
+		10
+		5
+		7
+		12
+		4
+		13
+		9
+		7
+		9
+		14
+		12
+		14
+		15
+		2
+		15
+		14
+		4
+		9
+		8
+		7
+		5
+		0
+		9
+		7
+		6
+		10
+		3
+		11
+		12
+		11
+		5
+		13
+		14
+		9
+		14
+		12
+		7
+		15
+		10
+		12
+	declare vector [] "N" varying
+		vector[] "N" 1  #16
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+	declare vector2 [] "uv" varying
+		vector2[] "uv" 1  #16
+		0.000000 0.000000
+		1.000000 0.000000
+		1.000000 1.000000
+		0.000000 1.000000
+		1.000000 0.333333
+		0.000000 0.333333
+		0.333333 0.000000
+		0.333333 0.333333
+		0.666667 0.000000
+		0.666667 0.333333
+		0.333333 1.000000
+		0.000000 0.666667
+		0.333333 0.666667
+		1.000000 0.666667
+		0.666667 0.666667
+		0.666667 1.000000
+end
+node "maya_place2dTexture" "ramp_tartanramp:place2dTexture1" # "osl_node"
+	scalar "i_coverageU" 1.000000
+	scalar "i_coverageV" 1.000000
+	int "i_mirrorU" 0
+	int "i_mirrorV" 0
+	scalar "i_noiseU" 0.000000
+	scalar "i_noiseV" 0.000000
+	scalar "i_offsetU" 0.000000
+	scalar "i_offsetV" 0.000000
+	scalar "i_repeatU" 1.000000
+	scalar "i_repeatV" 1.000000
+	scalar "i_rotateFrame" 0.000000
+	scalar "i_rotateUV" 0.000000
+	int "i_stagger" 0
+	scalar "i_translateFrameU" 0.000000
+	scalar "i_translateFrameV" 0.000000
+	int "i_wrapU" 1
+	int "i_wrapV" 1
+	token "i_mtoer_uvSetName" "uv"
+	vector "o_outUV" 0.000000 0.000000 0.000000
+end
+node "maya_ramp" "ramp_tartanramp:ramp1" # "osl_node"
+	scalar "i_alphaGain" 1.000000
+	scalar "i_alphaOffset" 0.000000
+	#i_colorPositions is array but not valid, skip
+	#i_colors is array but not valid, skip
+	color "i_colorGain" 1.000000 1.000000 1.000000
+	color "i_colorOffset" 0.000000 0.000000 0.000000
+	color "i_defaultColor" 0.500000 0.500000 0.500000
+	scalar "i_hueNoise" 0.000000
+	scalar "i_hueNoiseFreq" 0.500000
+	int "i_interpolation" 1
+	int "i_invert" 0
+	scalar "i_noise" 0.000000
+	scalar "i_noiseFreq" 0.876238
+	scalar "i_satNoise" 0.000000
+	scalar "i_satNoiseFreq" 0.500000
+	int "i_type" 8
+	scalar "i_uWave" 0.000000
+	param_link "i_uvCoord" "ramp_tartanramp:place2dTexture1" "o_outUV"
+	scalar "i_vWave" 0.000000
+	scalar "i_valNoise" 0.000000
+	scalar "i_valNoiseFreq" 0.500000
+	scalar "o_outAlpha" 0.890000
+	color "o_outColor" 1.000000 1.000000 0.000000
+end
+node "maya_lambert" "ramp_tartanramp:ramp1Material" # "osl_node"
+	color "i_ambientColor" 0.000000 0.000000 0.000000
+	param_link "i_color" "ramp_tartanramp:ramp1" "o_outColor"
+	scalar "i_diffuse" 0.800000
+	color "i_incandescence" 0.000000 0.000000 0.000000
+	int "i_matteOpacityMode" 2
+	scalar "i_matteOpacity" 1.000000
+	int "i_refractions" 0
+	scalar "i_refractiveIndex" 1.000000
+	int "i_refractionLimit" 6
+	scalar "i_lightAbsorbance" 0.000000
+	scalar "i_shadowAttenuation" 0.500000
+	vector "i_normalCamera" 1.000000 1.000000 1.000000
+	color "i_transparency" 0.000000 0.000000 0.000000
+	scalar "i_translucence" 0.000000
+	scalar "i_translucenceDepth" 0.500000
+	scalar "i_translucenceFocus" 0.500000
+	int "i_mtoer_hasBump" 0
+	color "o_outColor" 0.000000 0.000000 0.000000
+	color "o_outTransparency" 0.000000 0.000000 0.000000
+	# not support param(o_outClosure) type((null))
+	# not support param(result) type((null))
+	scalar "result_alpha" 0.000000
+end
+node "osl_shadergroup" "ramp_tartanramp:ramp1Material_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_tartanramp:ramp1Material"
+		"maya_ei_preset_aovs_0"
+end
+node "material" "ramp_tartanramp:ramp1SG" # "material"
+	ref "surface_shader" "ramp_tartanramp:ramp1Material_osl"
+	ref "displace_shader" ""
+	ref "volume_shader" ""
+	ref "env_shader" ""
+end
+node "instance" "ramp_tartanramp:nurbsPlaneShape1_inst" # "instance"
+	ref "element" "ramp_tartanramp:nurbsPlaneShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	-70.147781 -3.391744 -71.158234 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	-70.147781 -3.391744 -71.158234 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" off
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	bool "surface_emission" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+		ref[] "mtl_list" 1  #1
+		"ramp_tartanramp:ramp1SG"
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 1.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "poly" "ramp_noneinterplation:nurbsPlaneShape1" # "object"
+		point[] "pos_list" 2  #16
+		-12.000000 -0.000000 12.000000
+		-12.000000 -0.000000 12.000000
+		12.000000 -0.000000 12.000000
+		12.000000 -0.000000 12.000000
+		12.000000 0.000000 -12.000000
+		12.000000 0.000000 -12.000000
+		-12.000000 0.000000 -12.000000
+		-12.000000 0.000000 -12.000000
+		12.000000 -0.000000 4.000000
+		12.000000 -0.000000 4.000000
+		-12.000000 -0.000000 4.000000
+		-12.000000 -0.000000 4.000000
+		-4.000000 -0.000000 12.000000
+		-4.000000 -0.000000 12.000000
+		-4.000000 -0.000000 4.000000
+		-4.000000 -0.000000 4.000000
+		4.000000 -0.000000 12.000000
+		4.000000 -0.000000 12.000000
+		4.000000 -0.000000 4.000000
+		4.000000 -0.000000 4.000000
+		-4.000000 0.000000 -12.000000
+		-4.000000 0.000000 -12.000000
+		-12.000000 0.000000 -4.000000
+		-12.000000 0.000000 -4.000000
+		-4.000000 0.000000 -4.000000
+		-4.000000 0.000000 -4.000000
+		12.000000 0.000000 -4.000000
+		12.000000 0.000000 -4.000000
+		4.000000 0.000000 -4.000000
+		4.000000 0.000000 -4.000000
+		4.000000 0.000000 -12.000000
+		4.000000 0.000000 -12.000000
+		index[] "triangle_list" 1  #54
+		13
+		2
+		14
+		8
+		1
+		4
+		0
+		6
+		7
+		6
+		8
+		9
+		11
+		12
+		10
+		5
+		7
+		12
+		4
+		13
+		9
+		7
+		9
+		14
+		12
+		14
+		15
+		2
+		15
+		14
+		4
+		9
+		8
+		7
+		5
+		0
+		9
+		7
+		6
+		10
+		3
+		11
+		12
+		11
+		5
+		13
+		14
+		9
+		14
+		12
+		7
+		15
+		10
+		12
+	declare vector [] "N" varying
+		vector[] "N" 1  #16
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+	declare vector2 [] "uv" varying
+		vector2[] "uv" 1  #16
+		0.000000 0.000000
+		1.000000 0.000000
+		1.000000 1.000000
+		0.000000 1.000000
+		1.000000 0.333333
+		0.000000 0.333333
+		0.333333 0.000000
+		0.333333 0.333333
+		0.666667 0.000000
+		0.666667 0.333333
+		0.333333 1.000000
+		0.000000 0.666667
+		0.333333 0.666667
+		1.000000 0.666667
+		0.666667 0.666667
+		0.666667 1.000000
+end
+node "maya_place2dTexture" "ramp_noneinterplation:place2dTexture1" # "osl_node"
+	scalar "i_coverageU" 1.000000
+	scalar "i_coverageV" 1.000000
+	int "i_mirrorU" 0
+	int "i_mirrorV" 0
+	scalar "i_noiseU" 0.000000
+	scalar "i_noiseV" 0.000000
+	scalar "i_offsetU" 0.000000
+	scalar "i_offsetV" 0.000000
+	scalar "i_repeatU" 1.000000
+	scalar "i_repeatV" 1.000000
+	scalar "i_rotateFrame" 0.000000
+	scalar "i_rotateUV" 0.000000
+	int "i_stagger" 0
+	scalar "i_translateFrameU" 0.000000
+	scalar "i_translateFrameV" 0.000000
+	int "i_wrapU" 1
+	int "i_wrapV" 1
+	token "i_mtoer_uvSetName" "uv"
+	vector "o_outUV" 0.000000 0.000000 0.000000
+end
+node "maya_ramp" "ramp_noneinterplation:ramp1" # "osl_node"
+	scalar "i_alphaGain" 1.000000
+	scalar "i_alphaOffset" 0.000000
+	#i_colorPositions is array but not valid, skip
+	#i_colors is array but not valid, skip
+	color "i_colorGain" 1.000000 1.000000 1.000000
+	color "i_colorOffset" 0.000000 0.000000 0.000000
+	color "i_defaultColor" 0.500000 0.500000 0.500000
+	scalar "i_hueNoise" 0.000000
+	scalar "i_hueNoiseFreq" 0.500000
+	int "i_interpolation" 0
+	int "i_invert" 0
+	scalar "i_noise" 0.000000
+	scalar "i_noiseFreq" 0.876238
+	scalar "i_satNoise" 0.000000
+	scalar "i_satNoiseFreq" 0.500000
+	int "i_type" 0
+	scalar "i_uWave" 0.000000
+	param_link "i_uvCoord" "ramp_noneinterplation:place2dTexture1" "o_outUV"
+	scalar "i_vWave" 0.000000
+	scalar "i_valNoise" 0.000000
+	scalar "i_valNoiseFreq" 0.500000
+	scalar "o_outAlpha" 0.590000
+	color "o_outColor" 0.000000 1.000000 0.000000
+end
+node "maya_lambert" "ramp_noneinterplation:ramp1Material" # "osl_node"
+	color "i_ambientColor" 0.000000 0.000000 0.000000
+	param_link "i_color" "ramp_noneinterplation:ramp1" "o_outColor"
+	scalar "i_diffuse" 0.800000
+	color "i_incandescence" 0.000000 0.000000 0.000000
+	int "i_matteOpacityMode" 2
+	scalar "i_matteOpacity" 1.000000
+	int "i_refractions" 0
+	scalar "i_refractiveIndex" 1.000000
+	int "i_refractionLimit" 6
+	scalar "i_lightAbsorbance" 0.000000
+	scalar "i_shadowAttenuation" 0.500000
+	vector "i_normalCamera" 1.000000 1.000000 1.000000
+	color "i_transparency" 0.000000 0.000000 0.000000
+	scalar "i_translucence" 0.000000
+	scalar "i_translucenceDepth" 0.500000
+	scalar "i_translucenceFocus" 0.500000
+	int "i_mtoer_hasBump" 0
+	color "o_outColor" 0.000000 0.000000 0.000000
+	color "o_outTransparency" 0.000000 0.000000 0.000000
+	# not support param(o_outClosure) type((null))
+	# not support param(result) type((null))
+	scalar "result_alpha" 0.000000
+end
+node "osl_shadergroup" "ramp_noneinterplation:ramp1Material_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_noneinterplation:ramp1Material"
+		"maya_ei_preset_aovs_0"
+end
+node "material" "ramp_noneinterplation:ramp1SG" # "material"
+	ref "surface_shader" "ramp_noneinterplation:ramp1Material_osl"
+	ref "displace_shader" ""
+	ref "volume_shader" ""
+	ref "env_shader" ""
+end
+node "instance" "ramp_noneinterplation:nurbsPlaneShape1_inst" # "instance"
+	ref "element" "ramp_noneinterplation:nurbsPlaneShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	-43.424786 -3.401272 -71.264145 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	-43.424786 -3.401272 -71.264145 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" off
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	bool "surface_emission" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+		ref[] "mtl_list" 1  #1
+		"ramp_noneinterplation:ramp1SG"
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 1.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "poly" "ramp_linearramp:nurbsPlaneShape1" # "object"
+		point[] "pos_list" 2  #16
+		-12.000000 -0.000000 12.000000
+		-12.000000 -0.000000 12.000000
+		12.000000 -0.000000 12.000000
+		12.000000 -0.000000 12.000000
+		12.000000 0.000000 -12.000000
+		12.000000 0.000000 -12.000000
+		-12.000000 0.000000 -12.000000
+		-12.000000 0.000000 -12.000000
+		12.000000 -0.000000 4.000000
+		12.000000 -0.000000 4.000000
+		-12.000000 -0.000000 4.000000
+		-12.000000 -0.000000 4.000000
+		-4.000000 -0.000000 12.000000
+		-4.000000 -0.000000 12.000000
+		-4.000000 -0.000000 4.000000
+		-4.000000 -0.000000 4.000000
+		4.000000 -0.000000 12.000000
+		4.000000 -0.000000 12.000000
+		4.000000 -0.000000 4.000000
+		4.000000 -0.000000 4.000000
+		-4.000000 0.000000 -12.000000
+		-4.000000 0.000000 -12.000000
+		-12.000000 0.000000 -4.000000
+		-12.000000 0.000000 -4.000000
+		-4.000000 0.000000 -4.000000
+		-4.000000 0.000000 -4.000000
+		12.000000 0.000000 -4.000000
+		12.000000 0.000000 -4.000000
+		4.000000 0.000000 -4.000000
+		4.000000 0.000000 -4.000000
+		4.000000 0.000000 -12.000000
+		4.000000 0.000000 -12.000000
+		index[] "triangle_list" 1  #54
+		13
+		2
+		14
+		8
+		1
+		4
+		0
+		6
+		7
+		6
+		8
+		9
+		11
+		12
+		10
+		5
+		7
+		12
+		4
+		13
+		9
+		7
+		9
+		14
+		12
+		14
+		15
+		2
+		15
+		14
+		4
+		9
+		8
+		7
+		5
+		0
+		9
+		7
+		6
+		10
+		3
+		11
+		12
+		11
+		5
+		13
+		14
+		9
+		14
+		12
+		7
+		15
+		10
+		12
+	declare vector [] "N" varying
+		vector[] "N" 1  #16
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+	declare vector2 [] "uv" varying
+		vector2[] "uv" 1  #16
+		0.000000 0.000000
+		1.000000 0.000000
+		1.000000 1.000000
+		0.000000 1.000000
+		1.000000 0.333333
+		0.000000 0.333333
+		0.333333 0.000000
+		0.333333 0.333333
+		0.666667 0.000000
+		0.666667 0.333333
+		0.333333 1.000000
+		0.000000 0.666667
+		0.333333 0.666667
+		1.000000 0.666667
+		0.666667 0.666667
+		0.666667 1.000000
+end
+node "maya_place2dTexture" "ramp_linearramp:place2dTexture1" # "osl_node"
+	scalar "i_coverageU" 1.000000
+	scalar "i_coverageV" 1.000000
+	int "i_mirrorU" 0
+	int "i_mirrorV" 0
+	scalar "i_noiseU" 0.000000
+	scalar "i_noiseV" 0.000000
+	scalar "i_offsetU" 0.000000
+	scalar "i_offsetV" 0.000000
+	scalar "i_repeatU" 1.000000
+	scalar "i_repeatV" 1.000000
+	scalar "i_rotateFrame" 0.000000
+	scalar "i_rotateUV" 0.000000
+	int "i_stagger" 0
+	scalar "i_translateFrameU" 0.000000
+	scalar "i_translateFrameV" 0.000000
+	int "i_wrapU" 1
+	int "i_wrapV" 1
+	token "i_mtoer_uvSetName" "uv"
+	vector "o_outUV" 0.000000 0.000000 0.000000
+end
+node "maya_ramp" "ramp_linearramp:ramp1" # "osl_node"
+	scalar "i_alphaGain" 1.000000
+	scalar "i_alphaOffset" 0.000000
+	#i_colorPositions is array but not valid, skip
+	#i_colors is array but not valid, skip
+	color "i_colorGain" 1.000000 1.000000 1.000000
+	color "i_colorOffset" 0.000000 0.000000 0.000000
+	color "i_defaultColor" 0.500000 0.500000 0.500000
+	scalar "i_hueNoise" 0.000000
+	scalar "i_hueNoiseFreq" 0.500000
+	int "i_interpolation" 1
+	int "i_invert" 0
+	scalar "i_noise" 0.000000
+	scalar "i_noiseFreq" 0.876238
+	scalar "i_satNoise" 0.000000
+	scalar "i_satNoiseFreq" 0.500000
+	int "i_type" 0
+	scalar "i_uWave" 0.000000
+	param_link "i_uvCoord" "ramp_linearramp:place2dTexture1" "o_outUV"
+	scalar "i_vWave" 0.000000
+	scalar "i_valNoise" 0.000000
+	scalar "i_valNoiseFreq" 0.500000
+	scalar "o_outAlpha" 0.590000
+	color "o_outColor" 0.000000 1.000000 0.000000
+end
+node "maya_lambert" "ramp_linearramp:ramp1Material" # "osl_node"
+	color "i_ambientColor" 0.000000 0.000000 0.000000
+	param_link "i_color" "ramp_linearramp:ramp1" "o_outColor"
+	scalar "i_diffuse" 0.800000
+	color "i_incandescence" 0.000000 0.000000 0.000000
+	int "i_matteOpacityMode" 2
+	scalar "i_matteOpacity" 1.000000
+	int "i_refractions" 0
+	scalar "i_refractiveIndex" 1.000000
+	int "i_refractionLimit" 6
+	scalar "i_lightAbsorbance" 0.000000
+	scalar "i_shadowAttenuation" 0.500000
+	vector "i_normalCamera" 1.000000 1.000000 1.000000
+	color "i_transparency" 0.000000 0.000000 0.000000
+	scalar "i_translucence" 0.000000
+	scalar "i_translucenceDepth" 0.500000
+	scalar "i_translucenceFocus" 0.500000
+	int "i_mtoer_hasBump" 0
+	color "o_outColor" 0.000000 0.000000 0.000000
+	color "o_outTransparency" 0.000000 0.000000 0.000000
+	# not support param(o_outClosure) type((null))
+	# not support param(result) type((null))
+	scalar "result_alpha" 0.000000
+end
+node "osl_shadergroup" "ramp_linearramp:ramp1Material_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_linearramp:ramp1Material"
+		"maya_ei_preset_aovs_0"
+end
+node "material" "ramp_linearramp:ramp1SG" # "material"
+	ref "surface_shader" "ramp_linearramp:ramp1Material_osl"
+	ref "displace_shader" ""
+	ref "volume_shader" ""
+	ref "env_shader" ""
+end
+node "instance" "ramp_linearramp:nurbsPlaneShape1_inst" # "instance"
+	ref "element" "ramp_linearramp:nurbsPlaneShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	-17.699585 -3.401272 -71.174347 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	-17.699585 -3.401272 -71.174347 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" off
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	bool "surface_emission" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+		ref[] "mtl_list" 1  #1
+		"ramp_linearramp:ramp1SG"
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 1.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "poly" "ramp_expUpinterplation:nurbsPlaneShape1" # "object"
+		point[] "pos_list" 2  #16
+		-12.000000 -0.000000 12.000000
+		-12.000000 -0.000000 12.000000
+		12.000000 -0.000000 12.000000
+		12.000000 -0.000000 12.000000
+		12.000000 0.000000 -12.000000
+		12.000000 0.000000 -12.000000
+		-12.000000 0.000000 -12.000000
+		-12.000000 0.000000 -12.000000
+		12.000000 -0.000000 4.000000
+		12.000000 -0.000000 4.000000
+		-12.000000 -0.000000 4.000000
+		-12.000000 -0.000000 4.000000
+		-4.000000 -0.000000 12.000000
+		-4.000000 -0.000000 12.000000
+		-4.000000 -0.000000 4.000000
+		-4.000000 -0.000000 4.000000
+		4.000000 -0.000000 12.000000
+		4.000000 -0.000000 12.000000
+		4.000000 -0.000000 4.000000
+		4.000000 -0.000000 4.000000
+		-4.000000 0.000000 -12.000000
+		-4.000000 0.000000 -12.000000
+		-12.000000 0.000000 -4.000000
+		-12.000000 0.000000 -4.000000
+		-4.000000 0.000000 -4.000000
+		-4.000000 0.000000 -4.000000
+		12.000000 0.000000 -4.000000
+		12.000000 0.000000 -4.000000
+		4.000000 0.000000 -4.000000
+		4.000000 0.000000 -4.000000
+		4.000000 0.000000 -12.000000
+		4.000000 0.000000 -12.000000
+		index[] "triangle_list" 1  #54
+		13
+		2
+		14
+		8
+		1
+		4
+		0
+		6
+		7
+		6
+		8
+		9
+		11
+		12
+		10
+		5
+		7
+		12
+		4
+		13
+		9
+		7
+		9
+		14
+		12
+		14
+		15
+		2
+		15
+		14
+		4
+		9
+		8
+		7
+		5
+		0
+		9
+		7
+		6
+		10
+		3
+		11
+		12
+		11
+		5
+		13
+		14
+		9
+		14
+		12
+		7
+		15
+		10
+		12
+	declare vector [] "N" varying
+		vector[] "N" 1  #16
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+	declare vector2 [] "uv" varying
+		vector2[] "uv" 1  #16
+		0.000000 0.000000
+		1.000000 0.000000
+		1.000000 1.000000
+		0.000000 1.000000
+		1.000000 0.333333
+		0.000000 0.333333
+		0.333333 0.000000
+		0.333333 0.333333
+		0.666667 0.000000
+		0.666667 0.333333
+		0.333333 1.000000
+		0.000000 0.666667
+		0.333333 0.666667
+		1.000000 0.666667
+		0.666667 0.666667
+		0.666667 1.000000
+end
+node "maya_place2dTexture" "ramp_expUpinterplation:place2dTexture1" # "osl_node"
+	scalar "i_coverageU" 1.000000
+	scalar "i_coverageV" 1.000000
+	int "i_mirrorU" 0
+	int "i_mirrorV" 0
+	scalar "i_noiseU" 0.000000
+	scalar "i_noiseV" 0.000000
+	scalar "i_offsetU" 0.000000
+	scalar "i_offsetV" 0.000000
+	scalar "i_repeatU" 1.000000
+	scalar "i_repeatV" 1.000000
+	scalar "i_rotateFrame" 0.000000
+	scalar "i_rotateUV" 0.000000
+	int "i_stagger" 0
+	scalar "i_translateFrameU" 0.000000
+	scalar "i_translateFrameV" 0.000000
+	int "i_wrapU" 1
+	int "i_wrapV" 1
+	token "i_mtoer_uvSetName" "uv"
+	vector "o_outUV" 0.000000 0.000000 0.000000
+end
+node "maya_ramp" "ramp_expUpinterplation:ramp1" # "osl_node"
+	scalar "i_alphaGain" 1.000000
+	scalar "i_alphaOffset" 0.000000
+	#i_colorPositions is array but not valid, skip
+	#i_colors is array but not valid, skip
+	color "i_colorGain" 1.000000 1.000000 1.000000
+	color "i_colorOffset" 0.000000 0.000000 0.000000
+	color "i_defaultColor" 0.500000 0.500000 0.500000
+	scalar "i_hueNoise" 0.000000
+	scalar "i_hueNoiseFreq" 0.500000
+	int "i_interpolation" 2
+	int "i_invert" 0
+	scalar "i_noise" 0.000000
+	scalar "i_noiseFreq" 0.876238
+	scalar "i_satNoise" 0.000000
+	scalar "i_satNoiseFreq" 0.500000
+	int "i_type" 0
+	scalar "i_uWave" 0.000000
+	param_link "i_uvCoord" "ramp_expUpinterplation:place2dTexture1" "o_outUV"
+	scalar "i_vWave" 0.000000
+	scalar "i_valNoise" 0.000000
+	scalar "i_valNoiseFreq" 0.500000
+	scalar "o_outAlpha" 0.590000
+	color "o_outColor" 0.000000 1.000000 0.000000
+end
+node "maya_lambert" "ramp_expUpinterplation:ramp1Material" # "osl_node"
+	color "i_ambientColor" 0.000000 0.000000 0.000000
+	param_link "i_color" "ramp_expUpinterplation:ramp1" "o_outColor"
+	scalar "i_diffuse" 0.800000
+	color "i_incandescence" 0.000000 0.000000 0.000000
+	int "i_matteOpacityMode" 2
+	scalar "i_matteOpacity" 1.000000
+	int "i_refractions" 0
+	scalar "i_refractiveIndex" 1.000000
+	int "i_refractionLimit" 6
+	scalar "i_lightAbsorbance" 0.000000
+	scalar "i_shadowAttenuation" 0.500000
+	vector "i_normalCamera" 1.000000 1.000000 1.000000
+	color "i_transparency" 0.000000 0.000000 0.000000
+	scalar "i_translucence" 0.000000
+	scalar "i_translucenceDepth" 0.500000
+	scalar "i_translucenceFocus" 0.500000
+	int "i_mtoer_hasBump" 0
+	color "o_outColor" 0.000000 0.000000 0.000000
+	color "o_outTransparency" 0.000000 0.000000 0.000000
+	# not support param(o_outClosure) type((null))
+	# not support param(result) type((null))
+	scalar "result_alpha" 0.000000
+end
+node "osl_shadergroup" "ramp_expUpinterplation:ramp1Material_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_expUpinterplation:ramp1Material"
+		"maya_ei_preset_aovs_0"
+end
+node "material" "ramp_expUpinterplation:ramp1SG" # "material"
+	ref "surface_shader" "ramp_expUpinterplation:ramp1Material_osl"
+	ref "displace_shader" ""
+	ref "volume_shader" ""
+	ref "env_shader" ""
+end
+node "instance" "ramp_expUpinterplation:nurbsPlaneShape1_inst" # "instance"
+	ref "element" "ramp_expUpinterplation:nurbsPlaneShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	9.824567 -3.458436 -72.273438 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	9.824567 -3.458436 -72.273438 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" off
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	bool "surface_emission" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+		ref[] "mtl_list" 1  #1
+		"ramp_expUpinterplation:ramp1SG"
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 1.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "poly" "ramp_expDowninterplation:nurbsPlaneShape1" # "object"
+		point[] "pos_list" 2  #16
+		-12.000000 -0.000000 12.000000
+		-12.000000 -0.000000 12.000000
+		12.000000 -0.000000 12.000000
+		12.000000 -0.000000 12.000000
+		12.000000 0.000000 -12.000000
+		12.000000 0.000000 -12.000000
+		-12.000000 0.000000 -12.000000
+		-12.000000 0.000000 -12.000000
+		12.000000 -0.000000 4.000000
+		12.000000 -0.000000 4.000000
+		-12.000000 -0.000000 4.000000
+		-12.000000 -0.000000 4.000000
+		-4.000000 -0.000000 12.000000
+		-4.000000 -0.000000 12.000000
+		-4.000000 -0.000000 4.000000
+		-4.000000 -0.000000 4.000000
+		4.000000 -0.000000 12.000000
+		4.000000 -0.000000 12.000000
+		4.000000 -0.000000 4.000000
+		4.000000 -0.000000 4.000000
+		-4.000000 0.000000 -12.000000
+		-4.000000 0.000000 -12.000000
+		-12.000000 0.000000 -4.000000
+		-12.000000 0.000000 -4.000000
+		-4.000000 0.000000 -4.000000
+		-4.000000 0.000000 -4.000000
+		12.000000 0.000000 -4.000000
+		12.000000 0.000000 -4.000000
+		4.000000 0.000000 -4.000000
+		4.000000 0.000000 -4.000000
+		4.000000 0.000000 -12.000000
+		4.000000 0.000000 -12.000000
+		index[] "triangle_list" 1  #54
+		13
+		2
+		14
+		8
+		1
+		4
+		0
+		6
+		7
+		6
+		8
+		9
+		11
+		12
+		10
+		5
+		7
+		12
+		4
+		13
+		9
+		7
+		9
+		14
+		12
+		14
+		15
+		2
+		15
+		14
+		4
+		9
+		8
+		7
+		5
+		0
+		9
+		7
+		6
+		10
+		3
+		11
+		12
+		11
+		5
+		13
+		14
+		9
+		14
+		12
+		7
+		15
+		10
+		12
+	declare vector [] "N" varying
+		vector[] "N" 1  #16
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+	declare vector2 [] "uv" varying
+		vector2[] "uv" 1  #16
+		0.000000 0.000000
+		1.000000 0.000000
+		1.000000 1.000000
+		0.000000 1.000000
+		1.000000 0.333333
+		0.000000 0.333333
+		0.333333 0.000000
+		0.333333 0.333333
+		0.666667 0.000000
+		0.666667 0.333333
+		0.333333 1.000000
+		0.000000 0.666667
+		0.333333 0.666667
+		1.000000 0.666667
+		0.666667 0.666667
+		0.666667 1.000000
+end
+node "maya_place2dTexture" "ramp_expDowninterplation:place2dTexture1" # "osl_node"
+	scalar "i_coverageU" 1.000000
+	scalar "i_coverageV" 1.000000
+	int "i_mirrorU" 0
+	int "i_mirrorV" 0
+	scalar "i_noiseU" 0.000000
+	scalar "i_noiseV" 0.000000
+	scalar "i_offsetU" 0.000000
+	scalar "i_offsetV" 0.000000
+	scalar "i_repeatU" 1.000000
+	scalar "i_repeatV" 1.000000
+	scalar "i_rotateFrame" 0.000000
+	scalar "i_rotateUV" 0.000000
+	int "i_stagger" 0
+	scalar "i_translateFrameU" 0.000000
+	scalar "i_translateFrameV" 0.000000
+	int "i_wrapU" 1
+	int "i_wrapV" 1
+	token "i_mtoer_uvSetName" "uv"
+	vector "o_outUV" 0.000000 0.000000 0.000000
+end
+node "maya_ramp" "ramp_expDowninterplation:ramp1" # "osl_node"
+	scalar "i_alphaGain" 1.000000
+	scalar "i_alphaOffset" 0.000000
+	#i_colorPositions is array but not valid, skip
+	#i_colors is array but not valid, skip
+	color "i_colorGain" 1.000000 1.000000 1.000000
+	color "i_colorOffset" 0.000000 0.000000 0.000000
+	color "i_defaultColor" 0.500000 0.500000 0.500000
+	scalar "i_hueNoise" 0.000000
+	scalar "i_hueNoiseFreq" 0.500000
+	int "i_interpolation" 3
+	int "i_invert" 0
+	scalar "i_noise" 0.000000
+	scalar "i_noiseFreq" 0.876238
+	scalar "i_satNoise" 0.000000
+	scalar "i_satNoiseFreq" 0.500000
+	int "i_type" 0
+	scalar "i_uWave" 0.000000
+	param_link "i_uvCoord" "ramp_expDowninterplation:place2dTexture1" "o_outUV"
+	scalar "i_vWave" 0.000000
+	scalar "i_valNoise" 0.000000
+	scalar "i_valNoiseFreq" 0.500000
+	scalar "o_outAlpha" 0.590000
+	color "o_outColor" 0.000000 1.000000 0.000000
+end
+node "maya_lambert" "ramp_expDowninterplation:ramp1Material" # "osl_node"
+	color "i_ambientColor" 0.000000 0.000000 0.000000
+	param_link "i_color" "ramp_expDowninterplation:ramp1" "o_outColor"
+	scalar "i_diffuse" 0.800000
+	color "i_incandescence" 0.000000 0.000000 0.000000
+	int "i_matteOpacityMode" 2
+	scalar "i_matteOpacity" 1.000000
+	int "i_refractions" 0
+	scalar "i_refractiveIndex" 1.000000
+	int "i_refractionLimit" 6
+	scalar "i_lightAbsorbance" 0.000000
+	scalar "i_shadowAttenuation" 0.500000
+	vector "i_normalCamera" 1.000000 1.000000 1.000000
+	color "i_transparency" 0.000000 0.000000 0.000000
+	scalar "i_translucence" 0.000000
+	scalar "i_translucenceDepth" 0.500000
+	scalar "i_translucenceFocus" 0.500000
+	int "i_mtoer_hasBump" 0
+	color "o_outColor" 0.000000 0.000000 0.000000
+	color "o_outTransparency" 0.000000 0.000000 0.000000
+	# not support param(o_outClosure) type((null))
+	# not support param(result) type((null))
+	scalar "result_alpha" 0.000000
+end
+node "osl_shadergroup" "ramp_expDowninterplation:ramp1Material_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_expDowninterplation:ramp1Material"
+		"maya_ei_preset_aovs_0"
+end
+node "material" "ramp_expDowninterplation:ramp1SG" # "material"
+	ref "surface_shader" "ramp_expDowninterplation:ramp1Material_osl"
+	ref "displace_shader" ""
+	ref "volume_shader" ""
+	ref "env_shader" ""
+end
+node "instance" "ramp_expDowninterplation:nurbsPlaneShape1_inst" # "instance"
+	ref "element" "ramp_expDowninterplation:nurbsPlaneShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	36.139683 -3.344107 -69.791245 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	36.139683 -3.344107 -69.791245 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" off
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	bool "surface_emission" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+		ref[] "mtl_list" 1  #1
+		"ramp_expDowninterplation:ramp1SG"
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 1.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "poly" "ramp_smoothinterplation:nurbsPlaneShape1" # "object"
+		point[] "pos_list" 2  #16
+		-12.000000 -0.000000 12.000000
+		-12.000000 -0.000000 12.000000
+		12.000000 -0.000000 12.000000
+		12.000000 -0.000000 12.000000
+		12.000000 0.000000 -12.000000
+		12.000000 0.000000 -12.000000
+		-12.000000 0.000000 -12.000000
+		-12.000000 0.000000 -12.000000
+		12.000000 -0.000000 4.000000
+		12.000000 -0.000000 4.000000
+		-12.000000 -0.000000 4.000000
+		-12.000000 -0.000000 4.000000
+		-4.000000 -0.000000 12.000000
+		-4.000000 -0.000000 12.000000
+		-4.000000 -0.000000 4.000000
+		-4.000000 -0.000000 4.000000
+		4.000000 -0.000000 12.000000
+		4.000000 -0.000000 12.000000
+		4.000000 -0.000000 4.000000
+		4.000000 -0.000000 4.000000
+		-4.000000 0.000000 -12.000000
+		-4.000000 0.000000 -12.000000
+		-12.000000 0.000000 -4.000000
+		-12.000000 0.000000 -4.000000
+		-4.000000 0.000000 -4.000000
+		-4.000000 0.000000 -4.000000
+		12.000000 0.000000 -4.000000
+		12.000000 0.000000 -4.000000
+		4.000000 0.000000 -4.000000
+		4.000000 0.000000 -4.000000
+		4.000000 0.000000 -12.000000
+		4.000000 0.000000 -12.000000
+		index[] "triangle_list" 1  #54
+		13
+		2
+		14
+		8
+		1
+		4
+		0
+		6
+		7
+		6
+		8
+		9
+		11
+		12
+		10
+		5
+		7
+		12
+		4
+		13
+		9
+		7
+		9
+		14
+		12
+		14
+		15
+		2
+		15
+		14
+		4
+		9
+		8
+		7
+		5
+		0
+		9
+		7
+		6
+		10
+		3
+		11
+		12
+		11
+		5
+		13
+		14
+		9
+		14
+		12
+		7
+		15
+		10
+		12
+	declare vector [] "N" varying
+		vector[] "N" 1  #16
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+	declare vector2 [] "uv" varying
+		vector2[] "uv" 1  #16
+		0.000000 0.000000
+		1.000000 0.000000
+		1.000000 1.000000
+		0.000000 1.000000
+		1.000000 0.333333
+		0.000000 0.333333
+		0.333333 0.000000
+		0.333333 0.333333
+		0.666667 0.000000
+		0.666667 0.333333
+		0.333333 1.000000
+		0.000000 0.666667
+		0.333333 0.666667
+		1.000000 0.666667
+		0.666667 0.666667
+		0.666667 1.000000
+end
+node "maya_place2dTexture" "ramp_smoothinterplation:place2dTexture1" # "osl_node"
+	scalar "i_coverageU" 1.000000
+	scalar "i_coverageV" 1.000000
+	int "i_mirrorU" 0
+	int "i_mirrorV" 0
+	scalar "i_noiseU" 0.000000
+	scalar "i_noiseV" 0.000000
+	scalar "i_offsetU" 0.000000
+	scalar "i_offsetV" 0.000000
+	scalar "i_repeatU" 1.000000
+	scalar "i_repeatV" 1.000000
+	scalar "i_rotateFrame" 0.000000
+	scalar "i_rotateUV" 0.000000
+	int "i_stagger" 0
+	scalar "i_translateFrameU" 0.000000
+	scalar "i_translateFrameV" 0.000000
+	int "i_wrapU" 1
+	int "i_wrapV" 1
+	token "i_mtoer_uvSetName" "uv"
+	vector "o_outUV" 0.000000 0.000000 0.000000
+end
+node "maya_ramp" "ramp_smoothinterplation:ramp1" # "osl_node"
+	scalar "i_alphaGain" 1.000000
+	scalar "i_alphaOffset" 0.000000
+	#i_colorPositions is array but not valid, skip
+	#i_colors is array but not valid, skip
+	color "i_colorGain" 1.000000 1.000000 1.000000
+	color "i_colorOffset" 0.000000 0.000000 0.000000
+	color "i_defaultColor" 0.500000 0.500000 0.500000
+	scalar "i_hueNoise" 0.000000
+	scalar "i_hueNoiseFreq" 0.500000
+	int "i_interpolation" 4
+	int "i_invert" 0
+	scalar "i_noise" 0.000000
+	scalar "i_noiseFreq" 0.876238
+	scalar "i_satNoise" 0.000000
+	scalar "i_satNoiseFreq" 0.500000
+	int "i_type" 0
+	scalar "i_uWave" 0.000000
+	param_link "i_uvCoord" "ramp_smoothinterplation:place2dTexture1" "o_outUV"
+	scalar "i_vWave" 0.000000
+	scalar "i_valNoise" 0.000000
+	scalar "i_valNoiseFreq" 0.500000
+	scalar "o_outAlpha" 0.590000
+	color "o_outColor" 0.000000 1.000000 0.000000
+end
+node "maya_lambert" "ramp_smoothinterplation:ramp1Material" # "osl_node"
+	color "i_ambientColor" 0.000000 0.000000 0.000000
+	param_link "i_color" "ramp_smoothinterplation:ramp1" "o_outColor"
+	scalar "i_diffuse" 0.800000
+	color "i_incandescence" 0.000000 0.000000 0.000000
+	int "i_matteOpacityMode" 2
+	scalar "i_matteOpacity" 1.000000
+	int "i_refractions" 0
+	scalar "i_refractiveIndex" 1.000000
+	int "i_refractionLimit" 6
+	scalar "i_lightAbsorbance" 0.000000
+	scalar "i_shadowAttenuation" 0.500000
+	vector "i_normalCamera" 1.000000 1.000000 1.000000
+	color "i_transparency" 0.000000 0.000000 0.000000
+	scalar "i_translucence" 0.000000
+	scalar "i_translucenceDepth" 0.500000
+	scalar "i_translucenceFocus" 0.500000
+	int "i_mtoer_hasBump" 0
+	color "o_outColor" 0.000000 0.000000 0.000000
+	color "o_outTransparency" 0.000000 0.000000 0.000000
+	# not support param(o_outClosure) type((null))
+	# not support param(result) type((null))
+	scalar "result_alpha" 0.000000
+end
+node "osl_shadergroup" "ramp_smoothinterplation:ramp1Material_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_smoothinterplation:ramp1Material"
+		"maya_ei_preset_aovs_0"
+end
+node "material" "ramp_smoothinterplation:ramp1SG" # "material"
+	ref "surface_shader" "ramp_smoothinterplation:ramp1Material_osl"
+	ref "displace_shader" ""
+	ref "volume_shader" ""
+	ref "env_shader" ""
+end
+node "instance" "ramp_smoothinterplation:nurbsPlaneShape1_inst" # "instance"
+	ref "element" "ramp_smoothinterplation:nurbsPlaneShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	37.239555 -2.019803 -42.099319 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	37.239555 -2.019803 -42.099319 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" off
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	bool "surface_emission" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+		ref[] "mtl_list" 1  #1
+		"ramp_smoothinterplation:ramp1SG"
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 1.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "poly" "ramp_bumpinterplation:nurbsPlaneShape1" # "object"
+		point[] "pos_list" 2  #16
+		-12.000000 -0.000000 12.000000
+		-12.000000 -0.000000 12.000000
+		12.000000 -0.000000 12.000000
+		12.000000 -0.000000 12.000000
+		12.000000 0.000000 -12.000000
+		12.000000 0.000000 -12.000000
+		-12.000000 0.000000 -12.000000
+		-12.000000 0.000000 -12.000000
+		12.000000 -0.000000 4.000000
+		12.000000 -0.000000 4.000000
+		-12.000000 -0.000000 4.000000
+		-12.000000 -0.000000 4.000000
+		-4.000000 -0.000000 12.000000
+		-4.000000 -0.000000 12.000000
+		-4.000000 -0.000000 4.000000
+		-4.000000 -0.000000 4.000000
+		4.000000 -0.000000 12.000000
+		4.000000 -0.000000 12.000000
+		4.000000 -0.000000 4.000000
+		4.000000 -0.000000 4.000000
+		-4.000000 0.000000 -12.000000
+		-4.000000 0.000000 -12.000000
+		-12.000000 0.000000 -4.000000
+		-12.000000 0.000000 -4.000000
+		-4.000000 0.000000 -4.000000
+		-4.000000 0.000000 -4.000000
+		12.000000 0.000000 -4.000000
+		12.000000 0.000000 -4.000000
+		4.000000 0.000000 -4.000000
+		4.000000 0.000000 -4.000000
+		4.000000 0.000000 -12.000000
+		4.000000 0.000000 -12.000000
+		index[] "triangle_list" 1  #54
+		13
+		2
+		14
+		8
+		1
+		4
+		0
+		6
+		7
+		6
+		8
+		9
+		11
+		12
+		10
+		5
+		7
+		12
+		4
+		13
+		9
+		7
+		9
+		14
+		12
+		14
+		15
+		2
+		15
+		14
+		4
+		9
+		8
+		7
+		5
+		0
+		9
+		7
+		6
+		10
+		3
+		11
+		12
+		11
+		5
+		13
+		14
+		9
+		14
+		12
+		7
+		15
+		10
+		12
+	declare vector [] "N" varying
+		vector[] "N" 1  #16
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+	declare vector2 [] "uv" varying
+		vector2[] "uv" 1  #16
+		0.000000 0.000000
+		1.000000 0.000000
+		1.000000 1.000000
+		0.000000 1.000000
+		1.000000 0.333333
+		0.000000 0.333333
+		0.333333 0.000000
+		0.333333 0.333333
+		0.666667 0.000000
+		0.666667 0.333333
+		0.333333 1.000000
+		0.000000 0.666667
+		0.333333 0.666667
+		1.000000 0.666667
+		0.666667 0.666667
+		0.666667 1.000000
+end
+node "maya_place2dTexture" "ramp_bumpinterplation:place2dTexture1" # "osl_node"
+	scalar "i_coverageU" 1.000000
+	scalar "i_coverageV" 1.000000
+	int "i_mirrorU" 0
+	int "i_mirrorV" 0
+	scalar "i_noiseU" 0.000000
+	scalar "i_noiseV" 0.000000
+	scalar "i_offsetU" 0.000000
+	scalar "i_offsetV" 0.000000
+	scalar "i_repeatU" 1.000000
+	scalar "i_repeatV" 1.000000
+	scalar "i_rotateFrame" 0.000000
+	scalar "i_rotateUV" 0.000000
+	int "i_stagger" 0
+	scalar "i_translateFrameU" 0.000000
+	scalar "i_translateFrameV" 0.000000
+	int "i_wrapU" 1
+	int "i_wrapV" 1
+	token "i_mtoer_uvSetName" "uv"
+	vector "o_outUV" 0.000000 0.000000 0.000000
+end
+node "maya_ramp" "ramp_bumpinterplation:ramp1" # "osl_node"
+	scalar "i_alphaGain" 1.000000
+	scalar "i_alphaOffset" 0.000000
+	#i_colorPositions is array but not valid, skip
+	#i_colors is array but not valid, skip
+	color "i_colorGain" 1.000000 1.000000 1.000000
+	color "i_colorOffset" 0.000000 0.000000 0.000000
+	color "i_defaultColor" 0.500000 0.500000 0.500000
+	scalar "i_hueNoise" 0.000000
+	scalar "i_hueNoiseFreq" 0.500000
+	int "i_interpolation" 5
+	int "i_invert" 0
+	scalar "i_noise" 0.000000
+	scalar "i_noiseFreq" 0.876238
+	scalar "i_satNoise" 0.000000
+	scalar "i_satNoiseFreq" 0.500000
+	int "i_type" 0
+	scalar "i_uWave" 0.000000
+	param_link "i_uvCoord" "ramp_bumpinterplation:place2dTexture1" "o_outUV"
+	scalar "i_vWave" 0.000000
+	scalar "i_valNoise" 0.000000
+	scalar "i_valNoiseFreq" 0.500000
+	scalar "o_outAlpha" 0.590000
+	color "o_outColor" 0.000000 1.000000 0.000000
+end
+node "maya_lambert" "ramp_bumpinterplation:ramp1Material" # "osl_node"
+	color "i_ambientColor" 0.000000 0.000000 0.000000
+	param_link "i_color" "ramp_bumpinterplation:ramp1" "o_outColor"
+	scalar "i_diffuse" 0.800000
+	color "i_incandescence" 0.000000 0.000000 0.000000
+	int "i_matteOpacityMode" 2
+	scalar "i_matteOpacity" 1.000000
+	int "i_refractions" 0
+	scalar "i_refractiveIndex" 1.000000
+	int "i_refractionLimit" 6
+	scalar "i_lightAbsorbance" 0.000000
+	scalar "i_shadowAttenuation" 0.500000
+	vector "i_normalCamera" 1.000000 1.000000 1.000000
+	color "i_transparency" 0.000000 0.000000 0.000000
+	scalar "i_translucence" 0.000000
+	scalar "i_translucenceDepth" 0.500000
+	scalar "i_translucenceFocus" 0.500000
+	int "i_mtoer_hasBump" 0
+	color "o_outColor" 0.000000 0.000000 0.000000
+	color "o_outTransparency" 0.000000 0.000000 0.000000
+	# not support param(o_outClosure) type((null))
+	# not support param(result) type((null))
+	scalar "result_alpha" 0.000000
+end
+node "osl_shadergroup" "ramp_bumpinterplation:ramp1Material_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_bumpinterplation:ramp1Material"
+		"maya_ei_preset_aovs_0"
+end
+node "material" "ramp_bumpinterplation:ramp1SG" # "material"
+	ref "surface_shader" "ramp_bumpinterplation:ramp1Material_osl"
+	ref "displace_shader" ""
+	ref "volume_shader" ""
+	ref "env_shader" ""
+end
+node "instance" "ramp_bumpinterplation:nurbsPlaneShape1_inst" # "instance"
+	ref "element" "ramp_bumpinterplation:nurbsPlaneShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	35.750443 -0.743135 -15.412406 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	35.750443 -0.743135 -15.412406 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" off
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	bool "surface_emission" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+		ref[] "mtl_list" 1  #1
+		"ramp_bumpinterplation:ramp1SG"
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 1.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "poly" "ramp_spikeinterplation:nurbsPlaneShape1" # "object"
+		point[] "pos_list" 2  #16
+		-12.000000 -0.000000 12.000000
+		-12.000000 -0.000000 12.000000
+		12.000000 -0.000000 12.000000
+		12.000000 -0.000000 12.000000
+		12.000000 0.000000 -12.000000
+		12.000000 0.000000 -12.000000
+		-12.000000 0.000000 -12.000000
+		-12.000000 0.000000 -12.000000
+		12.000000 -0.000000 4.000000
+		12.000000 -0.000000 4.000000
+		-12.000000 -0.000000 4.000000
+		-12.000000 -0.000000 4.000000
+		-4.000000 -0.000000 12.000000
+		-4.000000 -0.000000 12.000000
+		-4.000000 -0.000000 4.000000
+		-4.000000 -0.000000 4.000000
+		4.000000 -0.000000 12.000000
+		4.000000 -0.000000 12.000000
+		4.000000 -0.000000 4.000000
+		4.000000 -0.000000 4.000000
+		-4.000000 0.000000 -12.000000
+		-4.000000 0.000000 -12.000000
+		-12.000000 0.000000 -4.000000
+		-12.000000 0.000000 -4.000000
+		-4.000000 0.000000 -4.000000
+		-4.000000 0.000000 -4.000000
+		12.000000 0.000000 -4.000000
+		12.000000 0.000000 -4.000000
+		4.000000 0.000000 -4.000000
+		4.000000 0.000000 -4.000000
+		4.000000 0.000000 -12.000000
+		4.000000 0.000000 -12.000000
+		index[] "triangle_list" 1  #54
+		13
+		2
+		14
+		8
+		1
+		4
+		0
+		6
+		7
+		6
+		8
+		9
+		11
+		12
+		10
+		5
+		7
+		12
+		4
+		13
+		9
+		7
+		9
+		14
+		12
+		14
+		15
+		2
+		15
+		14
+		4
+		9
+		8
+		7
+		5
+		0
+		9
+		7
+		6
+		10
+		3
+		11
+		12
+		11
+		5
+		13
+		14
+		9
+		14
+		12
+		7
+		15
+		10
+		12
+	declare vector [] "N" varying
+		vector[] "N" 1  #16
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+	declare vector2 [] "uv" varying
+		vector2[] "uv" 1  #16
+		0.000000 0.000000
+		1.000000 0.000000
+		1.000000 1.000000
+		0.000000 1.000000
+		1.000000 0.333333
+		0.000000 0.333333
+		0.333333 0.000000
+		0.333333 0.333333
+		0.666667 0.000000
+		0.666667 0.333333
+		0.333333 1.000000
+		0.000000 0.666667
+		0.333333 0.666667
+		1.000000 0.666667
+		0.666667 0.666667
+		0.666667 1.000000
+end
+node "maya_place2dTexture" "ramp_spikeinterplation:place2dTexture1" # "osl_node"
+	scalar "i_coverageU" 1.000000
+	scalar "i_coverageV" 1.000000
+	int "i_mirrorU" 0
+	int "i_mirrorV" 0
+	scalar "i_noiseU" 0.000000
+	scalar "i_noiseV" 0.000000
+	scalar "i_offsetU" 0.000000
+	scalar "i_offsetV" 0.000000
+	scalar "i_repeatU" 1.000000
+	scalar "i_repeatV" 1.000000
+	scalar "i_rotateFrame" 0.000000
+	scalar "i_rotateUV" 0.000000
+	int "i_stagger" 0
+	scalar "i_translateFrameU" 0.000000
+	scalar "i_translateFrameV" 0.000000
+	int "i_wrapU" 1
+	int "i_wrapV" 1
+	token "i_mtoer_uvSetName" "uv"
+	vector "o_outUV" 0.000000 0.000000 0.000000
+end
+node "maya_ramp" "ramp_spikeinterplation:ramp1" # "osl_node"
+	scalar "i_alphaGain" 1.000000
+	scalar "i_alphaOffset" 0.000000
+	#i_colorPositions is array but not valid, skip
+	#i_colors is array but not valid, skip
+	color "i_colorGain" 1.000000 1.000000 1.000000
+	color "i_colorOffset" 0.000000 0.000000 0.000000
+	color "i_defaultColor" 0.500000 0.500000 0.500000
+	scalar "i_hueNoise" 0.000000
+	scalar "i_hueNoiseFreq" 0.500000
+	int "i_interpolation" 6
+	int "i_invert" 0
+	scalar "i_noise" 0.000000
+	scalar "i_noiseFreq" 0.876238
+	scalar "i_satNoise" 0.000000
+	scalar "i_satNoiseFreq" 0.500000
+	int "i_type" 0
+	scalar "i_uWave" 0.000000
+	param_link "i_uvCoord" "ramp_spikeinterplation:place2dTexture1" "o_outUV"
+	scalar "i_vWave" 0.000000
+	scalar "i_valNoise" 0.000000
+	scalar "i_valNoiseFreq" 0.500000
+	scalar "o_outAlpha" 0.590000
+	color "o_outColor" 0.000000 1.000000 0.000000
+end
+node "maya_lambert" "ramp_spikeinterplation:ramp1Material" # "osl_node"
+	color "i_ambientColor" 0.000000 0.000000 0.000000
+	param_link "i_color" "ramp_spikeinterplation:ramp1" "o_outColor"
+	scalar "i_diffuse" 0.800000
+	color "i_incandescence" 0.000000 0.000000 0.000000
+	int "i_matteOpacityMode" 2
+	scalar "i_matteOpacity" 1.000000
+	int "i_refractions" 0
+	scalar "i_refractiveIndex" 1.000000
+	int "i_refractionLimit" 6
+	scalar "i_lightAbsorbance" 0.000000
+	scalar "i_shadowAttenuation" 0.500000
+	vector "i_normalCamera" 1.000000 1.000000 1.000000
+	color "i_transparency" 0.000000 0.000000 0.000000
+	scalar "i_translucence" 0.000000
+	scalar "i_translucenceDepth" 0.500000
+	scalar "i_translucenceFocus" 0.500000
+	int "i_mtoer_hasBump" 0
+	color "o_outColor" 0.000000 0.000000 0.000000
+	color "o_outTransparency" 0.000000 0.000000 0.000000
+	# not support param(o_outClosure) type((null))
+	# not support param(result) type((null))
+	scalar "result_alpha" 0.000000
+end
+node "osl_shadergroup" "ramp_spikeinterplation:ramp1Material_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_spikeinterplation:ramp1Material"
+		"maya_ei_preset_aovs_0"
+end
+node "material" "ramp_spikeinterplation:ramp1SG" # "material"
+	ref "surface_shader" "ramp_spikeinterplation:ramp1Material_osl"
+	ref "displace_shader" ""
+	ref "volume_shader" ""
+	ref "env_shader" ""
+end
+node "instance" "ramp_spikeinterplation:nurbsPlaneShape1_inst" # "instance"
+	ref "element" "ramp_spikeinterplation:nurbsPlaneShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	-68.829849 0.409677 8.325117 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	-68.829849 0.409677 8.325117 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" off
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	bool "surface_emission" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+		ref[] "mtl_list" 1  #1
+		"ramp_spikeinterplation:ramp1SG"
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 1.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "poly" "ramp_uwave:nurbsPlaneShape1" # "object"
+		point[] "pos_list" 2  #16
+		-12.000000 -0.000000 12.000000
+		-12.000000 -0.000000 12.000000
+		12.000000 -0.000000 12.000000
+		12.000000 -0.000000 12.000000
+		12.000000 0.000000 -12.000000
+		12.000000 0.000000 -12.000000
+		-12.000000 0.000000 -12.000000
+		-12.000000 0.000000 -12.000000
+		12.000000 -0.000000 4.000000
+		12.000000 -0.000000 4.000000
+		-12.000000 -0.000000 4.000000
+		-12.000000 -0.000000 4.000000
+		-4.000000 -0.000000 12.000000
+		-4.000000 -0.000000 12.000000
+		-4.000000 -0.000000 4.000000
+		-4.000000 -0.000000 4.000000
+		4.000000 -0.000000 12.000000
+		4.000000 -0.000000 12.000000
+		4.000000 -0.000000 4.000000
+		4.000000 -0.000000 4.000000
+		-4.000000 0.000000 -12.000000
+		-4.000000 0.000000 -12.000000
+		-12.000000 0.000000 -4.000000
+		-12.000000 0.000000 -4.000000
+		-4.000000 0.000000 -4.000000
+		-4.000000 0.000000 -4.000000
+		12.000000 0.000000 -4.000000
+		12.000000 0.000000 -4.000000
+		4.000000 0.000000 -4.000000
+		4.000000 0.000000 -4.000000
+		4.000000 0.000000 -12.000000
+		4.000000 0.000000 -12.000000
+		index[] "triangle_list" 1  #54
+		13
+		2
+		14
+		8
+		1
+		4
+		0
+		6
+		7
+		6
+		8
+		9
+		11
+		12
+		10
+		5
+		7
+		12
+		4
+		13
+		9
+		7
+		9
+		14
+		12
+		14
+		15
+		2
+		15
+		14
+		4
+		9
+		8
+		7
+		5
+		0
+		9
+		7
+		6
+		10
+		3
+		11
+		12
+		11
+		5
+		13
+		14
+		9
+		14
+		12
+		7
+		15
+		10
+		12
+	declare vector [] "N" varying
+		vector[] "N" 1  #16
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+	declare vector2 [] "uv" varying
+		vector2[] "uv" 1  #16
+		0.000000 0.000000
+		1.000000 0.000000
+		1.000000 1.000000
+		0.000000 1.000000
+		1.000000 0.333333
+		0.000000 0.333333
+		0.333333 0.000000
+		0.333333 0.333333
+		0.666667 0.000000
+		0.666667 0.333333
+		0.333333 1.000000
+		0.000000 0.666667
+		0.333333 0.666667
+		1.000000 0.666667
+		0.666667 0.666667
+		0.666667 1.000000
+end
+node "maya_place2dTexture" "ramp_uwave:place2dTexture1" # "osl_node"
+	scalar "i_coverageU" 1.000000
+	scalar "i_coverageV" 1.000000
+	int "i_mirrorU" 0
+	int "i_mirrorV" 0
+	scalar "i_noiseU" 0.000000
+	scalar "i_noiseV" 0.000000
+	scalar "i_offsetU" 0.000000
+	scalar "i_offsetV" 0.000000
+	scalar "i_repeatU" 1.000000
+	scalar "i_repeatV" 1.000000
+	scalar "i_rotateFrame" 0.000000
+	scalar "i_rotateUV" 0.000000
+	int "i_stagger" 0
+	scalar "i_translateFrameU" 0.000000
+	scalar "i_translateFrameV" 0.000000
+	int "i_wrapU" 1
+	int "i_wrapV" 1
+	token "i_mtoer_uvSetName" "uv"
+	vector "o_outUV" 0.000000 0.000000 0.000000
+end
+node "maya_ramp" "ramp_uwave:ramp1" # "osl_node"
+	scalar "i_alphaGain" 1.000000
+	scalar "i_alphaOffset" 0.000000
+	#i_colorPositions is array but not valid, skip
+	#i_colors is array but not valid, skip
+	color "i_colorGain" 1.000000 1.000000 1.000000
+	color "i_colorOffset" 0.000000 0.000000 0.000000
+	color "i_defaultColor" 0.500000 0.500000 0.500000
+	scalar "i_hueNoise" 0.000000
+	scalar "i_hueNoiseFreq" 0.500000
+	int "i_interpolation" 1
+	int "i_invert" 0
+	scalar "i_noise" 0.000000
+	scalar "i_noiseFreq" 0.876238
+	scalar "i_satNoise" 0.000000
+	scalar "i_satNoiseFreq" 0.500000
+	int "i_type" 1
+	scalar "i_uWave" 0.148515
+	param_link "i_uvCoord" "ramp_uwave:place2dTexture1" "o_outUV"
+	scalar "i_vWave" 0.000000
+	scalar "i_valNoise" 0.000000
+	scalar "i_valNoiseFreq" 0.500000
+	scalar "o_outAlpha" 0.590000
+	color "o_outColor" 0.000000 1.000000 0.000000
+end
+node "maya_lambert" "ramp_uwave:ramp1Material" # "osl_node"
+	color "i_ambientColor" 0.000000 0.000000 0.000000
+	param_link "i_color" "ramp_uwave:ramp1" "o_outColor"
+	scalar "i_diffuse" 0.800000
+	color "i_incandescence" 0.000000 0.000000 0.000000
+	int "i_matteOpacityMode" 2
+	scalar "i_matteOpacity" 1.000000
+	int "i_refractions" 0
+	scalar "i_refractiveIndex" 1.000000
+	int "i_refractionLimit" 6
+	scalar "i_lightAbsorbance" 0.000000
+	scalar "i_shadowAttenuation" 0.500000
+	vector "i_normalCamera" 1.000000 1.000000 1.000000
+	color "i_transparency" 0.000000 0.000000 0.000000
+	scalar "i_translucence" 0.000000
+	scalar "i_translucenceDepth" 0.500000
+	scalar "i_translucenceFocus" 0.500000
+	int "i_mtoer_hasBump" 0
+	color "o_outColor" 0.000000 0.000000 0.000000
+	color "o_outTransparency" 0.000000 0.000000 0.000000
+	# not support param(o_outClosure) type((null))
+	# not support param(result) type((null))
+	scalar "result_alpha" 0.000000
+end
+node "osl_shadergroup" "ramp_uwave:ramp1Material_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_uwave:ramp1Material"
+		"maya_ei_preset_aovs_0"
+end
+node "material" "ramp_uwave:ramp1SG" # "material"
+	ref "surface_shader" "ramp_uwave:ramp1Material_osl"
+	ref "displace_shader" ""
+	ref "volume_shader" ""
+	ref "env_shader" ""
+end
+node "instance" "ramp_uwave:nurbsPlaneShape1_inst" # "instance"
+	ref "element" "ramp_uwave:nurbsPlaneShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	-42.700249 0.333458 6.822768 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	-42.700249 0.333458 6.822768 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" off
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	bool "surface_emission" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+		ref[] "mtl_list" 1  #1
+		"ramp_uwave:ramp1SG"
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 1.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "poly" "ramp_vwave:nurbsPlaneShape1" # "object"
+		point[] "pos_list" 2  #16
+		-12.000000 -0.000000 12.000000
+		-12.000000 -0.000000 12.000000
+		12.000000 -0.000000 12.000000
+		12.000000 -0.000000 12.000000
+		12.000000 0.000000 -12.000000
+		12.000000 0.000000 -12.000000
+		-12.000000 0.000000 -12.000000
+		-12.000000 0.000000 -12.000000
+		12.000000 -0.000000 4.000000
+		12.000000 -0.000000 4.000000
+		-12.000000 -0.000000 4.000000
+		-12.000000 -0.000000 4.000000
+		-4.000000 -0.000000 12.000000
+		-4.000000 -0.000000 12.000000
+		-4.000000 -0.000000 4.000000
+		-4.000000 -0.000000 4.000000
+		4.000000 -0.000000 12.000000
+		4.000000 -0.000000 12.000000
+		4.000000 -0.000000 4.000000
+		4.000000 -0.000000 4.000000
+		-4.000000 0.000000 -12.000000
+		-4.000000 0.000000 -12.000000
+		-12.000000 0.000000 -4.000000
+		-12.000000 0.000000 -4.000000
+		-4.000000 0.000000 -4.000000
+		-4.000000 0.000000 -4.000000
+		12.000000 0.000000 -4.000000
+		12.000000 0.000000 -4.000000
+		4.000000 0.000000 -4.000000
+		4.000000 0.000000 -4.000000
+		4.000000 0.000000 -12.000000
+		4.000000 0.000000 -12.000000
+		index[] "triangle_list" 1  #54
+		13
+		2
+		14
+		8
+		1
+		4
+		0
+		6
+		7
+		6
+		8
+		9
+		11
+		12
+		10
+		5
+		7
+		12
+		4
+		13
+		9
+		7
+		9
+		14
+		12
+		14
+		15
+		2
+		15
+		14
+		4
+		9
+		8
+		7
+		5
+		0
+		9
+		7
+		6
+		10
+		3
+		11
+		12
+		11
+		5
+		13
+		14
+		9
+		14
+		12
+		7
+		15
+		10
+		12
+	declare vector [] "N" varying
+		vector[] "N" 1  #16
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+	declare vector2 [] "uv" varying
+		vector2[] "uv" 1  #16
+		0.000000 0.000000
+		1.000000 0.000000
+		1.000000 1.000000
+		0.000000 1.000000
+		1.000000 0.333333
+		0.000000 0.333333
+		0.333333 0.000000
+		0.333333 0.333333
+		0.666667 0.000000
+		0.666667 0.333333
+		0.333333 1.000000
+		0.000000 0.666667
+		0.333333 0.666667
+		1.000000 0.666667
+		0.666667 0.666667
+		0.666667 1.000000
+end
+node "maya_place2dTexture" "ramp_vwave:place2dTexture1" # "osl_node"
+	scalar "i_coverageU" 1.000000
+	scalar "i_coverageV" 1.000000
+	int "i_mirrorU" 0
+	int "i_mirrorV" 0
+	scalar "i_noiseU" 0.000000
+	scalar "i_noiseV" 0.000000
+	scalar "i_offsetU" 0.000000
+	scalar "i_offsetV" 0.000000
+	scalar "i_repeatU" 1.000000
+	scalar "i_repeatV" 1.000000
+	scalar "i_rotateFrame" 0.000000
+	scalar "i_rotateUV" 0.000000
+	int "i_stagger" 0
+	scalar "i_translateFrameU" 0.000000
+	scalar "i_translateFrameV" 0.000000
+	int "i_wrapU" 1
+	int "i_wrapV" 1
+	token "i_mtoer_uvSetName" "uv"
+	vector "o_outUV" 0.000000 0.000000 0.000000
+end
+node "maya_ramp" "ramp_vwave:ramp1" # "osl_node"
+	scalar "i_alphaGain" 1.000000
+	scalar "i_alphaOffset" 0.000000
+	#i_colorPositions is array but not valid, skip
+	#i_colors is array but not valid, skip
+	color "i_colorGain" 1.000000 1.000000 1.000000
+	color "i_colorOffset" 0.000000 0.000000 0.000000
+	color "i_defaultColor" 0.500000 0.500000 0.500000
+	scalar "i_hueNoise" 0.000000
+	scalar "i_hueNoiseFreq" 0.500000
+	int "i_interpolation" 1
+	int "i_invert" 0
+	scalar "i_noise" 0.000000
+	scalar "i_noiseFreq" 0.876238
+	scalar "i_satNoise" 0.000000
+	scalar "i_satNoiseFreq" 0.500000
+	int "i_type" 0
+	scalar "i_uWave" 0.000000
+	param_link "i_uvCoord" "ramp_vwave:place2dTexture1" "o_outUV"
+	scalar "i_vWave" 0.267327
+	scalar "i_valNoise" 0.000000
+	scalar "i_valNoiseFreq" 0.500000
+	scalar "o_outAlpha" 0.590000
+	color "o_outColor" 0.000000 1.000000 0.000000
+end
+node "maya_lambert" "ramp_vwave:ramp1Material" # "osl_node"
+	color "i_ambientColor" 0.000000 0.000000 0.000000
+	param_link "i_color" "ramp_vwave:ramp1" "o_outColor"
+	scalar "i_diffuse" 0.800000
+	color "i_incandescence" 0.000000 0.000000 0.000000
+	int "i_matteOpacityMode" 2
+	scalar "i_matteOpacity" 1.000000
+	int "i_refractions" 0
+	scalar "i_refractiveIndex" 1.000000
+	int "i_refractionLimit" 6
+	scalar "i_lightAbsorbance" 0.000000
+	scalar "i_shadowAttenuation" 0.500000
+	vector "i_normalCamera" 1.000000 1.000000 1.000000
+	color "i_transparency" 0.000000 0.000000 0.000000
+	scalar "i_translucence" 0.000000
+	scalar "i_translucenceDepth" 0.500000
+	scalar "i_translucenceFocus" 0.500000
+	int "i_mtoer_hasBump" 0
+	color "o_outColor" 0.000000 0.000000 0.000000
+	color "o_outTransparency" 0.000000 0.000000 0.000000
+	# not support param(o_outClosure) type((null))
+	# not support param(result) type((null))
+	scalar "result_alpha" 0.000000
+end
+node "osl_shadergroup" "ramp_vwave:ramp1Material_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_vwave:ramp1Material"
+		"maya_ei_preset_aovs_0"
+end
+node "material" "ramp_vwave:ramp1SG" # "material"
+	ref "surface_shader" "ramp_vwave:ramp1Material_osl"
+	ref "displace_shader" ""
+	ref "volume_shader" ""
+	ref "env_shader" ""
+end
+node "instance" "ramp_vwave:nurbsPlaneShape1_inst" # "instance"
+	ref "element" "ramp_vwave:nurbsPlaneShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	-15.378297 0.314403 6.519750 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	-15.378297 0.314403 6.519750 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" off
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	bool "surface_emission" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+		ref[] "mtl_list" 1  #1
+		"ramp_vwave:ramp1SG"
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 1.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "poly" "ramp_satNoise:nurbsPlaneShape1" # "object"
+		point[] "pos_list" 2  #16
+		-12.000000 -0.000000 12.000000
+		-12.000000 -0.000000 12.000000
+		12.000000 -0.000000 12.000000
+		12.000000 -0.000000 12.000000
+		12.000000 0.000000 -12.000000
+		12.000000 0.000000 -12.000000
+		-12.000000 0.000000 -12.000000
+		-12.000000 0.000000 -12.000000
+		12.000000 -0.000000 4.000000
+		12.000000 -0.000000 4.000000
+		-12.000000 -0.000000 4.000000
+		-12.000000 -0.000000 4.000000
+		-4.000000 -0.000000 12.000000
+		-4.000000 -0.000000 12.000000
+		-4.000000 -0.000000 4.000000
+		-4.000000 -0.000000 4.000000
+		4.000000 -0.000000 12.000000
+		4.000000 -0.000000 12.000000
+		4.000000 -0.000000 4.000000
+		4.000000 -0.000000 4.000000
+		-4.000000 0.000000 -12.000000
+		-4.000000 0.000000 -12.000000
+		-12.000000 0.000000 -4.000000
+		-12.000000 0.000000 -4.000000
+		-4.000000 0.000000 -4.000000
+		-4.000000 0.000000 -4.000000
+		12.000000 0.000000 -4.000000
+		12.000000 0.000000 -4.000000
+		4.000000 0.000000 -4.000000
+		4.000000 0.000000 -4.000000
+		4.000000 0.000000 -12.000000
+		4.000000 0.000000 -12.000000
+		index[] "triangle_list" 1  #54
+		13
+		2
+		14
+		8
+		1
+		4
+		0
+		6
+		7
+		6
+		8
+		9
+		11
+		12
+		10
+		5
+		7
+		12
+		4
+		13
+		9
+		7
+		9
+		14
+		12
+		14
+		15
+		2
+		15
+		14
+		4
+		9
+		8
+		7
+		5
+		0
+		9
+		7
+		6
+		10
+		3
+		11
+		12
+		11
+		5
+		13
+		14
+		9
+		14
+		12
+		7
+		15
+		10
+		12
+	declare vector [] "N" varying
+		vector[] "N" 1  #16
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+	declare vector2 [] "uv" varying
+		vector2[] "uv" 1  #16
+		0.000000 0.000000
+		1.000000 0.000000
+		1.000000 1.000000
+		0.000000 1.000000
+		1.000000 0.333333
+		0.000000 0.333333
+		0.333333 0.000000
+		0.333333 0.333333
+		0.666667 0.000000
+		0.666667 0.333333
+		0.333333 1.000000
+		0.000000 0.666667
+		0.333333 0.666667
+		1.000000 0.666667
+		0.666667 0.666667
+		0.666667 1.000000
+end
+node "maya_place2dTexture" "ramp_satNoise:place2dTexture1" # "osl_node"
+	scalar "i_coverageU" 1.000000
+	scalar "i_coverageV" 1.000000
+	int "i_mirrorU" 0
+	int "i_mirrorV" 0
+	scalar "i_noiseU" 0.000000
+	scalar "i_noiseV" 0.000000
+	scalar "i_offsetU" 0.000000
+	scalar "i_offsetV" 0.000000
+	scalar "i_repeatU" 1.000000
+	scalar "i_repeatV" 1.000000
+	scalar "i_rotateFrame" 0.000000
+	scalar "i_rotateUV" 0.000000
+	int "i_stagger" 0
+	scalar "i_translateFrameU" 0.000000
+	scalar "i_translateFrameV" 0.000000
+	int "i_wrapU" 1
+	int "i_wrapV" 1
+	token "i_mtoer_uvSetName" "uv"
+	vector "o_outUV" 0.000000 0.000000 0.000000
+end
+node "maya_ramp" "ramp_satNoise:ramp1" # "osl_node"
+	scalar "i_alphaGain" 1.000000
+	scalar "i_alphaOffset" 0.000000
+	#i_colorPositions is array but not valid, skip
+	#i_colors is array but not valid, skip
+	color "i_colorGain" 1.000000 1.000000 1.000000
+	color "i_colorOffset" 0.000000 0.000000 0.000000
+	color "i_defaultColor" 0.500000 0.500000 0.500000
+	scalar "i_hueNoise" 0.000000
+	scalar "i_hueNoiseFreq" 0.500000
+	int "i_interpolation" 1
+	int "i_invert" 0
+	scalar "i_noise" 0.000000
+	scalar "i_noiseFreq" 0.000000
+	scalar "i_satNoise" 1.000000
+	scalar "i_satNoiseFreq" 0.193069
+	int "i_type" 0
+	scalar "i_uWave" 0.000000
+	param_link "i_uvCoord" "ramp_satNoise:place2dTexture1" "o_outUV"
+	scalar "i_vWave" 0.000000
+	scalar "i_valNoise" 0.000000
+	scalar "i_valNoiseFreq" 0.549505
+	scalar "o_outAlpha" 0.625745
+	color "o_outColor" 1.000000 0.365670 1.000000
+end
+node "maya_lambert" "ramp_satNoise:ramp1Material" # "osl_node"
+	color "i_ambientColor" 0.000000 0.000000 0.000000
+	param_link "i_color" "ramp_satNoise:ramp1" "o_outColor"
+	scalar "i_diffuse" 0.800000
+	color "i_incandescence" 0.000000 0.000000 0.000000
+	int "i_matteOpacityMode" 2
+	scalar "i_matteOpacity" 1.000000
+	int "i_refractions" 0
+	scalar "i_refractiveIndex" 1.000000
+	int "i_refractionLimit" 6
+	scalar "i_lightAbsorbance" 0.000000
+	scalar "i_shadowAttenuation" 0.500000
+	vector "i_normalCamera" 1.000000 1.000000 1.000000
+	color "i_transparency" 0.000000 0.000000 0.000000
+	scalar "i_translucence" 0.000000
+	scalar "i_translucenceDepth" 0.500000
+	scalar "i_translucenceFocus" 0.500000
+	int "i_mtoer_hasBump" 0
+	color "o_outColor" 0.000000 0.000000 0.000000
+	color "o_outTransparency" 0.000000 0.000000 0.000000
+	# not support param(o_outClosure) type((null))
+	# not support param(result) type((null))
+	scalar "result_alpha" 0.000000
+end
+node "osl_shadergroup" "ramp_satNoise:ramp1Material_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_satNoise:ramp1Material"
+		"maya_ei_preset_aovs_0"
+end
+node "material" "ramp_satNoise:ramp1SG" # "material"
+	ref "surface_shader" "ramp_satNoise:ramp1Material_osl"
+	ref "displace_shader" ""
+	ref "volume_shader" ""
+	ref "env_shader" ""
+end
+node "instance" "ramp_satNoise:nurbsPlaneShape1_inst" # "instance"
+	ref "element" "ramp_satNoise:nurbsPlaneShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	9.144819 0.390622 8.198911 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	9.144819 0.390622 8.198911 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" off
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	bool "surface_emission" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+		ref[] "mtl_list" 1  #1
+		"ramp_satNoise:ramp1SG"
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 1.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "poly" "ramp_hueNoise:nurbsPlaneShape1" # "object"
+		point[] "pos_list" 2  #16
+		-12.000000 -0.000000 12.000000
+		-12.000000 -0.000000 12.000000
+		12.000000 -0.000000 12.000000
+		12.000000 -0.000000 12.000000
+		12.000000 0.000000 -12.000000
+		12.000000 0.000000 -12.000000
+		-12.000000 0.000000 -12.000000
+		-12.000000 0.000000 -12.000000
+		12.000000 -0.000000 4.000000
+		12.000000 -0.000000 4.000000
+		-12.000000 -0.000000 4.000000
+		-12.000000 -0.000000 4.000000
+		-4.000000 -0.000000 12.000000
+		-4.000000 -0.000000 12.000000
+		-4.000000 -0.000000 4.000000
+		-4.000000 -0.000000 4.000000
+		4.000000 -0.000000 12.000000
+		4.000000 -0.000000 12.000000
+		4.000000 -0.000000 4.000000
+		4.000000 -0.000000 4.000000
+		-4.000000 0.000000 -12.000000
+		-4.000000 0.000000 -12.000000
+		-12.000000 0.000000 -4.000000
+		-12.000000 0.000000 -4.000000
+		-4.000000 0.000000 -4.000000
+		-4.000000 0.000000 -4.000000
+		12.000000 0.000000 -4.000000
+		12.000000 0.000000 -4.000000
+		4.000000 0.000000 -4.000000
+		4.000000 0.000000 -4.000000
+		4.000000 0.000000 -12.000000
+		4.000000 0.000000 -12.000000
+		index[] "triangle_list" 1  #54
+		13
+		2
+		14
+		8
+		1
+		4
+		0
+		6
+		7
+		6
+		8
+		9
+		11
+		12
+		10
+		5
+		7
+		12
+		4
+		13
+		9
+		7
+		9
+		14
+		12
+		14
+		15
+		2
+		15
+		14
+		4
+		9
+		8
+		7
+		5
+		0
+		9
+		7
+		6
+		10
+		3
+		11
+		12
+		11
+		5
+		13
+		14
+		9
+		14
+		12
+		7
+		15
+		10
+		12
+	declare vector [] "N" varying
+		vector[] "N" 1  #16
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+	declare vector2 [] "uv" varying
+		vector2[] "uv" 1  #16
+		0.000000 0.000000
+		1.000000 0.000000
+		1.000000 1.000000
+		0.000000 1.000000
+		1.000000 0.333333
+		0.000000 0.333333
+		0.333333 0.000000
+		0.333333 0.333333
+		0.666667 0.000000
+		0.666667 0.333333
+		0.333333 1.000000
+		0.000000 0.666667
+		0.333333 0.666667
+		1.000000 0.666667
+		0.666667 0.666667
+		0.666667 1.000000
+end
+node "maya_place2dTexture" "ramp_hueNoise:place2dTexture1" # "osl_node"
+	scalar "i_coverageU" 1.000000
+	scalar "i_coverageV" 1.000000
+	int "i_mirrorU" 0
+	int "i_mirrorV" 0
+	scalar "i_noiseU" 0.000000
+	scalar "i_noiseV" 0.000000
+	scalar "i_offsetU" 0.000000
+	scalar "i_offsetV" 0.000000
+	scalar "i_repeatU" 1.000000
+	scalar "i_repeatV" 1.000000
+	scalar "i_rotateFrame" 0.000000
+	scalar "i_rotateUV" 0.000000
+	int "i_stagger" 0
+	scalar "i_translateFrameU" 0.000000
+	scalar "i_translateFrameV" 0.000000
+	int "i_wrapU" 1
+	int "i_wrapV" 1
+	token "i_mtoer_uvSetName" "uv"
+	vector "o_outUV" 0.000000 0.000000 0.000000
+end
+node "maya_ramp" "ramp_hueNoise:ramp1" # "osl_node"
+	scalar "i_alphaGain" 1.000000
+	scalar "i_alphaOffset" 0.000000
+	#i_colorPositions is array but not valid, skip
+	#i_colors is array but not valid, skip
+	color "i_colorGain" 1.000000 1.000000 1.000000
+	color "i_colorOffset" 0.000000 0.000000 0.000000
+	color "i_defaultColor" 0.500000 0.500000 0.500000
+	scalar "i_hueNoise" 0.678218
+	scalar "i_hueNoiseFreq" 2.792079
+	int "i_interpolation" 1
+	int "i_invert" 0
+	scalar "i_noise" 0.000000
+	scalar "i_noiseFreq" 0.000000
+	scalar "i_satNoise" 0.000000
+	scalar "i_satNoiseFreq" 0.509901
+	int "i_type" 0
+	scalar "i_uWave" 0.000000
+	param_link "i_uvCoord" "ramp_hueNoise:place2dTexture1" "o_outUV"
+	scalar "i_vWave" 0.000000
+	scalar "i_valNoise" 0.000000
+	scalar "i_valNoiseFreq" 0.549505
+	scalar "o_outAlpha" 0.397934
+	color "o_outColor" 0.000000 0.488024 1.000000
+end
+node "maya_lambert" "ramp_hueNoise:ramp1Material" # "osl_node"
+	color "i_ambientColor" 0.000000 0.000000 0.000000
+	param_link "i_color" "ramp_hueNoise:ramp1" "o_outColor"
+	scalar "i_diffuse" 0.800000
+	color "i_incandescence" 0.000000 0.000000 0.000000
+	int "i_matteOpacityMode" 2
+	scalar "i_matteOpacity" 1.000000
+	int "i_refractions" 0
+	scalar "i_refractiveIndex" 1.000000
+	int "i_refractionLimit" 6
+	scalar "i_lightAbsorbance" 0.000000
+	scalar "i_shadowAttenuation" 0.500000
+	vector "i_normalCamera" 1.000000 1.000000 1.000000
+	color "i_transparency" 0.000000 0.000000 0.000000
+	scalar "i_translucence" 0.000000
+	scalar "i_translucenceDepth" 0.500000
+	scalar "i_translucenceFocus" 0.500000
+	int "i_mtoer_hasBump" 0
+	color "o_outColor" 0.000000 0.000000 0.000000
+	color "o_outTransparency" 0.000000 0.000000 0.000000
+	# not support param(o_outClosure) type((null))
+	# not support param(result) type((null))
+	scalar "result_alpha" 0.000000
+end
+node "osl_shadergroup" "ramp_hueNoise:ramp1Material_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_hueNoise:ramp1Material"
+		"maya_ei_preset_aovs_0"
+end
+node "material" "ramp_hueNoise:ramp1SG" # "material"
+	ref "surface_shader" "ramp_hueNoise:ramp1Material_osl"
+	ref "displace_shader" ""
+	ref "volume_shader" ""
+	ref "env_shader" ""
+end
+node "instance" "ramp_hueNoise:nurbsPlaneShape1_inst" # "instance"
+	ref "element" "ramp_hueNoise:nurbsPlaneShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	36.060280 0.476369 10.085618 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	36.060280 0.476369 10.085618 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" off
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	bool "surface_emission" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+		ref[] "mtl_list" 1  #1
+		"ramp_hueNoise:ramp1SG"
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 1.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "poly" "ramp_valNoise:nurbsPlaneShape1" # "object"
+		point[] "pos_list" 2  #16
+		-12.000000 -0.000000 12.000000
+		-12.000000 -0.000000 12.000000
+		12.000000 -0.000000 12.000000
+		12.000000 -0.000000 12.000000
+		12.000000 0.000000 -12.000000
+		12.000000 0.000000 -12.000000
+		-12.000000 0.000000 -12.000000
+		-12.000000 0.000000 -12.000000
+		12.000000 -0.000000 4.000000
+		12.000000 -0.000000 4.000000
+		-12.000000 -0.000000 4.000000
+		-12.000000 -0.000000 4.000000
+		-4.000000 -0.000000 12.000000
+		-4.000000 -0.000000 12.000000
+		-4.000000 -0.000000 4.000000
+		-4.000000 -0.000000 4.000000
+		4.000000 -0.000000 12.000000
+		4.000000 -0.000000 12.000000
+		4.000000 -0.000000 4.000000
+		4.000000 -0.000000 4.000000
+		-4.000000 0.000000 -12.000000
+		-4.000000 0.000000 -12.000000
+		-12.000000 0.000000 -4.000000
+		-12.000000 0.000000 -4.000000
+		-4.000000 0.000000 -4.000000
+		-4.000000 0.000000 -4.000000
+		12.000000 0.000000 -4.000000
+		12.000000 0.000000 -4.000000
+		4.000000 0.000000 -4.000000
+		4.000000 0.000000 -4.000000
+		4.000000 0.000000 -12.000000
+		4.000000 0.000000 -12.000000
+		index[] "triangle_list" 1  #54
+		13
+		2
+		14
+		8
+		1
+		4
+		0
+		6
+		7
+		6
+		8
+		9
+		11
+		12
+		10
+		5
+		7
+		12
+		4
+		13
+		9
+		7
+		9
+		14
+		12
+		14
+		15
+		2
+		15
+		14
+		4
+		9
+		8
+		7
+		5
+		0
+		9
+		7
+		6
+		10
+		3
+		11
+		12
+		11
+		5
+		13
+		14
+		9
+		14
+		12
+		7
+		15
+		10
+		12
+	declare vector [] "N" varying
+		vector[] "N" 1  #16
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+	declare vector2 [] "uv" varying
+		vector2[] "uv" 1  #16
+		0.000000 0.000000
+		1.000000 0.000000
+		1.000000 1.000000
+		0.000000 1.000000
+		1.000000 0.333333
+		0.000000 0.333333
+		0.333333 0.000000
+		0.333333 0.333333
+		0.666667 0.000000
+		0.666667 0.333333
+		0.333333 1.000000
+		0.000000 0.666667
+		0.333333 0.666667
+		1.000000 0.666667
+		0.666667 0.666667
+		0.666667 1.000000
+end
+node "maya_place2dTexture" "ramp_valNoise:place2dTexture1" # "osl_node"
+	scalar "i_coverageU" 1.000000
+	scalar "i_coverageV" 1.000000
+	int "i_mirrorU" 0
+	int "i_mirrorV" 0
+	scalar "i_noiseU" 0.000000
+	scalar "i_noiseV" 0.000000
+	scalar "i_offsetU" 0.000000
+	scalar "i_offsetV" 0.000000
+	scalar "i_repeatU" 1.000000
+	scalar "i_repeatV" 1.000000
+	scalar "i_rotateFrame" 0.000000
+	scalar "i_rotateUV" 0.000000
+	int "i_stagger" 0
+	scalar "i_translateFrameU" 0.000000
+	scalar "i_translateFrameV" 0.000000
+	int "i_wrapU" 1
+	int "i_wrapV" 1
+	token "i_mtoer_uvSetName" "uv"
+	vector "o_outUV" 0.000000 0.000000 0.000000
+end
+node "maya_ramp" "ramp_valNoise:ramp1" # "osl_node"
+	scalar "i_alphaGain" 1.000000
+	scalar "i_alphaOffset" 0.000000
+	#i_colorPositions is array but not valid, skip
+	#i_colors is array but not valid, skip
+	color "i_colorGain" 1.000000 1.000000 1.000000
+	color "i_colorOffset" 0.000000 0.000000 0.000000
+	color "i_defaultColor" 0.500000 0.500000 0.500000
+	scalar "i_hueNoise" 0.000000
+	scalar "i_hueNoiseFreq" 0.500000
+	int "i_interpolation" 1
+	int "i_invert" 0
+	scalar "i_noise" 0.000000
+	scalar "i_noiseFreq" 0.000000
+	scalar "i_satNoise" 0.000000
+	scalar "i_satNoiseFreq" 0.500000
+	int "i_type" 0
+	scalar "i_uWave" 0.000000
+	param_link "i_uvCoord" "ramp_valNoise:place2dTexture1" "o_outUV"
+	scalar "i_vWave" 0.000000
+	scalar "i_valNoise" 1.000000
+	scalar "i_valNoiseFreq" 0.886139
+	scalar "o_outAlpha" 0.260075
+	color "o_outColor" 0.634330 0.000000 0.634330
+end
+node "maya_lambert" "ramp_valNoise:ramp1Material" # "osl_node"
+	color "i_ambientColor" 0.000000 0.000000 0.000000
+	param_link "i_color" "ramp_valNoise:ramp1" "o_outColor"
+	scalar "i_diffuse" 0.800000
+	color "i_incandescence" 0.000000 0.000000 0.000000
+	int "i_matteOpacityMode" 2
+	scalar "i_matteOpacity" 1.000000
+	int "i_refractions" 0
+	scalar "i_refractiveIndex" 1.000000
+	int "i_refractionLimit" 6
+	scalar "i_lightAbsorbance" 0.000000
+	scalar "i_shadowAttenuation" 0.500000
+	vector "i_normalCamera" 1.000000 1.000000 1.000000
+	color "i_transparency" 0.000000 0.000000 0.000000
+	scalar "i_translucence" 0.000000
+	scalar "i_translucenceDepth" 0.500000
+	scalar "i_translucenceFocus" 0.500000
+	int "i_mtoer_hasBump" 0
+	color "o_outColor" 0.000000 0.000000 0.000000
+	color "o_outTransparency" 0.000000 0.000000 0.000000
+	# not support param(o_outClosure) type((null))
+	# not support param(result) type((null))
+	scalar "result_alpha" 0.000000
+end
+node "osl_shadergroup" "ramp_valNoise:ramp1Material_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_valNoise:ramp1Material"
+		"maya_ei_preset_aovs_0"
+end
+node "material" "ramp_valNoise:ramp1SG" # "material"
+	ref "surface_shader" "ramp_valNoise:ramp1Material_osl"
+	ref "displace_shader" ""
+	ref "volume_shader" ""
+	ref "env_shader" ""
+end
+node "instance" "ramp_valNoise:nurbsPlaneShape1_inst" # "instance"
+	ref "element" "ramp_valNoise:nurbsPlaneShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	61.542145 -3.150750 -65.659927 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	61.542145 -3.150750 -65.659927 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" off
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	bool "surface_emission" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+		ref[] "mtl_list" 1  #1
+		"ramp_valNoise:ramp1SG"
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 1.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "poly" "ramp_noise_noisefreq:nurbsPlaneShape1" # "object"
+		point[] "pos_list" 2  #16
+		-12.000000 -0.000000 12.000000
+		-12.000000 -0.000000 12.000000
+		12.000000 -0.000000 12.000000
+		12.000000 -0.000000 12.000000
+		12.000000 0.000000 -12.000000
+		12.000000 0.000000 -12.000000
+		-12.000000 0.000000 -12.000000
+		-12.000000 0.000000 -12.000000
+		12.000000 -0.000000 4.000000
+		12.000000 -0.000000 4.000000
+		-12.000000 -0.000000 4.000000
+		-12.000000 -0.000000 4.000000
+		-4.000000 -0.000000 12.000000
+		-4.000000 -0.000000 12.000000
+		-4.000000 -0.000000 4.000000
+		-4.000000 -0.000000 4.000000
+		4.000000 -0.000000 12.000000
+		4.000000 -0.000000 12.000000
+		4.000000 -0.000000 4.000000
+		4.000000 -0.000000 4.000000
+		-4.000000 0.000000 -12.000000
+		-4.000000 0.000000 -12.000000
+		-12.000000 0.000000 -4.000000
+		-12.000000 0.000000 -4.000000
+		-4.000000 0.000000 -4.000000
+		-4.000000 0.000000 -4.000000
+		12.000000 0.000000 -4.000000
+		12.000000 0.000000 -4.000000
+		4.000000 0.000000 -4.000000
+		4.000000 0.000000 -4.000000
+		4.000000 0.000000 -12.000000
+		4.000000 0.000000 -12.000000
+		index[] "triangle_list" 1  #54
+		13
+		2
+		14
+		8
+		1
+		4
+		0
+		6
+		7
+		6
+		8
+		9
+		11
+		12
+		10
+		5
+		7
+		12
+		4
+		13
+		9
+		7
+		9
+		14
+		12
+		14
+		15
+		2
+		15
+		14
+		4
+		9
+		8
+		7
+		5
+		0
+		9
+		7
+		6
+		10
+		3
+		11
+		12
+		11
+		5
+		13
+		14
+		9
+		14
+		12
+		7
+		15
+		10
+		12
+	declare vector [] "N" varying
+		vector[] "N" 1  #16
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+		0.000000 1.000000 0.000000
+	declare vector2 [] "uv" varying
+		vector2[] "uv" 1  #16
+		0.000000 0.000000
+		1.000000 0.000000
+		1.000000 1.000000
+		0.000000 1.000000
+		1.000000 0.333333
+		0.000000 0.333333
+		0.333333 0.000000
+		0.333333 0.333333
+		0.666667 0.000000
+		0.666667 0.333333
+		0.333333 1.000000
+		0.000000 0.666667
+		0.333333 0.666667
+		1.000000 0.666667
+		0.666667 0.666667
+		0.666667 1.000000
+end
+node "maya_place2dTexture" "ramp_noise_noisefreq:place2dTexture1" # "osl_node"
+	scalar "i_coverageU" 1.000000
+	scalar "i_coverageV" 1.000000
+	int "i_mirrorU" 0
+	int "i_mirrorV" 0
+	scalar "i_noiseU" 0.000000
+	scalar "i_noiseV" 0.000000
+	scalar "i_offsetU" 0.000000
+	scalar "i_offsetV" 0.000000
+	scalar "i_repeatU" 1.000000
+	scalar "i_repeatV" 1.000000
+	scalar "i_rotateFrame" 0.000000
+	scalar "i_rotateUV" 0.000000
+	int "i_stagger" 0
+	scalar "i_translateFrameU" 0.000000
+	scalar "i_translateFrameV" 0.000000
+	int "i_wrapU" 1
+	int "i_wrapV" 1
+	token "i_mtoer_uvSetName" "uv"
+	vector "o_outUV" 0.000000 0.000000 0.000000
+end
+node "maya_ramp" "ramp_noise_noisefreq:ramp1" # "osl_node"
+	scalar "i_alphaGain" 1.000000
+	scalar "i_alphaOffset" 0.000000
+	#i_colorPositions is array but not valid, skip
+	#i_colors is array but not valid, skip
+	color "i_colorGain" 1.000000 1.000000 1.000000
+	color "i_colorOffset" 0.000000 0.000000 0.000000
+	color "i_defaultColor" 0.500000 0.500000 0.500000
+	scalar "i_hueNoise" 0.000000
+	scalar "i_hueNoiseFreq" 0.500000
+	int "i_interpolation" 1
+	int "i_invert" 0
+	scalar "i_noise" 0.297030
+	scalar "i_noiseFreq" 0.405941
+	scalar "i_satNoise" 0.000000
+	scalar "i_satNoiseFreq" 0.500000
+	int "i_type" 0
+	scalar "i_uWave" 0.000000
+	param_link "i_uvCoord" "ramp_noise_noisefreq:place2dTexture1" "o_outUV"
+	scalar "i_vWave" 0.000000
+	scalar "i_valNoise" 0.000000
+	scalar "i_valNoiseFreq" 0.500000
+	scalar "o_outAlpha" 0.890000
+	color "o_outColor" 1.000000 1.000000 0.000000
+end
+node "maya_lambert" "ramp_noise_noisefreq:ramp1Material" # "osl_node"
+	color "i_ambientColor" 0.000000 0.000000 0.000000
+	param_link "i_color" "ramp_noise_noisefreq:ramp1" "o_outColor"
+	scalar "i_diffuse" 0.800000
+	color "i_incandescence" 0.000000 0.000000 0.000000
+	int "i_matteOpacityMode" 2
+	scalar "i_matteOpacity" 1.000000
+	int "i_refractions" 0
+	scalar "i_refractiveIndex" 1.000000
+	int "i_refractionLimit" 6
+	scalar "i_lightAbsorbance" 0.000000
+	scalar "i_shadowAttenuation" 0.500000
+	vector "i_normalCamera" 1.000000 1.000000 1.000000
+	color "i_transparency" 0.000000 0.000000 0.000000
+	scalar "i_translucence" 0.000000
+	scalar "i_translucenceDepth" 0.500000
+	scalar "i_translucenceFocus" 0.500000
+	int "i_mtoer_hasBump" 0
+	color "o_outColor" 0.000000 0.000000 0.000000
+	color "o_outTransparency" 0.000000 0.000000 0.000000
+	# not support param(o_outClosure) type((null))
+	# not support param(result) type((null))
+	scalar "result_alpha" 0.000000
+end
+node "osl_shadergroup" "ramp_noise_noisefreq:ramp1Material_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_noise_noisefreq:ramp1Material"
+		"maya_ei_preset_aovs_0"
+end
+node "material" "ramp_noise_noisefreq:ramp1SG" # "material"
+	ref "surface_shader" "ramp_noise_noisefreq:ramp1Material_osl"
+	ref "displace_shader" ""
+	ref "volume_shader" ""
+	ref "env_shader" ""
+end
+node "instance" "ramp_noise_noisefreq:nurbsPlaneShape1_inst" # "instance"
+	ref "element" "ramp_noise_noisefreq:nurbsPlaneShape1"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	62.476490 -1.833835 -38.123081 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 1.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	62.476490 -1.833835 -38.123081 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" off
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	bool "surface_emission" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+		ref[] "mtl_list" 1  #1
+		"ramp_noise_noisefreq:ramp1SG"
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 1.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "outvar" "outvar_beauty" # "outvar"
+	token "name" "color"
+	enum "type" "color"
+	bool "filter" on
+end
+node "outvar" "outvar_beauty_alpha" # "outvar"
+	token "name" "opacity"
+	enum "type" "color"
+	bool "filter" on
+end
+node "output" "output_beauty" # "output"
+	token "filename" "E:/elaraShaderDev/images/beauty/test.png"
+	enum "data_type" "rgba"
+		ref[] "var_list" 1  #2
+		"outvar_beauty"
+		"outvar_beauty_alpha"
+end
+node "osl_shadergroup" "ramp_vramp:ramp1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_vramp:ramp1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "ramp_vramp:place2dTexture1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_vramp:place2dTexture1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "ramp_uramp:ramp1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_uramp:ramp1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "ramp_uramp:place2dTexture1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_uramp:place2dTexture1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "ramp_diagonalramp:ramp1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_diagonalramp:ramp1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "ramp_diagonalramp:place2dTexture1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_diagonalramp:place2dTexture1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "ramp_radialramp:ramp1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_radialramp:ramp1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "ramp_radialramp:place2dTexture1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_radialramp:place2dTexture1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "ramp_circularramp:ramp1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_circularramp:ramp1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "ramp_circularramp:place2dTexture1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_circularramp:place2dTexture1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "ramp_boxramp:ramp1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_boxramp:ramp1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "ramp_boxramp:place2dTexture1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_boxramp:place2dTexture1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "ramp_uvramp:ramp1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_uvramp:ramp1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "ramp_uvramp:place2dTexture1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_uvramp:place2dTexture1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "ramp_fourcornerramp:ramp1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_fourcornerramp:ramp1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "ramp_fourcornerramp:place2dTexture1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_fourcornerramp:place2dTexture1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "ramp_tartanramp:ramp1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_tartanramp:ramp1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "ramp_tartanramp:place2dTexture1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_tartanramp:place2dTexture1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "ramp_noneinterplation:ramp1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_noneinterplation:ramp1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "ramp_noneinterplation:place2dTexture1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_noneinterplation:place2dTexture1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "ramp_linearramp:ramp1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_linearramp:ramp1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "ramp_linearramp:place2dTexture1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_linearramp:place2dTexture1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "ramp_expUpinterplation:ramp1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_expUpinterplation:ramp1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "ramp_expUpinterplation:place2dTexture1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_expUpinterplation:place2dTexture1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "ramp_expDowninterplation:ramp1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_expDowninterplation:ramp1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "ramp_expDowninterplation:place2dTexture1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_expDowninterplation:place2dTexture1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "ramp_smoothinterplation:ramp1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_smoothinterplation:ramp1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "ramp_smoothinterplation:place2dTexture1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_smoothinterplation:place2dTexture1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "ramp_bumpinterplation:ramp1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_bumpinterplation:ramp1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "ramp_bumpinterplation:place2dTexture1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_bumpinterplation:place2dTexture1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "ramp_spikeinterplation:ramp1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_spikeinterplation:ramp1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "ramp_spikeinterplation:place2dTexture1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_spikeinterplation:place2dTexture1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "ramp_uwave:ramp1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_uwave:ramp1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "ramp_uwave:place2dTexture1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_uwave:place2dTexture1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "ramp_vwave:ramp1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_vwave:ramp1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "ramp_vwave:place2dTexture1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_vwave:place2dTexture1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "ramp_satNoise:ramp1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_satNoise:ramp1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "ramp_satNoise:place2dTexture1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_satNoise:place2dTexture1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "ramp_hueNoise:ramp1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_hueNoise:ramp1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "ramp_hueNoise:place2dTexture1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_hueNoise:place2dTexture1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "ramp_valNoise:ramp1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_valNoise:ramp1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "ramp_valNoise:place2dTexture1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_valNoise:place2dTexture1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "ramp_noise_noisefreq:ramp1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_noise_noisefreq:ramp1"
+		"maya_ei_preset_aovs_0"
+end
+node "osl_shadergroup" "ramp_noise_noisefreq:place2dTexture1_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"ramp_noise_noisefreq:place2dTexture1"
+		"maya_ei_preset_aovs_0"
+end
+node "outvar" "output_default_color" # "outvar"
+	token "name" "color"
+	enum "type" "color"
+	bool "filter" on
+end
+node "outvar" "output_default_alpha" # "outvar"
+	token "name" "opacity"
+	enum "type" "color"
+	bool "filter" on
+end
+node "output" "output_default" # "output"
+	token "filename" "E:/elaraShaderDev/images/test.png"
+	enum "data_type" "rgba"
+		ref[] "var_list" 1  #2
+		"output_default_color"
+		"output_default_alpha"
+end
+node "maya_envSphere" "mtoer_maya_envSphere" # "osl_node"
+	color "i_image" 0.000000 0.000000 0.000000
+	scalar "i_shearU" 0.000000
+	scalar "i_shearV" 0.000000
+	token "i_filename" ""
+	int "i_flip" 0
+end
+node "osl_shadergroup" "mtoer_maya_envSphere_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"mtoer_sphereuv_shader"
+		"mtoer_maya_envSphere"
+end
+node "camera" "perspShape" # "camera"
+		ref[] "output_list" 1  #2
+		"output_default"
+		"output_beauty"
+	ref "imager_shader" ""
+	ref "atmo_shader" ""
+	ref "env_shader" "mtoer_maya_envSphere_osl"
+	ref "lens_shader" ""
+	scalar "focal" 35.000000
+	scalar "aperture" 36.000000
+	scalar "aspect" 1.777000
+	int "res_x" 1920
+	int "res_y" 1080
+	int "window_xmin" -2147483648
+	int "window_xmax" 2147483647
+	int "window_ymin" -2147483648
+	int "window_ymax" 2147483647
+	scalar "clip_hither" 0.100000
+	scalar "clip_yon" 10000.000000
+	declare scalar "eiAOVZDepthMin" 100.000000
+	declare scalar "eiAOVZDepthMax" 300.000000
+end
+node "instance" "perspShape_inst" # "instance"
+	ref "element" "perspShape"
+	matrix "transform"
+	0.999994 0.000000 0.003491 0.000000
+	0.003487 -0.047775 -0.998852 0.000000
+	0.000167 0.998858 -0.047775 0.000000
+	-4.311885 166.092148 -39.906933 1.000000
+	matrix "motion_transform"
+	0.999994 0.000000 0.003491 0.000000
+	0.003487 -0.047775 -0.998852 0.000000
+	0.000167 0.998858 -0.047775 0.000000
+	-4.311885 166.092148 -39.906933 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" on
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	bool "surface_emission" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+	#mtl_list is array but not valid, skip
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 340282346638528860000000000000000000000.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "instgroup" "mtoer_instgroup_00" # "instgroup"
+		ref[] "instance_list" 1  #24
+		"perspShape_inst"
+		"ramp_boxramp:nurbsPlaneShape1_inst"
+		"ramp_bumpinterplation:nurbsPlaneShape1_inst"
+		"ramp_circularramp:nurbsPlaneShape1_inst"
+		"ramp_diagonalramp:nurbsPlaneShape1_inst"
+		"ramp_expDowninterplation:nurbsPlaneShape1_inst"
+		"ramp_expUpinterplation:nurbsPlaneShape1_inst"
+		"ramp_fourcornerramp:nurbsPlaneShape1_inst"
+		"ramp_hueNoise:nurbsPlaneShape1_inst"
+		"ramp_linearramp:nurbsPlaneShape1_inst"
+		"ramp_noise_noisefreq:nurbsPlaneShape1_inst"
+		"ramp_noneinterplation:nurbsPlaneShape1_inst"
+		"ramp_radialramp:nurbsPlaneShape1_inst"
+		"ramp_satNoise:nurbsPlaneShape1_inst"
+		"ramp_smoothinterplation:nurbsPlaneShape1_inst"
+		"ramp_spikeinterplation:nurbsPlaneShape1_inst"
+		"ramp_tartanramp:nurbsPlaneShape1_inst"
+		"ramp_uramp:nurbsPlaneShape1_inst"
+		"ramp_uvramp:nurbsPlaneShape1_inst"
+		"ramp_uwave:nurbsPlaneShape1_inst"
+		"ramp_valNoise:nurbsPlaneShape1_inst"
+		"ramp_vramp:directionalLightShape1_inst"
+		"ramp_vramp:nurbsPlaneShape1_inst"
+		"ramp_vwave:nurbsPlaneShape1_inst"
+end
+render "mtoer_instgroup_00" "perspShape_inst" "options"

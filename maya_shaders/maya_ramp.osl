@@ -170,13 +170,14 @@ shader maya_ramp
 			if(i_hueNoise > 0)
 			{
 				// unclamped hue values seem closer to Maya
-				hue += 1.25 * i_hueNoise * noise("perlin", ss * i_hueNoiseFreq * 18,	
-					tt * i_hueNoiseFreq * 18);				
+				hue +=  i_hueNoise * noise("perlin", ss * i_hueNoiseFreq * 18,	
+					tt * i_hueNoiseFreq * 18);
+                //hue = clamp(hue, 0, 1);                    
 			}
 			
 			if(i_satNoise > 0)
 			{
-				sat += 1.25 * i_satNoise * noise("perlin", ss * i_satNoiseFreq * 18,	
+				sat +=  i_satNoise * noise("perlin", ss * i_satNoiseFreq * 18,	
 					tt * i_satNoiseFreq * 18);
 					
 				sat = clamp(sat, 0, 1);
@@ -184,13 +185,13 @@ shader maya_ramp
 			
 			if(i_valNoise > 0)
 			{
-				val += 1.25 * i_valNoise * noise("perlin", ss * i_valNoiseFreq * 18,
+				val +=  i_valNoise * noise("perlin", ss * i_valNoiseFreq * 18,
 					tt * i_valNoiseFreq * 18);
 				
 				val = clamp(val, 0, 1);
 			}
 
-			o_outColor = transformc("hsv", "rgb", color("hsv", hue, sat, val));
+			o_outColor = transformc("rgb", color("hsv", hue, sat, val));
 		}
 
 		o_outAlpha = 1.0;
