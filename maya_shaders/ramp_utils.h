@@ -1,17 +1,15 @@
-
 #ifndef __ramp_utils_h
 #define __ramp_utils_h
 
 #include "stdosl.h"
 
-color
-colorRamp(
+color colorRamp(
 	float   i_pos,
-	float   i_positions[],
+	float   i_positions[3],
 	int     i_interpolation[],
-	color   i_colorValues[])
+	color   i_colorValues[3])
 {
-	color result = 0;
+	color result = color(0, 0, 0);
 	
 	if(arraylength(i_positions) == arraylength(i_colorValues) &&
 			arraylength(i_positions) > 0)
