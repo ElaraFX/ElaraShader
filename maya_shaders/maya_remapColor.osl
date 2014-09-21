@@ -1,0 +1,383 @@
+// -------------for mtoer.xml------------------------------
+// <maya_remapColor>
+	// <maya.name type="STRING">remapColor</maya.name>
+// </maya_remapColor>
+
+#include "ramp_utils.h"
+
+shader maya_remapColor
+[[ string help = "Maya ramapColor"]]
+(//{
+	// Inputs
+				color	i_color					= 0.5,
+			
+				float	i_red_Position_0		= 0.0 ,
+				float	i_red_Position_1		= 1.0 ,
+				float	i_red_Position_2		= -99 ,
+				float	i_red_Position_3		= -99 ,
+				float	i_red_Position_4		= -99 ,
+				float	i_red_Position_5		= -99 ,
+				float	i_red_Position_6		= -99 ,
+				float	i_red_Position_7		= -99 ,
+				float	i_red_Position_8		= -99 ,
+				float	i_red_Position_9		= -99 ,
+				float	i_red_Position_10		= -99 ,
+				float	i_red_Position_11		= -99 ,
+				float	i_red_Position_12		= -99 ,
+				float	i_red_Position_13		= -99 ,
+				float	i_red_Position_14		= -99 ,
+				float	i_red_Position_15		= -99 ,
+				
+				float	i_red_FloatValue_0		= 0.0 ,
+				float	i_red_FloatValue_1		= 1.0 ,
+				float	i_red_FloatValue_2		= -99 ,
+				float	i_red_FloatValue_3		= -99 ,
+				float	i_red_FloatValue_4		= -99 ,
+				float	i_red_FloatValue_5		= -99 ,
+				float	i_red_FloatValue_6		= -99 ,
+				float	i_red_FloatValue_7		= -99 ,
+				float	i_red_FloatValue_8		= -99 ,
+				float	i_red_FloatValue_9		= -99 ,
+				float	i_red_FloatValue_10		= -99 ,
+				float	i_red_FloatValue_11		= -99 ,
+				float	i_red_FloatValue_12		= -99 ,
+				float	i_red_FloatValue_13		= -99 ,
+				float	i_red_FloatValue_14		= -99 ,
+				float	i_red_FloatValue_15		= -99 ,
+				
+	/*uniform*/	int		i_red_Interp_0			= 1 ,
+	/*uniform*/	int		i_red_Interp_1			= 1 ,
+	/*uniform*/	int		i_red_Interp_2			= -99 ,
+	/*uniform*/	int		i_red_Interp_3			= -99 ,
+	/*uniform*/	int		i_red_Interp_4			= -99 ,
+	/*uniform*/	int		i_red_Interp_5			= -99 ,
+	/*uniform*/	int		i_red_Interp_6			= -99 ,
+	/*uniform*/	int		i_red_Interp_7			= -99 ,
+	/*uniform*/	int		i_red_Interp_8			= -99 ,
+	/*uniform*/	int		i_red_Interp_9			= -99 ,
+	/*uniform*/	int		i_red_Interp_10			= -99 ,
+	/*uniform*/	int		i_red_Interp_11			= -99 ,
+	/*uniform*/	int		i_red_Interp_12			= -99 ,
+	/*uniform*/	int		i_red_Interp_13			= -99 ,
+	/*uniform*/	int		i_red_Interp_14			= -99 ,
+	/*uniform*/	int		i_red_Interp_15			= -99 ,
+
+				float	i_green_Position_0		= 0.0 ,
+				float	i_green_Position_1		= 1.0 ,
+				float	i_green_Position_2		= -99 ,
+				float	i_green_Position_3		= -99 ,
+				float	i_green_Position_4		= -99 ,
+				float	i_green_Position_5		= -99 ,
+				float	i_green_Position_6		= -99 ,
+				float	i_green_Position_7		= -99 ,
+				float	i_green_Position_8		= -99 ,
+				float	i_green_Position_9		= -99 ,
+				float	i_green_Position_10		= -99 ,
+				float	i_green_Position_11		= -99 ,
+				float	i_green_Position_12		= -99 ,
+				float	i_green_Position_13		= -99 ,
+				float	i_green_Position_14		= -99 ,
+				float	i_green_Position_15		= -99 ,
+				
+				float	i_green_FloatValue_0	= 0.0 ,
+				float	i_green_FloatValue_1	= 1.0 ,
+				float	i_green_FloatValue_2	= -99 ,
+				float	i_green_FloatValue_3	= -99 ,
+				float	i_green_FloatValue_4	= -99 ,
+				float	i_green_FloatValue_5	= -99 ,
+				float	i_green_FloatValue_6	= -99 ,
+				float	i_green_FloatValue_7	= -99 ,
+				float	i_green_FloatValue_8	= -99 ,
+				float	i_green_FloatValue_9	= -99 ,
+				float	i_green_FloatValue_10	= -99 ,
+				float	i_green_FloatValue_11	= -99 ,
+				float	i_green_FloatValue_12	= -99 ,
+				float	i_green_FloatValue_13	= -99 ,
+				float	i_green_FloatValue_14	= -99 ,
+				float	i_green_FloatValue_15	= -99 ,
+				
+	/*uniform*/	int		i_green_Interp_0		= 1 ,
+	/*uniform*/	int		i_green_Interp_1		= 1 ,
+	/*uniform*/	int		i_green_Interp_2		= -99 ,
+	/*uniform*/	int		i_green_Interp_3		= -99 ,
+	/*uniform*/	int		i_green_Interp_4		= -99 ,
+	/*uniform*/	int		i_green_Interp_5		= -99 ,
+	/*uniform*/	int		i_green_Interp_6		= -99 ,
+	/*uniform*/	int		i_green_Interp_7		= -99 ,
+	/*uniform*/	int		i_green_Interp_8		= -99 ,
+	/*uniform*/	int		i_green_Interp_9		= -99 ,
+	/*uniform*/	int		i_green_Interp_10		= -99 ,
+	/*uniform*/	int		i_green_Interp_11		= -99 ,
+	/*uniform*/	int		i_green_Interp_12		= -99 ,
+	/*uniform*/	int		i_green_Interp_13		= -99 ,
+	/*uniform*/	int		i_green_Interp_14		= -99 ,
+	/*uniform*/	int		i_green_Interp_15		= -99 ,
+
+				float	i_blue_Position_0		= 0.0 ,
+				float	i_blue_Position_1		= 1.0 ,
+				float	i_blue_Position_2		= -99 ,
+				float	i_blue_Position_3		= -99 ,
+				float	i_blue_Position_4		= -99 ,
+				float	i_blue_Position_5		= -99 ,
+				float	i_blue_Position_6		= -99 ,
+				float	i_blue_Position_7		= -99 ,
+				float	i_blue_Position_8		= -99 ,
+				float	i_blue_Position_9		= -99 ,
+				float	i_blue_Position_10		= -99 ,
+				float	i_blue_Position_11		= -99 ,
+				float	i_blue_Position_12		= -99 ,
+				float	i_blue_Position_13		= -99 ,
+				float	i_blue_Position_14		= -99 ,
+				float	i_blue_Position_15		= -99 ,
+				
+				float	i_blue_FloatValue_0		= 0.0 ,
+				float	i_blue_FloatValue_1		= 1.0 ,
+				float	i_blue_FloatValue_2		= -99 ,
+				float	i_blue_FloatValue_3		= -99 ,
+				float	i_blue_FloatValue_4		= -99 ,
+				float	i_blue_FloatValue_5		= -99 ,
+				float	i_blue_FloatValue_6		= -99 ,
+				float	i_blue_FloatValue_7		= -99 ,
+				float	i_blue_FloatValue_8		= -99 ,
+				float	i_blue_FloatValue_9		= -99 ,
+				float	i_blue_FloatValue_10	= -99 ,
+				float	i_blue_FloatValue_11	= -99 ,
+				float	i_blue_FloatValue_12	= -99 ,
+				float	i_blue_FloatValue_13	= -99 ,
+				float	i_blue_FloatValue_14	= -99 ,
+				float	i_blue_FloatValue_15	= -99 ,
+				
+	/*uniform*/	int		i_blue_Interp_0			= 1 ,
+	/*uniform*/	int		i_blue_Interp_1			= 1 ,
+	/*uniform*/	int		i_blue_Interp_2			= -99 ,
+	/*uniform*/	int		i_blue_Interp_3			= -99 ,
+	/*uniform*/	int		i_blue_Interp_4			= -99 ,
+	/*uniform*/	int		i_blue_Interp_5			= -99 ,
+	/*uniform*/	int		i_blue_Interp_6			= -99 ,
+	/*uniform*/	int		i_blue_Interp_7			= -99 ,
+	/*uniform*/	int		i_blue_Interp_8			= -99 ,
+	/*uniform*/	int		i_blue_Interp_9			= -99 ,
+	/*uniform*/	int		i_blue_Interp_10		= -99 ,
+	/*uniform*/	int		i_blue_Interp_11		= -99 ,
+	/*uniform*/	int		i_blue_Interp_12		= -99 ,
+	/*uniform*/	int		i_blue_Interp_13		= -99 ,
+	/*uniform*/	int		i_blue_Interp_14		= -99 ,
+	/*uniform*/	int		i_blue_Interp_15		= -99 ,
+
+				float	i_inputMin				= 0.0,
+				float	i_inputMax				= 1.0,
+				float	i_outputMin				= 0.0,
+				float	i_outputMax				= 1.0,
+	
+	// Outputs
+	output		color	o_outColor				= 0.0
+)//}
+{
+	// Apply input range
+	color c = (i_color - i_inputMin) / (i_inputMax - i_inputMin);
+
+	// Mimic maya's behavior when the input range is empty.
+	if( i_inputMin == i_inputMax )
+		c = 0;
+
+	//{ red arrays
+		float i_red_Position[16] = {
+								i_red_Position_0,
+								i_red_Position_1,
+								i_red_Position_2,
+								i_red_Position_3,
+								i_red_Position_4,
+								i_red_Position_5,
+								i_red_Position_6,
+								i_red_Position_7,
+								i_red_Position_8,
+								i_red_Position_9,
+								i_red_Position_10,
+								i_red_Position_11,
+								i_red_Position_12,
+								i_red_Position_13,
+								i_red_Position_14,
+								i_red_Position_15
+							};
+		int i_red_Interp[16] = {
+								i_red_Interp_0,
+								i_red_Interp_1,
+								i_red_Interp_2,
+								i_red_Interp_3,
+								i_red_Interp_4,
+								i_red_Interp_5,
+								i_red_Interp_6,
+								i_red_Interp_7,
+								i_red_Interp_8,
+								i_red_Interp_9,
+								i_red_Interp_10,
+								i_red_Interp_11,
+								i_red_Interp_12,
+								i_red_Interp_13,
+								i_red_Interp_14,
+								i_red_Interp_15
+							};
+		float i_red_FloatValue[16] = {
+								i_red_FloatValue_0,
+								i_red_FloatValue_1,
+								i_red_FloatValue_2,
+								i_red_FloatValue_3,
+								i_red_FloatValue_4,
+								i_red_FloatValue_5,
+								i_red_FloatValue_6,
+								i_red_FloatValue_7,
+								i_red_FloatValue_8,
+								i_red_FloatValue_9,
+								i_red_FloatValue_10,
+								i_red_FloatValue_11,
+								i_red_FloatValue_12,
+								i_red_FloatValue_13,
+								i_red_FloatValue_14,
+								i_red_FloatValue_15
+							};
+	//}
+	//{ green arrays
+		float i_green_Position[16] = {
+								i_green_Position_0,
+								i_green_Position_1,
+								i_green_Position_2,
+								i_green_Position_3,
+								i_green_Position_4,
+								i_green_Position_5,
+								i_green_Position_6,
+								i_green_Position_7,
+								i_green_Position_8,
+								i_green_Position_9,
+								i_green_Position_10,
+								i_green_Position_11,
+								i_green_Position_12,
+								i_green_Position_13,
+								i_green_Position_14,
+								i_green_Position_15
+							};
+		int i_green_Interp[16] = {
+								i_green_Interp_0,
+								i_green_Interp_1,
+								i_green_Interp_2,
+								i_green_Interp_3,
+								i_green_Interp_4,
+								i_green_Interp_5,
+								i_green_Interp_6,
+								i_green_Interp_7,
+								i_green_Interp_8,
+								i_green_Interp_9,
+								i_green_Interp_10,
+								i_green_Interp_11,
+								i_green_Interp_12,
+								i_green_Interp_13,
+								i_green_Interp_14,
+								i_green_Interp_15
+							};
+		float i_green_FloatValue[16] = {
+								i_green_FloatValue_0,
+								i_green_FloatValue_1,
+								i_green_FloatValue_2,
+								i_green_FloatValue_3,
+								i_green_FloatValue_4,
+								i_green_FloatValue_5,
+								i_green_FloatValue_6,
+								i_green_FloatValue_7,
+								i_green_FloatValue_8,
+								i_green_FloatValue_9,
+								i_green_FloatValue_10,
+								i_green_FloatValue_11,
+								i_green_FloatValue_12,
+								i_green_FloatValue_13,
+								i_green_FloatValue_14,
+								i_green_FloatValue_15
+							};
+	//}
+	//{ blue arrays
+		float i_blue_Position[16] = {
+								i_blue_Position_0,
+								i_blue_Position_1,
+								i_blue_Position_2,
+								i_blue_Position_3,
+								i_blue_Position_4,
+								i_blue_Position_5,
+								i_blue_Position_6,
+								i_blue_Position_7,
+								i_blue_Position_8,
+								i_blue_Position_9,
+								i_blue_Position_10,
+								i_blue_Position_11,
+								i_blue_Position_12,
+								i_blue_Position_13,
+								i_blue_Position_14,
+								i_blue_Position_15
+							};
+		int i_blue_Interp[16] = {
+								i_blue_Interp_0,
+								i_blue_Interp_1,
+								i_blue_Interp_2,
+								i_blue_Interp_3,
+								i_blue_Interp_4,
+								i_blue_Interp_5,
+								i_blue_Interp_6,
+								i_blue_Interp_7,
+								i_blue_Interp_8,
+								i_blue_Interp_9,
+								i_blue_Interp_10,
+								i_blue_Interp_11,
+								i_blue_Interp_12,
+								i_blue_Interp_13,
+								i_blue_Interp_14,
+								i_blue_Interp_15
+							};
+		float i_blue_FloatValue[16] = {
+								i_blue_FloatValue_0,
+								i_blue_FloatValue_1,
+								i_blue_FloatValue_2,
+								i_blue_FloatValue_3,
+								i_blue_FloatValue_4,
+								i_blue_FloatValue_5,
+								i_blue_FloatValue_6,
+								i_blue_FloatValue_7,
+								i_blue_FloatValue_8,
+								i_blue_FloatValue_9,
+								i_blue_FloatValue_10,
+								i_blue_FloatValue_11,
+								i_blue_FloatValue_12,
+								i_blue_FloatValue_13,
+								i_blue_FloatValue_14,
+								i_blue_FloatValue_15
+							};
+	//}
+	// Remap red
+	float red = floatRamp(
+		c[0],
+		i_red_Position,
+		i_red_Interp,
+		i_red_FloatValue );
+
+	c[0] = red;
+
+	// Remap green
+	float green = floatRamp(
+		c[1],
+		i_green_Position,
+		i_green_Interp,
+		i_green_FloatValue );
+
+	c[1] = green ;
+
+	// Remap blue
+	float blue = floatRamp(
+		c[2],
+		i_blue_Position,
+		i_blue_Interp,
+		i_blue_FloatValue );
+
+	c[2] = blue;
+
+	// Apply output range
+	o_outColor = i_outputMin + c * (i_outputMax - i_outputMin);
+	//~ o_outColor = 0.5;
+}
+
+
