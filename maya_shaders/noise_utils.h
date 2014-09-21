@@ -501,5 +501,53 @@ cos_waves(
 	return noiseValue /= i_numWaves;      
 }
 
+float
+cos_waves3(
+	float i_x,
+    float i_y,
+    float i_z,
+	float i_time,
+	float i_numWaves
+    )
+{
+	float x = i_x * 2 * M_PI;
+	float y = i_y * 2 * M_PI;
+    float z = i_z * 2 * M_PI;
+	float time = i_time * 2 * M_PI;
+
+	float dirX = 0;
+	float dirY = 0;
+    float dirZ = 0;
+	float norm = 0;
+	float noiseValue = 0;
+	int i = 0;
+
+	for(i = 1; i <= i_numWaves; i += 1)
+	{
+		point noisePoint=0;
+        noisePoint[0] = noise("uperlin",  i * M_PI / i_numWaves+123);
+		noisePoint[1] = noise("uperlin",  i * M_PI / i_numWaves);
+        noisePoint[2] = noise("uperlin",  i * M_PI / i_numWaves-123);
+		
+		dirX = 2 * noisePoint[0] - 1;
+		dirY = 2 * noisePoint[1] - 1;
+        dirZ = 2 * noisePoint[2] - 1;
+		//float offset = 2 * noisePoint[2] - 1;
+		float freqNoise = noise("uperlin", 50 * dirX * dirY * dirZ);
+
+		norm = sqrt(dirX * dirX + dirY * dirY + dirZ * dirZ);
+		
+		if(norm > EPSILON)
+		{
+			dirX /= norm;
+			dirY /= norm;
+            dirZ /= norm;
+			noiseValue += cos((dirX * x + dirY * y + dirZ * z)  * (M_PI) / (6 * freqNoise) + time);
+				//offset * time);
+		}
+	}
+
+	return noiseValue /= i_numWaves;      
+}
 #endif
 
