@@ -1,0 +1,54 @@
+// -------------for mtoer.xml------------------------------
+// <maya_contrast>
+	// <maya.name type="STRING">contrast</maya.name>
+// </maya_contrast>
+
+#include "mayautil.h"
+
+float
+mayaContrast(
+	float i_value,
+	float i_contrast,
+	float i_bias)
+{
+	// Compute biased value 
+	float value = pow(i_value + EPSILON, log(0.5) / log(i_bias));
+
+	float outValue;
+	
+	if (value < 0.5)
+	{
+		outValue = 0.5 * pow(2 * value, i_contrast);
+	}
+	else
+	{
+		outValue = 1.0 - 0.5 * pow(2 * (1 - value), i_contrast);
+	}
+
+	return outValue;
+}
+
+shader maya_contrast
+[[ string help = "Maya Contrast"]]
+(
+	// Inputs
+	//
+			vector	i_value			= 0.0 ,
+			vector	i_contrast		= 2.0 ,
+			vector	i_bias			= 0.5 ,
+	// Outputs
+	//
+	output	vector	o_outputValue	= 0.0
+)
+{
+	float r = mayaContrast(i_value[0], i_contrast[0],	i_bias[0]);
+
+	float g = mayaContrast(i_value[1], i_contrast[1], i_bias[1]);
+
+	float b = mayaContrast(i_value[2], i_contrast[2], i_bias[2]);
+
+	o_outputValue = vector(r, g, b);
+	//~ o_outputValue = vector(0);
+}
+
+
