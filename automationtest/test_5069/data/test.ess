@@ -289,9 +289,57 @@ node "poly" "bias:object:pPlaneShape1" # "object"
 		0.000000 1.000000
 		1.000000 1.000000
 end
+node "maya_place2dTexture" "bias:object:place2dTexture1" # "osl_node"
+	scalar "i_coverageU" 1.000000
+	scalar "i_coverageV" 1.000000
+	int "i_mirrorU" 0
+	int "i_mirrorV" 0
+	scalar "i_noiseU" 0.000000
+	scalar "i_noiseV" 0.000000
+	scalar "i_offsetU" 0.000000
+	scalar "i_offsetV" 0.000000
+	scalar "i_repeatU" 2.000000
+	scalar "i_repeatV" 2.000000
+	scalar "i_rotateFrame" 0.000000
+	scalar "i_rotateUV" 0.000000
+	int "i_stagger" 0
+	scalar "i_translateFrameU" 0.000000
+	scalar "i_translateFrameV" 0.000000
+	int "i_wrapU" 1
+	int "i_wrapV" 1
+	token "i_mtoer_uvSetName" "uv"
+	vector "o_outUV" 0.000000 0.000000 0.000000
+end
+node "maya_cloth" "bias:object:cloth1" # "osl_node"
+	scalar "i_alphaGain" 1.000000
+	scalar "i_alphaOffset" 0.000000
+	scalar "i_brightSpread" 0.000000
+	color "i_colorGain" 1.000000 1.000000 1.000000
+	color "i_colorOffset" 0.000000 0.000000 0.000000
+	color "i_defaultColor" 0.500000 0.500000 0.500000
+	color "i_gapColor" 0.000000 0.000000 0.000000
+	scalar "i_invert" 0.000000
+	scalar "i_randomness" 0.000000
+	color "i_uColor" 1.000000 1.000000 1.000000
+	param_link "i_uvCoord" "bias:object:place2dTexture1" "o_outUV"
+	scalar "i_uWave" 0.000000
+	scalar "i_uWidth" 1.000000
+	color "i_vColor" 0.500000 0.500000 0.500000
+	scalar "i_vWave" 0.000000
+	scalar "i_vWidth" 1.000000
+	scalar "i_widthSpread" 0.000000
+	scalar "o_outAlpha" 0.031250
+	color "o_outColor" 0.031250 0.031250 0.031250
+end
+node "maya_contrast" "bias:object:contrast1" # "osl_node"
+	param_link "i_value" "bias:object:cloth1" "o_outColor"
+	color "i_contrast" 4.000000 4.000000 4.000000
+	color "i_bias" 0.300000 0.300000 0.300000
+	color "o_outValue" 0.002735 0.002735 0.002735
+end
 node "maya_lambert" "bias:object:lambert2" # "osl_node"
 	color "i_ambientColor" 0.000000 0.000000 0.000000
-	color "i_color" 0.500000 0.500000 0.500000
+	param_link "i_color" "bias:object:contrast1" "o_outValue"
 	scalar "i_diffuse" 1.000000
 	color "i_incandescence" 0.000000 0.000000 0.000000
 	int "i_matteOpacityMode" 2
@@ -392,9 +440,57 @@ node "poly" "bias_2:object:pPlaneShape1" # "object"
 		0.000000 1.000000
 		1.000000 1.000000
 end
+node "maya_place2dTexture" "bias_2:object:place2dTexture1" # "osl_node"
+	scalar "i_coverageU" 1.000000
+	scalar "i_coverageV" 1.000000
+	int "i_mirrorU" 0
+	int "i_mirrorV" 0
+	scalar "i_noiseU" 0.000000
+	scalar "i_noiseV" 0.000000
+	scalar "i_offsetU" 0.000000
+	scalar "i_offsetV" 0.000000
+	scalar "i_repeatU" 2.000000
+	scalar "i_repeatV" 2.000000
+	scalar "i_rotateFrame" 0.000000
+	scalar "i_rotateUV" 0.000000
+	int "i_stagger" 0
+	scalar "i_translateFrameU" 0.000000
+	scalar "i_translateFrameV" 0.000000
+	int "i_wrapU" 1
+	int "i_wrapV" 1
+	token "i_mtoer_uvSetName" "uv"
+	vector "o_outUV" 0.000000 0.000000 0.000000
+end
+node "maya_cloth" "bias_2:object:cloth1" # "osl_node"
+	scalar "i_alphaGain" 1.000000
+	scalar "i_alphaOffset" 0.000000
+	scalar "i_brightSpread" 0.000000
+	color "i_colorGain" 1.000000 1.000000 1.000000
+	color "i_colorOffset" 0.000000 0.000000 0.000000
+	color "i_defaultColor" 0.500000 0.500000 0.500000
+	color "i_gapColor" 0.000000 0.000000 0.000000
+	scalar "i_invert" 0.000000
+	scalar "i_randomness" 0.000000
+	color "i_uColor" 1.000000 1.000000 1.000000
+	param_link "i_uvCoord" "bias_2:object:place2dTexture1" "o_outUV"
+	scalar "i_uWave" 0.000000
+	scalar "i_uWidth" 1.000000
+	color "i_vColor" 0.500000 0.500000 0.500000
+	scalar "i_vWave" 0.000000
+	scalar "i_vWidth" 1.000000
+	scalar "i_widthSpread" 0.000000
+	scalar "o_outAlpha" 0.031250
+	color "o_outColor" 0.031250 0.031250 0.031250
+end
+node "maya_contrast" "bias_2:object:contrast1" # "osl_node"
+	param_link "i_value" "bias_2:object:cloth1" "o_outColor"
+	color "i_contrast" 4.000000 4.000000 4.000000
+	color "i_bias" 0.700000 0.300000 0.100000
+	color "o_outValue" 0.000000 0.002735 0.123228
+end
 node "maya_lambert" "bias_2:object:lambert2" # "osl_node"
 	color "i_ambientColor" 0.000000 0.000000 0.000000
-	color "i_color" 0.500000 0.500000 0.500000
+	param_link "i_color" "bias_2:object:contrast1" "o_outValue"
 	scalar "i_diffuse" 1.000000
 	color "i_incandescence" 0.000000 0.000000 0.000000
 	int "i_matteOpacityMode" 2
@@ -495,9 +591,57 @@ node "poly" "contrast:object:pPlaneShape1" # "object"
 		0.000000 1.000000
 		1.000000 1.000000
 end
+node "maya_place2dTexture" "contrast:object:place2dTexture1" # "osl_node"
+	scalar "i_coverageU" 1.000000
+	scalar "i_coverageV" 1.000000
+	int "i_mirrorU" 0
+	int "i_mirrorV" 0
+	scalar "i_noiseU" 0.000000
+	scalar "i_noiseV" 0.000000
+	scalar "i_offsetU" 0.000000
+	scalar "i_offsetV" 0.000000
+	scalar "i_repeatU" 2.000000
+	scalar "i_repeatV" 2.000000
+	scalar "i_rotateFrame" 0.000000
+	scalar "i_rotateUV" 0.000000
+	int "i_stagger" 0
+	scalar "i_translateFrameU" 0.000000
+	scalar "i_translateFrameV" 0.000000
+	int "i_wrapU" 1
+	int "i_wrapV" 1
+	token "i_mtoer_uvSetName" "uv"
+	vector "o_outUV" 0.000000 0.000000 0.000000
+end
+node "maya_cloth" "contrast:object:cloth1" # "osl_node"
+	scalar "i_alphaGain" 1.000000
+	scalar "i_alphaOffset" 0.000000
+	scalar "i_brightSpread" 0.000000
+	color "i_colorGain" 1.000000 1.000000 1.000000
+	color "i_colorOffset" 0.000000 0.000000 0.000000
+	color "i_defaultColor" 0.500000 0.500000 0.500000
+	color "i_gapColor" 0.000000 0.000000 0.000000
+	scalar "i_invert" 0.000000
+	scalar "i_randomness" 0.000000
+	color "i_uColor" 1.000000 1.000000 1.000000
+	param_link "i_uvCoord" "contrast:object:place2dTexture1" "o_outUV"
+	scalar "i_uWave" 0.000000
+	scalar "i_uWidth" 1.000000
+	color "i_vColor" 0.500000 0.500000 0.500000
+	scalar "i_vWave" 0.000000
+	scalar "i_vWidth" 1.000000
+	scalar "i_widthSpread" 0.000000
+	scalar "o_outAlpha" 0.031250
+	color "o_outColor" 0.031250 0.031250 0.031250
+end
+node "maya_contrast" "contrast:object:contrast1" # "osl_node"
+	param_link "i_value" "contrast:object:cloth1" "o_outColor"
+	color "i_contrast" 4.000000 4.000000 4.000000
+	color "i_bias" 0.500000 0.500000 0.500000
+	color "o_outValue" 0.000008 0.000008 0.000008
+end
 node "maya_lambert" "contrast:object:lambert2" # "osl_node"
 	color "i_ambientColor" 0.000000 0.000000 0.000000
-	color "i_color" 0.500000 0.500000 0.500000
+	param_link "i_color" "contrast:object:contrast1" "o_outValue"
 	scalar "i_diffuse" 1.000000
 	color "i_incandescence" 0.000000 0.000000 0.000000
 	int "i_matteOpacityMode" 2
@@ -598,9 +742,57 @@ node "poly" "contrast_2:object:pPlaneShape1" # "object"
 		0.000000 1.000000
 		1.000000 1.000000
 end
+node "maya_place2dTexture" "contrast_2:object:place2dTexture1" # "osl_node"
+	scalar "i_coverageU" 1.000000
+	scalar "i_coverageV" 1.000000
+	int "i_mirrorU" 0
+	int "i_mirrorV" 0
+	scalar "i_noiseU" 0.000000
+	scalar "i_noiseV" 0.000000
+	scalar "i_offsetU" 0.000000
+	scalar "i_offsetV" 0.000000
+	scalar "i_repeatU" 2.000000
+	scalar "i_repeatV" 2.000000
+	scalar "i_rotateFrame" 0.000000
+	scalar "i_rotateUV" 0.000000
+	int "i_stagger" 0
+	scalar "i_translateFrameU" 0.000000
+	scalar "i_translateFrameV" 0.000000
+	int "i_wrapU" 1
+	int "i_wrapV" 1
+	token "i_mtoer_uvSetName" "uv"
+	vector "o_outUV" 0.000000 0.000000 0.000000
+end
+node "maya_cloth" "contrast_2:object:cloth1" # "osl_node"
+	scalar "i_alphaGain" 1.000000
+	scalar "i_alphaOffset" 0.000000
+	scalar "i_brightSpread" 0.000000
+	color "i_colorGain" 1.000000 1.000000 1.000000
+	color "i_colorOffset" 0.000000 0.000000 0.000000
+	color "i_defaultColor" 0.500000 0.500000 0.500000
+	color "i_gapColor" 0.000000 0.000000 0.000000
+	scalar "i_invert" 0.000000
+	scalar "i_randomness" 0.000000
+	color "i_uColor" 1.000000 1.000000 1.000000
+	param_link "i_uvCoord" "contrast_2:object:place2dTexture1" "o_outUV"
+	scalar "i_uWave" 0.000000
+	scalar "i_uWidth" 1.000000
+	color "i_vColor" 0.500000 0.500000 0.500000
+	scalar "i_vWave" 0.000000
+	scalar "i_vWidth" 1.000000
+	scalar "i_widthSpread" 0.000000
+	scalar "o_outAlpha" 0.031250
+	color "o_outColor" 0.031250 0.031250 0.031250
+end
+node "maya_contrast" "contrast_2:object:contrast1" # "osl_node"
+	param_link "i_value" "contrast_2:object:cloth1" "o_outColor"
+	color "i_contrast" 0.500000 1.000000 2.000000
+	color "i_bias" 0.500000 0.500000 0.500000
+	color "o_outValue" 0.125000 0.031250 0.001953
+end
 node "maya_lambert" "contrast_2:object:lambert2" # "osl_node"
 	color "i_ambientColor" 0.000000 0.000000 0.000000
-	color "i_color" 0.500000 0.500000 0.500000
+	param_link "i_color" "contrast_2:object:contrast1" "o_outValue"
 	scalar "i_diffuse" 1.000000
 	color "i_incandescence" 0.000000 0.000000 0.000000
 	int "i_matteOpacityMode" 2
@@ -701,9 +893,57 @@ node "poly" "object:pPlaneShape1" # "object"
 		0.000000 1.000000
 		1.000000 1.000000
 end
+node "maya_place2dTexture" "object:place2dTexture1" # "osl_node"
+	scalar "i_coverageU" 1.000000
+	scalar "i_coverageV" 1.000000
+	int "i_mirrorU" 0
+	int "i_mirrorV" 0
+	scalar "i_noiseU" 0.000000
+	scalar "i_noiseV" 0.000000
+	scalar "i_offsetU" 0.000000
+	scalar "i_offsetV" 0.000000
+	scalar "i_repeatU" 2.000000
+	scalar "i_repeatV" 2.000000
+	scalar "i_rotateFrame" 0.000000
+	scalar "i_rotateUV" 0.000000
+	int "i_stagger" 0
+	scalar "i_translateFrameU" 0.000000
+	scalar "i_translateFrameV" 0.000000
+	int "i_wrapU" 1
+	int "i_wrapV" 1
+	token "i_mtoer_uvSetName" "uv"
+	vector "o_outUV" 0.000000 0.000000 0.000000
+end
+node "maya_cloth" "object:cloth1" # "osl_node"
+	scalar "i_alphaGain" 1.000000
+	scalar "i_alphaOffset" 0.000000
+	scalar "i_brightSpread" 0.000000
+	color "i_colorGain" 1.000000 1.000000 1.000000
+	color "i_colorOffset" 0.000000 0.000000 0.000000
+	color "i_defaultColor" 0.500000 0.500000 0.500000
+	color "i_gapColor" 0.000000 0.000000 0.000000
+	scalar "i_invert" 0.000000
+	scalar "i_randomness" 0.000000
+	color "i_uColor" 1.000000 1.000000 1.000000
+	param_link "i_uvCoord" "object:place2dTexture1" "o_outUV"
+	scalar "i_uWave" 0.000000
+	scalar "i_uWidth" 1.000000
+	color "i_vColor" 0.500000 0.500000 0.500000
+	scalar "i_vWave" 0.000000
+	scalar "i_vWidth" 1.000000
+	scalar "i_widthSpread" 0.000000
+	scalar "o_outAlpha" 0.031250
+	color "o_outColor" 0.031250 0.031250 0.031250
+end
+node "maya_contrast" "object:contrast1" # "osl_node"
+	param_link "i_value" "object:cloth1" "o_outColor"
+	color "i_contrast" 2.000000 2.000000 2.000000
+	color "i_bias" 0.500000 0.500000 0.500000
+	color "o_outValue" 0.001953 0.001953 0.001953
+end
 node "maya_lambert" "object:lambert2" # "osl_node"
 	color "i_ambientColor" 0.000000 0.000000 0.000000
-	color "i_color" 0.500000 0.500000 0.500000
+	param_link "i_color" "object:contrast1" "o_outValue"
 	scalar "i_diffuse" 1.000000
 	color "i_incandescence" 0.000000 0.000000 0.000000
 	int "i_matteOpacityMode" 2
@@ -804,9 +1044,57 @@ node "poly" "value:object:pPlaneShape1" # "object"
 		0.000000 1.000000
 		1.000000 1.000000
 end
+node "maya_place2dTexture" "value:object:place2dTexture1" # "osl_node"
+	scalar "i_coverageU" 1.000000
+	scalar "i_coverageV" 1.000000
+	int "i_mirrorU" 0
+	int "i_mirrorV" 0
+	scalar "i_noiseU" 0.000000
+	scalar "i_noiseV" 0.000000
+	scalar "i_offsetU" 0.000000
+	scalar "i_offsetV" 0.000000
+	scalar "i_repeatU" 2.000000
+	scalar "i_repeatV" 2.000000
+	scalar "i_rotateFrame" 0.000000
+	scalar "i_rotateUV" 0.000000
+	int "i_stagger" 0
+	scalar "i_translateFrameU" 0.000000
+	scalar "i_translateFrameV" 0.000000
+	int "i_wrapU" 1
+	int "i_wrapV" 1
+	token "i_mtoer_uvSetName" "uv"
+	vector "o_outUV" 0.000000 0.000000 0.000000
+end
+node "maya_cloth" "value:object:cloth1" # "osl_node"
+	scalar "i_alphaGain" 1.000000
+	scalar "i_alphaOffset" 0.000000
+	scalar "i_brightSpread" 0.000000
+	color "i_colorGain" 2.000000 0.820000 1.933704
+	color "i_colorOffset" 0.000000 0.000000 0.000000
+	color "i_defaultColor" 0.500000 0.500000 0.500000
+	color "i_gapColor" 0.000000 0.000000 0.000000
+	scalar "i_invert" 0.000000
+	scalar "i_randomness" 0.000000
+	color "i_uColor" 1.000000 1.000000 1.000000
+	param_link "i_uvCoord" "value:object:place2dTexture1" "o_outUV"
+	scalar "i_uWave" 0.000000
+	scalar "i_uWidth" 1.000000
+	color "i_vColor" 0.500000 0.500000 0.500000
+	scalar "i_vWave" 0.000000
+	scalar "i_vWidth" 1.000000
+	scalar "i_widthSpread" 0.000000
+	scalar "o_outAlpha" 0.031250
+	color "o_outColor" 0.062500 0.025625 0.060428
+end
+node "maya_contrast" "value:object:contrast1" # "osl_node"
+	param_link "i_value" "value:object:cloth1" "o_outColor"
+	color "i_contrast" 2.000000 2.000000 2.000000
+	color "i_bias" 0.500000 0.500000 0.500000
+	color "o_outValue" 0.007813 0.001313 0.007303
+end
 node "maya_lambert" "value:object:lambert2" # "osl_node"
 	color "i_ambientColor" 0.000000 0.000000 0.000000
-	color "i_color" 0.500000 0.500000 0.500000
+	param_link "i_color" "value:object:contrast1" "o_outValue"
 	scalar "i_diffuse" 1.000000
 	color "i_incandescence" 0.000000 0.000000 0.000000
 	int "i_matteOpacityMode" 2
@@ -881,54 +1169,6 @@ node "instance" "value:object:pPlaneShape1_inst" # "instance"
 	#light_group is array but not valid, skip
 	#shadow_group is array but not valid, skip
 end
-node "maya_place2dTexture" "bias:object:place2dTexture1" # "osl_node"
-	scalar "i_coverageU" 1.000000
-	scalar "i_coverageV" 1.000000
-	int "i_mirrorU" 0
-	int "i_mirrorV" 0
-	scalar "i_noiseU" 0.000000
-	scalar "i_noiseV" 0.000000
-	scalar "i_offsetU" 0.000000
-	scalar "i_offsetV" 0.000000
-	scalar "i_repeatU" 2.000000
-	scalar "i_repeatV" 2.000000
-	scalar "i_rotateFrame" 0.000000
-	scalar "i_rotateUV" 0.000000
-	int "i_stagger" 0
-	scalar "i_translateFrameU" 0.000000
-	scalar "i_translateFrameV" 0.000000
-	int "i_wrapU" 1
-	int "i_wrapV" 1
-	token "i_mtoer_uvSetName" "uv"
-	vector "o_outUV" 0.000000 0.000000 0.000000
-end
-node "maya_cloth" "bias:object:cloth1" # "osl_node"
-	scalar "i_alphaGain" 1.000000
-	scalar "i_alphaOffset" 0.000000
-	scalar "i_brightSpread" 0.000000
-	color "i_colorGain" 1.000000 1.000000 1.000000
-	color "i_colorOffset" 0.000000 0.000000 0.000000
-	color "i_defaultColor" 0.500000 0.500000 0.500000
-	color "i_gapColor" 0.000000 0.000000 0.000000
-	scalar "i_invert" 0.000000
-	scalar "i_randomness" 0.000000
-	color "i_uColor" 1.000000 1.000000 1.000000
-	param_link "i_uvCoord" "bias:object:place2dTexture1" "o_outUV"
-	scalar "i_uWave" 0.000000
-	scalar "i_uWidth" 1.000000
-	color "i_vColor" 0.500000 0.500000 0.500000
-	scalar "i_vWave" 0.000000
-	scalar "i_vWidth" 1.000000
-	scalar "i_widthSpread" 0.000000
-	scalar "o_outAlpha" 0.031250
-	color "o_outColor" 0.031250 0.031250 0.031250
-end
-node "maya_contrast" "bias:object:contrast1" # "osl_node"
-	param_link "i_value" "bias:object:cloth1" "o_outColor"
-	vector "i_contrast" 4.000000 4.000000 4.000000
-	vector "i_bias" 0.300000 0.300000 0.300000
-	vector "o_outputValue" 0.000000 0.000000 0.000000
-end
 node "osl_shadergroup" "bias:object:contrast1_osl" # "osl_shadergroup"
 		ref[] "nodes" 1  #2
 		"bias:object:contrast1"
@@ -943,54 +1183,6 @@ node "osl_shadergroup" "bias:object:place2dTexture1_osl" # "osl_shadergroup"
 		ref[] "nodes" 1  #2
 		"bias:object:place2dTexture1"
 		"maya_ei_preset_aovs_0"
-end
-node "maya_place2dTexture" "bias_2:object:place2dTexture1" # "osl_node"
-	scalar "i_coverageU" 1.000000
-	scalar "i_coverageV" 1.000000
-	int "i_mirrorU" 0
-	int "i_mirrorV" 0
-	scalar "i_noiseU" 0.000000
-	scalar "i_noiseV" 0.000000
-	scalar "i_offsetU" 0.000000
-	scalar "i_offsetV" 0.000000
-	scalar "i_repeatU" 2.000000
-	scalar "i_repeatV" 2.000000
-	scalar "i_rotateFrame" 0.000000
-	scalar "i_rotateUV" 0.000000
-	int "i_stagger" 0
-	scalar "i_translateFrameU" 0.000000
-	scalar "i_translateFrameV" 0.000000
-	int "i_wrapU" 1
-	int "i_wrapV" 1
-	token "i_mtoer_uvSetName" "uv"
-	vector "o_outUV" 0.000000 0.000000 0.000000
-end
-node "maya_cloth" "bias_2:object:cloth1" # "osl_node"
-	scalar "i_alphaGain" 1.000000
-	scalar "i_alphaOffset" 0.000000
-	scalar "i_brightSpread" 0.000000
-	color "i_colorGain" 1.000000 1.000000 1.000000
-	color "i_colorOffset" 0.000000 0.000000 0.000000
-	color "i_defaultColor" 0.500000 0.500000 0.500000
-	color "i_gapColor" 0.000000 0.000000 0.000000
-	scalar "i_invert" 0.000000
-	scalar "i_randomness" 0.000000
-	color "i_uColor" 1.000000 1.000000 1.000000
-	param_link "i_uvCoord" "bias_2:object:place2dTexture1" "o_outUV"
-	scalar "i_uWave" 0.000000
-	scalar "i_uWidth" 1.000000
-	color "i_vColor" 0.500000 0.500000 0.500000
-	scalar "i_vWave" 0.000000
-	scalar "i_vWidth" 1.000000
-	scalar "i_widthSpread" 0.000000
-	scalar "o_outAlpha" 0.031250
-	color "o_outColor" 0.031250 0.031250 0.031250
-end
-node "maya_contrast" "bias_2:object:contrast1" # "osl_node"
-	param_link "i_value" "bias_2:object:cloth1" "o_outColor"
-	vector "i_contrast" 4.000000 4.000000 4.000000
-	vector "i_bias" 0.700000 0.300000 0.100000
-	vector "o_outputValue" 0.000000 0.000000 0.000000
 end
 node "osl_shadergroup" "bias_2:object:contrast1_osl" # "osl_shadergroup"
 		ref[] "nodes" 1  #2
@@ -1007,54 +1199,6 @@ node "osl_shadergroup" "bias_2:object:place2dTexture1_osl" # "osl_shadergroup"
 		"bias_2:object:place2dTexture1"
 		"maya_ei_preset_aovs_0"
 end
-node "maya_place2dTexture" "contrast:object:place2dTexture1" # "osl_node"
-	scalar "i_coverageU" 1.000000
-	scalar "i_coverageV" 1.000000
-	int "i_mirrorU" 0
-	int "i_mirrorV" 0
-	scalar "i_noiseU" 0.000000
-	scalar "i_noiseV" 0.000000
-	scalar "i_offsetU" 0.000000
-	scalar "i_offsetV" 0.000000
-	scalar "i_repeatU" 2.000000
-	scalar "i_repeatV" 2.000000
-	scalar "i_rotateFrame" 0.000000
-	scalar "i_rotateUV" 0.000000
-	int "i_stagger" 0
-	scalar "i_translateFrameU" 0.000000
-	scalar "i_translateFrameV" 0.000000
-	int "i_wrapU" 1
-	int "i_wrapV" 1
-	token "i_mtoer_uvSetName" "uv"
-	vector "o_outUV" 0.000000 0.000000 0.000000
-end
-node "maya_cloth" "contrast:object:cloth1" # "osl_node"
-	scalar "i_alphaGain" 1.000000
-	scalar "i_alphaOffset" 0.000000
-	scalar "i_brightSpread" 0.000000
-	color "i_colorGain" 1.000000 1.000000 1.000000
-	color "i_colorOffset" 0.000000 0.000000 0.000000
-	color "i_defaultColor" 0.500000 0.500000 0.500000
-	color "i_gapColor" 0.000000 0.000000 0.000000
-	scalar "i_invert" 0.000000
-	scalar "i_randomness" 0.000000
-	color "i_uColor" 1.000000 1.000000 1.000000
-	param_link "i_uvCoord" "contrast:object:place2dTexture1" "o_outUV"
-	scalar "i_uWave" 0.000000
-	scalar "i_uWidth" 1.000000
-	color "i_vColor" 0.500000 0.500000 0.500000
-	scalar "i_vWave" 0.000000
-	scalar "i_vWidth" 1.000000
-	scalar "i_widthSpread" 0.000000
-	scalar "o_outAlpha" 0.031250
-	color "o_outColor" 0.031250 0.031250 0.031250
-end
-node "maya_contrast" "contrast:object:contrast1" # "osl_node"
-	param_link "i_value" "contrast:object:cloth1" "o_outColor"
-	vector "i_contrast" 4.000000 4.000000 4.000000
-	vector "i_bias" 0.500000 0.500000 0.500000
-	vector "o_outputValue" 0.000000 0.000000 0.000000
-end
 node "osl_shadergroup" "contrast:object:contrast1_osl" # "osl_shadergroup"
 		ref[] "nodes" 1  #2
 		"contrast:object:contrast1"
@@ -1069,54 +1213,6 @@ node "osl_shadergroup" "contrast:object:place2dTexture1_osl" # "osl_shadergroup"
 		ref[] "nodes" 1  #2
 		"contrast:object:place2dTexture1"
 		"maya_ei_preset_aovs_0"
-end
-node "maya_place2dTexture" "contrast_2:object:place2dTexture1" # "osl_node"
-	scalar "i_coverageU" 1.000000
-	scalar "i_coverageV" 1.000000
-	int "i_mirrorU" 0
-	int "i_mirrorV" 0
-	scalar "i_noiseU" 0.000000
-	scalar "i_noiseV" 0.000000
-	scalar "i_offsetU" 0.000000
-	scalar "i_offsetV" 0.000000
-	scalar "i_repeatU" 2.000000
-	scalar "i_repeatV" 2.000000
-	scalar "i_rotateFrame" 0.000000
-	scalar "i_rotateUV" 0.000000
-	int "i_stagger" 0
-	scalar "i_translateFrameU" 0.000000
-	scalar "i_translateFrameV" 0.000000
-	int "i_wrapU" 1
-	int "i_wrapV" 1
-	token "i_mtoer_uvSetName" "uv"
-	vector "o_outUV" 0.000000 0.000000 0.000000
-end
-node "maya_cloth" "contrast_2:object:cloth1" # "osl_node"
-	scalar "i_alphaGain" 1.000000
-	scalar "i_alphaOffset" 0.000000
-	scalar "i_brightSpread" 0.000000
-	color "i_colorGain" 1.000000 1.000000 1.000000
-	color "i_colorOffset" 0.000000 0.000000 0.000000
-	color "i_defaultColor" 0.500000 0.500000 0.500000
-	color "i_gapColor" 0.000000 0.000000 0.000000
-	scalar "i_invert" 0.000000
-	scalar "i_randomness" 0.000000
-	color "i_uColor" 1.000000 1.000000 1.000000
-	param_link "i_uvCoord" "contrast_2:object:place2dTexture1" "o_outUV"
-	scalar "i_uWave" 0.000000
-	scalar "i_uWidth" 1.000000
-	color "i_vColor" 0.500000 0.500000 0.500000
-	scalar "i_vWave" 0.000000
-	scalar "i_vWidth" 1.000000
-	scalar "i_widthSpread" 0.000000
-	scalar "o_outAlpha" 0.031250
-	color "o_outColor" 0.031250 0.031250 0.031250
-end
-node "maya_contrast" "contrast_2:object:contrast1" # "osl_node"
-	param_link "i_value" "contrast_2:object:cloth1" "o_outColor"
-	vector "i_contrast" 0.500000 1.000000 2.000000
-	vector "i_bias" 0.500000 0.500000 0.500000
-	vector "o_outputValue" 0.000000 0.000000 0.000000
 end
 node "osl_shadergroup" "contrast_2:object:contrast1_osl" # "osl_shadergroup"
 		ref[] "nodes" 1  #2
@@ -1133,54 +1229,6 @@ node "osl_shadergroup" "contrast_2:object:place2dTexture1_osl" # "osl_shadergrou
 		"contrast_2:object:place2dTexture1"
 		"maya_ei_preset_aovs_0"
 end
-node "maya_place2dTexture" "object:place2dTexture1" # "osl_node"
-	scalar "i_coverageU" 1.000000
-	scalar "i_coverageV" 1.000000
-	int "i_mirrorU" 0
-	int "i_mirrorV" 0
-	scalar "i_noiseU" 0.000000
-	scalar "i_noiseV" 0.000000
-	scalar "i_offsetU" 0.000000
-	scalar "i_offsetV" 0.000000
-	scalar "i_repeatU" 2.000000
-	scalar "i_repeatV" 2.000000
-	scalar "i_rotateFrame" 0.000000
-	scalar "i_rotateUV" 0.000000
-	int "i_stagger" 0
-	scalar "i_translateFrameU" 0.000000
-	scalar "i_translateFrameV" 0.000000
-	int "i_wrapU" 1
-	int "i_wrapV" 1
-	token "i_mtoer_uvSetName" "uv"
-	vector "o_outUV" 0.000000 0.000000 0.000000
-end
-node "maya_cloth" "object:cloth1" # "osl_node"
-	scalar "i_alphaGain" 1.000000
-	scalar "i_alphaOffset" 0.000000
-	scalar "i_brightSpread" 0.000000
-	color "i_colorGain" 1.000000 1.000000 1.000000
-	color "i_colorOffset" 0.000000 0.000000 0.000000
-	color "i_defaultColor" 0.500000 0.500000 0.500000
-	color "i_gapColor" 0.000000 0.000000 0.000000
-	scalar "i_invert" 0.000000
-	scalar "i_randomness" 0.000000
-	color "i_uColor" 1.000000 1.000000 1.000000
-	param_link "i_uvCoord" "object:place2dTexture1" "o_outUV"
-	scalar "i_uWave" 0.000000
-	scalar "i_uWidth" 1.000000
-	color "i_vColor" 0.500000 0.500000 0.500000
-	scalar "i_vWave" 0.000000
-	scalar "i_vWidth" 1.000000
-	scalar "i_widthSpread" 0.000000
-	scalar "o_outAlpha" 0.031250
-	color "o_outColor" 0.031250 0.031250 0.031250
-end
-node "maya_contrast" "object:contrast1" # "osl_node"
-	param_link "i_value" "object:cloth1" "o_outColor"
-	vector "i_contrast" 2.000000 2.000000 2.000000
-	vector "i_bias" 0.500000 0.500000 0.500000
-	vector "o_outputValue" 0.000000 0.000000 0.000000
-end
 node "osl_shadergroup" "object:contrast1_osl" # "osl_shadergroup"
 		ref[] "nodes" 1  #2
 		"object:contrast1"
@@ -1195,54 +1243,6 @@ node "osl_shadergroup" "object:place2dTexture1_osl" # "osl_shadergroup"
 		ref[] "nodes" 1  #2
 		"object:place2dTexture1"
 		"maya_ei_preset_aovs_0"
-end
-node "maya_place2dTexture" "value:object:place2dTexture1" # "osl_node"
-	scalar "i_coverageU" 1.000000
-	scalar "i_coverageV" 1.000000
-	int "i_mirrorU" 0
-	int "i_mirrorV" 0
-	scalar "i_noiseU" 0.000000
-	scalar "i_noiseV" 0.000000
-	scalar "i_offsetU" 0.000000
-	scalar "i_offsetV" 0.000000
-	scalar "i_repeatU" 2.000000
-	scalar "i_repeatV" 2.000000
-	scalar "i_rotateFrame" 0.000000
-	scalar "i_rotateUV" 0.000000
-	int "i_stagger" 0
-	scalar "i_translateFrameU" 0.000000
-	scalar "i_translateFrameV" 0.000000
-	int "i_wrapU" 1
-	int "i_wrapV" 1
-	token "i_mtoer_uvSetName" "uv"
-	vector "o_outUV" 0.000000 0.000000 0.000000
-end
-node "maya_cloth" "value:object:cloth1" # "osl_node"
-	scalar "i_alphaGain" 1.000000
-	scalar "i_alphaOffset" 0.000000
-	scalar "i_brightSpread" 0.000000
-	color "i_colorGain" 2.000000 0.820000 1.933704
-	color "i_colorOffset" 0.000000 0.000000 0.000000
-	color "i_defaultColor" 0.500000 0.500000 0.500000
-	color "i_gapColor" 0.000000 0.000000 0.000000
-	scalar "i_invert" 0.000000
-	scalar "i_randomness" 0.000000
-	color "i_uColor" 1.000000 1.000000 1.000000
-	param_link "i_uvCoord" "value:object:place2dTexture1" "o_outUV"
-	scalar "i_uWave" 0.000000
-	scalar "i_uWidth" 1.000000
-	color "i_vColor" 0.500000 0.500000 0.500000
-	scalar "i_vWave" 0.000000
-	scalar "i_vWidth" 1.000000
-	scalar "i_widthSpread" 0.000000
-	scalar "o_outAlpha" 0.031250
-	color "o_outColor" 0.062500 0.025625 0.060428
-end
-node "maya_contrast" "value:object:contrast1" # "osl_node"
-	param_link "i_value" "value:object:cloth1" "o_outColor"
-	vector "i_contrast" 2.000000 2.000000 2.000000
-	vector "i_bias" 0.500000 0.500000 0.500000
-	vector "o_outputValue" 0.000000 0.000000 0.000000
 end
 node "osl_shadergroup" "value:object:contrast1_osl" # "osl_shadergroup"
 		ref[] "nodes" 1  #2

@@ -33,12 +33,12 @@ shader maya_contrast
 (
 	// Inputs
 	//
-			vector	i_value			= 0.0 ,
-			vector	i_contrast		= 2.0 ,
-			vector	i_bias			= 0.5 ,
+			color	i_value			= 0.0 ,
+			color	i_contrast		= 2.0 ,
+			color	i_bias			= 0.5 ,
 	// Outputs
 	//
-	output	color	o_outputValue	= 0.0
+	output	color	o_outValue	= 0.0
 )
 {
 	float r = mayaContrast(i_value[0], i_contrast[0],	i_bias[0]);
@@ -47,8 +47,7 @@ shader maya_contrast
 
 	float b = mayaContrast(i_value[2], i_contrast[2], i_bias[2]);
 
-	o_outputValue = color(r, g, b);
-	//~ o_outputValue = vector(0);
+	o_outValue = color(r, g, b);
 }
 
 
