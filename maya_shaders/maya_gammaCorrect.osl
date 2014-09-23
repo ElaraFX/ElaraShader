@@ -1,0 +1,32 @@
+// -------------for mtoer.xml------------------------------
+// <maya_gammaCorrect>
+	// <maya.name type="STRING">gammaCorrect</maya.name>
+// </maya_gammaCorrect>
+
+shader maya_gammaCorrect
+[[ string help = "Maya GammaCorrect"]]
+(
+	// Inputs
+	//
+			color	i_value		= 0,
+			color	i_gamma		= 1,
+	// Outputs
+	//
+	output	color	o_outValue	= 0
+)
+{
+	// correct 0 gamma situation, making it matches maya software's result.
+	color gamma = color(
+						i_gamma[0]==0? 1:i_gamma[0],
+						i_gamma[1]==0? 1:i_gamma[1],
+						i_gamma[2]==0? 1:i_gamma[2]
+					);
+	o_outValue = color(
+		pow(i_value[0], 1.0 / gamma[0]),
+		pow(i_value[1], 1.0 / gamma[1]),
+		pow(i_value[2], 1.0 / gamma[2])
+		);
+	
+}
+
+
