@@ -12,14 +12,15 @@ shader maya_remapColor
 				color	i_color							= 0.5,
 				
 				float	i_rPositions[RAMP_MAX_POINTS]	= {0.0, 1.0, 0.0} ,
-				float	i_rFloatValues[RAMP_MAX_POINTS]	= {0.0, 1.0, 0.0} ,
-	/*uniform*/	int		i_rInterp[RAMP_MAX_POINTS]		= {1} ,
+						
+				float	i_rValues[RAMP_MAX_POINTS]	= {0.0, 1.0, 0.0} ,
+	/*uniform*/	int		i_rInterpolations[RAMP_MAX_POINTS]		= {1} ,
 				float	i_gPositions[RAMP_MAX_POINTS]	= {0.0, 1.0, 0.0} ,
-				float	i_gFloatValues[RAMP_MAX_POINTS]	= {0.0, 1.0, 0.0} ,
-	/*uniform*/	int		i_gInterp[RAMP_MAX_POINTS]		= {1} ,
+				float	i_gValues[RAMP_MAX_POINTS]	= {0.0, 1.0, 0.0} ,
+	/*uniform*/	int		i_gInterpolations[RAMP_MAX_POINTS]		= {1} ,
 				float	i_bPositions[RAMP_MAX_POINTS]	= {0.0, 1.0, 0} ,
-				float	i_bFloatValues[RAMP_MAX_POINTS]	= {0.0, 1.0, 0} ,
-	/*uniform*/	int		i_bInterp[RAMP_MAX_POINTS]		= {1} ,
+				float	i_bValues[RAMP_MAX_POINTS]	= {0.0, 1.0, 0} ,
+	/*uniform*/	int		i_bInterpolations[RAMP_MAX_POINTS]		= {1} ,
 				float	i_inputMin						= 0.0,
 				float	i_inputMax						= 1.0,
 				float	i_outputMin						= 0.0,
@@ -41,8 +42,8 @@ shader maya_remapColor
 	float red = floatRamp(
 		c[0],
 		i_rPositions,
-		i_rInterp,
-		i_rFloatValues );
+		i_rInterpolations,
+		i_rValues );
 
 	c[0] = red;
 
@@ -50,8 +51,8 @@ shader maya_remapColor
 	float green = floatRamp(
 		c[1],
 		i_gPositions,
-		i_gInterp,
-		i_gFloatValues );
+		i_gInterpolations,
+		i_gValues );
 
 	c[1] = green ;
 
@@ -59,8 +60,8 @@ shader maya_remapColor
 	float blue = floatRamp(
 		c[2],
 		i_bPositions,
-		i_bInterp,
-		i_bFloatValues );
+		i_bInterpolations,
+		i_bValues );
 
 	c[2] = blue;
 
