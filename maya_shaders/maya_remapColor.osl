@@ -11,9 +11,9 @@ shader maya_remapColor
 	// Inputs
 				color	i_color							= 0.5,
 				
-				float	i_rPositions[RAMP_MAX_POINTS]	= {0.0, 1.0, 0.0} ,
+				float	i_rPositions[RAMP_MAX_POINTS]	= {0.0, 1.0, 0.4, 0.6, 0.0} ,
 						
-				float	i_rValues[RAMP_MAX_POINTS]	= {0.0, 1.0, 0.0} ,
+				float	i_rValues[RAMP_MAX_POINTS]	= {0.0, 1.0, 0.8,0.2,0.0} ,
 	/*uniform*/	int		i_rInterpolations[RAMP_MAX_POINTS]		= {1} ,
 				float	i_gPositions[RAMP_MAX_POINTS]	= {0.0, 1.0, 0.0} ,
 				float	i_gValues[RAMP_MAX_POINTS]	= {0.0, 1.0, 0.0} ,
