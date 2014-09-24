@@ -95,8 +95,8 @@ node "options" "options" # "options"
 	scalar "path_cache_radius" 1.000000
 	int "path_cache_points" 100
 	bool "path_cache_secondary_only" off
-	declare token "texture_searchpath" "D:/Projects/2014/osl/testCase/sourceimages"
-	declare token "procedural_searchpath" "D:/Projects/2014/osl/testCase/"
+	declare token "texture_searchpath" "K:/osl/testCase/sourceimages"
+	declare token "procedural_searchpath" "K:/osl/testCase/"
 	declare scalar "frame" 1.000000
 	declare token "render_layer" "defaultRenderLayer"
 	declare scalar "fps" 24.000000
@@ -129,6 +129,115 @@ node "instance" "directionalLightShape1_inst" # "instance"
 	bool "visible" on
 	bool "visible_secondary" on
 	bool "cast_shadow" off
+	bool "recv_shadow" on
+	bool "cast_reflection" on
+	bool "recv_reflection" on
+	bool "cast_refraction" on
+	bool "recv_refraction" on
+	bool "cast_transparency" on
+	bool "recv_transparency" on
+	bool "motion" on
+	bool "displace" on
+	bool "opaque" on
+	bool "emissive" off
+	bool "neg_parity" off
+	bool "visible_primary" on
+	bool "use_light_group" off
+	bool "use_shadow_group" off
+	bool "surface_emission" off
+	# enum "face" not set
+	ref "approx" ""
+	scalar "max_displace" 340282346638528860000000000000000000000.000000
+	#mtl_list is array but not valid, skip
+	scalar "bias" 340282346638528860000000000000000000000.000000
+	scalar "step_size" 340282346638528860000000000000000000000.000000
+	#light_group is array but not valid, skip
+	#shadow_group is array but not valid, skip
+end
+node "outvar" "output_default_color" # "outvar"
+	token "name" "color"
+	enum "type" "color"
+	bool "filter" on
+end
+node "outvar" "output_default_alpha" # "outvar"
+	token "name" "opacity"
+	enum "type" "color"
+	bool "filter" on
+end
+node "output" "output_default" # "output"
+	token "filename" "K:/osl/testCase/images/test.png"
+	enum "data_type" "rgba"
+		ref[] "var_list" 1  #2
+		"output_default_color"
+		"output_default_alpha"
+end
+node "outvar" "outvar_beauty" # "outvar"
+	token "name" "color"
+	enum "type" "color"
+	bool "filter" on
+end
+node "outvar" "outvar_beauty_alpha" # "outvar"
+	token "name" "opacity"
+	enum "type" "color"
+	bool "filter" on
+end
+node "output" "output_beauty" # "output"
+	token "filename" "K:/osl/testCase/images/beauty/test.png"
+	enum "data_type" "rgba"
+		ref[] "var_list" 1  #2
+		"outvar_beauty"
+		"outvar_beauty_alpha"
+end
+node "maya_envSphere" "mtoer_maya_envSphere" # "osl_node"
+	color "i_image" 0.000000 0.000000 0.000000
+	scalar "i_shearU" 0.000000
+	scalar "i_shearV" 0.000000
+	token "i_filename" ""
+	int "i_flip" 0
+end
+node "osl_shadergroup" "mtoer_maya_envSphere_osl" # "osl_shadergroup"
+		ref[] "nodes" 1  #2
+		"mtoer_sphereuv_shader"
+		"mtoer_maya_envSphere"
+end
+node "camera" "perspShape2" # "camera"
+		ref[] "output_list" 1  #2
+		"output_default"
+		"output_beauty"
+	ref "imager_shader" ""
+	ref "atmo_shader" ""
+	ref "env_shader" "mtoer_maya_envSphere_osl"
+	ref "lens_shader" ""
+	scalar "focal" 35.000000
+	scalar "aperture" 36.000000
+	scalar "aspect" 1.000000
+	int "res_x" 1024
+	int "res_y" 1024
+	int "window_xmin" -2147483648
+	int "window_xmax" 2147483647
+	int "window_ymin" -2147483648
+	int "window_ymax" 2147483647
+	scalar "clip_hither" 0.100000
+	scalar "clip_yon" 10000.000000
+	declare scalar "eiAOVZDepthMin" 100.000000
+	declare scalar "eiAOVZDepthMax" 300.000000
+end
+node "instance" "perspShape2_inst" # "instance"
+	ref "element" "perspShape2"
+	matrix "transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	0.000000 -1.000000 0.000000 0.000000
+	1.569295 -6.580384 3.469826 1.000000
+	matrix "motion_transform"
+	1.000000 0.000000 0.000000 0.000000
+	0.000000 0.000000 1.000000 0.000000
+	0.000000 -1.000000 0.000000 0.000000
+	1.569295 -6.580384 3.469826 1.000000
+	#bitfield:
+	bool "visible" on
+	bool "visible_secondary" on
+	bool "cast_shadow" on
 	bool "recv_shadow" on
 	bool "cast_reflection" on
 	bool "recv_reflection" on
@@ -224,150 +333,15 @@ node "maya_cloth" "object:cloth2" # "osl_node"
 end
 node "maya_remapColor" "object:remapColor1" # "osl_node"
 	param_link "i_color" "object:cloth2" "o_outColor"
-	scalar "i_red_Position_0" 0.000000
-	scalar "i_red_Position_1" 1.000000
-	scalar "i_red_Position_2" -99.000000
-	scalar "i_red_Position_3" -99.000000
-	scalar "i_red_Position_4" -99.000000
-	scalar "i_red_Position_5" -99.000000
-	scalar "i_red_Position_6" -99.000000
-	scalar "i_red_Position_7" -99.000000
-	scalar "i_red_Position_8" -99.000000
-	scalar "i_red_Position_9" -99.000000
-	scalar "i_red_Position_10" -99.000000
-	scalar "i_red_Position_11" -99.000000
-	scalar "i_red_Position_12" -99.000000
-	scalar "i_red_Position_13" -99.000000
-	scalar "i_red_Position_14" -99.000000
-	scalar "i_red_Position_15" -99.000000
-	scalar "i_red_FloatValue_0" 0.000000
-	scalar "i_red_FloatValue_1" 1.000000
-	scalar "i_red_FloatValue_2" -99.000000
-	scalar "i_red_FloatValue_3" -99.000000
-	scalar "i_red_FloatValue_4" -99.000000
-	scalar "i_red_FloatValue_5" -99.000000
-	scalar "i_red_FloatValue_6" -99.000000
-	scalar "i_red_FloatValue_7" -99.000000
-	scalar "i_red_FloatValue_8" -99.000000
-	scalar "i_red_FloatValue_9" -99.000000
-	scalar "i_red_FloatValue_10" -99.000000
-	scalar "i_red_FloatValue_11" -99.000000
-	scalar "i_red_FloatValue_12" -99.000000
-	scalar "i_red_FloatValue_13" -99.000000
-	scalar "i_red_FloatValue_14" -99.000000
-	scalar "i_red_FloatValue_15" -99.000000
-	int "i_red_Interp_0" 1
-	int "i_red_Interp_1" 1
-	int "i_red_Interp_2" -99
-	int "i_red_Interp_3" -99
-	int "i_red_Interp_4" -99
-	int "i_red_Interp_5" -99
-	int "i_red_Interp_6" -99
-	int "i_red_Interp_7" -99
-	int "i_red_Interp_8" -99
-	int "i_red_Interp_9" -99
-	int "i_red_Interp_10" -99
-	int "i_red_Interp_11" -99
-	int "i_red_Interp_12" -99
-	int "i_red_Interp_13" -99
-	int "i_red_Interp_14" -99
-	int "i_red_Interp_15" -99
-	scalar "i_green_Position_0" 0.000000
-	scalar "i_green_Position_1" 1.000000
-	scalar "i_green_Position_2" -99.000000
-	scalar "i_green_Position_3" -99.000000
-	scalar "i_green_Position_4" -99.000000
-	scalar "i_green_Position_5" -99.000000
-	scalar "i_green_Position_6" -99.000000
-	scalar "i_green_Position_7" -99.000000
-	scalar "i_green_Position_8" -99.000000
-	scalar "i_green_Position_9" -99.000000
-	scalar "i_green_Position_10" -99.000000
-	scalar "i_green_Position_11" -99.000000
-	scalar "i_green_Position_12" -99.000000
-	scalar "i_green_Position_13" -99.000000
-	scalar "i_green_Position_14" -99.000000
-	scalar "i_green_Position_15" -99.000000
-	scalar "i_green_FloatValue_0" 0.000000
-	scalar "i_green_FloatValue_1" 1.000000
-	scalar "i_green_FloatValue_2" -99.000000
-	scalar "i_green_FloatValue_3" -99.000000
-	scalar "i_green_FloatValue_4" -99.000000
-	scalar "i_green_FloatValue_5" -99.000000
-	scalar "i_green_FloatValue_6" -99.000000
-	scalar "i_green_FloatValue_7" -99.000000
-	scalar "i_green_FloatValue_8" -99.000000
-	scalar "i_green_FloatValue_9" -99.000000
-	scalar "i_green_FloatValue_10" -99.000000
-	scalar "i_green_FloatValue_11" -99.000000
-	scalar "i_green_FloatValue_12" -99.000000
-	scalar "i_green_FloatValue_13" -99.000000
-	scalar "i_green_FloatValue_14" -99.000000
-	scalar "i_green_FloatValue_15" -99.000000
-	int "i_green_Interp_0" 1
-	int "i_green_Interp_1" 1
-	int "i_green_Interp_2" -99
-	int "i_green_Interp_3" -99
-	int "i_green_Interp_4" -99
-	int "i_green_Interp_5" -99
-	int "i_green_Interp_6" -99
-	int "i_green_Interp_7" -99
-	int "i_green_Interp_8" -99
-	int "i_green_Interp_9" -99
-	int "i_green_Interp_10" -99
-	int "i_green_Interp_11" -99
-	int "i_green_Interp_12" -99
-	int "i_green_Interp_13" -99
-	int "i_green_Interp_14" -99
-	int "i_green_Interp_15" -99
-	scalar "i_blue_Position_0" 0.000000
-	scalar "i_blue_Position_1" 1.000000
-	scalar "i_blue_Position_2" -99.000000
-	scalar "i_blue_Position_3" -99.000000
-	scalar "i_blue_Position_4" -99.000000
-	scalar "i_blue_Position_5" -99.000000
-	scalar "i_blue_Position_6" -99.000000
-	scalar "i_blue_Position_7" -99.000000
-	scalar "i_blue_Position_8" -99.000000
-	scalar "i_blue_Position_9" -99.000000
-	scalar "i_blue_Position_10" -99.000000
-	scalar "i_blue_Position_11" -99.000000
-	scalar "i_blue_Position_12" -99.000000
-	scalar "i_blue_Position_13" -99.000000
-	scalar "i_blue_Position_14" -99.000000
-	scalar "i_blue_Position_15" -99.000000
-	scalar "i_blue_FloatValue_0" 0.000000
-	scalar "i_blue_FloatValue_1" 1.000000
-	scalar "i_blue_FloatValue_2" -99.000000
-	scalar "i_blue_FloatValue_3" -99.000000
-	scalar "i_blue_FloatValue_4" -99.000000
-	scalar "i_blue_FloatValue_5" -99.000000
-	scalar "i_blue_FloatValue_6" -99.000000
-	scalar "i_blue_FloatValue_7" -99.000000
-	scalar "i_blue_FloatValue_8" -99.000000
-	scalar "i_blue_FloatValue_9" -99.000000
-	scalar "i_blue_FloatValue_10" -99.000000
-	scalar "i_blue_FloatValue_11" -99.000000
-	scalar "i_blue_FloatValue_12" -99.000000
-	scalar "i_blue_FloatValue_13" -99.000000
-	scalar "i_blue_FloatValue_14" -99.000000
-	scalar "i_blue_FloatValue_15" -99.000000
-	int "i_blue_Interp_0" 1
-	int "i_blue_Interp_1" 1
-	int "i_blue_Interp_2" -99
-	int "i_blue_Interp_3" -99
-	int "i_blue_Interp_4" -99
-	int "i_blue_Interp_5" -99
-	int "i_blue_Interp_6" -99
-	int "i_blue_Interp_7" -99
-	int "i_blue_Interp_8" -99
-	int "i_blue_Interp_9" -99
-	int "i_blue_Interp_10" -99
-	int "i_blue_Interp_11" -99
-	int "i_blue_Interp_12" -99
-	int "i_blue_Interp_13" -99
-	int "i_blue_Interp_14" -99
-	int "i_blue_Interp_15" -99
+	#i_rPositions is array but not valid, skip
+	#i_rFloatValues is array but not valid, skip
+	#i_rInterp is array but not valid, skip
+	#i_gPositions is array but not valid, skip
+	#i_gFloatValues is array but not valid, skip
+	#i_gInterp is array but not valid, skip
+	#i_bPositions is array but not valid, skip
+	#i_bFloatValues is array but not valid, skip
+	#i_bInterp is array but not valid, skip
 	scalar "i_inputMin" 0.000000
 	scalar "i_inputMax" 1.000000
 	scalar "i_outputMin" 0.000000
@@ -521,150 +495,15 @@ node "maya_cloth" "blue_FloatValue:object:cloth2" # "osl_node"
 end
 node "maya_remapColor" "blue_FloatValue:object:remapColor1" # "osl_node"
 	param_link "i_color" "blue_FloatValue:object:cloth2" "o_outColor"
-	scalar "i_red_Position_0" 0.000000
-	scalar "i_red_Position_1" 1.000000
-	scalar "i_red_Position_2" -99.000000
-	scalar "i_red_Position_3" -99.000000
-	scalar "i_red_Position_4" -99.000000
-	scalar "i_red_Position_5" -99.000000
-	scalar "i_red_Position_6" -99.000000
-	scalar "i_red_Position_7" -99.000000
-	scalar "i_red_Position_8" -99.000000
-	scalar "i_red_Position_9" -99.000000
-	scalar "i_red_Position_10" -99.000000
-	scalar "i_red_Position_11" -99.000000
-	scalar "i_red_Position_12" -99.000000
-	scalar "i_red_Position_13" -99.000000
-	scalar "i_red_Position_14" -99.000000
-	scalar "i_red_Position_15" -99.000000
-	scalar "i_red_FloatValue_0" 0.000000
-	scalar "i_red_FloatValue_1" 1.000000
-	scalar "i_red_FloatValue_2" -99.000000
-	scalar "i_red_FloatValue_3" -99.000000
-	scalar "i_red_FloatValue_4" -99.000000
-	scalar "i_red_FloatValue_5" -99.000000
-	scalar "i_red_FloatValue_6" -99.000000
-	scalar "i_red_FloatValue_7" -99.000000
-	scalar "i_red_FloatValue_8" -99.000000
-	scalar "i_red_FloatValue_9" -99.000000
-	scalar "i_red_FloatValue_10" -99.000000
-	scalar "i_red_FloatValue_11" -99.000000
-	scalar "i_red_FloatValue_12" -99.000000
-	scalar "i_red_FloatValue_13" -99.000000
-	scalar "i_red_FloatValue_14" -99.000000
-	scalar "i_red_FloatValue_15" -99.000000
-	int "i_red_Interp_0" 1
-	int "i_red_Interp_1" 1
-	int "i_red_Interp_2" -99
-	int "i_red_Interp_3" -99
-	int "i_red_Interp_4" -99
-	int "i_red_Interp_5" -99
-	int "i_red_Interp_6" -99
-	int "i_red_Interp_7" -99
-	int "i_red_Interp_8" -99
-	int "i_red_Interp_9" -99
-	int "i_red_Interp_10" -99
-	int "i_red_Interp_11" -99
-	int "i_red_Interp_12" -99
-	int "i_red_Interp_13" -99
-	int "i_red_Interp_14" -99
-	int "i_red_Interp_15" -99
-	scalar "i_green_Position_0" 0.000000
-	scalar "i_green_Position_1" 1.000000
-	scalar "i_green_Position_2" -99.000000
-	scalar "i_green_Position_3" -99.000000
-	scalar "i_green_Position_4" -99.000000
-	scalar "i_green_Position_5" -99.000000
-	scalar "i_green_Position_6" -99.000000
-	scalar "i_green_Position_7" -99.000000
-	scalar "i_green_Position_8" -99.000000
-	scalar "i_green_Position_9" -99.000000
-	scalar "i_green_Position_10" -99.000000
-	scalar "i_green_Position_11" -99.000000
-	scalar "i_green_Position_12" -99.000000
-	scalar "i_green_Position_13" -99.000000
-	scalar "i_green_Position_14" -99.000000
-	scalar "i_green_Position_15" -99.000000
-	scalar "i_green_FloatValue_0" 0.000000
-	scalar "i_green_FloatValue_1" 1.000000
-	scalar "i_green_FloatValue_2" -99.000000
-	scalar "i_green_FloatValue_3" -99.000000
-	scalar "i_green_FloatValue_4" -99.000000
-	scalar "i_green_FloatValue_5" -99.000000
-	scalar "i_green_FloatValue_6" -99.000000
-	scalar "i_green_FloatValue_7" -99.000000
-	scalar "i_green_FloatValue_8" -99.000000
-	scalar "i_green_FloatValue_9" -99.000000
-	scalar "i_green_FloatValue_10" -99.000000
-	scalar "i_green_FloatValue_11" -99.000000
-	scalar "i_green_FloatValue_12" -99.000000
-	scalar "i_green_FloatValue_13" -99.000000
-	scalar "i_green_FloatValue_14" -99.000000
-	scalar "i_green_FloatValue_15" -99.000000
-	int "i_green_Interp_0" 1
-	int "i_green_Interp_1" 1
-	int "i_green_Interp_2" -99
-	int "i_green_Interp_3" -99
-	int "i_green_Interp_4" -99
-	int "i_green_Interp_5" -99
-	int "i_green_Interp_6" -99
-	int "i_green_Interp_7" -99
-	int "i_green_Interp_8" -99
-	int "i_green_Interp_9" -99
-	int "i_green_Interp_10" -99
-	int "i_green_Interp_11" -99
-	int "i_green_Interp_12" -99
-	int "i_green_Interp_13" -99
-	int "i_green_Interp_14" -99
-	int "i_green_Interp_15" -99
-	scalar "i_blue_Position_0" 0.000000
-	scalar "i_blue_Position_1" 1.000000
-	scalar "i_blue_Position_2" -99.000000
-	scalar "i_blue_Position_3" -99.000000
-	scalar "i_blue_Position_4" -99.000000
-	scalar "i_blue_Position_5" -99.000000
-	scalar "i_blue_Position_6" -99.000000
-	scalar "i_blue_Position_7" -99.000000
-	scalar "i_blue_Position_8" -99.000000
-	scalar "i_blue_Position_9" -99.000000
-	scalar "i_blue_Position_10" -99.000000
-	scalar "i_blue_Position_11" -99.000000
-	scalar "i_blue_Position_12" -99.000000
-	scalar "i_blue_Position_13" -99.000000
-	scalar "i_blue_Position_14" -99.000000
-	scalar "i_blue_Position_15" -99.000000
-	scalar "i_blue_FloatValue_0" 0.000000
-	scalar "i_blue_FloatValue_1" 1.000000
-	scalar "i_blue_FloatValue_2" -99.000000
-	scalar "i_blue_FloatValue_3" -99.000000
-	scalar "i_blue_FloatValue_4" -99.000000
-	scalar "i_blue_FloatValue_5" -99.000000
-	scalar "i_blue_FloatValue_6" -99.000000
-	scalar "i_blue_FloatValue_7" -99.000000
-	scalar "i_blue_FloatValue_8" -99.000000
-	scalar "i_blue_FloatValue_9" -99.000000
-	scalar "i_blue_FloatValue_10" -99.000000
-	scalar "i_blue_FloatValue_11" -99.000000
-	scalar "i_blue_FloatValue_12" -99.000000
-	scalar "i_blue_FloatValue_13" -99.000000
-	scalar "i_blue_FloatValue_14" -99.000000
-	scalar "i_blue_FloatValue_15" -99.000000
-	int "i_blue_Interp_0" 1
-	int "i_blue_Interp_1" 1
-	int "i_blue_Interp_2" -99
-	int "i_blue_Interp_3" -99
-	int "i_blue_Interp_4" -99
-	int "i_blue_Interp_5" -99
-	int "i_blue_Interp_6" -99
-	int "i_blue_Interp_7" -99
-	int "i_blue_Interp_8" -99
-	int "i_blue_Interp_9" -99
-	int "i_blue_Interp_10" -99
-	int "i_blue_Interp_11" -99
-	int "i_blue_Interp_12" -99
-	int "i_blue_Interp_13" -99
-	int "i_blue_Interp_14" -99
-	int "i_blue_Interp_15" -99
+	#i_rPositions is array but not valid, skip
+	#i_rFloatValues is array but not valid, skip
+	#i_rInterp is array but not valid, skip
+	#i_gPositions is array but not valid, skip
+	#i_gFloatValues is array but not valid, skip
+	#i_gInterp is array but not valid, skip
+	#i_bPositions is array but not valid, skip
+	#i_bFloatValues is array but not valid, skip
+	#i_bInterp is array but not valid, skip
 	scalar "i_inputMin" 0.000000
 	scalar "i_inputMax" 1.000000
 	scalar "i_outputMin" 0.000000
@@ -818,150 +657,15 @@ node "maya_cloth" "blue_Interp:object:cloth2" # "osl_node"
 end
 node "maya_remapColor" "blue_Interp:object:remapColor1" # "osl_node"
 	param_link "i_color" "blue_Interp:object:cloth2" "o_outColor"
-	scalar "i_red_Position_0" 0.000000
-	scalar "i_red_Position_1" 1.000000
-	scalar "i_red_Position_2" -99.000000
-	scalar "i_red_Position_3" -99.000000
-	scalar "i_red_Position_4" -99.000000
-	scalar "i_red_Position_5" -99.000000
-	scalar "i_red_Position_6" -99.000000
-	scalar "i_red_Position_7" -99.000000
-	scalar "i_red_Position_8" -99.000000
-	scalar "i_red_Position_9" -99.000000
-	scalar "i_red_Position_10" -99.000000
-	scalar "i_red_Position_11" -99.000000
-	scalar "i_red_Position_12" -99.000000
-	scalar "i_red_Position_13" -99.000000
-	scalar "i_red_Position_14" -99.000000
-	scalar "i_red_Position_15" -99.000000
-	scalar "i_red_FloatValue_0" 0.000000
-	scalar "i_red_FloatValue_1" 1.000000
-	scalar "i_red_FloatValue_2" -99.000000
-	scalar "i_red_FloatValue_3" -99.000000
-	scalar "i_red_FloatValue_4" -99.000000
-	scalar "i_red_FloatValue_5" -99.000000
-	scalar "i_red_FloatValue_6" -99.000000
-	scalar "i_red_FloatValue_7" -99.000000
-	scalar "i_red_FloatValue_8" -99.000000
-	scalar "i_red_FloatValue_9" -99.000000
-	scalar "i_red_FloatValue_10" -99.000000
-	scalar "i_red_FloatValue_11" -99.000000
-	scalar "i_red_FloatValue_12" -99.000000
-	scalar "i_red_FloatValue_13" -99.000000
-	scalar "i_red_FloatValue_14" -99.000000
-	scalar "i_red_FloatValue_15" -99.000000
-	int "i_red_Interp_0" 1
-	int "i_red_Interp_1" 1
-	int "i_red_Interp_2" -99
-	int "i_red_Interp_3" -99
-	int "i_red_Interp_4" -99
-	int "i_red_Interp_5" -99
-	int "i_red_Interp_6" -99
-	int "i_red_Interp_7" -99
-	int "i_red_Interp_8" -99
-	int "i_red_Interp_9" -99
-	int "i_red_Interp_10" -99
-	int "i_red_Interp_11" -99
-	int "i_red_Interp_12" -99
-	int "i_red_Interp_13" -99
-	int "i_red_Interp_14" -99
-	int "i_red_Interp_15" -99
-	scalar "i_green_Position_0" 0.000000
-	scalar "i_green_Position_1" 1.000000
-	scalar "i_green_Position_2" -99.000000
-	scalar "i_green_Position_3" -99.000000
-	scalar "i_green_Position_4" -99.000000
-	scalar "i_green_Position_5" -99.000000
-	scalar "i_green_Position_6" -99.000000
-	scalar "i_green_Position_7" -99.000000
-	scalar "i_green_Position_8" -99.000000
-	scalar "i_green_Position_9" -99.000000
-	scalar "i_green_Position_10" -99.000000
-	scalar "i_green_Position_11" -99.000000
-	scalar "i_green_Position_12" -99.000000
-	scalar "i_green_Position_13" -99.000000
-	scalar "i_green_Position_14" -99.000000
-	scalar "i_green_Position_15" -99.000000
-	scalar "i_green_FloatValue_0" 0.000000
-	scalar "i_green_FloatValue_1" 1.000000
-	scalar "i_green_FloatValue_2" -99.000000
-	scalar "i_green_FloatValue_3" -99.000000
-	scalar "i_green_FloatValue_4" -99.000000
-	scalar "i_green_FloatValue_5" -99.000000
-	scalar "i_green_FloatValue_6" -99.000000
-	scalar "i_green_FloatValue_7" -99.000000
-	scalar "i_green_FloatValue_8" -99.000000
-	scalar "i_green_FloatValue_9" -99.000000
-	scalar "i_green_FloatValue_10" -99.000000
-	scalar "i_green_FloatValue_11" -99.000000
-	scalar "i_green_FloatValue_12" -99.000000
-	scalar "i_green_FloatValue_13" -99.000000
-	scalar "i_green_FloatValue_14" -99.000000
-	scalar "i_green_FloatValue_15" -99.000000
-	int "i_green_Interp_0" 1
-	int "i_green_Interp_1" 1
-	int "i_green_Interp_2" -99
-	int "i_green_Interp_3" -99
-	int "i_green_Interp_4" -99
-	int "i_green_Interp_5" -99
-	int "i_green_Interp_6" -99
-	int "i_green_Interp_7" -99
-	int "i_green_Interp_8" -99
-	int "i_green_Interp_9" -99
-	int "i_green_Interp_10" -99
-	int "i_green_Interp_11" -99
-	int "i_green_Interp_12" -99
-	int "i_green_Interp_13" -99
-	int "i_green_Interp_14" -99
-	int "i_green_Interp_15" -99
-	scalar "i_blue_Position_0" 0.000000
-	scalar "i_blue_Position_1" 1.000000
-	scalar "i_blue_Position_2" -99.000000
-	scalar "i_blue_Position_3" -99.000000
-	scalar "i_blue_Position_4" -99.000000
-	scalar "i_blue_Position_5" -99.000000
-	scalar "i_blue_Position_6" -99.000000
-	scalar "i_blue_Position_7" -99.000000
-	scalar "i_blue_Position_8" -99.000000
-	scalar "i_blue_Position_9" -99.000000
-	scalar "i_blue_Position_10" -99.000000
-	scalar "i_blue_Position_11" -99.000000
-	scalar "i_blue_Position_12" -99.000000
-	scalar "i_blue_Position_13" -99.000000
-	scalar "i_blue_Position_14" -99.000000
-	scalar "i_blue_Position_15" -99.000000
-	scalar "i_blue_FloatValue_0" 0.000000
-	scalar "i_blue_FloatValue_1" 1.000000
-	scalar "i_blue_FloatValue_2" -99.000000
-	scalar "i_blue_FloatValue_3" -99.000000
-	scalar "i_blue_FloatValue_4" -99.000000
-	scalar "i_blue_FloatValue_5" -99.000000
-	scalar "i_blue_FloatValue_6" -99.000000
-	scalar "i_blue_FloatValue_7" -99.000000
-	scalar "i_blue_FloatValue_8" -99.000000
-	scalar "i_blue_FloatValue_9" -99.000000
-	scalar "i_blue_FloatValue_10" -99.000000
-	scalar "i_blue_FloatValue_11" -99.000000
-	scalar "i_blue_FloatValue_12" -99.000000
-	scalar "i_blue_FloatValue_13" -99.000000
-	scalar "i_blue_FloatValue_14" -99.000000
-	scalar "i_blue_FloatValue_15" -99.000000
-	int "i_blue_Interp_0" 1
-	int "i_blue_Interp_1" 1
-	int "i_blue_Interp_2" -99
-	int "i_blue_Interp_3" -99
-	int "i_blue_Interp_4" -99
-	int "i_blue_Interp_5" -99
-	int "i_blue_Interp_6" -99
-	int "i_blue_Interp_7" -99
-	int "i_blue_Interp_8" -99
-	int "i_blue_Interp_9" -99
-	int "i_blue_Interp_10" -99
-	int "i_blue_Interp_11" -99
-	int "i_blue_Interp_12" -99
-	int "i_blue_Interp_13" -99
-	int "i_blue_Interp_14" -99
-	int "i_blue_Interp_15" -99
+	#i_rPositions is array but not valid, skip
+	#i_rFloatValues is array but not valid, skip
+	#i_rInterp is array but not valid, skip
+	#i_gPositions is array but not valid, skip
+	#i_gFloatValues is array but not valid, skip
+	#i_gInterp is array but not valid, skip
+	#i_bPositions is array but not valid, skip
+	#i_bFloatValues is array but not valid, skip
+	#i_bInterp is array but not valid, skip
 	scalar "i_inputMin" 0.000000
 	scalar "i_inputMax" 1.000000
 	scalar "i_outputMin" 0.000000
@@ -1115,150 +819,15 @@ node "maya_cloth" "blue_Position:object:cloth2" # "osl_node"
 end
 node "maya_remapColor" "blue_Position:object:remapColor1" # "osl_node"
 	param_link "i_color" "blue_Position:object:cloth2" "o_outColor"
-	scalar "i_red_Position_0" 0.000000
-	scalar "i_red_Position_1" 1.000000
-	scalar "i_red_Position_2" -99.000000
-	scalar "i_red_Position_3" -99.000000
-	scalar "i_red_Position_4" -99.000000
-	scalar "i_red_Position_5" -99.000000
-	scalar "i_red_Position_6" -99.000000
-	scalar "i_red_Position_7" -99.000000
-	scalar "i_red_Position_8" -99.000000
-	scalar "i_red_Position_9" -99.000000
-	scalar "i_red_Position_10" -99.000000
-	scalar "i_red_Position_11" -99.000000
-	scalar "i_red_Position_12" -99.000000
-	scalar "i_red_Position_13" -99.000000
-	scalar "i_red_Position_14" -99.000000
-	scalar "i_red_Position_15" -99.000000
-	scalar "i_red_FloatValue_0" 0.000000
-	scalar "i_red_FloatValue_1" 1.000000
-	scalar "i_red_FloatValue_2" -99.000000
-	scalar "i_red_FloatValue_3" -99.000000
-	scalar "i_red_FloatValue_4" -99.000000
-	scalar "i_red_FloatValue_5" -99.000000
-	scalar "i_red_FloatValue_6" -99.000000
-	scalar "i_red_FloatValue_7" -99.000000
-	scalar "i_red_FloatValue_8" -99.000000
-	scalar "i_red_FloatValue_9" -99.000000
-	scalar "i_red_FloatValue_10" -99.000000
-	scalar "i_red_FloatValue_11" -99.000000
-	scalar "i_red_FloatValue_12" -99.000000
-	scalar "i_red_FloatValue_13" -99.000000
-	scalar "i_red_FloatValue_14" -99.000000
-	scalar "i_red_FloatValue_15" -99.000000
-	int "i_red_Interp_0" 1
-	int "i_red_Interp_1" 1
-	int "i_red_Interp_2" -99
-	int "i_red_Interp_3" -99
-	int "i_red_Interp_4" -99
-	int "i_red_Interp_5" -99
-	int "i_red_Interp_6" -99
-	int "i_red_Interp_7" -99
-	int "i_red_Interp_8" -99
-	int "i_red_Interp_9" -99
-	int "i_red_Interp_10" -99
-	int "i_red_Interp_11" -99
-	int "i_red_Interp_12" -99
-	int "i_red_Interp_13" -99
-	int "i_red_Interp_14" -99
-	int "i_red_Interp_15" -99
-	scalar "i_green_Position_0" 0.000000
-	scalar "i_green_Position_1" 1.000000
-	scalar "i_green_Position_2" -99.000000
-	scalar "i_green_Position_3" -99.000000
-	scalar "i_green_Position_4" -99.000000
-	scalar "i_green_Position_5" -99.000000
-	scalar "i_green_Position_6" -99.000000
-	scalar "i_green_Position_7" -99.000000
-	scalar "i_green_Position_8" -99.000000
-	scalar "i_green_Position_9" -99.000000
-	scalar "i_green_Position_10" -99.000000
-	scalar "i_green_Position_11" -99.000000
-	scalar "i_green_Position_12" -99.000000
-	scalar "i_green_Position_13" -99.000000
-	scalar "i_green_Position_14" -99.000000
-	scalar "i_green_Position_15" -99.000000
-	scalar "i_green_FloatValue_0" 0.000000
-	scalar "i_green_FloatValue_1" 1.000000
-	scalar "i_green_FloatValue_2" -99.000000
-	scalar "i_green_FloatValue_3" -99.000000
-	scalar "i_green_FloatValue_4" -99.000000
-	scalar "i_green_FloatValue_5" -99.000000
-	scalar "i_green_FloatValue_6" -99.000000
-	scalar "i_green_FloatValue_7" -99.000000
-	scalar "i_green_FloatValue_8" -99.000000
-	scalar "i_green_FloatValue_9" -99.000000
-	scalar "i_green_FloatValue_10" -99.000000
-	scalar "i_green_FloatValue_11" -99.000000
-	scalar "i_green_FloatValue_12" -99.000000
-	scalar "i_green_FloatValue_13" -99.000000
-	scalar "i_green_FloatValue_14" -99.000000
-	scalar "i_green_FloatValue_15" -99.000000
-	int "i_green_Interp_0" 1
-	int "i_green_Interp_1" 1
-	int "i_green_Interp_2" -99
-	int "i_green_Interp_3" -99
-	int "i_green_Interp_4" -99
-	int "i_green_Interp_5" -99
-	int "i_green_Interp_6" -99
-	int "i_green_Interp_7" -99
-	int "i_green_Interp_8" -99
-	int "i_green_Interp_9" -99
-	int "i_green_Interp_10" -99
-	int "i_green_Interp_11" -99
-	int "i_green_Interp_12" -99
-	int "i_green_Interp_13" -99
-	int "i_green_Interp_14" -99
-	int "i_green_Interp_15" -99
-	scalar "i_blue_Position_0" 0.000000
-	scalar "i_blue_Position_1" 1.000000
-	scalar "i_blue_Position_2" -99.000000
-	scalar "i_blue_Position_3" -99.000000
-	scalar "i_blue_Position_4" -99.000000
-	scalar "i_blue_Position_5" -99.000000
-	scalar "i_blue_Position_6" -99.000000
-	scalar "i_blue_Position_7" -99.000000
-	scalar "i_blue_Position_8" -99.000000
-	scalar "i_blue_Position_9" -99.000000
-	scalar "i_blue_Position_10" -99.000000
-	scalar "i_blue_Position_11" -99.000000
-	scalar "i_blue_Position_12" -99.000000
-	scalar "i_blue_Position_13" -99.000000
-	scalar "i_blue_Position_14" -99.000000
-	scalar "i_blue_Position_15" -99.000000
-	scalar "i_blue_FloatValue_0" 0.000000
-	scalar "i_blue_FloatValue_1" 1.000000
-	scalar "i_blue_FloatValue_2" -99.000000
-	scalar "i_blue_FloatValue_3" -99.000000
-	scalar "i_blue_FloatValue_4" -99.000000
-	scalar "i_blue_FloatValue_5" -99.000000
-	scalar "i_blue_FloatValue_6" -99.000000
-	scalar "i_blue_FloatValue_7" -99.000000
-	scalar "i_blue_FloatValue_8" -99.000000
-	scalar "i_blue_FloatValue_9" -99.000000
-	scalar "i_blue_FloatValue_10" -99.000000
-	scalar "i_blue_FloatValue_11" -99.000000
-	scalar "i_blue_FloatValue_12" -99.000000
-	scalar "i_blue_FloatValue_13" -99.000000
-	scalar "i_blue_FloatValue_14" -99.000000
-	scalar "i_blue_FloatValue_15" -99.000000
-	int "i_blue_Interp_0" 1
-	int "i_blue_Interp_1" 1
-	int "i_blue_Interp_2" -99
-	int "i_blue_Interp_3" -99
-	int "i_blue_Interp_4" -99
-	int "i_blue_Interp_5" -99
-	int "i_blue_Interp_6" -99
-	int "i_blue_Interp_7" -99
-	int "i_blue_Interp_8" -99
-	int "i_blue_Interp_9" -99
-	int "i_blue_Interp_10" -99
-	int "i_blue_Interp_11" -99
-	int "i_blue_Interp_12" -99
-	int "i_blue_Interp_13" -99
-	int "i_blue_Interp_14" -99
-	int "i_blue_Interp_15" -99
+	#i_rPositions is array but not valid, skip
+	#i_rFloatValues is array but not valid, skip
+	#i_rInterp is array but not valid, skip
+	#i_gPositions is array but not valid, skip
+	#i_gFloatValues is array but not valid, skip
+	#i_gInterp is array but not valid, skip
+	#i_bPositions is array but not valid, skip
+	#i_bFloatValues is array but not valid, skip
+	#i_bInterp is array but not valid, skip
 	scalar "i_inputMin" 0.000000
 	scalar "i_inputMax" 1.000000
 	scalar "i_outputMin" 0.000000
@@ -1412,150 +981,15 @@ node "maya_cloth" "blue_Position_Value_Interp2:object:cloth2" # "osl_node"
 end
 node "maya_remapColor" "blue_Position_Value_Interp2:object:remapColor1" # "osl_node"
 	param_link "i_color" "blue_Position_Value_Interp2:object:cloth2" "o_outColor"
-	scalar "i_red_Position_0" 0.000000
-	scalar "i_red_Position_1" 1.000000
-	scalar "i_red_Position_2" -99.000000
-	scalar "i_red_Position_3" -99.000000
-	scalar "i_red_Position_4" -99.000000
-	scalar "i_red_Position_5" -99.000000
-	scalar "i_red_Position_6" -99.000000
-	scalar "i_red_Position_7" -99.000000
-	scalar "i_red_Position_8" -99.000000
-	scalar "i_red_Position_9" -99.000000
-	scalar "i_red_Position_10" -99.000000
-	scalar "i_red_Position_11" -99.000000
-	scalar "i_red_Position_12" -99.000000
-	scalar "i_red_Position_13" -99.000000
-	scalar "i_red_Position_14" -99.000000
-	scalar "i_red_Position_15" -99.000000
-	scalar "i_red_FloatValue_0" 0.000000
-	scalar "i_red_FloatValue_1" 1.000000
-	scalar "i_red_FloatValue_2" -99.000000
-	scalar "i_red_FloatValue_3" -99.000000
-	scalar "i_red_FloatValue_4" -99.000000
-	scalar "i_red_FloatValue_5" -99.000000
-	scalar "i_red_FloatValue_6" -99.000000
-	scalar "i_red_FloatValue_7" -99.000000
-	scalar "i_red_FloatValue_8" -99.000000
-	scalar "i_red_FloatValue_9" -99.000000
-	scalar "i_red_FloatValue_10" -99.000000
-	scalar "i_red_FloatValue_11" -99.000000
-	scalar "i_red_FloatValue_12" -99.000000
-	scalar "i_red_FloatValue_13" -99.000000
-	scalar "i_red_FloatValue_14" -99.000000
-	scalar "i_red_FloatValue_15" -99.000000
-	int "i_red_Interp_0" 1
-	int "i_red_Interp_1" 1
-	int "i_red_Interp_2" -99
-	int "i_red_Interp_3" -99
-	int "i_red_Interp_4" -99
-	int "i_red_Interp_5" -99
-	int "i_red_Interp_6" -99
-	int "i_red_Interp_7" -99
-	int "i_red_Interp_8" -99
-	int "i_red_Interp_9" -99
-	int "i_red_Interp_10" -99
-	int "i_red_Interp_11" -99
-	int "i_red_Interp_12" -99
-	int "i_red_Interp_13" -99
-	int "i_red_Interp_14" -99
-	int "i_red_Interp_15" -99
-	scalar "i_green_Position_0" 0.000000
-	scalar "i_green_Position_1" 1.000000
-	scalar "i_green_Position_2" -99.000000
-	scalar "i_green_Position_3" -99.000000
-	scalar "i_green_Position_4" -99.000000
-	scalar "i_green_Position_5" -99.000000
-	scalar "i_green_Position_6" -99.000000
-	scalar "i_green_Position_7" -99.000000
-	scalar "i_green_Position_8" -99.000000
-	scalar "i_green_Position_9" -99.000000
-	scalar "i_green_Position_10" -99.000000
-	scalar "i_green_Position_11" -99.000000
-	scalar "i_green_Position_12" -99.000000
-	scalar "i_green_Position_13" -99.000000
-	scalar "i_green_Position_14" -99.000000
-	scalar "i_green_Position_15" -99.000000
-	scalar "i_green_FloatValue_0" 0.000000
-	scalar "i_green_FloatValue_1" 1.000000
-	scalar "i_green_FloatValue_2" -99.000000
-	scalar "i_green_FloatValue_3" -99.000000
-	scalar "i_green_FloatValue_4" -99.000000
-	scalar "i_green_FloatValue_5" -99.000000
-	scalar "i_green_FloatValue_6" -99.000000
-	scalar "i_green_FloatValue_7" -99.000000
-	scalar "i_green_FloatValue_8" -99.000000
-	scalar "i_green_FloatValue_9" -99.000000
-	scalar "i_green_FloatValue_10" -99.000000
-	scalar "i_green_FloatValue_11" -99.000000
-	scalar "i_green_FloatValue_12" -99.000000
-	scalar "i_green_FloatValue_13" -99.000000
-	scalar "i_green_FloatValue_14" -99.000000
-	scalar "i_green_FloatValue_15" -99.000000
-	int "i_green_Interp_0" 1
-	int "i_green_Interp_1" 1
-	int "i_green_Interp_2" -99
-	int "i_green_Interp_3" -99
-	int "i_green_Interp_4" -99
-	int "i_green_Interp_5" -99
-	int "i_green_Interp_6" -99
-	int "i_green_Interp_7" -99
-	int "i_green_Interp_8" -99
-	int "i_green_Interp_9" -99
-	int "i_green_Interp_10" -99
-	int "i_green_Interp_11" -99
-	int "i_green_Interp_12" -99
-	int "i_green_Interp_13" -99
-	int "i_green_Interp_14" -99
-	int "i_green_Interp_15" -99
-	scalar "i_blue_Position_0" 0.000000
-	scalar "i_blue_Position_1" 1.000000
-	scalar "i_blue_Position_2" -99.000000
-	scalar "i_blue_Position_3" -99.000000
-	scalar "i_blue_Position_4" -99.000000
-	scalar "i_blue_Position_5" -99.000000
-	scalar "i_blue_Position_6" -99.000000
-	scalar "i_blue_Position_7" -99.000000
-	scalar "i_blue_Position_8" -99.000000
-	scalar "i_blue_Position_9" -99.000000
-	scalar "i_blue_Position_10" -99.000000
-	scalar "i_blue_Position_11" -99.000000
-	scalar "i_blue_Position_12" -99.000000
-	scalar "i_blue_Position_13" -99.000000
-	scalar "i_blue_Position_14" -99.000000
-	scalar "i_blue_Position_15" -99.000000
-	scalar "i_blue_FloatValue_0" 0.000000
-	scalar "i_blue_FloatValue_1" 1.000000
-	scalar "i_blue_FloatValue_2" -99.000000
-	scalar "i_blue_FloatValue_3" -99.000000
-	scalar "i_blue_FloatValue_4" -99.000000
-	scalar "i_blue_FloatValue_5" -99.000000
-	scalar "i_blue_FloatValue_6" -99.000000
-	scalar "i_blue_FloatValue_7" -99.000000
-	scalar "i_blue_FloatValue_8" -99.000000
-	scalar "i_blue_FloatValue_9" -99.000000
-	scalar "i_blue_FloatValue_10" -99.000000
-	scalar "i_blue_FloatValue_11" -99.000000
-	scalar "i_blue_FloatValue_12" -99.000000
-	scalar "i_blue_FloatValue_13" -99.000000
-	scalar "i_blue_FloatValue_14" -99.000000
-	scalar "i_blue_FloatValue_15" -99.000000
-	int "i_blue_Interp_0" 1
-	int "i_blue_Interp_1" 1
-	int "i_blue_Interp_2" -99
-	int "i_blue_Interp_3" -99
-	int "i_blue_Interp_4" -99
-	int "i_blue_Interp_5" -99
-	int "i_blue_Interp_6" -99
-	int "i_blue_Interp_7" -99
-	int "i_blue_Interp_8" -99
-	int "i_blue_Interp_9" -99
-	int "i_blue_Interp_10" -99
-	int "i_blue_Interp_11" -99
-	int "i_blue_Interp_12" -99
-	int "i_blue_Interp_13" -99
-	int "i_blue_Interp_14" -99
-	int "i_blue_Interp_15" -99
+	#i_rPositions is array but not valid, skip
+	#i_rFloatValues is array but not valid, skip
+	#i_rInterp is array but not valid, skip
+	#i_gPositions is array but not valid, skip
+	#i_gFloatValues is array but not valid, skip
+	#i_gInterp is array but not valid, skip
+	#i_bPositions is array but not valid, skip
+	#i_bFloatValues is array but not valid, skip
+	#i_bInterp is array but not valid, skip
 	scalar "i_inputMin" 0.000000
 	scalar "i_inputMax" 1.000000
 	scalar "i_outputMin" 0.000000
@@ -1709,150 +1143,15 @@ node "maya_cloth" "blue_Position_Value2:object:cloth2" # "osl_node"
 end
 node "maya_remapColor" "blue_Position_Value2:object:remapColor1" # "osl_node"
 	param_link "i_color" "blue_Position_Value2:object:cloth2" "o_outColor"
-	scalar "i_red_Position_0" 0.000000
-	scalar "i_red_Position_1" 1.000000
-	scalar "i_red_Position_2" -99.000000
-	scalar "i_red_Position_3" -99.000000
-	scalar "i_red_Position_4" -99.000000
-	scalar "i_red_Position_5" -99.000000
-	scalar "i_red_Position_6" -99.000000
-	scalar "i_red_Position_7" -99.000000
-	scalar "i_red_Position_8" -99.000000
-	scalar "i_red_Position_9" -99.000000
-	scalar "i_red_Position_10" -99.000000
-	scalar "i_red_Position_11" -99.000000
-	scalar "i_red_Position_12" -99.000000
-	scalar "i_red_Position_13" -99.000000
-	scalar "i_red_Position_14" -99.000000
-	scalar "i_red_Position_15" -99.000000
-	scalar "i_red_FloatValue_0" 0.000000
-	scalar "i_red_FloatValue_1" 1.000000
-	scalar "i_red_FloatValue_2" -99.000000
-	scalar "i_red_FloatValue_3" -99.000000
-	scalar "i_red_FloatValue_4" -99.000000
-	scalar "i_red_FloatValue_5" -99.000000
-	scalar "i_red_FloatValue_6" -99.000000
-	scalar "i_red_FloatValue_7" -99.000000
-	scalar "i_red_FloatValue_8" -99.000000
-	scalar "i_red_FloatValue_9" -99.000000
-	scalar "i_red_FloatValue_10" -99.000000
-	scalar "i_red_FloatValue_11" -99.000000
-	scalar "i_red_FloatValue_12" -99.000000
-	scalar "i_red_FloatValue_13" -99.000000
-	scalar "i_red_FloatValue_14" -99.000000
-	scalar "i_red_FloatValue_15" -99.000000
-	int "i_red_Interp_0" 1
-	int "i_red_Interp_1" 1
-	int "i_red_Interp_2" -99
-	int "i_red_Interp_3" -99
-	int "i_red_Interp_4" -99
-	int "i_red_Interp_5" -99
-	int "i_red_Interp_6" -99
-	int "i_red_Interp_7" -99
-	int "i_red_Interp_8" -99
-	int "i_red_Interp_9" -99
-	int "i_red_Interp_10" -99
-	int "i_red_Interp_11" -99
-	int "i_red_Interp_12" -99
-	int "i_red_Interp_13" -99
-	int "i_red_Interp_14" -99
-	int "i_red_Interp_15" -99
-	scalar "i_green_Position_0" 0.000000
-	scalar "i_green_Position_1" 1.000000
-	scalar "i_green_Position_2" -99.000000
-	scalar "i_green_Position_3" -99.000000
-	scalar "i_green_Position_4" -99.000000
-	scalar "i_green_Position_5" -99.000000
-	scalar "i_green_Position_6" -99.000000
-	scalar "i_green_Position_7" -99.000000
-	scalar "i_green_Position_8" -99.000000
-	scalar "i_green_Position_9" -99.000000
-	scalar "i_green_Position_10" -99.000000
-	scalar "i_green_Position_11" -99.000000
-	scalar "i_green_Position_12" -99.000000
-	scalar "i_green_Position_13" -99.000000
-	scalar "i_green_Position_14" -99.000000
-	scalar "i_green_Position_15" -99.000000
-	scalar "i_green_FloatValue_0" 0.000000
-	scalar "i_green_FloatValue_1" 1.000000
-	scalar "i_green_FloatValue_2" -99.000000
-	scalar "i_green_FloatValue_3" -99.000000
-	scalar "i_green_FloatValue_4" -99.000000
-	scalar "i_green_FloatValue_5" -99.000000
-	scalar "i_green_FloatValue_6" -99.000000
-	scalar "i_green_FloatValue_7" -99.000000
-	scalar "i_green_FloatValue_8" -99.000000
-	scalar "i_green_FloatValue_9" -99.000000
-	scalar "i_green_FloatValue_10" -99.000000
-	scalar "i_green_FloatValue_11" -99.000000
-	scalar "i_green_FloatValue_12" -99.000000
-	scalar "i_green_FloatValue_13" -99.000000
-	scalar "i_green_FloatValue_14" -99.000000
-	scalar "i_green_FloatValue_15" -99.000000
-	int "i_green_Interp_0" 1
-	int "i_green_Interp_1" 1
-	int "i_green_Interp_2" -99
-	int "i_green_Interp_3" -99
-	int "i_green_Interp_4" -99
-	int "i_green_Interp_5" -99
-	int "i_green_Interp_6" -99
-	int "i_green_Interp_7" -99
-	int "i_green_Interp_8" -99
-	int "i_green_Interp_9" -99
-	int "i_green_Interp_10" -99
-	int "i_green_Interp_11" -99
-	int "i_green_Interp_12" -99
-	int "i_green_Interp_13" -99
-	int "i_green_Interp_14" -99
-	int "i_green_Interp_15" -99
-	scalar "i_blue_Position_0" 0.000000
-	scalar "i_blue_Position_1" 1.000000
-	scalar "i_blue_Position_2" -99.000000
-	scalar "i_blue_Position_3" -99.000000
-	scalar "i_blue_Position_4" -99.000000
-	scalar "i_blue_Position_5" -99.000000
-	scalar "i_blue_Position_6" -99.000000
-	scalar "i_blue_Position_7" -99.000000
-	scalar "i_blue_Position_8" -99.000000
-	scalar "i_blue_Position_9" -99.000000
-	scalar "i_blue_Position_10" -99.000000
-	scalar "i_blue_Position_11" -99.000000
-	scalar "i_blue_Position_12" -99.000000
-	scalar "i_blue_Position_13" -99.000000
-	scalar "i_blue_Position_14" -99.000000
-	scalar "i_blue_Position_15" -99.000000
-	scalar "i_blue_FloatValue_0" 0.000000
-	scalar "i_blue_FloatValue_1" 1.000000
-	scalar "i_blue_FloatValue_2" -99.000000
-	scalar "i_blue_FloatValue_3" -99.000000
-	scalar "i_blue_FloatValue_4" -99.000000
-	scalar "i_blue_FloatValue_5" -99.000000
-	scalar "i_blue_FloatValue_6" -99.000000
-	scalar "i_blue_FloatValue_7" -99.000000
-	scalar "i_blue_FloatValue_8" -99.000000
-	scalar "i_blue_FloatValue_9" -99.000000
-	scalar "i_blue_FloatValue_10" -99.000000
-	scalar "i_blue_FloatValue_11" -99.000000
-	scalar "i_blue_FloatValue_12" -99.000000
-	scalar "i_blue_FloatValue_13" -99.000000
-	scalar "i_blue_FloatValue_14" -99.000000
-	scalar "i_blue_FloatValue_15" -99.000000
-	int "i_blue_Interp_0" 1
-	int "i_blue_Interp_1" 1
-	int "i_blue_Interp_2" -99
-	int "i_blue_Interp_3" -99
-	int "i_blue_Interp_4" -99
-	int "i_blue_Interp_5" -99
-	int "i_blue_Interp_6" -99
-	int "i_blue_Interp_7" -99
-	int "i_blue_Interp_8" -99
-	int "i_blue_Interp_9" -99
-	int "i_blue_Interp_10" -99
-	int "i_blue_Interp_11" -99
-	int "i_blue_Interp_12" -99
-	int "i_blue_Interp_13" -99
-	int "i_blue_Interp_14" -99
-	int "i_blue_Interp_15" -99
+	#i_rPositions is array but not valid, skip
+	#i_rFloatValues is array but not valid, skip
+	#i_rInterp is array but not valid, skip
+	#i_gPositions is array but not valid, skip
+	#i_gFloatValues is array but not valid, skip
+	#i_gInterp is array but not valid, skip
+	#i_bPositions is array but not valid, skip
+	#i_bFloatValues is array but not valid, skip
+	#i_bInterp is array but not valid, skip
 	scalar "i_inputMin" 0.000000
 	scalar "i_inputMax" 1.000000
 	scalar "i_outputMin" 0.000000
@@ -2006,150 +1305,15 @@ node "maya_cloth" "color:object:cloth2" # "osl_node"
 end
 node "maya_remapColor" "color:object:remapColor1" # "osl_node"
 	param_link "i_color" "color:object:cloth2" "o_outColor"
-	scalar "i_red_Position_0" 0.000000
-	scalar "i_red_Position_1" 1.000000
-	scalar "i_red_Position_2" -99.000000
-	scalar "i_red_Position_3" -99.000000
-	scalar "i_red_Position_4" -99.000000
-	scalar "i_red_Position_5" -99.000000
-	scalar "i_red_Position_6" -99.000000
-	scalar "i_red_Position_7" -99.000000
-	scalar "i_red_Position_8" -99.000000
-	scalar "i_red_Position_9" -99.000000
-	scalar "i_red_Position_10" -99.000000
-	scalar "i_red_Position_11" -99.000000
-	scalar "i_red_Position_12" -99.000000
-	scalar "i_red_Position_13" -99.000000
-	scalar "i_red_Position_14" -99.000000
-	scalar "i_red_Position_15" -99.000000
-	scalar "i_red_FloatValue_0" 0.000000
-	scalar "i_red_FloatValue_1" 1.000000
-	scalar "i_red_FloatValue_2" -99.000000
-	scalar "i_red_FloatValue_3" -99.000000
-	scalar "i_red_FloatValue_4" -99.000000
-	scalar "i_red_FloatValue_5" -99.000000
-	scalar "i_red_FloatValue_6" -99.000000
-	scalar "i_red_FloatValue_7" -99.000000
-	scalar "i_red_FloatValue_8" -99.000000
-	scalar "i_red_FloatValue_9" -99.000000
-	scalar "i_red_FloatValue_10" -99.000000
-	scalar "i_red_FloatValue_11" -99.000000
-	scalar "i_red_FloatValue_12" -99.000000
-	scalar "i_red_FloatValue_13" -99.000000
-	scalar "i_red_FloatValue_14" -99.000000
-	scalar "i_red_FloatValue_15" -99.000000
-	int "i_red_Interp_0" 1
-	int "i_red_Interp_1" 1
-	int "i_red_Interp_2" -99
-	int "i_red_Interp_3" -99
-	int "i_red_Interp_4" -99
-	int "i_red_Interp_5" -99
-	int "i_red_Interp_6" -99
-	int "i_red_Interp_7" -99
-	int "i_red_Interp_8" -99
-	int "i_red_Interp_9" -99
-	int "i_red_Interp_10" -99
-	int "i_red_Interp_11" -99
-	int "i_red_Interp_12" -99
-	int "i_red_Interp_13" -99
-	int "i_red_Interp_14" -99
-	int "i_red_Interp_15" -99
-	scalar "i_green_Position_0" 0.000000
-	scalar "i_green_Position_1" 1.000000
-	scalar "i_green_Position_2" -99.000000
-	scalar "i_green_Position_3" -99.000000
-	scalar "i_green_Position_4" -99.000000
-	scalar "i_green_Position_5" -99.000000
-	scalar "i_green_Position_6" -99.000000
-	scalar "i_green_Position_7" -99.000000
-	scalar "i_green_Position_8" -99.000000
-	scalar "i_green_Position_9" -99.000000
-	scalar "i_green_Position_10" -99.000000
-	scalar "i_green_Position_11" -99.000000
-	scalar "i_green_Position_12" -99.000000
-	scalar "i_green_Position_13" -99.000000
-	scalar "i_green_Position_14" -99.000000
-	scalar "i_green_Position_15" -99.000000
-	scalar "i_green_FloatValue_0" 0.000000
-	scalar "i_green_FloatValue_1" 1.000000
-	scalar "i_green_FloatValue_2" -99.000000
-	scalar "i_green_FloatValue_3" -99.000000
-	scalar "i_green_FloatValue_4" -99.000000
-	scalar "i_green_FloatValue_5" -99.000000
-	scalar "i_green_FloatValue_6" -99.000000
-	scalar "i_green_FloatValue_7" -99.000000
-	scalar "i_green_FloatValue_8" -99.000000
-	scalar "i_green_FloatValue_9" -99.000000
-	scalar "i_green_FloatValue_10" -99.000000
-	scalar "i_green_FloatValue_11" -99.000000
-	scalar "i_green_FloatValue_12" -99.000000
-	scalar "i_green_FloatValue_13" -99.000000
-	scalar "i_green_FloatValue_14" -99.000000
-	scalar "i_green_FloatValue_15" -99.000000
-	int "i_green_Interp_0" 1
-	int "i_green_Interp_1" 1
-	int "i_green_Interp_2" -99
-	int "i_green_Interp_3" -99
-	int "i_green_Interp_4" -99
-	int "i_green_Interp_5" -99
-	int "i_green_Interp_6" -99
-	int "i_green_Interp_7" -99
-	int "i_green_Interp_8" -99
-	int "i_green_Interp_9" -99
-	int "i_green_Interp_10" -99
-	int "i_green_Interp_11" -99
-	int "i_green_Interp_12" -99
-	int "i_green_Interp_13" -99
-	int "i_green_Interp_14" -99
-	int "i_green_Interp_15" -99
-	scalar "i_blue_Position_0" 0.000000
-	scalar "i_blue_Position_1" 1.000000
-	scalar "i_blue_Position_2" -99.000000
-	scalar "i_blue_Position_3" -99.000000
-	scalar "i_blue_Position_4" -99.000000
-	scalar "i_blue_Position_5" -99.000000
-	scalar "i_blue_Position_6" -99.000000
-	scalar "i_blue_Position_7" -99.000000
-	scalar "i_blue_Position_8" -99.000000
-	scalar "i_blue_Position_9" -99.000000
-	scalar "i_blue_Position_10" -99.000000
-	scalar "i_blue_Position_11" -99.000000
-	scalar "i_blue_Position_12" -99.000000
-	scalar "i_blue_Position_13" -99.000000
-	scalar "i_blue_Position_14" -99.000000
-	scalar "i_blue_Position_15" -99.000000
-	scalar "i_blue_FloatValue_0" 0.000000
-	scalar "i_blue_FloatValue_1" 1.000000
-	scalar "i_blue_FloatValue_2" -99.000000
-	scalar "i_blue_FloatValue_3" -99.000000
-	scalar "i_blue_FloatValue_4" -99.000000
-	scalar "i_blue_FloatValue_5" -99.000000
-	scalar "i_blue_FloatValue_6" -99.000000
-	scalar "i_blue_FloatValue_7" -99.000000
-	scalar "i_blue_FloatValue_8" -99.000000
-	scalar "i_blue_FloatValue_9" -99.000000
-	scalar "i_blue_FloatValue_10" -99.000000
-	scalar "i_blue_FloatValue_11" -99.000000
-	scalar "i_blue_FloatValue_12" -99.000000
-	scalar "i_blue_FloatValue_13" -99.000000
-	scalar "i_blue_FloatValue_14" -99.000000
-	scalar "i_blue_FloatValue_15" -99.000000
-	int "i_blue_Interp_0" 1
-	int "i_blue_Interp_1" 1
-	int "i_blue_Interp_2" -99
-	int "i_blue_Interp_3" -99
-	int "i_blue_Interp_4" -99
-	int "i_blue_Interp_5" -99
-	int "i_blue_Interp_6" -99
-	int "i_blue_Interp_7" -99
-	int "i_blue_Interp_8" -99
-	int "i_blue_Interp_9" -99
-	int "i_blue_Interp_10" -99
-	int "i_blue_Interp_11" -99
-	int "i_blue_Interp_12" -99
-	int "i_blue_Interp_13" -99
-	int "i_blue_Interp_14" -99
-	int "i_blue_Interp_15" -99
+	#i_rPositions is array but not valid, skip
+	#i_rFloatValues is array but not valid, skip
+	#i_rInterp is array but not valid, skip
+	#i_gPositions is array but not valid, skip
+	#i_gFloatValues is array but not valid, skip
+	#i_gInterp is array but not valid, skip
+	#i_bPositions is array but not valid, skip
+	#i_bFloatValues is array but not valid, skip
+	#i_bInterp is array but not valid, skip
 	scalar "i_inputMin" 0.000000
 	scalar "i_inputMax" 1.000000
 	scalar "i_outputMin" 0.000000
@@ -2303,150 +1467,15 @@ node "maya_cloth" "green_FloatValue:object:cloth2" # "osl_node"
 end
 node "maya_remapColor" "green_FloatValue:object:remapColor1" # "osl_node"
 	param_link "i_color" "green_FloatValue:object:cloth2" "o_outColor"
-	scalar "i_red_Position_0" 0.000000
-	scalar "i_red_Position_1" 1.000000
-	scalar "i_red_Position_2" -99.000000
-	scalar "i_red_Position_3" -99.000000
-	scalar "i_red_Position_4" -99.000000
-	scalar "i_red_Position_5" -99.000000
-	scalar "i_red_Position_6" -99.000000
-	scalar "i_red_Position_7" -99.000000
-	scalar "i_red_Position_8" -99.000000
-	scalar "i_red_Position_9" -99.000000
-	scalar "i_red_Position_10" -99.000000
-	scalar "i_red_Position_11" -99.000000
-	scalar "i_red_Position_12" -99.000000
-	scalar "i_red_Position_13" -99.000000
-	scalar "i_red_Position_14" -99.000000
-	scalar "i_red_Position_15" -99.000000
-	scalar "i_red_FloatValue_0" 0.000000
-	scalar "i_red_FloatValue_1" 1.000000
-	scalar "i_red_FloatValue_2" -99.000000
-	scalar "i_red_FloatValue_3" -99.000000
-	scalar "i_red_FloatValue_4" -99.000000
-	scalar "i_red_FloatValue_5" -99.000000
-	scalar "i_red_FloatValue_6" -99.000000
-	scalar "i_red_FloatValue_7" -99.000000
-	scalar "i_red_FloatValue_8" -99.000000
-	scalar "i_red_FloatValue_9" -99.000000
-	scalar "i_red_FloatValue_10" -99.000000
-	scalar "i_red_FloatValue_11" -99.000000
-	scalar "i_red_FloatValue_12" -99.000000
-	scalar "i_red_FloatValue_13" -99.000000
-	scalar "i_red_FloatValue_14" -99.000000
-	scalar "i_red_FloatValue_15" -99.000000
-	int "i_red_Interp_0" 1
-	int "i_red_Interp_1" 1
-	int "i_red_Interp_2" -99
-	int "i_red_Interp_3" -99
-	int "i_red_Interp_4" -99
-	int "i_red_Interp_5" -99
-	int "i_red_Interp_6" -99
-	int "i_red_Interp_7" -99
-	int "i_red_Interp_8" -99
-	int "i_red_Interp_9" -99
-	int "i_red_Interp_10" -99
-	int "i_red_Interp_11" -99
-	int "i_red_Interp_12" -99
-	int "i_red_Interp_13" -99
-	int "i_red_Interp_14" -99
-	int "i_red_Interp_15" -99
-	scalar "i_green_Position_0" 0.000000
-	scalar "i_green_Position_1" 1.000000
-	scalar "i_green_Position_2" -99.000000
-	scalar "i_green_Position_3" -99.000000
-	scalar "i_green_Position_4" -99.000000
-	scalar "i_green_Position_5" -99.000000
-	scalar "i_green_Position_6" -99.000000
-	scalar "i_green_Position_7" -99.000000
-	scalar "i_green_Position_8" -99.000000
-	scalar "i_green_Position_9" -99.000000
-	scalar "i_green_Position_10" -99.000000
-	scalar "i_green_Position_11" -99.000000
-	scalar "i_green_Position_12" -99.000000
-	scalar "i_green_Position_13" -99.000000
-	scalar "i_green_Position_14" -99.000000
-	scalar "i_green_Position_15" -99.000000
-	scalar "i_green_FloatValue_0" 0.000000
-	scalar "i_green_FloatValue_1" 1.000000
-	scalar "i_green_FloatValue_2" -99.000000
-	scalar "i_green_FloatValue_3" -99.000000
-	scalar "i_green_FloatValue_4" -99.000000
-	scalar "i_green_FloatValue_5" -99.000000
-	scalar "i_green_FloatValue_6" -99.000000
-	scalar "i_green_FloatValue_7" -99.000000
-	scalar "i_green_FloatValue_8" -99.000000
-	scalar "i_green_FloatValue_9" -99.000000
-	scalar "i_green_FloatValue_10" -99.000000
-	scalar "i_green_FloatValue_11" -99.000000
-	scalar "i_green_FloatValue_12" -99.000000
-	scalar "i_green_FloatValue_13" -99.000000
-	scalar "i_green_FloatValue_14" -99.000000
-	scalar "i_green_FloatValue_15" -99.000000
-	int "i_green_Interp_0" 1
-	int "i_green_Interp_1" 1
-	int "i_green_Interp_2" -99
-	int "i_green_Interp_3" -99
-	int "i_green_Interp_4" -99
-	int "i_green_Interp_5" -99
-	int "i_green_Interp_6" -99
-	int "i_green_Interp_7" -99
-	int "i_green_Interp_8" -99
-	int "i_green_Interp_9" -99
-	int "i_green_Interp_10" -99
-	int "i_green_Interp_11" -99
-	int "i_green_Interp_12" -99
-	int "i_green_Interp_13" -99
-	int "i_green_Interp_14" -99
-	int "i_green_Interp_15" -99
-	scalar "i_blue_Position_0" 0.000000
-	scalar "i_blue_Position_1" 1.000000
-	scalar "i_blue_Position_2" -99.000000
-	scalar "i_blue_Position_3" -99.000000
-	scalar "i_blue_Position_4" -99.000000
-	scalar "i_blue_Position_5" -99.000000
-	scalar "i_blue_Position_6" -99.000000
-	scalar "i_blue_Position_7" -99.000000
-	scalar "i_blue_Position_8" -99.000000
-	scalar "i_blue_Position_9" -99.000000
-	scalar "i_blue_Position_10" -99.000000
-	scalar "i_blue_Position_11" -99.000000
-	scalar "i_blue_Position_12" -99.000000
-	scalar "i_blue_Position_13" -99.000000
-	scalar "i_blue_Position_14" -99.000000
-	scalar "i_blue_Position_15" -99.000000
-	scalar "i_blue_FloatValue_0" 0.000000
-	scalar "i_blue_FloatValue_1" 1.000000
-	scalar "i_blue_FloatValue_2" -99.000000
-	scalar "i_blue_FloatValue_3" -99.000000
-	scalar "i_blue_FloatValue_4" -99.000000
-	scalar "i_blue_FloatValue_5" -99.000000
-	scalar "i_blue_FloatValue_6" -99.000000
-	scalar "i_blue_FloatValue_7" -99.000000
-	scalar "i_blue_FloatValue_8" -99.000000
-	scalar "i_blue_FloatValue_9" -99.000000
-	scalar "i_blue_FloatValue_10" -99.000000
-	scalar "i_blue_FloatValue_11" -99.000000
-	scalar "i_blue_FloatValue_12" -99.000000
-	scalar "i_blue_FloatValue_13" -99.000000
-	scalar "i_blue_FloatValue_14" -99.000000
-	scalar "i_blue_FloatValue_15" -99.000000
-	int "i_blue_Interp_0" 1
-	int "i_blue_Interp_1" 1
-	int "i_blue_Interp_2" -99
-	int "i_blue_Interp_3" -99
-	int "i_blue_Interp_4" -99
-	int "i_blue_Interp_5" -99
-	int "i_blue_Interp_6" -99
-	int "i_blue_Interp_7" -99
-	int "i_blue_Interp_8" -99
-	int "i_blue_Interp_9" -99
-	int "i_blue_Interp_10" -99
-	int "i_blue_Interp_11" -99
-	int "i_blue_Interp_12" -99
-	int "i_blue_Interp_13" -99
-	int "i_blue_Interp_14" -99
-	int "i_blue_Interp_15" -99
+	#i_rPositions is array but not valid, skip
+	#i_rFloatValues is array but not valid, skip
+	#i_rInterp is array but not valid, skip
+	#i_gPositions is array but not valid, skip
+	#i_gFloatValues is array but not valid, skip
+	#i_gInterp is array but not valid, skip
+	#i_bPositions is array but not valid, skip
+	#i_bFloatValues is array but not valid, skip
+	#i_bInterp is array but not valid, skip
 	scalar "i_inputMin" 0.000000
 	scalar "i_inputMax" 1.000000
 	scalar "i_outputMin" 0.000000
@@ -2494,12 +1523,12 @@ node "instance" "green_FloatValue:object:pPlaneShape1_inst" # "instance"
 	1.000000 0.000000 0.000000 0.000000
 	0.000000 1.000000 0.000000 0.000000
 	0.000000 0.000000 1.000000 0.000000
-	2.775849 0.000000 2.363784 1.000000
+	2.775849 0.000000 1.213157 1.000000
 	matrix "motion_transform"
 	1.000000 0.000000 0.000000 0.000000
 	0.000000 1.000000 0.000000 0.000000
 	0.000000 0.000000 1.000000 0.000000
-	2.775849 0.000000 2.363784 1.000000
+	2.775849 0.000000 1.213157 1.000000
 	#bitfield:
 	bool "visible" on
 	bool "visible_secondary" on
@@ -2600,150 +1629,15 @@ node "maya_cloth" "green_Interp:object:cloth2" # "osl_node"
 end
 node "maya_remapColor" "green_Interp:object:remapColor1" # "osl_node"
 	param_link "i_color" "green_Interp:object:cloth2" "o_outColor"
-	scalar "i_red_Position_0" 0.000000
-	scalar "i_red_Position_1" 1.000000
-	scalar "i_red_Position_2" -99.000000
-	scalar "i_red_Position_3" -99.000000
-	scalar "i_red_Position_4" -99.000000
-	scalar "i_red_Position_5" -99.000000
-	scalar "i_red_Position_6" -99.000000
-	scalar "i_red_Position_7" -99.000000
-	scalar "i_red_Position_8" -99.000000
-	scalar "i_red_Position_9" -99.000000
-	scalar "i_red_Position_10" -99.000000
-	scalar "i_red_Position_11" -99.000000
-	scalar "i_red_Position_12" -99.000000
-	scalar "i_red_Position_13" -99.000000
-	scalar "i_red_Position_14" -99.000000
-	scalar "i_red_Position_15" -99.000000
-	scalar "i_red_FloatValue_0" 0.000000
-	scalar "i_red_FloatValue_1" 1.000000
-	scalar "i_red_FloatValue_2" -99.000000
-	scalar "i_red_FloatValue_3" -99.000000
-	scalar "i_red_FloatValue_4" -99.000000
-	scalar "i_red_FloatValue_5" -99.000000
-	scalar "i_red_FloatValue_6" -99.000000
-	scalar "i_red_FloatValue_7" -99.000000
-	scalar "i_red_FloatValue_8" -99.000000
-	scalar "i_red_FloatValue_9" -99.000000
-	scalar "i_red_FloatValue_10" -99.000000
-	scalar "i_red_FloatValue_11" -99.000000
-	scalar "i_red_FloatValue_12" -99.000000
-	scalar "i_red_FloatValue_13" -99.000000
-	scalar "i_red_FloatValue_14" -99.000000
-	scalar "i_red_FloatValue_15" -99.000000
-	int "i_red_Interp_0" 1
-	int "i_red_Interp_1" 1
-	int "i_red_Interp_2" -99
-	int "i_red_Interp_3" -99
-	int "i_red_Interp_4" -99
-	int "i_red_Interp_5" -99
-	int "i_red_Interp_6" -99
-	int "i_red_Interp_7" -99
-	int "i_red_Interp_8" -99
-	int "i_red_Interp_9" -99
-	int "i_red_Interp_10" -99
-	int "i_red_Interp_11" -99
-	int "i_red_Interp_12" -99
-	int "i_red_Interp_13" -99
-	int "i_red_Interp_14" -99
-	int "i_red_Interp_15" -99
-	scalar "i_green_Position_0" 0.000000
-	scalar "i_green_Position_1" 1.000000
-	scalar "i_green_Position_2" -99.000000
-	scalar "i_green_Position_3" -99.000000
-	scalar "i_green_Position_4" -99.000000
-	scalar "i_green_Position_5" -99.000000
-	scalar "i_green_Position_6" -99.000000
-	scalar "i_green_Position_7" -99.000000
-	scalar "i_green_Position_8" -99.000000
-	scalar "i_green_Position_9" -99.000000
-	scalar "i_green_Position_10" -99.000000
-	scalar "i_green_Position_11" -99.000000
-	scalar "i_green_Position_12" -99.000000
-	scalar "i_green_Position_13" -99.000000
-	scalar "i_green_Position_14" -99.000000
-	scalar "i_green_Position_15" -99.000000
-	scalar "i_green_FloatValue_0" 0.000000
-	scalar "i_green_FloatValue_1" 1.000000
-	scalar "i_green_FloatValue_2" -99.000000
-	scalar "i_green_FloatValue_3" -99.000000
-	scalar "i_green_FloatValue_4" -99.000000
-	scalar "i_green_FloatValue_5" -99.000000
-	scalar "i_green_FloatValue_6" -99.000000
-	scalar "i_green_FloatValue_7" -99.000000
-	scalar "i_green_FloatValue_8" -99.000000
-	scalar "i_green_FloatValue_9" -99.000000
-	scalar "i_green_FloatValue_10" -99.000000
-	scalar "i_green_FloatValue_11" -99.000000
-	scalar "i_green_FloatValue_12" -99.000000
-	scalar "i_green_FloatValue_13" -99.000000
-	scalar "i_green_FloatValue_14" -99.000000
-	scalar "i_green_FloatValue_15" -99.000000
-	int "i_green_Interp_0" 1
-	int "i_green_Interp_1" 1
-	int "i_green_Interp_2" -99
-	int "i_green_Interp_3" -99
-	int "i_green_Interp_4" -99
-	int "i_green_Interp_5" -99
-	int "i_green_Interp_6" -99
-	int "i_green_Interp_7" -99
-	int "i_green_Interp_8" -99
-	int "i_green_Interp_9" -99
-	int "i_green_Interp_10" -99
-	int "i_green_Interp_11" -99
-	int "i_green_Interp_12" -99
-	int "i_green_Interp_13" -99
-	int "i_green_Interp_14" -99
-	int "i_green_Interp_15" -99
-	scalar "i_blue_Position_0" 0.000000
-	scalar "i_blue_Position_1" 1.000000
-	scalar "i_blue_Position_2" -99.000000
-	scalar "i_blue_Position_3" -99.000000
-	scalar "i_blue_Position_4" -99.000000
-	scalar "i_blue_Position_5" -99.000000
-	scalar "i_blue_Position_6" -99.000000
-	scalar "i_blue_Position_7" -99.000000
-	scalar "i_blue_Position_8" -99.000000
-	scalar "i_blue_Position_9" -99.000000
-	scalar "i_blue_Position_10" -99.000000
-	scalar "i_blue_Position_11" -99.000000
-	scalar "i_blue_Position_12" -99.000000
-	scalar "i_blue_Position_13" -99.000000
-	scalar "i_blue_Position_14" -99.000000
-	scalar "i_blue_Position_15" -99.000000
-	scalar "i_blue_FloatValue_0" 0.000000
-	scalar "i_blue_FloatValue_1" 1.000000
-	scalar "i_blue_FloatValue_2" -99.000000
-	scalar "i_blue_FloatValue_3" -99.000000
-	scalar "i_blue_FloatValue_4" -99.000000
-	scalar "i_blue_FloatValue_5" -99.000000
-	scalar "i_blue_FloatValue_6" -99.000000
-	scalar "i_blue_FloatValue_7" -99.000000
-	scalar "i_blue_FloatValue_8" -99.000000
-	scalar "i_blue_FloatValue_9" -99.000000
-	scalar "i_blue_FloatValue_10" -99.000000
-	scalar "i_blue_FloatValue_11" -99.000000
-	scalar "i_blue_FloatValue_12" -99.000000
-	scalar "i_blue_FloatValue_13" -99.000000
-	scalar "i_blue_FloatValue_14" -99.000000
-	scalar "i_blue_FloatValue_15" -99.000000
-	int "i_blue_Interp_0" 1
-	int "i_blue_Interp_1" 1
-	int "i_blue_Interp_2" -99
-	int "i_blue_Interp_3" -99
-	int "i_blue_Interp_4" -99
-	int "i_blue_Interp_5" -99
-	int "i_blue_Interp_6" -99
-	int "i_blue_Interp_7" -99
-	int "i_blue_Interp_8" -99
-	int "i_blue_Interp_9" -99
-	int "i_blue_Interp_10" -99
-	int "i_blue_Interp_11" -99
-	int "i_blue_Interp_12" -99
-	int "i_blue_Interp_13" -99
-	int "i_blue_Interp_14" -99
-	int "i_blue_Interp_15" -99
+	#i_rPositions is array but not valid, skip
+	#i_rFloatValues is array but not valid, skip
+	#i_rInterp is array but not valid, skip
+	#i_gPositions is array but not valid, skip
+	#i_gFloatValues is array but not valid, skip
+	#i_gInterp is array but not valid, skip
+	#i_bPositions is array but not valid, skip
+	#i_bFloatValues is array but not valid, skip
+	#i_bInterp is array but not valid, skip
 	scalar "i_inputMin" 0.000000
 	scalar "i_inputMax" 1.000000
 	scalar "i_outputMin" 0.000000
@@ -2791,12 +1685,12 @@ node "instance" "green_Interp:object:pPlaneShape1_inst" # "instance"
 	1.000000 0.000000 0.000000 0.000000
 	0.000000 1.000000 0.000000 0.000000
 	0.000000 0.000000 1.000000 0.000000
-	2.775849 0.000000 3.461768 1.000000
+	2.775849 0.000000 2.378834 1.000000
 	matrix "motion_transform"
 	1.000000 0.000000 0.000000 0.000000
 	0.000000 1.000000 0.000000 0.000000
 	0.000000 0.000000 1.000000 0.000000
-	2.775849 0.000000 3.461768 1.000000
+	2.775849 0.000000 2.378834 1.000000
 	#bitfield:
 	bool "visible" on
 	bool "visible_secondary" on
@@ -2897,150 +1791,15 @@ node "maya_cloth" "green_Position:object:cloth2" # "osl_node"
 end
 node "maya_remapColor" "green_Position:object:remapColor1" # "osl_node"
 	param_link "i_color" "green_Position:object:cloth2" "o_outColor"
-	scalar "i_red_Position_0" 0.000000
-	scalar "i_red_Position_1" 1.000000
-	scalar "i_red_Position_2" -99.000000
-	scalar "i_red_Position_3" -99.000000
-	scalar "i_red_Position_4" -99.000000
-	scalar "i_red_Position_5" -99.000000
-	scalar "i_red_Position_6" -99.000000
-	scalar "i_red_Position_7" -99.000000
-	scalar "i_red_Position_8" -99.000000
-	scalar "i_red_Position_9" -99.000000
-	scalar "i_red_Position_10" -99.000000
-	scalar "i_red_Position_11" -99.000000
-	scalar "i_red_Position_12" -99.000000
-	scalar "i_red_Position_13" -99.000000
-	scalar "i_red_Position_14" -99.000000
-	scalar "i_red_Position_15" -99.000000
-	scalar "i_red_FloatValue_0" 0.000000
-	scalar "i_red_FloatValue_1" 1.000000
-	scalar "i_red_FloatValue_2" -99.000000
-	scalar "i_red_FloatValue_3" -99.000000
-	scalar "i_red_FloatValue_4" -99.000000
-	scalar "i_red_FloatValue_5" -99.000000
-	scalar "i_red_FloatValue_6" -99.000000
-	scalar "i_red_FloatValue_7" -99.000000
-	scalar "i_red_FloatValue_8" -99.000000
-	scalar "i_red_FloatValue_9" -99.000000
-	scalar "i_red_FloatValue_10" -99.000000
-	scalar "i_red_FloatValue_11" -99.000000
-	scalar "i_red_FloatValue_12" -99.000000
-	scalar "i_red_FloatValue_13" -99.000000
-	scalar "i_red_FloatValue_14" -99.000000
-	scalar "i_red_FloatValue_15" -99.000000
-	int "i_red_Interp_0" 1
-	int "i_red_Interp_1" 1
-	int "i_red_Interp_2" -99
-	int "i_red_Interp_3" -99
-	int "i_red_Interp_4" -99
-	int "i_red_Interp_5" -99
-	int "i_red_Interp_6" -99
-	int "i_red_Interp_7" -99
-	int "i_red_Interp_8" -99
-	int "i_red_Interp_9" -99
-	int "i_red_Interp_10" -99
-	int "i_red_Interp_11" -99
-	int "i_red_Interp_12" -99
-	int "i_red_Interp_13" -99
-	int "i_red_Interp_14" -99
-	int "i_red_Interp_15" -99
-	scalar "i_green_Position_0" 0.000000
-	scalar "i_green_Position_1" 1.000000
-	scalar "i_green_Position_2" -99.000000
-	scalar "i_green_Position_3" -99.000000
-	scalar "i_green_Position_4" -99.000000
-	scalar "i_green_Position_5" -99.000000
-	scalar "i_green_Position_6" -99.000000
-	scalar "i_green_Position_7" -99.000000
-	scalar "i_green_Position_8" -99.000000
-	scalar "i_green_Position_9" -99.000000
-	scalar "i_green_Position_10" -99.000000
-	scalar "i_green_Position_11" -99.000000
-	scalar "i_green_Position_12" -99.000000
-	scalar "i_green_Position_13" -99.000000
-	scalar "i_green_Position_14" -99.000000
-	scalar "i_green_Position_15" -99.000000
-	scalar "i_green_FloatValue_0" 0.000000
-	scalar "i_green_FloatValue_1" 1.000000
-	scalar "i_green_FloatValue_2" -99.000000
-	scalar "i_green_FloatValue_3" -99.000000
-	scalar "i_green_FloatValue_4" -99.000000
-	scalar "i_green_FloatValue_5" -99.000000
-	scalar "i_green_FloatValue_6" -99.000000
-	scalar "i_green_FloatValue_7" -99.000000
-	scalar "i_green_FloatValue_8" -99.000000
-	scalar "i_green_FloatValue_9" -99.000000
-	scalar "i_green_FloatValue_10" -99.000000
-	scalar "i_green_FloatValue_11" -99.000000
-	scalar "i_green_FloatValue_12" -99.000000
-	scalar "i_green_FloatValue_13" -99.000000
-	scalar "i_green_FloatValue_14" -99.000000
-	scalar "i_green_FloatValue_15" -99.000000
-	int "i_green_Interp_0" 1
-	int "i_green_Interp_1" 1
-	int "i_green_Interp_2" -99
-	int "i_green_Interp_3" -99
-	int "i_green_Interp_4" -99
-	int "i_green_Interp_5" -99
-	int "i_green_Interp_6" -99
-	int "i_green_Interp_7" -99
-	int "i_green_Interp_8" -99
-	int "i_green_Interp_9" -99
-	int "i_green_Interp_10" -99
-	int "i_green_Interp_11" -99
-	int "i_green_Interp_12" -99
-	int "i_green_Interp_13" -99
-	int "i_green_Interp_14" -99
-	int "i_green_Interp_15" -99
-	scalar "i_blue_Position_0" 0.000000
-	scalar "i_blue_Position_1" 1.000000
-	scalar "i_blue_Position_2" -99.000000
-	scalar "i_blue_Position_3" -99.000000
-	scalar "i_blue_Position_4" -99.000000
-	scalar "i_blue_Position_5" -99.000000
-	scalar "i_blue_Position_6" -99.000000
-	scalar "i_blue_Position_7" -99.000000
-	scalar "i_blue_Position_8" -99.000000
-	scalar "i_blue_Position_9" -99.000000
-	scalar "i_blue_Position_10" -99.000000
-	scalar "i_blue_Position_11" -99.000000
-	scalar "i_blue_Position_12" -99.000000
-	scalar "i_blue_Position_13" -99.000000
-	scalar "i_blue_Position_14" -99.000000
-	scalar "i_blue_Position_15" -99.000000
-	scalar "i_blue_FloatValue_0" 0.000000
-	scalar "i_blue_FloatValue_1" 1.000000
-	scalar "i_blue_FloatValue_2" -99.000000
-	scalar "i_blue_FloatValue_3" -99.000000
-	scalar "i_blue_FloatValue_4" -99.000000
-	scalar "i_blue_FloatValue_5" -99.000000
-	scalar "i_blue_FloatValue_6" -99.000000
-	scalar "i_blue_FloatValue_7" -99.000000
-	scalar "i_blue_FloatValue_8" -99.000000
-	scalar "i_blue_FloatValue_9" -99.000000
-	scalar "i_blue_FloatValue_10" -99.000000
-	scalar "i_blue_FloatValue_11" -99.000000
-	scalar "i_blue_FloatValue_12" -99.000000
-	scalar "i_blue_FloatValue_13" -99.000000
-	scalar "i_blue_FloatValue_14" -99.000000
-	scalar "i_blue_FloatValue_15" -99.000000
-	int "i_blue_Interp_0" 1
-	int "i_blue_Interp_1" 1
-	int "i_blue_Interp_2" -99
-	int "i_blue_Interp_3" -99
-	int "i_blue_Interp_4" -99
-	int "i_blue_Interp_5" -99
-	int "i_blue_Interp_6" -99
-	int "i_blue_Interp_7" -99
-	int "i_blue_Interp_8" -99
-	int "i_blue_Interp_9" -99
-	int "i_blue_Interp_10" -99
-	int "i_blue_Interp_11" -99
-	int "i_blue_Interp_12" -99
-	int "i_blue_Interp_13" -99
-	int "i_blue_Interp_14" -99
-	int "i_blue_Interp_15" -99
+	#i_rPositions is array but not valid, skip
+	#i_rFloatValues is array but not valid, skip
+	#i_rInterp is array but not valid, skip
+	#i_gPositions is array but not valid, skip
+	#i_gFloatValues is array but not valid, skip
+	#i_gInterp is array but not valid, skip
+	#i_bPositions is array but not valid, skip
+	#i_bFloatValues is array but not valid, skip
+	#i_bInterp is array but not valid, skip
 	scalar "i_inputMin" 0.000000
 	scalar "i_inputMax" 1.000000
 	scalar "i_outputMin" 0.000000
@@ -3088,12 +1847,12 @@ node "instance" "green_Position:object:pPlaneShape1_inst" # "instance"
 	1.000000 0.000000 0.000000 0.000000
 	0.000000 1.000000 0.000000 0.000000
 	0.000000 0.000000 1.000000 0.000000
-	2.775849 0.000000 4.698853 1.000000
+	2.775849 0.000000 3.548226 1.000000
 	matrix "motion_transform"
 	1.000000 0.000000 0.000000 0.000000
 	0.000000 1.000000 0.000000 0.000000
 	0.000000 0.000000 1.000000 0.000000
-	2.775849 0.000000 4.698853 1.000000
+	2.775849 0.000000 3.548226 1.000000
 	#bitfield:
 	bool "visible" on
 	bool "visible_secondary" on
@@ -3194,150 +1953,15 @@ node "maya_cloth" "green_Position_Value_Interp2:object:cloth2" # "osl_node"
 end
 node "maya_remapColor" "green_Position_Value_Interp2:object:remapColor1" # "osl_node"
 	param_link "i_color" "green_Position_Value_Interp2:object:cloth2" "o_outColor"
-	scalar "i_red_Position_0" 0.000000
-	scalar "i_red_Position_1" 1.000000
-	scalar "i_red_Position_2" -99.000000
-	scalar "i_red_Position_3" -99.000000
-	scalar "i_red_Position_4" -99.000000
-	scalar "i_red_Position_5" -99.000000
-	scalar "i_red_Position_6" -99.000000
-	scalar "i_red_Position_7" -99.000000
-	scalar "i_red_Position_8" -99.000000
-	scalar "i_red_Position_9" -99.000000
-	scalar "i_red_Position_10" -99.000000
-	scalar "i_red_Position_11" -99.000000
-	scalar "i_red_Position_12" -99.000000
-	scalar "i_red_Position_13" -99.000000
-	scalar "i_red_Position_14" -99.000000
-	scalar "i_red_Position_15" -99.000000
-	scalar "i_red_FloatValue_0" 0.000000
-	scalar "i_red_FloatValue_1" 1.000000
-	scalar "i_red_FloatValue_2" -99.000000
-	scalar "i_red_FloatValue_3" -99.000000
-	scalar "i_red_FloatValue_4" -99.000000
-	scalar "i_red_FloatValue_5" -99.000000
-	scalar "i_red_FloatValue_6" -99.000000
-	scalar "i_red_FloatValue_7" -99.000000
-	scalar "i_red_FloatValue_8" -99.000000
-	scalar "i_red_FloatValue_9" -99.000000
-	scalar "i_red_FloatValue_10" -99.000000
-	scalar "i_red_FloatValue_11" -99.000000
-	scalar "i_red_FloatValue_12" -99.000000
-	scalar "i_red_FloatValue_13" -99.000000
-	scalar "i_red_FloatValue_14" -99.000000
-	scalar "i_red_FloatValue_15" -99.000000
-	int "i_red_Interp_0" 1
-	int "i_red_Interp_1" 1
-	int "i_red_Interp_2" -99
-	int "i_red_Interp_3" -99
-	int "i_red_Interp_4" -99
-	int "i_red_Interp_5" -99
-	int "i_red_Interp_6" -99
-	int "i_red_Interp_7" -99
-	int "i_red_Interp_8" -99
-	int "i_red_Interp_9" -99
-	int "i_red_Interp_10" -99
-	int "i_red_Interp_11" -99
-	int "i_red_Interp_12" -99
-	int "i_red_Interp_13" -99
-	int "i_red_Interp_14" -99
-	int "i_red_Interp_15" -99
-	scalar "i_green_Position_0" 0.000000
-	scalar "i_green_Position_1" 1.000000
-	scalar "i_green_Position_2" -99.000000
-	scalar "i_green_Position_3" -99.000000
-	scalar "i_green_Position_4" -99.000000
-	scalar "i_green_Position_5" -99.000000
-	scalar "i_green_Position_6" -99.000000
-	scalar "i_green_Position_7" -99.000000
-	scalar "i_green_Position_8" -99.000000
-	scalar "i_green_Position_9" -99.000000
-	scalar "i_green_Position_10" -99.000000
-	scalar "i_green_Position_11" -99.000000
-	scalar "i_green_Position_12" -99.000000
-	scalar "i_green_Position_13" -99.000000
-	scalar "i_green_Position_14" -99.000000
-	scalar "i_green_Position_15" -99.000000
-	scalar "i_green_FloatValue_0" 0.000000
-	scalar "i_green_FloatValue_1" 1.000000
-	scalar "i_green_FloatValue_2" -99.000000
-	scalar "i_green_FloatValue_3" -99.000000
-	scalar "i_green_FloatValue_4" -99.000000
-	scalar "i_green_FloatValue_5" -99.000000
-	scalar "i_green_FloatValue_6" -99.000000
-	scalar "i_green_FloatValue_7" -99.000000
-	scalar "i_green_FloatValue_8" -99.000000
-	scalar "i_green_FloatValue_9" -99.000000
-	scalar "i_green_FloatValue_10" -99.000000
-	scalar "i_green_FloatValue_11" -99.000000
-	scalar "i_green_FloatValue_12" -99.000000
-	scalar "i_green_FloatValue_13" -99.000000
-	scalar "i_green_FloatValue_14" -99.000000
-	scalar "i_green_FloatValue_15" -99.000000
-	int "i_green_Interp_0" 1
-	int "i_green_Interp_1" 1
-	int "i_green_Interp_2" -99
-	int "i_green_Interp_3" -99
-	int "i_green_Interp_4" -99
-	int "i_green_Interp_5" -99
-	int "i_green_Interp_6" -99
-	int "i_green_Interp_7" -99
-	int "i_green_Interp_8" -99
-	int "i_green_Interp_9" -99
-	int "i_green_Interp_10" -99
-	int "i_green_Interp_11" -99
-	int "i_green_Interp_12" -99
-	int "i_green_Interp_13" -99
-	int "i_green_Interp_14" -99
-	int "i_green_Interp_15" -99
-	scalar "i_blue_Position_0" 0.000000
-	scalar "i_blue_Position_1" 1.000000
-	scalar "i_blue_Position_2" -99.000000
-	scalar "i_blue_Position_3" -99.000000
-	scalar "i_blue_Position_4" -99.000000
-	scalar "i_blue_Position_5" -99.000000
-	scalar "i_blue_Position_6" -99.000000
-	scalar "i_blue_Position_7" -99.000000
-	scalar "i_blue_Position_8" -99.000000
-	scalar "i_blue_Position_9" -99.000000
-	scalar "i_blue_Position_10" -99.000000
-	scalar "i_blue_Position_11" -99.000000
-	scalar "i_blue_Position_12" -99.000000
-	scalar "i_blue_Position_13" -99.000000
-	scalar "i_blue_Position_14" -99.000000
-	scalar "i_blue_Position_15" -99.000000
-	scalar "i_blue_FloatValue_0" 0.000000
-	scalar "i_blue_FloatValue_1" 1.000000
-	scalar "i_blue_FloatValue_2" -99.000000
-	scalar "i_blue_FloatValue_3" -99.000000
-	scalar "i_blue_FloatValue_4" -99.000000
-	scalar "i_blue_FloatValue_5" -99.000000
-	scalar "i_blue_FloatValue_6" -99.000000
-	scalar "i_blue_FloatValue_7" -99.000000
-	scalar "i_blue_FloatValue_8" -99.000000
-	scalar "i_blue_FloatValue_9" -99.000000
-	scalar "i_blue_FloatValue_10" -99.000000
-	scalar "i_blue_FloatValue_11" -99.000000
-	scalar "i_blue_FloatValue_12" -99.000000
-	scalar "i_blue_FloatValue_13" -99.000000
-	scalar "i_blue_FloatValue_14" -99.000000
-	scalar "i_blue_FloatValue_15" -99.000000
-	int "i_blue_Interp_0" 1
-	int "i_blue_Interp_1" 1
-	int "i_blue_Interp_2" -99
-	int "i_blue_Interp_3" -99
-	int "i_blue_Interp_4" -99
-	int "i_blue_Interp_5" -99
-	int "i_blue_Interp_6" -99
-	int "i_blue_Interp_7" -99
-	int "i_blue_Interp_8" -99
-	int "i_blue_Interp_9" -99
-	int "i_blue_Interp_10" -99
-	int "i_blue_Interp_11" -99
-	int "i_blue_Interp_12" -99
-	int "i_blue_Interp_13" -99
-	int "i_blue_Interp_14" -99
-	int "i_blue_Interp_15" -99
+	#i_rPositions is array but not valid, skip
+	#i_rFloatValues is array but not valid, skip
+	#i_rInterp is array but not valid, skip
+	#i_gPositions is array but not valid, skip
+	#i_gFloatValues is array but not valid, skip
+	#i_gInterp is array but not valid, skip
+	#i_bPositions is array but not valid, skip
+	#i_bFloatValues is array but not valid, skip
+	#i_bInterp is array but not valid, skip
 	scalar "i_inputMin" 0.000000
 	scalar "i_inputMax" 1.000000
 	scalar "i_outputMin" 0.000000
@@ -3385,12 +2009,12 @@ node "instance" "green_Position_Value_Interp2:object:pPlaneShape1_inst" # "insta
 	1.000000 0.000000 0.000000 0.000000
 	0.000000 1.000000 0.000000 0.000000
 	0.000000 0.000000 1.000000 0.000000
-	2.750942 0.000000 5.899197 1.000000
+	2.750942 0.000000 4.748570 1.000000
 	matrix "motion_transform"
 	1.000000 0.000000 0.000000 0.000000
 	0.000000 1.000000 0.000000 0.000000
 	0.000000 0.000000 1.000000 0.000000
-	2.750942 0.000000 5.899197 1.000000
+	2.750942 0.000000 4.748570 1.000000
 	#bitfield:
 	bool "visible" on
 	bool "visible_secondary" on
@@ -3491,150 +2115,15 @@ node "maya_cloth" "green_Position_Value2:object:cloth2" # "osl_node"
 end
 node "maya_remapColor" "green_Position_Value2:object:remapColor1" # "osl_node"
 	param_link "i_color" "green_Position_Value2:object:cloth2" "o_outColor"
-	scalar "i_red_Position_0" 0.000000
-	scalar "i_red_Position_1" 1.000000
-	scalar "i_red_Position_2" -99.000000
-	scalar "i_red_Position_3" -99.000000
-	scalar "i_red_Position_4" -99.000000
-	scalar "i_red_Position_5" -99.000000
-	scalar "i_red_Position_6" -99.000000
-	scalar "i_red_Position_7" -99.000000
-	scalar "i_red_Position_8" -99.000000
-	scalar "i_red_Position_9" -99.000000
-	scalar "i_red_Position_10" -99.000000
-	scalar "i_red_Position_11" -99.000000
-	scalar "i_red_Position_12" -99.000000
-	scalar "i_red_Position_13" -99.000000
-	scalar "i_red_Position_14" -99.000000
-	scalar "i_red_Position_15" -99.000000
-	scalar "i_red_FloatValue_0" 0.000000
-	scalar "i_red_FloatValue_1" 1.000000
-	scalar "i_red_FloatValue_2" -99.000000
-	scalar "i_red_FloatValue_3" -99.000000
-	scalar "i_red_FloatValue_4" -99.000000
-	scalar "i_red_FloatValue_5" -99.000000
-	scalar "i_red_FloatValue_6" -99.000000
-	scalar "i_red_FloatValue_7" -99.000000
-	scalar "i_red_FloatValue_8" -99.000000
-	scalar "i_red_FloatValue_9" -99.000000
-	scalar "i_red_FloatValue_10" -99.000000
-	scalar "i_red_FloatValue_11" -99.000000
-	scalar "i_red_FloatValue_12" -99.000000
-	scalar "i_red_FloatValue_13" -99.000000
-	scalar "i_red_FloatValue_14" -99.000000
-	scalar "i_red_FloatValue_15" -99.000000
-	int "i_red_Interp_0" 1
-	int "i_red_Interp_1" 1
-	int "i_red_Interp_2" -99
-	int "i_red_Interp_3" -99
-	int "i_red_Interp_4" -99
-	int "i_red_Interp_5" -99
-	int "i_red_Interp_6" -99
-	int "i_red_Interp_7" -99
-	int "i_red_Interp_8" -99
-	int "i_red_Interp_9" -99
-	int "i_red_Interp_10" -99
-	int "i_red_Interp_11" -99
-	int "i_red_Interp_12" -99
-	int "i_red_Interp_13" -99
-	int "i_red_Interp_14" -99
-	int "i_red_Interp_15" -99
-	scalar "i_green_Position_0" 0.000000
-	scalar "i_green_Position_1" 1.000000
-	scalar "i_green_Position_2" -99.000000
-	scalar "i_green_Position_3" -99.000000
-	scalar "i_green_Position_4" -99.000000
-	scalar "i_green_Position_5" -99.000000
-	scalar "i_green_Position_6" -99.000000
-	scalar "i_green_Position_7" -99.000000
-	scalar "i_green_Position_8" -99.000000
-	scalar "i_green_Position_9" -99.000000
-	scalar "i_green_Position_10" -99.000000
-	scalar "i_green_Position_11" -99.000000
-	scalar "i_green_Position_12" -99.000000
-	scalar "i_green_Position_13" -99.000000
-	scalar "i_green_Position_14" -99.000000
-	scalar "i_green_Position_15" -99.000000
-	scalar "i_green_FloatValue_0" 0.000000
-	scalar "i_green_FloatValue_1" 1.000000
-	scalar "i_green_FloatValue_2" -99.000000
-	scalar "i_green_FloatValue_3" -99.000000
-	scalar "i_green_FloatValue_4" -99.000000
-	scalar "i_green_FloatValue_5" -99.000000
-	scalar "i_green_FloatValue_6" -99.000000
-	scalar "i_green_FloatValue_7" -99.000000
-	scalar "i_green_FloatValue_8" -99.000000
-	scalar "i_green_FloatValue_9" -99.000000
-	scalar "i_green_FloatValue_10" -99.000000
-	scalar "i_green_FloatValue_11" -99.000000
-	scalar "i_green_FloatValue_12" -99.000000
-	scalar "i_green_FloatValue_13" -99.000000
-	scalar "i_green_FloatValue_14" -99.000000
-	scalar "i_green_FloatValue_15" -99.000000
-	int "i_green_Interp_0" 1
-	int "i_green_Interp_1" 1
-	int "i_green_Interp_2" -99
-	int "i_green_Interp_3" -99
-	int "i_green_Interp_4" -99
-	int "i_green_Interp_5" -99
-	int "i_green_Interp_6" -99
-	int "i_green_Interp_7" -99
-	int "i_green_Interp_8" -99
-	int "i_green_Interp_9" -99
-	int "i_green_Interp_10" -99
-	int "i_green_Interp_11" -99
-	int "i_green_Interp_12" -99
-	int "i_green_Interp_13" -99
-	int "i_green_Interp_14" -99
-	int "i_green_Interp_15" -99
-	scalar "i_blue_Position_0" 0.000000
-	scalar "i_blue_Position_1" 1.000000
-	scalar "i_blue_Position_2" -99.000000
-	scalar "i_blue_Position_3" -99.000000
-	scalar "i_blue_Position_4" -99.000000
-	scalar "i_blue_Position_5" -99.000000
-	scalar "i_blue_Position_6" -99.000000
-	scalar "i_blue_Position_7" -99.000000
-	scalar "i_blue_Position_8" -99.000000
-	scalar "i_blue_Position_9" -99.000000
-	scalar "i_blue_Position_10" -99.000000
-	scalar "i_blue_Position_11" -99.000000
-	scalar "i_blue_Position_12" -99.000000
-	scalar "i_blue_Position_13" -99.000000
-	scalar "i_blue_Position_14" -99.000000
-	scalar "i_blue_Position_15" -99.000000
-	scalar "i_blue_FloatValue_0" 0.000000
-	scalar "i_blue_FloatValue_1" 1.000000
-	scalar "i_blue_FloatValue_2" -99.000000
-	scalar "i_blue_FloatValue_3" -99.000000
-	scalar "i_blue_FloatValue_4" -99.000000
-	scalar "i_blue_FloatValue_5" -99.000000
-	scalar "i_blue_FloatValue_6" -99.000000
-	scalar "i_blue_FloatValue_7" -99.000000
-	scalar "i_blue_FloatValue_8" -99.000000
-	scalar "i_blue_FloatValue_9" -99.000000
-	scalar "i_blue_FloatValue_10" -99.000000
-	scalar "i_blue_FloatValue_11" -99.000000
-	scalar "i_blue_FloatValue_12" -99.000000
-	scalar "i_blue_FloatValue_13" -99.000000
-	scalar "i_blue_FloatValue_14" -99.000000
-	scalar "i_blue_FloatValue_15" -99.000000
-	int "i_blue_Interp_0" 1
-	int "i_blue_Interp_1" 1
-	int "i_blue_Interp_2" -99
-	int "i_blue_Interp_3" -99
-	int "i_blue_Interp_4" -99
-	int "i_blue_Interp_5" -99
-	int "i_blue_Interp_6" -99
-	int "i_blue_Interp_7" -99
-	int "i_blue_Interp_8" -99
-	int "i_blue_Interp_9" -99
-	int "i_blue_Interp_10" -99
-	int "i_blue_Interp_11" -99
-	int "i_blue_Interp_12" -99
-	int "i_blue_Interp_13" -99
-	int "i_blue_Interp_14" -99
-	int "i_blue_Interp_15" -99
+	#i_rPositions is array but not valid, skip
+	#i_rFloatValues is array but not valid, skip
+	#i_rInterp is array but not valid, skip
+	#i_gPositions is array but not valid, skip
+	#i_gFloatValues is array but not valid, skip
+	#i_gInterp is array but not valid, skip
+	#i_bPositions is array but not valid, skip
+	#i_bFloatValues is array but not valid, skip
+	#i_bInterp is array but not valid, skip
 	scalar "i_inputMin" 0.000000
 	scalar "i_inputMax" 1.000000
 	scalar "i_outputMin" 0.000000
@@ -3682,12 +2171,12 @@ node "instance" "green_Position_Value2:object:pPlaneShape1_inst" # "instance"
 	1.000000 0.000000 0.000000 0.000000
 	0.000000 1.000000 0.000000 0.000000
 	0.000000 0.000000 1.000000 0.000000
-	2.796295 0.000000 1.163215 1.000000
+	2.796295 0.000000 5.891085 1.000000
 	matrix "motion_transform"
 	1.000000 0.000000 0.000000 0.000000
 	0.000000 1.000000 0.000000 0.000000
 	0.000000 0.000000 1.000000 0.000000
-	2.796295 0.000000 1.163215 1.000000
+	2.796295 0.000000 5.891085 1.000000
 	#bitfield:
 	bool "visible" on
 	bool "visible_secondary" on
@@ -3788,150 +2277,15 @@ node "maya_cloth" "inputMax:object:cloth2" # "osl_node"
 end
 node "maya_remapColor" "inputMax:object:remapColor1" # "osl_node"
 	param_link "i_color" "inputMax:object:cloth2" "o_outColor"
-	scalar "i_red_Position_0" 0.000000
-	scalar "i_red_Position_1" 1.000000
-	scalar "i_red_Position_2" -99.000000
-	scalar "i_red_Position_3" -99.000000
-	scalar "i_red_Position_4" -99.000000
-	scalar "i_red_Position_5" -99.000000
-	scalar "i_red_Position_6" -99.000000
-	scalar "i_red_Position_7" -99.000000
-	scalar "i_red_Position_8" -99.000000
-	scalar "i_red_Position_9" -99.000000
-	scalar "i_red_Position_10" -99.000000
-	scalar "i_red_Position_11" -99.000000
-	scalar "i_red_Position_12" -99.000000
-	scalar "i_red_Position_13" -99.000000
-	scalar "i_red_Position_14" -99.000000
-	scalar "i_red_Position_15" -99.000000
-	scalar "i_red_FloatValue_0" 0.000000
-	scalar "i_red_FloatValue_1" 1.000000
-	scalar "i_red_FloatValue_2" -99.000000
-	scalar "i_red_FloatValue_3" -99.000000
-	scalar "i_red_FloatValue_4" -99.000000
-	scalar "i_red_FloatValue_5" -99.000000
-	scalar "i_red_FloatValue_6" -99.000000
-	scalar "i_red_FloatValue_7" -99.000000
-	scalar "i_red_FloatValue_8" -99.000000
-	scalar "i_red_FloatValue_9" -99.000000
-	scalar "i_red_FloatValue_10" -99.000000
-	scalar "i_red_FloatValue_11" -99.000000
-	scalar "i_red_FloatValue_12" -99.000000
-	scalar "i_red_FloatValue_13" -99.000000
-	scalar "i_red_FloatValue_14" -99.000000
-	scalar "i_red_FloatValue_15" -99.000000
-	int "i_red_Interp_0" 1
-	int "i_red_Interp_1" 1
-	int "i_red_Interp_2" -99
-	int "i_red_Interp_3" -99
-	int "i_red_Interp_4" -99
-	int "i_red_Interp_5" -99
-	int "i_red_Interp_6" -99
-	int "i_red_Interp_7" -99
-	int "i_red_Interp_8" -99
-	int "i_red_Interp_9" -99
-	int "i_red_Interp_10" -99
-	int "i_red_Interp_11" -99
-	int "i_red_Interp_12" -99
-	int "i_red_Interp_13" -99
-	int "i_red_Interp_14" -99
-	int "i_red_Interp_15" -99
-	scalar "i_green_Position_0" 0.000000
-	scalar "i_green_Position_1" 1.000000
-	scalar "i_green_Position_2" -99.000000
-	scalar "i_green_Position_3" -99.000000
-	scalar "i_green_Position_4" -99.000000
-	scalar "i_green_Position_5" -99.000000
-	scalar "i_green_Position_6" -99.000000
-	scalar "i_green_Position_7" -99.000000
-	scalar "i_green_Position_8" -99.000000
-	scalar "i_green_Position_9" -99.000000
-	scalar "i_green_Position_10" -99.000000
-	scalar "i_green_Position_11" -99.000000
-	scalar "i_green_Position_12" -99.000000
-	scalar "i_green_Position_13" -99.000000
-	scalar "i_green_Position_14" -99.000000
-	scalar "i_green_Position_15" -99.000000
-	scalar "i_green_FloatValue_0" 0.000000
-	scalar "i_green_FloatValue_1" 1.000000
-	scalar "i_green_FloatValue_2" -99.000000
-	scalar "i_green_FloatValue_3" -99.000000
-	scalar "i_green_FloatValue_4" -99.000000
-	scalar "i_green_FloatValue_5" -99.000000
-	scalar "i_green_FloatValue_6" -99.000000
-	scalar "i_green_FloatValue_7" -99.000000
-	scalar "i_green_FloatValue_8" -99.000000
-	scalar "i_green_FloatValue_9" -99.000000
-	scalar "i_green_FloatValue_10" -99.000000
-	scalar "i_green_FloatValue_11" -99.000000
-	scalar "i_green_FloatValue_12" -99.000000
-	scalar "i_green_FloatValue_13" -99.000000
-	scalar "i_green_FloatValue_14" -99.000000
-	scalar "i_green_FloatValue_15" -99.000000
-	int "i_green_Interp_0" 1
-	int "i_green_Interp_1" 1
-	int "i_green_Interp_2" -99
-	int "i_green_Interp_3" -99
-	int "i_green_Interp_4" -99
-	int "i_green_Interp_5" -99
-	int "i_green_Interp_6" -99
-	int "i_green_Interp_7" -99
-	int "i_green_Interp_8" -99
-	int "i_green_Interp_9" -99
-	int "i_green_Interp_10" -99
-	int "i_green_Interp_11" -99
-	int "i_green_Interp_12" -99
-	int "i_green_Interp_13" -99
-	int "i_green_Interp_14" -99
-	int "i_green_Interp_15" -99
-	scalar "i_blue_Position_0" 0.000000
-	scalar "i_blue_Position_1" 1.000000
-	scalar "i_blue_Position_2" -99.000000
-	scalar "i_blue_Position_3" -99.000000
-	scalar "i_blue_Position_4" -99.000000
-	scalar "i_blue_Position_5" -99.000000
-	scalar "i_blue_Position_6" -99.000000
-	scalar "i_blue_Position_7" -99.000000
-	scalar "i_blue_Position_8" -99.000000
-	scalar "i_blue_Position_9" -99.000000
-	scalar "i_blue_Position_10" -99.000000
-	scalar "i_blue_Position_11" -99.000000
-	scalar "i_blue_Position_12" -99.000000
-	scalar "i_blue_Position_13" -99.000000
-	scalar "i_blue_Position_14" -99.000000
-	scalar "i_blue_Position_15" -99.000000
-	scalar "i_blue_FloatValue_0" 0.000000
-	scalar "i_blue_FloatValue_1" 1.000000
-	scalar "i_blue_FloatValue_2" -99.000000
-	scalar "i_blue_FloatValue_3" -99.000000
-	scalar "i_blue_FloatValue_4" -99.000000
-	scalar "i_blue_FloatValue_5" -99.000000
-	scalar "i_blue_FloatValue_6" -99.000000
-	scalar "i_blue_FloatValue_7" -99.000000
-	scalar "i_blue_FloatValue_8" -99.000000
-	scalar "i_blue_FloatValue_9" -99.000000
-	scalar "i_blue_FloatValue_10" -99.000000
-	scalar "i_blue_FloatValue_11" -99.000000
-	scalar "i_blue_FloatValue_12" -99.000000
-	scalar "i_blue_FloatValue_13" -99.000000
-	scalar "i_blue_FloatValue_14" -99.000000
-	scalar "i_blue_FloatValue_15" -99.000000
-	int "i_blue_Interp_0" 1
-	int "i_blue_Interp_1" 1
-	int "i_blue_Interp_2" -99
-	int "i_blue_Interp_3" -99
-	int "i_blue_Interp_4" -99
-	int "i_blue_Interp_5" -99
-	int "i_blue_Interp_6" -99
-	int "i_blue_Interp_7" -99
-	int "i_blue_Interp_8" -99
-	int "i_blue_Interp_9" -99
-	int "i_blue_Interp_10" -99
-	int "i_blue_Interp_11" -99
-	int "i_blue_Interp_12" -99
-	int "i_blue_Interp_13" -99
-	int "i_blue_Interp_14" -99
-	int "i_blue_Interp_15" -99
+	#i_rPositions is array but not valid, skip
+	#i_rFloatValues is array but not valid, skip
+	#i_rInterp is array but not valid, skip
+	#i_gPositions is array but not valid, skip
+	#i_gFloatValues is array but not valid, skip
+	#i_gInterp is array but not valid, skip
+	#i_bPositions is array but not valid, skip
+	#i_bFloatValues is array but not valid, skip
+	#i_bInterp is array but not valid, skip
 	scalar "i_inputMin" 0.000000
 	scalar "i_inputMax" 0.500000
 	scalar "i_outputMin" 0.000000
@@ -4085,150 +2439,15 @@ node "maya_cloth" "inputMin:object:cloth2" # "osl_node"
 end
 node "maya_remapColor" "inputMin:object:remapColor1" # "osl_node"
 	param_link "i_color" "inputMin:object:cloth2" "o_outColor"
-	scalar "i_red_Position_0" 0.000000
-	scalar "i_red_Position_1" 1.000000
-	scalar "i_red_Position_2" -99.000000
-	scalar "i_red_Position_3" -99.000000
-	scalar "i_red_Position_4" -99.000000
-	scalar "i_red_Position_5" -99.000000
-	scalar "i_red_Position_6" -99.000000
-	scalar "i_red_Position_7" -99.000000
-	scalar "i_red_Position_8" -99.000000
-	scalar "i_red_Position_9" -99.000000
-	scalar "i_red_Position_10" -99.000000
-	scalar "i_red_Position_11" -99.000000
-	scalar "i_red_Position_12" -99.000000
-	scalar "i_red_Position_13" -99.000000
-	scalar "i_red_Position_14" -99.000000
-	scalar "i_red_Position_15" -99.000000
-	scalar "i_red_FloatValue_0" 0.000000
-	scalar "i_red_FloatValue_1" 1.000000
-	scalar "i_red_FloatValue_2" -99.000000
-	scalar "i_red_FloatValue_3" -99.000000
-	scalar "i_red_FloatValue_4" -99.000000
-	scalar "i_red_FloatValue_5" -99.000000
-	scalar "i_red_FloatValue_6" -99.000000
-	scalar "i_red_FloatValue_7" -99.000000
-	scalar "i_red_FloatValue_8" -99.000000
-	scalar "i_red_FloatValue_9" -99.000000
-	scalar "i_red_FloatValue_10" -99.000000
-	scalar "i_red_FloatValue_11" -99.000000
-	scalar "i_red_FloatValue_12" -99.000000
-	scalar "i_red_FloatValue_13" -99.000000
-	scalar "i_red_FloatValue_14" -99.000000
-	scalar "i_red_FloatValue_15" -99.000000
-	int "i_red_Interp_0" 1
-	int "i_red_Interp_1" 1
-	int "i_red_Interp_2" -99
-	int "i_red_Interp_3" -99
-	int "i_red_Interp_4" -99
-	int "i_red_Interp_5" -99
-	int "i_red_Interp_6" -99
-	int "i_red_Interp_7" -99
-	int "i_red_Interp_8" -99
-	int "i_red_Interp_9" -99
-	int "i_red_Interp_10" -99
-	int "i_red_Interp_11" -99
-	int "i_red_Interp_12" -99
-	int "i_red_Interp_13" -99
-	int "i_red_Interp_14" -99
-	int "i_red_Interp_15" -99
-	scalar "i_green_Position_0" 0.000000
-	scalar "i_green_Position_1" 1.000000
-	scalar "i_green_Position_2" -99.000000
-	scalar "i_green_Position_3" -99.000000
-	scalar "i_green_Position_4" -99.000000
-	scalar "i_green_Position_5" -99.000000
-	scalar "i_green_Position_6" -99.000000
-	scalar "i_green_Position_7" -99.000000
-	scalar "i_green_Position_8" -99.000000
-	scalar "i_green_Position_9" -99.000000
-	scalar "i_green_Position_10" -99.000000
-	scalar "i_green_Position_11" -99.000000
-	scalar "i_green_Position_12" -99.000000
-	scalar "i_green_Position_13" -99.000000
-	scalar "i_green_Position_14" -99.000000
-	scalar "i_green_Position_15" -99.000000
-	scalar "i_green_FloatValue_0" 0.000000
-	scalar "i_green_FloatValue_1" 1.000000
-	scalar "i_green_FloatValue_2" -99.000000
-	scalar "i_green_FloatValue_3" -99.000000
-	scalar "i_green_FloatValue_4" -99.000000
-	scalar "i_green_FloatValue_5" -99.000000
-	scalar "i_green_FloatValue_6" -99.000000
-	scalar "i_green_FloatValue_7" -99.000000
-	scalar "i_green_FloatValue_8" -99.000000
-	scalar "i_green_FloatValue_9" -99.000000
-	scalar "i_green_FloatValue_10" -99.000000
-	scalar "i_green_FloatValue_11" -99.000000
-	scalar "i_green_FloatValue_12" -99.000000
-	scalar "i_green_FloatValue_13" -99.000000
-	scalar "i_green_FloatValue_14" -99.000000
-	scalar "i_green_FloatValue_15" -99.000000
-	int "i_green_Interp_0" 1
-	int "i_green_Interp_1" 1
-	int "i_green_Interp_2" -99
-	int "i_green_Interp_3" -99
-	int "i_green_Interp_4" -99
-	int "i_green_Interp_5" -99
-	int "i_green_Interp_6" -99
-	int "i_green_Interp_7" -99
-	int "i_green_Interp_8" -99
-	int "i_green_Interp_9" -99
-	int "i_green_Interp_10" -99
-	int "i_green_Interp_11" -99
-	int "i_green_Interp_12" -99
-	int "i_green_Interp_13" -99
-	int "i_green_Interp_14" -99
-	int "i_green_Interp_15" -99
-	scalar "i_blue_Position_0" 0.000000
-	scalar "i_blue_Position_1" 1.000000
-	scalar "i_blue_Position_2" -99.000000
-	scalar "i_blue_Position_3" -99.000000
-	scalar "i_blue_Position_4" -99.000000
-	scalar "i_blue_Position_5" -99.000000
-	scalar "i_blue_Position_6" -99.000000
-	scalar "i_blue_Position_7" -99.000000
-	scalar "i_blue_Position_8" -99.000000
-	scalar "i_blue_Position_9" -99.000000
-	scalar "i_blue_Position_10" -99.000000
-	scalar "i_blue_Position_11" -99.000000
-	scalar "i_blue_Position_12" -99.000000
-	scalar "i_blue_Position_13" -99.000000
-	scalar "i_blue_Position_14" -99.000000
-	scalar "i_blue_Position_15" -99.000000
-	scalar "i_blue_FloatValue_0" 0.000000
-	scalar "i_blue_FloatValue_1" 1.000000
-	scalar "i_blue_FloatValue_2" -99.000000
-	scalar "i_blue_FloatValue_3" -99.000000
-	scalar "i_blue_FloatValue_4" -99.000000
-	scalar "i_blue_FloatValue_5" -99.000000
-	scalar "i_blue_FloatValue_6" -99.000000
-	scalar "i_blue_FloatValue_7" -99.000000
-	scalar "i_blue_FloatValue_8" -99.000000
-	scalar "i_blue_FloatValue_9" -99.000000
-	scalar "i_blue_FloatValue_10" -99.000000
-	scalar "i_blue_FloatValue_11" -99.000000
-	scalar "i_blue_FloatValue_12" -99.000000
-	scalar "i_blue_FloatValue_13" -99.000000
-	scalar "i_blue_FloatValue_14" -99.000000
-	scalar "i_blue_FloatValue_15" -99.000000
-	int "i_blue_Interp_0" 1
-	int "i_blue_Interp_1" 1
-	int "i_blue_Interp_2" -99
-	int "i_blue_Interp_3" -99
-	int "i_blue_Interp_4" -99
-	int "i_blue_Interp_5" -99
-	int "i_blue_Interp_6" -99
-	int "i_blue_Interp_7" -99
-	int "i_blue_Interp_8" -99
-	int "i_blue_Interp_9" -99
-	int "i_blue_Interp_10" -99
-	int "i_blue_Interp_11" -99
-	int "i_blue_Interp_12" -99
-	int "i_blue_Interp_13" -99
-	int "i_blue_Interp_14" -99
-	int "i_blue_Interp_15" -99
+	#i_rPositions is array but not valid, skip
+	#i_rFloatValues is array but not valid, skip
+	#i_rInterp is array but not valid, skip
+	#i_gPositions is array but not valid, skip
+	#i_gFloatValues is array but not valid, skip
+	#i_gInterp is array but not valid, skip
+	#i_bPositions is array but not valid, skip
+	#i_bFloatValues is array but not valid, skip
+	#i_bInterp is array but not valid, skip
 	scalar "i_inputMin" 0.500000
 	scalar "i_inputMax" 1.000000
 	scalar "i_outputMin" 0.000000
@@ -4382,150 +2601,15 @@ node "maya_cloth" "outputMax:object:cloth2" # "osl_node"
 end
 node "maya_remapColor" "outputMax:object:remapColor1" # "osl_node"
 	param_link "i_color" "outputMax:object:cloth2" "o_outColor"
-	scalar "i_red_Position_0" 0.000000
-	scalar "i_red_Position_1" 1.000000
-	scalar "i_red_Position_2" -99.000000
-	scalar "i_red_Position_3" -99.000000
-	scalar "i_red_Position_4" -99.000000
-	scalar "i_red_Position_5" -99.000000
-	scalar "i_red_Position_6" -99.000000
-	scalar "i_red_Position_7" -99.000000
-	scalar "i_red_Position_8" -99.000000
-	scalar "i_red_Position_9" -99.000000
-	scalar "i_red_Position_10" -99.000000
-	scalar "i_red_Position_11" -99.000000
-	scalar "i_red_Position_12" -99.000000
-	scalar "i_red_Position_13" -99.000000
-	scalar "i_red_Position_14" -99.000000
-	scalar "i_red_Position_15" -99.000000
-	scalar "i_red_FloatValue_0" 0.000000
-	scalar "i_red_FloatValue_1" 1.000000
-	scalar "i_red_FloatValue_2" -99.000000
-	scalar "i_red_FloatValue_3" -99.000000
-	scalar "i_red_FloatValue_4" -99.000000
-	scalar "i_red_FloatValue_5" -99.000000
-	scalar "i_red_FloatValue_6" -99.000000
-	scalar "i_red_FloatValue_7" -99.000000
-	scalar "i_red_FloatValue_8" -99.000000
-	scalar "i_red_FloatValue_9" -99.000000
-	scalar "i_red_FloatValue_10" -99.000000
-	scalar "i_red_FloatValue_11" -99.000000
-	scalar "i_red_FloatValue_12" -99.000000
-	scalar "i_red_FloatValue_13" -99.000000
-	scalar "i_red_FloatValue_14" -99.000000
-	scalar "i_red_FloatValue_15" -99.000000
-	int "i_red_Interp_0" 1
-	int "i_red_Interp_1" 1
-	int "i_red_Interp_2" -99
-	int "i_red_Interp_3" -99
-	int "i_red_Interp_4" -99
-	int "i_red_Interp_5" -99
-	int "i_red_Interp_6" -99
-	int "i_red_Interp_7" -99
-	int "i_red_Interp_8" -99
-	int "i_red_Interp_9" -99
-	int "i_red_Interp_10" -99
-	int "i_red_Interp_11" -99
-	int "i_red_Interp_12" -99
-	int "i_red_Interp_13" -99
-	int "i_red_Interp_14" -99
-	int "i_red_Interp_15" -99
-	scalar "i_green_Position_0" 0.000000
-	scalar "i_green_Position_1" 1.000000
-	scalar "i_green_Position_2" -99.000000
-	scalar "i_green_Position_3" -99.000000
-	scalar "i_green_Position_4" -99.000000
-	scalar "i_green_Position_5" -99.000000
-	scalar "i_green_Position_6" -99.000000
-	scalar "i_green_Position_7" -99.000000
-	scalar "i_green_Position_8" -99.000000
-	scalar "i_green_Position_9" -99.000000
-	scalar "i_green_Position_10" -99.000000
-	scalar "i_green_Position_11" -99.000000
-	scalar "i_green_Position_12" -99.000000
-	scalar "i_green_Position_13" -99.000000
-	scalar "i_green_Position_14" -99.000000
-	scalar "i_green_Position_15" -99.000000
-	scalar "i_green_FloatValue_0" 0.000000
-	scalar "i_green_FloatValue_1" 1.000000
-	scalar "i_green_FloatValue_2" -99.000000
-	scalar "i_green_FloatValue_3" -99.000000
-	scalar "i_green_FloatValue_4" -99.000000
-	scalar "i_green_FloatValue_5" -99.000000
-	scalar "i_green_FloatValue_6" -99.000000
-	scalar "i_green_FloatValue_7" -99.000000
-	scalar "i_green_FloatValue_8" -99.000000
-	scalar "i_green_FloatValue_9" -99.000000
-	scalar "i_green_FloatValue_10" -99.000000
-	scalar "i_green_FloatValue_11" -99.000000
-	scalar "i_green_FloatValue_12" -99.000000
-	scalar "i_green_FloatValue_13" -99.000000
-	scalar "i_green_FloatValue_14" -99.000000
-	scalar "i_green_FloatValue_15" -99.000000
-	int "i_green_Interp_0" 1
-	int "i_green_Interp_1" 1
-	int "i_green_Interp_2" -99
-	int "i_green_Interp_3" -99
-	int "i_green_Interp_4" -99
-	int "i_green_Interp_5" -99
-	int "i_green_Interp_6" -99
-	int "i_green_Interp_7" -99
-	int "i_green_Interp_8" -99
-	int "i_green_Interp_9" -99
-	int "i_green_Interp_10" -99
-	int "i_green_Interp_11" -99
-	int "i_green_Interp_12" -99
-	int "i_green_Interp_13" -99
-	int "i_green_Interp_14" -99
-	int "i_green_Interp_15" -99
-	scalar "i_blue_Position_0" 0.000000
-	scalar "i_blue_Position_1" 1.000000
-	scalar "i_blue_Position_2" -99.000000
-	scalar "i_blue_Position_3" -99.000000
-	scalar "i_blue_Position_4" -99.000000
-	scalar "i_blue_Position_5" -99.000000
-	scalar "i_blue_Position_6" -99.000000
-	scalar "i_blue_Position_7" -99.000000
-	scalar "i_blue_Position_8" -99.000000
-	scalar "i_blue_Position_9" -99.000000
-	scalar "i_blue_Position_10" -99.000000
-	scalar "i_blue_Position_11" -99.000000
-	scalar "i_blue_Position_12" -99.000000
-	scalar "i_blue_Position_13" -99.000000
-	scalar "i_blue_Position_14" -99.000000
-	scalar "i_blue_Position_15" -99.000000
-	scalar "i_blue_FloatValue_0" 0.000000
-	scalar "i_blue_FloatValue_1" 1.000000
-	scalar "i_blue_FloatValue_2" -99.000000
-	scalar "i_blue_FloatValue_3" -99.000000
-	scalar "i_blue_FloatValue_4" -99.000000
-	scalar "i_blue_FloatValue_5" -99.000000
-	scalar "i_blue_FloatValue_6" -99.000000
-	scalar "i_blue_FloatValue_7" -99.000000
-	scalar "i_blue_FloatValue_8" -99.000000
-	scalar "i_blue_FloatValue_9" -99.000000
-	scalar "i_blue_FloatValue_10" -99.000000
-	scalar "i_blue_FloatValue_11" -99.000000
-	scalar "i_blue_FloatValue_12" -99.000000
-	scalar "i_blue_FloatValue_13" -99.000000
-	scalar "i_blue_FloatValue_14" -99.000000
-	scalar "i_blue_FloatValue_15" -99.000000
-	int "i_blue_Interp_0" 1
-	int "i_blue_Interp_1" 1
-	int "i_blue_Interp_2" -99
-	int "i_blue_Interp_3" -99
-	int "i_blue_Interp_4" -99
-	int "i_blue_Interp_5" -99
-	int "i_blue_Interp_6" -99
-	int "i_blue_Interp_7" -99
-	int "i_blue_Interp_8" -99
-	int "i_blue_Interp_9" -99
-	int "i_blue_Interp_10" -99
-	int "i_blue_Interp_11" -99
-	int "i_blue_Interp_12" -99
-	int "i_blue_Interp_13" -99
-	int "i_blue_Interp_14" -99
-	int "i_blue_Interp_15" -99
+	#i_rPositions is array but not valid, skip
+	#i_rFloatValues is array but not valid, skip
+	#i_rInterp is array but not valid, skip
+	#i_gPositions is array but not valid, skip
+	#i_gFloatValues is array but not valid, skip
+	#i_gInterp is array but not valid, skip
+	#i_bPositions is array but not valid, skip
+	#i_bFloatValues is array but not valid, skip
+	#i_bInterp is array but not valid, skip
 	scalar "i_inputMin" 0.000000
 	scalar "i_inputMax" 1.000000
 	scalar "i_outputMin" 0.000000
@@ -4679,150 +2763,15 @@ node "maya_cloth" "outputMin:object:cloth2" # "osl_node"
 end
 node "maya_remapColor" "outputMin:object:remapColor1" # "osl_node"
 	param_link "i_color" "outputMin:object:cloth2" "o_outColor"
-	scalar "i_red_Position_0" 0.000000
-	scalar "i_red_Position_1" 1.000000
-	scalar "i_red_Position_2" -99.000000
-	scalar "i_red_Position_3" -99.000000
-	scalar "i_red_Position_4" -99.000000
-	scalar "i_red_Position_5" -99.000000
-	scalar "i_red_Position_6" -99.000000
-	scalar "i_red_Position_7" -99.000000
-	scalar "i_red_Position_8" -99.000000
-	scalar "i_red_Position_9" -99.000000
-	scalar "i_red_Position_10" -99.000000
-	scalar "i_red_Position_11" -99.000000
-	scalar "i_red_Position_12" -99.000000
-	scalar "i_red_Position_13" -99.000000
-	scalar "i_red_Position_14" -99.000000
-	scalar "i_red_Position_15" -99.000000
-	scalar "i_red_FloatValue_0" 0.000000
-	scalar "i_red_FloatValue_1" 1.000000
-	scalar "i_red_FloatValue_2" -99.000000
-	scalar "i_red_FloatValue_3" -99.000000
-	scalar "i_red_FloatValue_4" -99.000000
-	scalar "i_red_FloatValue_5" -99.000000
-	scalar "i_red_FloatValue_6" -99.000000
-	scalar "i_red_FloatValue_7" -99.000000
-	scalar "i_red_FloatValue_8" -99.000000
-	scalar "i_red_FloatValue_9" -99.000000
-	scalar "i_red_FloatValue_10" -99.000000
-	scalar "i_red_FloatValue_11" -99.000000
-	scalar "i_red_FloatValue_12" -99.000000
-	scalar "i_red_FloatValue_13" -99.000000
-	scalar "i_red_FloatValue_14" -99.000000
-	scalar "i_red_FloatValue_15" -99.000000
-	int "i_red_Interp_0" 1
-	int "i_red_Interp_1" 1
-	int "i_red_Interp_2" -99
-	int "i_red_Interp_3" -99
-	int "i_red_Interp_4" -99
-	int "i_red_Interp_5" -99
-	int "i_red_Interp_6" -99
-	int "i_red_Interp_7" -99
-	int "i_red_Interp_8" -99
-	int "i_red_Interp_9" -99
-	int "i_red_Interp_10" -99
-	int "i_red_Interp_11" -99
-	int "i_red_Interp_12" -99
-	int "i_red_Interp_13" -99
-	int "i_red_Interp_14" -99
-	int "i_red_Interp_15" -99
-	scalar "i_green_Position_0" 0.000000
-	scalar "i_green_Position_1" 1.000000
-	scalar "i_green_Position_2" -99.000000
-	scalar "i_green_Position_3" -99.000000
-	scalar "i_green_Position_4" -99.000000
-	scalar "i_green_Position_5" -99.000000
-	scalar "i_green_Position_6" -99.000000
-	scalar "i_green_Position_7" -99.000000
-	scalar "i_green_Position_8" -99.000000
-	scalar "i_green_Position_9" -99.000000
-	scalar "i_green_Position_10" -99.000000
-	scalar "i_green_Position_11" -99.000000
-	scalar "i_green_Position_12" -99.000000
-	scalar "i_green_Position_13" -99.000000
-	scalar "i_green_Position_14" -99.000000
-	scalar "i_green_Position_15" -99.000000
-	scalar "i_green_FloatValue_0" 0.000000
-	scalar "i_green_FloatValue_1" 1.000000
-	scalar "i_green_FloatValue_2" -99.000000
-	scalar "i_green_FloatValue_3" -99.000000
-	scalar "i_green_FloatValue_4" -99.000000
-	scalar "i_green_FloatValue_5" -99.000000
-	scalar "i_green_FloatValue_6" -99.000000
-	scalar "i_green_FloatValue_7" -99.000000
-	scalar "i_green_FloatValue_8" -99.000000
-	scalar "i_green_FloatValue_9" -99.000000
-	scalar "i_green_FloatValue_10" -99.000000
-	scalar "i_green_FloatValue_11" -99.000000
-	scalar "i_green_FloatValue_12" -99.000000
-	scalar "i_green_FloatValue_13" -99.000000
-	scalar "i_green_FloatValue_14" -99.000000
-	scalar "i_green_FloatValue_15" -99.000000
-	int "i_green_Interp_0" 1
-	int "i_green_Interp_1" 1
-	int "i_green_Interp_2" -99
-	int "i_green_Interp_3" -99
-	int "i_green_Interp_4" -99
-	int "i_green_Interp_5" -99
-	int "i_green_Interp_6" -99
-	int "i_green_Interp_7" -99
-	int "i_green_Interp_8" -99
-	int "i_green_Interp_9" -99
-	int "i_green_Interp_10" -99
-	int "i_green_Interp_11" -99
-	int "i_green_Interp_12" -99
-	int "i_green_Interp_13" -99
-	int "i_green_Interp_14" -99
-	int "i_green_Interp_15" -99
-	scalar "i_blue_Position_0" 0.000000
-	scalar "i_blue_Position_1" 1.000000
-	scalar "i_blue_Position_2" -99.000000
-	scalar "i_blue_Position_3" -99.000000
-	scalar "i_blue_Position_4" -99.000000
-	scalar "i_blue_Position_5" -99.000000
-	scalar "i_blue_Position_6" -99.000000
-	scalar "i_blue_Position_7" -99.000000
-	scalar "i_blue_Position_8" -99.000000
-	scalar "i_blue_Position_9" -99.000000
-	scalar "i_blue_Position_10" -99.000000
-	scalar "i_blue_Position_11" -99.000000
-	scalar "i_blue_Position_12" -99.000000
-	scalar "i_blue_Position_13" -99.000000
-	scalar "i_blue_Position_14" -99.000000
-	scalar "i_blue_Position_15" -99.000000
-	scalar "i_blue_FloatValue_0" 0.000000
-	scalar "i_blue_FloatValue_1" 1.000000
-	scalar "i_blue_FloatValue_2" -99.000000
-	scalar "i_blue_FloatValue_3" -99.000000
-	scalar "i_blue_FloatValue_4" -99.000000
-	scalar "i_blue_FloatValue_5" -99.000000
-	scalar "i_blue_FloatValue_6" -99.000000
-	scalar "i_blue_FloatValue_7" -99.000000
-	scalar "i_blue_FloatValue_8" -99.000000
-	scalar "i_blue_FloatValue_9" -99.000000
-	scalar "i_blue_FloatValue_10" -99.000000
-	scalar "i_blue_FloatValue_11" -99.000000
-	scalar "i_blue_FloatValue_12" -99.000000
-	scalar "i_blue_FloatValue_13" -99.000000
-	scalar "i_blue_FloatValue_14" -99.000000
-	scalar "i_blue_FloatValue_15" -99.000000
-	int "i_blue_Interp_0" 1
-	int "i_blue_Interp_1" 1
-	int "i_blue_Interp_2" -99
-	int "i_blue_Interp_3" -99
-	int "i_blue_Interp_4" -99
-	int "i_blue_Interp_5" -99
-	int "i_blue_Interp_6" -99
-	int "i_blue_Interp_7" -99
-	int "i_blue_Interp_8" -99
-	int "i_blue_Interp_9" -99
-	int "i_blue_Interp_10" -99
-	int "i_blue_Interp_11" -99
-	int "i_blue_Interp_12" -99
-	int "i_blue_Interp_13" -99
-	int "i_blue_Interp_14" -99
-	int "i_blue_Interp_15" -99
+	#i_rPositions is array but not valid, skip
+	#i_rFloatValues is array but not valid, skip
+	#i_rInterp is array but not valid, skip
+	#i_gPositions is array but not valid, skip
+	#i_gFloatValues is array but not valid, skip
+	#i_gInterp is array but not valid, skip
+	#i_bPositions is array but not valid, skip
+	#i_bFloatValues is array but not valid, skip
+	#i_bInterp is array but not valid, skip
 	scalar "i_inputMin" 0.000000
 	scalar "i_inputMax" 1.000000
 	scalar "i_outputMin" 0.400000
@@ -4976,150 +2925,15 @@ node "maya_cloth" "red_FloatValue:object:cloth2" # "osl_node"
 end
 node "maya_remapColor" "red_FloatValue:object:remapColor1" # "osl_node"
 	param_link "i_color" "red_FloatValue:object:cloth2" "o_outColor"
-	scalar "i_red_Position_0" 0.000000
-	scalar "i_red_Position_1" 1.000000
-	scalar "i_red_Position_2" -99.000000
-	scalar "i_red_Position_3" -99.000000
-	scalar "i_red_Position_4" -99.000000
-	scalar "i_red_Position_5" -99.000000
-	scalar "i_red_Position_6" -99.000000
-	scalar "i_red_Position_7" -99.000000
-	scalar "i_red_Position_8" -99.000000
-	scalar "i_red_Position_9" -99.000000
-	scalar "i_red_Position_10" -99.000000
-	scalar "i_red_Position_11" -99.000000
-	scalar "i_red_Position_12" -99.000000
-	scalar "i_red_Position_13" -99.000000
-	scalar "i_red_Position_14" -99.000000
-	scalar "i_red_Position_15" -99.000000
-	scalar "i_red_FloatValue_0" 0.000000
-	scalar "i_red_FloatValue_1" 1.000000
-	scalar "i_red_FloatValue_2" -99.000000
-	scalar "i_red_FloatValue_3" -99.000000
-	scalar "i_red_FloatValue_4" -99.000000
-	scalar "i_red_FloatValue_5" -99.000000
-	scalar "i_red_FloatValue_6" -99.000000
-	scalar "i_red_FloatValue_7" -99.000000
-	scalar "i_red_FloatValue_8" -99.000000
-	scalar "i_red_FloatValue_9" -99.000000
-	scalar "i_red_FloatValue_10" -99.000000
-	scalar "i_red_FloatValue_11" -99.000000
-	scalar "i_red_FloatValue_12" -99.000000
-	scalar "i_red_FloatValue_13" -99.000000
-	scalar "i_red_FloatValue_14" -99.000000
-	scalar "i_red_FloatValue_15" -99.000000
-	int "i_red_Interp_0" 1
-	int "i_red_Interp_1" 1
-	int "i_red_Interp_2" -99
-	int "i_red_Interp_3" -99
-	int "i_red_Interp_4" -99
-	int "i_red_Interp_5" -99
-	int "i_red_Interp_6" -99
-	int "i_red_Interp_7" -99
-	int "i_red_Interp_8" -99
-	int "i_red_Interp_9" -99
-	int "i_red_Interp_10" -99
-	int "i_red_Interp_11" -99
-	int "i_red_Interp_12" -99
-	int "i_red_Interp_13" -99
-	int "i_red_Interp_14" -99
-	int "i_red_Interp_15" -99
-	scalar "i_green_Position_0" 0.000000
-	scalar "i_green_Position_1" 1.000000
-	scalar "i_green_Position_2" -99.000000
-	scalar "i_green_Position_3" -99.000000
-	scalar "i_green_Position_4" -99.000000
-	scalar "i_green_Position_5" -99.000000
-	scalar "i_green_Position_6" -99.000000
-	scalar "i_green_Position_7" -99.000000
-	scalar "i_green_Position_8" -99.000000
-	scalar "i_green_Position_9" -99.000000
-	scalar "i_green_Position_10" -99.000000
-	scalar "i_green_Position_11" -99.000000
-	scalar "i_green_Position_12" -99.000000
-	scalar "i_green_Position_13" -99.000000
-	scalar "i_green_Position_14" -99.000000
-	scalar "i_green_Position_15" -99.000000
-	scalar "i_green_FloatValue_0" 0.000000
-	scalar "i_green_FloatValue_1" 1.000000
-	scalar "i_green_FloatValue_2" -99.000000
-	scalar "i_green_FloatValue_3" -99.000000
-	scalar "i_green_FloatValue_4" -99.000000
-	scalar "i_green_FloatValue_5" -99.000000
-	scalar "i_green_FloatValue_6" -99.000000
-	scalar "i_green_FloatValue_7" -99.000000
-	scalar "i_green_FloatValue_8" -99.000000
-	scalar "i_green_FloatValue_9" -99.000000
-	scalar "i_green_FloatValue_10" -99.000000
-	scalar "i_green_FloatValue_11" -99.000000
-	scalar "i_green_FloatValue_12" -99.000000
-	scalar "i_green_FloatValue_13" -99.000000
-	scalar "i_green_FloatValue_14" -99.000000
-	scalar "i_green_FloatValue_15" -99.000000
-	int "i_green_Interp_0" 1
-	int "i_green_Interp_1" 1
-	int "i_green_Interp_2" -99
-	int "i_green_Interp_3" -99
-	int "i_green_Interp_4" -99
-	int "i_green_Interp_5" -99
-	int "i_green_Interp_6" -99
-	int "i_green_Interp_7" -99
-	int "i_green_Interp_8" -99
-	int "i_green_Interp_9" -99
-	int "i_green_Interp_10" -99
-	int "i_green_Interp_11" -99
-	int "i_green_Interp_12" -99
-	int "i_green_Interp_13" -99
-	int "i_green_Interp_14" -99
-	int "i_green_Interp_15" -99
-	scalar "i_blue_Position_0" 0.000000
-	scalar "i_blue_Position_1" 1.000000
-	scalar "i_blue_Position_2" -99.000000
-	scalar "i_blue_Position_3" -99.000000
-	scalar "i_blue_Position_4" -99.000000
-	scalar "i_blue_Position_5" -99.000000
-	scalar "i_blue_Position_6" -99.000000
-	scalar "i_blue_Position_7" -99.000000
-	scalar "i_blue_Position_8" -99.000000
-	scalar "i_blue_Position_9" -99.000000
-	scalar "i_blue_Position_10" -99.000000
-	scalar "i_blue_Position_11" -99.000000
-	scalar "i_blue_Position_12" -99.000000
-	scalar "i_blue_Position_13" -99.000000
-	scalar "i_blue_Position_14" -99.000000
-	scalar "i_blue_Position_15" -99.000000
-	scalar "i_blue_FloatValue_0" 0.000000
-	scalar "i_blue_FloatValue_1" 1.000000
-	scalar "i_blue_FloatValue_2" -99.000000
-	scalar "i_blue_FloatValue_3" -99.000000
-	scalar "i_blue_FloatValue_4" -99.000000
-	scalar "i_blue_FloatValue_5" -99.000000
-	scalar "i_blue_FloatValue_6" -99.000000
-	scalar "i_blue_FloatValue_7" -99.000000
-	scalar "i_blue_FloatValue_8" -99.000000
-	scalar "i_blue_FloatValue_9" -99.000000
-	scalar "i_blue_FloatValue_10" -99.000000
-	scalar "i_blue_FloatValue_11" -99.000000
-	scalar "i_blue_FloatValue_12" -99.000000
-	scalar "i_blue_FloatValue_13" -99.000000
-	scalar "i_blue_FloatValue_14" -99.000000
-	scalar "i_blue_FloatValue_15" -99.000000
-	int "i_blue_Interp_0" 1
-	int "i_blue_Interp_1" 1
-	int "i_blue_Interp_2" -99
-	int "i_blue_Interp_3" -99
-	int "i_blue_Interp_4" -99
-	int "i_blue_Interp_5" -99
-	int "i_blue_Interp_6" -99
-	int "i_blue_Interp_7" -99
-	int "i_blue_Interp_8" -99
-	int "i_blue_Interp_9" -99
-	int "i_blue_Interp_10" -99
-	int "i_blue_Interp_11" -99
-	int "i_blue_Interp_12" -99
-	int "i_blue_Interp_13" -99
-	int "i_blue_Interp_14" -99
-	int "i_blue_Interp_15" -99
+	#i_rPositions is array but not valid, skip
+	#i_rFloatValues is array but not valid, skip
+	#i_rInterp is array but not valid, skip
+	#i_gPositions is array but not valid, skip
+	#i_gFloatValues is array but not valid, skip
+	#i_gInterp is array but not valid, skip
+	#i_bPositions is array but not valid, skip
+	#i_bFloatValues is array but not valid, skip
+	#i_bInterp is array but not valid, skip
 	scalar "i_inputMin" 0.000000
 	scalar "i_inputMax" 1.000000
 	scalar "i_outputMin" 0.000000
@@ -5273,150 +3087,15 @@ node "maya_cloth" "red_Interp:object:cloth2" # "osl_node"
 end
 node "maya_remapColor" "red_Interp:object:remapColor1" # "osl_node"
 	param_link "i_color" "red_Interp:object:cloth2" "o_outColor"
-	scalar "i_red_Position_0" 0.000000
-	scalar "i_red_Position_1" 1.000000
-	scalar "i_red_Position_2" -99.000000
-	scalar "i_red_Position_3" -99.000000
-	scalar "i_red_Position_4" -99.000000
-	scalar "i_red_Position_5" -99.000000
-	scalar "i_red_Position_6" -99.000000
-	scalar "i_red_Position_7" -99.000000
-	scalar "i_red_Position_8" -99.000000
-	scalar "i_red_Position_9" -99.000000
-	scalar "i_red_Position_10" -99.000000
-	scalar "i_red_Position_11" -99.000000
-	scalar "i_red_Position_12" -99.000000
-	scalar "i_red_Position_13" -99.000000
-	scalar "i_red_Position_14" -99.000000
-	scalar "i_red_Position_15" -99.000000
-	scalar "i_red_FloatValue_0" 0.000000
-	scalar "i_red_FloatValue_1" 1.000000
-	scalar "i_red_FloatValue_2" -99.000000
-	scalar "i_red_FloatValue_3" -99.000000
-	scalar "i_red_FloatValue_4" -99.000000
-	scalar "i_red_FloatValue_5" -99.000000
-	scalar "i_red_FloatValue_6" -99.000000
-	scalar "i_red_FloatValue_7" -99.000000
-	scalar "i_red_FloatValue_8" -99.000000
-	scalar "i_red_FloatValue_9" -99.000000
-	scalar "i_red_FloatValue_10" -99.000000
-	scalar "i_red_FloatValue_11" -99.000000
-	scalar "i_red_FloatValue_12" -99.000000
-	scalar "i_red_FloatValue_13" -99.000000
-	scalar "i_red_FloatValue_14" -99.000000
-	scalar "i_red_FloatValue_15" -99.000000
-	int "i_red_Interp_0" 1
-	int "i_red_Interp_1" 1
-	int "i_red_Interp_2" -99
-	int "i_red_Interp_3" -99
-	int "i_red_Interp_4" -99
-	int "i_red_Interp_5" -99
-	int "i_red_Interp_6" -99
-	int "i_red_Interp_7" -99
-	int "i_red_Interp_8" -99
-	int "i_red_Interp_9" -99
-	int "i_red_Interp_10" -99
-	int "i_red_Interp_11" -99
-	int "i_red_Interp_12" -99
-	int "i_red_Interp_13" -99
-	int "i_red_Interp_14" -99
-	int "i_red_Interp_15" -99
-	scalar "i_green_Position_0" 0.000000
-	scalar "i_green_Position_1" 1.000000
-	scalar "i_green_Position_2" -99.000000
-	scalar "i_green_Position_3" -99.000000
-	scalar "i_green_Position_4" -99.000000
-	scalar "i_green_Position_5" -99.000000
-	scalar "i_green_Position_6" -99.000000
-	scalar "i_green_Position_7" -99.000000
-	scalar "i_green_Position_8" -99.000000
-	scalar "i_green_Position_9" -99.000000
-	scalar "i_green_Position_10" -99.000000
-	scalar "i_green_Position_11" -99.000000
-	scalar "i_green_Position_12" -99.000000
-	scalar "i_green_Position_13" -99.000000
-	scalar "i_green_Position_14" -99.000000
-	scalar "i_green_Position_15" -99.000000
-	scalar "i_green_FloatValue_0" 0.000000
-	scalar "i_green_FloatValue_1" 1.000000
-	scalar "i_green_FloatValue_2" -99.000000
-	scalar "i_green_FloatValue_3" -99.000000
-	scalar "i_green_FloatValue_4" -99.000000
-	scalar "i_green_FloatValue_5" -99.000000
-	scalar "i_green_FloatValue_6" -99.000000
-	scalar "i_green_FloatValue_7" -99.000000
-	scalar "i_green_FloatValue_8" -99.000000
-	scalar "i_green_FloatValue_9" -99.000000
-	scalar "i_green_FloatValue_10" -99.000000
-	scalar "i_green_FloatValue_11" -99.000000
-	scalar "i_green_FloatValue_12" -99.000000
-	scalar "i_green_FloatValue_13" -99.000000
-	scalar "i_green_FloatValue_14" -99.000000
-	scalar "i_green_FloatValue_15" -99.000000
-	int "i_green_Interp_0" 1
-	int "i_green_Interp_1" 1
-	int "i_green_Interp_2" -99
-	int "i_green_Interp_3" -99
-	int "i_green_Interp_4" -99
-	int "i_green_Interp_5" -99
-	int "i_green_Interp_6" -99
-	int "i_green_Interp_7" -99
-	int "i_green_Interp_8" -99
-	int "i_green_Interp_9" -99
-	int "i_green_Interp_10" -99
-	int "i_green_Interp_11" -99
-	int "i_green_Interp_12" -99
-	int "i_green_Interp_13" -99
-	int "i_green_Interp_14" -99
-	int "i_green_Interp_15" -99
-	scalar "i_blue_Position_0" 0.000000
-	scalar "i_blue_Position_1" 1.000000
-	scalar "i_blue_Position_2" -99.000000
-	scalar "i_blue_Position_3" -99.000000
-	scalar "i_blue_Position_4" -99.000000
-	scalar "i_blue_Position_5" -99.000000
-	scalar "i_blue_Position_6" -99.000000
-	scalar "i_blue_Position_7" -99.000000
-	scalar "i_blue_Position_8" -99.000000
-	scalar "i_blue_Position_9" -99.000000
-	scalar "i_blue_Position_10" -99.000000
-	scalar "i_blue_Position_11" -99.000000
-	scalar "i_blue_Position_12" -99.000000
-	scalar "i_blue_Position_13" -99.000000
-	scalar "i_blue_Position_14" -99.000000
-	scalar "i_blue_Position_15" -99.000000
-	scalar "i_blue_FloatValue_0" 0.000000
-	scalar "i_blue_FloatValue_1" 1.000000
-	scalar "i_blue_FloatValue_2" -99.000000
-	scalar "i_blue_FloatValue_3" -99.000000
-	scalar "i_blue_FloatValue_4" -99.000000
-	scalar "i_blue_FloatValue_5" -99.000000
-	scalar "i_blue_FloatValue_6" -99.000000
-	scalar "i_blue_FloatValue_7" -99.000000
-	scalar "i_blue_FloatValue_8" -99.000000
-	scalar "i_blue_FloatValue_9" -99.000000
-	scalar "i_blue_FloatValue_10" -99.000000
-	scalar "i_blue_FloatValue_11" -99.000000
-	scalar "i_blue_FloatValue_12" -99.000000
-	scalar "i_blue_FloatValue_13" -99.000000
-	scalar "i_blue_FloatValue_14" -99.000000
-	scalar "i_blue_FloatValue_15" -99.000000
-	int "i_blue_Interp_0" 1
-	int "i_blue_Interp_1" 1
-	int "i_blue_Interp_2" -99
-	int "i_blue_Interp_3" -99
-	int "i_blue_Interp_4" -99
-	int "i_blue_Interp_5" -99
-	int "i_blue_Interp_6" -99
-	int "i_blue_Interp_7" -99
-	int "i_blue_Interp_8" -99
-	int "i_blue_Interp_9" -99
-	int "i_blue_Interp_10" -99
-	int "i_blue_Interp_11" -99
-	int "i_blue_Interp_12" -99
-	int "i_blue_Interp_13" -99
-	int "i_blue_Interp_14" -99
-	int "i_blue_Interp_15" -99
+	#i_rPositions is array but not valid, skip
+	#i_rFloatValues is array but not valid, skip
+	#i_rInterp is array but not valid, skip
+	#i_gPositions is array but not valid, skip
+	#i_gFloatValues is array but not valid, skip
+	#i_gInterp is array but not valid, skip
+	#i_bPositions is array but not valid, skip
+	#i_bFloatValues is array but not valid, skip
+	#i_bInterp is array but not valid, skip
 	scalar "i_inputMin" 0.000000
 	scalar "i_inputMax" 1.000000
 	scalar "i_outputMin" 0.000000
@@ -5570,150 +3249,15 @@ node "maya_cloth" "red_Position:object:cloth2" # "osl_node"
 end
 node "maya_remapColor" "red_Position:object:remapColor1" # "osl_node"
 	param_link "i_color" "red_Position:object:cloth2" "o_outColor"
-	scalar "i_red_Position_0" 0.000000
-	scalar "i_red_Position_1" 1.000000
-	scalar "i_red_Position_2" -99.000000
-	scalar "i_red_Position_3" -99.000000
-	scalar "i_red_Position_4" -99.000000
-	scalar "i_red_Position_5" -99.000000
-	scalar "i_red_Position_6" -99.000000
-	scalar "i_red_Position_7" -99.000000
-	scalar "i_red_Position_8" -99.000000
-	scalar "i_red_Position_9" -99.000000
-	scalar "i_red_Position_10" -99.000000
-	scalar "i_red_Position_11" -99.000000
-	scalar "i_red_Position_12" -99.000000
-	scalar "i_red_Position_13" -99.000000
-	scalar "i_red_Position_14" -99.000000
-	scalar "i_red_Position_15" -99.000000
-	scalar "i_red_FloatValue_0" 0.000000
-	scalar "i_red_FloatValue_1" 1.000000
-	scalar "i_red_FloatValue_2" -99.000000
-	scalar "i_red_FloatValue_3" -99.000000
-	scalar "i_red_FloatValue_4" -99.000000
-	scalar "i_red_FloatValue_5" -99.000000
-	scalar "i_red_FloatValue_6" -99.000000
-	scalar "i_red_FloatValue_7" -99.000000
-	scalar "i_red_FloatValue_8" -99.000000
-	scalar "i_red_FloatValue_9" -99.000000
-	scalar "i_red_FloatValue_10" -99.000000
-	scalar "i_red_FloatValue_11" -99.000000
-	scalar "i_red_FloatValue_12" -99.000000
-	scalar "i_red_FloatValue_13" -99.000000
-	scalar "i_red_FloatValue_14" -99.000000
-	scalar "i_red_FloatValue_15" -99.000000
-	int "i_red_Interp_0" 1
-	int "i_red_Interp_1" 1
-	int "i_red_Interp_2" -99
-	int "i_red_Interp_3" -99
-	int "i_red_Interp_4" -99
-	int "i_red_Interp_5" -99
-	int "i_red_Interp_6" -99
-	int "i_red_Interp_7" -99
-	int "i_red_Interp_8" -99
-	int "i_red_Interp_9" -99
-	int "i_red_Interp_10" -99
-	int "i_red_Interp_11" -99
-	int "i_red_Interp_12" -99
-	int "i_red_Interp_13" -99
-	int "i_red_Interp_14" -99
-	int "i_red_Interp_15" -99
-	scalar "i_green_Position_0" 0.000000
-	scalar "i_green_Position_1" 1.000000
-	scalar "i_green_Position_2" -99.000000
-	scalar "i_green_Position_3" -99.000000
-	scalar "i_green_Position_4" -99.000000
-	scalar "i_green_Position_5" -99.000000
-	scalar "i_green_Position_6" -99.000000
-	scalar "i_green_Position_7" -99.000000
-	scalar "i_green_Position_8" -99.000000
-	scalar "i_green_Position_9" -99.000000
-	scalar "i_green_Position_10" -99.000000
-	scalar "i_green_Position_11" -99.000000
-	scalar "i_green_Position_12" -99.000000
-	scalar "i_green_Position_13" -99.000000
-	scalar "i_green_Position_14" -99.000000
-	scalar "i_green_Position_15" -99.000000
-	scalar "i_green_FloatValue_0" 0.000000
-	scalar "i_green_FloatValue_1" 1.000000
-	scalar "i_green_FloatValue_2" -99.000000
-	scalar "i_green_FloatValue_3" -99.000000
-	scalar "i_green_FloatValue_4" -99.000000
-	scalar "i_green_FloatValue_5" -99.000000
-	scalar "i_green_FloatValue_6" -99.000000
-	scalar "i_green_FloatValue_7" -99.000000
-	scalar "i_green_FloatValue_8" -99.000000
-	scalar "i_green_FloatValue_9" -99.000000
-	scalar "i_green_FloatValue_10" -99.000000
-	scalar "i_green_FloatValue_11" -99.000000
-	scalar "i_green_FloatValue_12" -99.000000
-	scalar "i_green_FloatValue_13" -99.000000
-	scalar "i_green_FloatValue_14" -99.000000
-	scalar "i_green_FloatValue_15" -99.000000
-	int "i_green_Interp_0" 1
-	int "i_green_Interp_1" 1
-	int "i_green_Interp_2" -99
-	int "i_green_Interp_3" -99
-	int "i_green_Interp_4" -99
-	int "i_green_Interp_5" -99
-	int "i_green_Interp_6" -99
-	int "i_green_Interp_7" -99
-	int "i_green_Interp_8" -99
-	int "i_green_Interp_9" -99
-	int "i_green_Interp_10" -99
-	int "i_green_Interp_11" -99
-	int "i_green_Interp_12" -99
-	int "i_green_Interp_13" -99
-	int "i_green_Interp_14" -99
-	int "i_green_Interp_15" -99
-	scalar "i_blue_Position_0" 0.000000
-	scalar "i_blue_Position_1" 1.000000
-	scalar "i_blue_Position_2" -99.000000
-	scalar "i_blue_Position_3" -99.000000
-	scalar "i_blue_Position_4" -99.000000
-	scalar "i_blue_Position_5" -99.000000
-	scalar "i_blue_Position_6" -99.000000
-	scalar "i_blue_Position_7" -99.000000
-	scalar "i_blue_Position_8" -99.000000
-	scalar "i_blue_Position_9" -99.000000
-	scalar "i_blue_Position_10" -99.000000
-	scalar "i_blue_Position_11" -99.000000
-	scalar "i_blue_Position_12" -99.000000
-	scalar "i_blue_Position_13" -99.000000
-	scalar "i_blue_Position_14" -99.000000
-	scalar "i_blue_Position_15" -99.000000
-	scalar "i_blue_FloatValue_0" 0.000000
-	scalar "i_blue_FloatValue_1" 1.000000
-	scalar "i_blue_FloatValue_2" -99.000000
-	scalar "i_blue_FloatValue_3" -99.000000
-	scalar "i_blue_FloatValue_4" -99.000000
-	scalar "i_blue_FloatValue_5" -99.000000
-	scalar "i_blue_FloatValue_6" -99.000000
-	scalar "i_blue_FloatValue_7" -99.000000
-	scalar "i_blue_FloatValue_8" -99.000000
-	scalar "i_blue_FloatValue_9" -99.000000
-	scalar "i_blue_FloatValue_10" -99.000000
-	scalar "i_blue_FloatValue_11" -99.000000
-	scalar "i_blue_FloatValue_12" -99.000000
-	scalar "i_blue_FloatValue_13" -99.000000
-	scalar "i_blue_FloatValue_14" -99.000000
-	scalar "i_blue_FloatValue_15" -99.000000
-	int "i_blue_Interp_0" 1
-	int "i_blue_Interp_1" 1
-	int "i_blue_Interp_2" -99
-	int "i_blue_Interp_3" -99
-	int "i_blue_Interp_4" -99
-	int "i_blue_Interp_5" -99
-	int "i_blue_Interp_6" -99
-	int "i_blue_Interp_7" -99
-	int "i_blue_Interp_8" -99
-	int "i_blue_Interp_9" -99
-	int "i_blue_Interp_10" -99
-	int "i_blue_Interp_11" -99
-	int "i_blue_Interp_12" -99
-	int "i_blue_Interp_13" -99
-	int "i_blue_Interp_14" -99
-	int "i_blue_Interp_15" -99
+	#i_rPositions is array but not valid, skip
+	#i_rFloatValues is array but not valid, skip
+	#i_rInterp is array but not valid, skip
+	#i_gPositions is array but not valid, skip
+	#i_gFloatValues is array but not valid, skip
+	#i_gInterp is array but not valid, skip
+	#i_bPositions is array but not valid, skip
+	#i_bFloatValues is array but not valid, skip
+	#i_bInterp is array but not valid, skip
 	scalar "i_inputMin" 0.000000
 	scalar "i_inputMax" 1.000000
 	scalar "i_outputMin" 0.000000
@@ -5867,150 +3411,15 @@ node "maya_cloth" "red_Position_Value_Interp2:object:cloth2" # "osl_node"
 end
 node "maya_remapColor" "red_Position_Value_Interp2:object:remapColor1" # "osl_node"
 	param_link "i_color" "red_Position_Value_Interp2:object:cloth2" "o_outColor"
-	scalar "i_red_Position_0" 0.000000
-	scalar "i_red_Position_1" 1.000000
-	scalar "i_red_Position_2" -99.000000
-	scalar "i_red_Position_3" -99.000000
-	scalar "i_red_Position_4" -99.000000
-	scalar "i_red_Position_5" -99.000000
-	scalar "i_red_Position_6" -99.000000
-	scalar "i_red_Position_7" -99.000000
-	scalar "i_red_Position_8" -99.000000
-	scalar "i_red_Position_9" -99.000000
-	scalar "i_red_Position_10" -99.000000
-	scalar "i_red_Position_11" -99.000000
-	scalar "i_red_Position_12" -99.000000
-	scalar "i_red_Position_13" -99.000000
-	scalar "i_red_Position_14" -99.000000
-	scalar "i_red_Position_15" -99.000000
-	scalar "i_red_FloatValue_0" 0.000000
-	scalar "i_red_FloatValue_1" 1.000000
-	scalar "i_red_FloatValue_2" -99.000000
-	scalar "i_red_FloatValue_3" -99.000000
-	scalar "i_red_FloatValue_4" -99.000000
-	scalar "i_red_FloatValue_5" -99.000000
-	scalar "i_red_FloatValue_6" -99.000000
-	scalar "i_red_FloatValue_7" -99.000000
-	scalar "i_red_FloatValue_8" -99.000000
-	scalar "i_red_FloatValue_9" -99.000000
-	scalar "i_red_FloatValue_10" -99.000000
-	scalar "i_red_FloatValue_11" -99.000000
-	scalar "i_red_FloatValue_12" -99.000000
-	scalar "i_red_FloatValue_13" -99.000000
-	scalar "i_red_FloatValue_14" -99.000000
-	scalar "i_red_FloatValue_15" -99.000000
-	int "i_red_Interp_0" 1
-	int "i_red_Interp_1" 1
-	int "i_red_Interp_2" -99
-	int "i_red_Interp_3" -99
-	int "i_red_Interp_4" -99
-	int "i_red_Interp_5" -99
-	int "i_red_Interp_6" -99
-	int "i_red_Interp_7" -99
-	int "i_red_Interp_8" -99
-	int "i_red_Interp_9" -99
-	int "i_red_Interp_10" -99
-	int "i_red_Interp_11" -99
-	int "i_red_Interp_12" -99
-	int "i_red_Interp_13" -99
-	int "i_red_Interp_14" -99
-	int "i_red_Interp_15" -99
-	scalar "i_green_Position_0" 0.000000
-	scalar "i_green_Position_1" 1.000000
-	scalar "i_green_Position_2" -99.000000
-	scalar "i_green_Position_3" -99.000000
-	scalar "i_green_Position_4" -99.000000
-	scalar "i_green_Position_5" -99.000000
-	scalar "i_green_Position_6" -99.000000
-	scalar "i_green_Position_7" -99.000000
-	scalar "i_green_Position_8" -99.000000
-	scalar "i_green_Position_9" -99.000000
-	scalar "i_green_Position_10" -99.000000
-	scalar "i_green_Position_11" -99.000000
-	scalar "i_green_Position_12" -99.000000
-	scalar "i_green_Position_13" -99.000000
-	scalar "i_green_Position_14" -99.000000
-	scalar "i_green_Position_15" -99.000000
-	scalar "i_green_FloatValue_0" 0.000000
-	scalar "i_green_FloatValue_1" 1.000000
-	scalar "i_green_FloatValue_2" -99.000000
-	scalar "i_green_FloatValue_3" -99.000000
-	scalar "i_green_FloatValue_4" -99.000000
-	scalar "i_green_FloatValue_5" -99.000000
-	scalar "i_green_FloatValue_6" -99.000000
-	scalar "i_green_FloatValue_7" -99.000000
-	scalar "i_green_FloatValue_8" -99.000000
-	scalar "i_green_FloatValue_9" -99.000000
-	scalar "i_green_FloatValue_10" -99.000000
-	scalar "i_green_FloatValue_11" -99.000000
-	scalar "i_green_FloatValue_12" -99.000000
-	scalar "i_green_FloatValue_13" -99.000000
-	scalar "i_green_FloatValue_14" -99.000000
-	scalar "i_green_FloatValue_15" -99.000000
-	int "i_green_Interp_0" 1
-	int "i_green_Interp_1" 1
-	int "i_green_Interp_2" -99
-	int "i_green_Interp_3" -99
-	int "i_green_Interp_4" -99
-	int "i_green_Interp_5" -99
-	int "i_green_Interp_6" -99
-	int "i_green_Interp_7" -99
-	int "i_green_Interp_8" -99
-	int "i_green_Interp_9" -99
-	int "i_green_Interp_10" -99
-	int "i_green_Interp_11" -99
-	int "i_green_Interp_12" -99
-	int "i_green_Interp_13" -99
-	int "i_green_Interp_14" -99
-	int "i_green_Interp_15" -99
-	scalar "i_blue_Position_0" 0.000000
-	scalar "i_blue_Position_1" 1.000000
-	scalar "i_blue_Position_2" -99.000000
-	scalar "i_blue_Position_3" -99.000000
-	scalar "i_blue_Position_4" -99.000000
-	scalar "i_blue_Position_5" -99.000000
-	scalar "i_blue_Position_6" -99.000000
-	scalar "i_blue_Position_7" -99.000000
-	scalar "i_blue_Position_8" -99.000000
-	scalar "i_blue_Position_9" -99.000000
-	scalar "i_blue_Position_10" -99.000000
-	scalar "i_blue_Position_11" -99.000000
-	scalar "i_blue_Position_12" -99.000000
-	scalar "i_blue_Position_13" -99.000000
-	scalar "i_blue_Position_14" -99.000000
-	scalar "i_blue_Position_15" -99.000000
-	scalar "i_blue_FloatValue_0" 0.000000
-	scalar "i_blue_FloatValue_1" 1.000000
-	scalar "i_blue_FloatValue_2" -99.000000
-	scalar "i_blue_FloatValue_3" -99.000000
-	scalar "i_blue_FloatValue_4" -99.000000
-	scalar "i_blue_FloatValue_5" -99.000000
-	scalar "i_blue_FloatValue_6" -99.000000
-	scalar "i_blue_FloatValue_7" -99.000000
-	scalar "i_blue_FloatValue_8" -99.000000
-	scalar "i_blue_FloatValue_9" -99.000000
-	scalar "i_blue_FloatValue_10" -99.000000
-	scalar "i_blue_FloatValue_11" -99.000000
-	scalar "i_blue_FloatValue_12" -99.000000
-	scalar "i_blue_FloatValue_13" -99.000000
-	scalar "i_blue_FloatValue_14" -99.000000
-	scalar "i_blue_FloatValue_15" -99.000000
-	int "i_blue_Interp_0" 1
-	int "i_blue_Interp_1" 1
-	int "i_blue_Interp_2" -99
-	int "i_blue_Interp_3" -99
-	int "i_blue_Interp_4" -99
-	int "i_blue_Interp_5" -99
-	int "i_blue_Interp_6" -99
-	int "i_blue_Interp_7" -99
-	int "i_blue_Interp_8" -99
-	int "i_blue_Interp_9" -99
-	int "i_blue_Interp_10" -99
-	int "i_blue_Interp_11" -99
-	int "i_blue_Interp_12" -99
-	int "i_blue_Interp_13" -99
-	int "i_blue_Interp_14" -99
-	int "i_blue_Interp_15" -99
+	#i_rPositions is array but not valid, skip
+	#i_rFloatValues is array but not valid, skip
+	#i_rInterp is array but not valid, skip
+	#i_gPositions is array but not valid, skip
+	#i_gFloatValues is array but not valid, skip
+	#i_gInterp is array but not valid, skip
+	#i_bPositions is array but not valid, skip
+	#i_bFloatValues is array but not valid, skip
+	#i_bInterp is array but not valid, skip
 	scalar "i_inputMin" 0.000000
 	scalar "i_inputMax" 1.000000
 	scalar "i_outputMin" 0.000000
@@ -6164,150 +3573,15 @@ node "maya_cloth" "red_Position_Value2:object:cloth2" # "osl_node"
 end
 node "maya_remapColor" "red_Position_Value2:object:remapColor1" # "osl_node"
 	param_link "i_color" "red_Position_Value2:object:cloth2" "o_outColor"
-	scalar "i_red_Position_0" 0.000000
-	scalar "i_red_Position_1" 1.000000
-	scalar "i_red_Position_2" -99.000000
-	scalar "i_red_Position_3" -99.000000
-	scalar "i_red_Position_4" -99.000000
-	scalar "i_red_Position_5" -99.000000
-	scalar "i_red_Position_6" -99.000000
-	scalar "i_red_Position_7" -99.000000
-	scalar "i_red_Position_8" -99.000000
-	scalar "i_red_Position_9" -99.000000
-	scalar "i_red_Position_10" -99.000000
-	scalar "i_red_Position_11" -99.000000
-	scalar "i_red_Position_12" -99.000000
-	scalar "i_red_Position_13" -99.000000
-	scalar "i_red_Position_14" -99.000000
-	scalar "i_red_Position_15" -99.000000
-	scalar "i_red_FloatValue_0" 0.000000
-	scalar "i_red_FloatValue_1" 1.000000
-	scalar "i_red_FloatValue_2" -99.000000
-	scalar "i_red_FloatValue_3" -99.000000
-	scalar "i_red_FloatValue_4" -99.000000
-	scalar "i_red_FloatValue_5" -99.000000
-	scalar "i_red_FloatValue_6" -99.000000
-	scalar "i_red_FloatValue_7" -99.000000
-	scalar "i_red_FloatValue_8" -99.000000
-	scalar "i_red_FloatValue_9" -99.000000
-	scalar "i_red_FloatValue_10" -99.000000
-	scalar "i_red_FloatValue_11" -99.000000
-	scalar "i_red_FloatValue_12" -99.000000
-	scalar "i_red_FloatValue_13" -99.000000
-	scalar "i_red_FloatValue_14" -99.000000
-	scalar "i_red_FloatValue_15" -99.000000
-	int "i_red_Interp_0" 1
-	int "i_red_Interp_1" 1
-	int "i_red_Interp_2" -99
-	int "i_red_Interp_3" -99
-	int "i_red_Interp_4" -99
-	int "i_red_Interp_5" -99
-	int "i_red_Interp_6" -99
-	int "i_red_Interp_7" -99
-	int "i_red_Interp_8" -99
-	int "i_red_Interp_9" -99
-	int "i_red_Interp_10" -99
-	int "i_red_Interp_11" -99
-	int "i_red_Interp_12" -99
-	int "i_red_Interp_13" -99
-	int "i_red_Interp_14" -99
-	int "i_red_Interp_15" -99
-	scalar "i_green_Position_0" 0.000000
-	scalar "i_green_Position_1" 1.000000
-	scalar "i_green_Position_2" -99.000000
-	scalar "i_green_Position_3" -99.000000
-	scalar "i_green_Position_4" -99.000000
-	scalar "i_green_Position_5" -99.000000
-	scalar "i_green_Position_6" -99.000000
-	scalar "i_green_Position_7" -99.000000
-	scalar "i_green_Position_8" -99.000000
-	scalar "i_green_Position_9" -99.000000
-	scalar "i_green_Position_10" -99.000000
-	scalar "i_green_Position_11" -99.000000
-	scalar "i_green_Position_12" -99.000000
-	scalar "i_green_Position_13" -99.000000
-	scalar "i_green_Position_14" -99.000000
-	scalar "i_green_Position_15" -99.000000
-	scalar "i_green_FloatValue_0" 0.000000
-	scalar "i_green_FloatValue_1" 1.000000
-	scalar "i_green_FloatValue_2" -99.000000
-	scalar "i_green_FloatValue_3" -99.000000
-	scalar "i_green_FloatValue_4" -99.000000
-	scalar "i_green_FloatValue_5" -99.000000
-	scalar "i_green_FloatValue_6" -99.000000
-	scalar "i_green_FloatValue_7" -99.000000
-	scalar "i_green_FloatValue_8" -99.000000
-	scalar "i_green_FloatValue_9" -99.000000
-	scalar "i_green_FloatValue_10" -99.000000
-	scalar "i_green_FloatValue_11" -99.000000
-	scalar "i_green_FloatValue_12" -99.000000
-	scalar "i_green_FloatValue_13" -99.000000
-	scalar "i_green_FloatValue_14" -99.000000
-	scalar "i_green_FloatValue_15" -99.000000
-	int "i_green_Interp_0" 1
-	int "i_green_Interp_1" 1
-	int "i_green_Interp_2" -99
-	int "i_green_Interp_3" -99
-	int "i_green_Interp_4" -99
-	int "i_green_Interp_5" -99
-	int "i_green_Interp_6" -99
-	int "i_green_Interp_7" -99
-	int "i_green_Interp_8" -99
-	int "i_green_Interp_9" -99
-	int "i_green_Interp_10" -99
-	int "i_green_Interp_11" -99
-	int "i_green_Interp_12" -99
-	int "i_green_Interp_13" -99
-	int "i_green_Interp_14" -99
-	int "i_green_Interp_15" -99
-	scalar "i_blue_Position_0" 0.000000
-	scalar "i_blue_Position_1" 1.000000
-	scalar "i_blue_Position_2" -99.000000
-	scalar "i_blue_Position_3" -99.000000
-	scalar "i_blue_Position_4" -99.000000
-	scalar "i_blue_Position_5" -99.000000
-	scalar "i_blue_Position_6" -99.000000
-	scalar "i_blue_Position_7" -99.000000
-	scalar "i_blue_Position_8" -99.000000
-	scalar "i_blue_Position_9" -99.000000
-	scalar "i_blue_Position_10" -99.000000
-	scalar "i_blue_Position_11" -99.000000
-	scalar "i_blue_Position_12" -99.000000
-	scalar "i_blue_Position_13" -99.000000
-	scalar "i_blue_Position_14" -99.000000
-	scalar "i_blue_Position_15" -99.000000
-	scalar "i_blue_FloatValue_0" 0.000000
-	scalar "i_blue_FloatValue_1" 1.000000
-	scalar "i_blue_FloatValue_2" -99.000000
-	scalar "i_blue_FloatValue_3" -99.000000
-	scalar "i_blue_FloatValue_4" -99.000000
-	scalar "i_blue_FloatValue_5" -99.000000
-	scalar "i_blue_FloatValue_6" -99.000000
-	scalar "i_blue_FloatValue_7" -99.000000
-	scalar "i_blue_FloatValue_8" -99.000000
-	scalar "i_blue_FloatValue_9" -99.000000
-	scalar "i_blue_FloatValue_10" -99.000000
-	scalar "i_blue_FloatValue_11" -99.000000
-	scalar "i_blue_FloatValue_12" -99.000000
-	scalar "i_blue_FloatValue_13" -99.000000
-	scalar "i_blue_FloatValue_14" -99.000000
-	scalar "i_blue_FloatValue_15" -99.000000
-	int "i_blue_Interp_0" 1
-	int "i_blue_Interp_1" 1
-	int "i_blue_Interp_2" -99
-	int "i_blue_Interp_3" -99
-	int "i_blue_Interp_4" -99
-	int "i_blue_Interp_5" -99
-	int "i_blue_Interp_6" -99
-	int "i_blue_Interp_7" -99
-	int "i_blue_Interp_8" -99
-	int "i_blue_Interp_9" -99
-	int "i_blue_Interp_10" -99
-	int "i_blue_Interp_11" -99
-	int "i_blue_Interp_12" -99
-	int "i_blue_Interp_13" -99
-	int "i_blue_Interp_14" -99
-	int "i_blue_Interp_15" -99
+	#i_rPositions is array but not valid, skip
+	#i_rFloatValues is array but not valid, skip
+	#i_rInterp is array but not valid, skip
+	#i_gPositions is array but not valid, skip
+	#i_gFloatValues is array but not valid, skip
+	#i_gInterp is array but not valid, skip
+	#i_bPositions is array but not valid, skip
+	#i_bFloatValues is array but not valid, skip
+	#i_bInterp is array but not valid, skip
 	scalar "i_inputMin" 0.000000
 	scalar "i_inputMax" 1.000000
 	scalar "i_outputMin" 0.000000
@@ -6388,115 +3662,6 @@ node "instance" "red_Position_Value2:object:pPlaneShape1_inst" # "instance"
 		"red_Position_Value2:object:lambert2SG"
 	scalar "bias" 340282346638528860000000000000000000000.000000
 	scalar "step_size" 1.000000
-	#light_group is array but not valid, skip
-	#shadow_group is array but not valid, skip
-end
-node "outvar" "output_default_color" # "outvar"
-	token "name" "color"
-	enum "type" "color"
-	bool "filter" on
-end
-node "outvar" "output_default_alpha" # "outvar"
-	token "name" "opacity"
-	enum "type" "color"
-	bool "filter" on
-end
-node "output" "output_default" # "output"
-	token "filename" "D:/Projects/2014/osl/testCase/images/test.png"
-	enum "data_type" "rgba"
-		ref[] "var_list" 1  #2
-		"output_default_color"
-		"output_default_alpha"
-end
-node "outvar" "outvar_beauty" # "outvar"
-	token "name" "color"
-	enum "type" "color"
-	bool "filter" on
-end
-node "outvar" "outvar_beauty_alpha" # "outvar"
-	token "name" "opacity"
-	enum "type" "color"
-	bool "filter" on
-end
-node "output" "output_beauty" # "output"
-	token "filename" "D:/Projects/2014/osl/testCase/images/beauty/test.png"
-	enum "data_type" "rgba"
-		ref[] "var_list" 1  #2
-		"outvar_beauty"
-		"outvar_beauty_alpha"
-end
-node "maya_envSphere" "mtoer_maya_envSphere" # "osl_node"
-	color "i_image" 0.000000 0.000000 0.000000
-	scalar "i_shearU" 0.000000
-	scalar "i_shearV" 0.000000
-	token "i_filename" ""
-	int "i_flip" 0
-end
-node "osl_shadergroup" "mtoer_maya_envSphere_osl" # "osl_shadergroup"
-		ref[] "nodes" 1  #2
-		"mtoer_sphereuv_shader"
-		"mtoer_maya_envSphere"
-end
-node "camera" "perspShape2" # "camera"
-		ref[] "output_list" 1  #2
-		"output_default"
-		"output_beauty"
-	ref "imager_shader" ""
-	ref "atmo_shader" ""
-	ref "env_shader" "mtoer_maya_envSphere_osl"
-	ref "lens_shader" ""
-	scalar "focal" 35.000000
-	scalar "aperture" 36.000000
-	scalar "aspect" 1.000000
-	int "res_x" 1024
-	int "res_y" 1024
-	int "window_xmin" -2147483648
-	int "window_xmax" 2147483647
-	int "window_ymin" -2147483648
-	int "window_ymax" 2147483647
-	scalar "clip_hither" 0.100000
-	scalar "clip_yon" 10000.000000
-	declare scalar "eiAOVZDepthMin" 100.000000
-	declare scalar "eiAOVZDepthMax" 300.000000
-end
-node "instance" "perspShape2_inst" # "instance"
-	ref "element" "perspShape2"
-	matrix "transform"
-	1.000000 0.000000 0.000000 0.000000
-	0.000000 0.000000 1.000000 0.000000
-	0.000000 -1.000000 0.000000 0.000000
-	1.569295 -6.580384 3.469826 1.000000
-	matrix "motion_transform"
-	1.000000 0.000000 0.000000 0.000000
-	0.000000 0.000000 1.000000 0.000000
-	0.000000 -1.000000 0.000000 0.000000
-	1.569295 -6.580384 3.469826 1.000000
-	#bitfield:
-	bool "visible" on
-	bool "visible_secondary" on
-	bool "cast_shadow" on
-	bool "recv_shadow" on
-	bool "cast_reflection" on
-	bool "recv_reflection" on
-	bool "cast_refraction" on
-	bool "recv_refraction" on
-	bool "cast_transparency" on
-	bool "recv_transparency" on
-	bool "motion" on
-	bool "displace" on
-	bool "opaque" on
-	bool "emissive" off
-	bool "neg_parity" off
-	bool "visible_primary" on
-	bool "use_light_group" off
-	bool "use_shadow_group" off
-	bool "surface_emission" off
-	# enum "face" not set
-	ref "approx" ""
-	scalar "max_displace" 340282346638528860000000000000000000000.000000
-	#mtl_list is array but not valid, skip
-	scalar "bias" 340282346638528860000000000000000000000.000000
-	scalar "step_size" 340282346638528860000000000000000000000.000000
 	#light_group is array but not valid, skip
 	#shadow_group is array but not valid, skip
 end
