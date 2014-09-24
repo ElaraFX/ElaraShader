@@ -1,0 +1,8 @@
+BUG：
+1、color transformc (string fromspace, string tospace, color Cfrom) 函数无效， 用另外一个；
+
+TRANSLATOR:
+1、ramp 颜色数组不支持；  需要更改声明
+2、ramp 颜色ramp位置不支持； 需要更改声明
+3、cloud节点属性名称输出错误，centerThresh，edgeThresh， transpRange， 属性有效；
+
