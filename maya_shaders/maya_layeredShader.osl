@@ -4,7 +4,7 @@
 // </maya_layeredShader>
 
 #include <stdosl.h>
-
+#define LAYEREDSHADER_MAX_LAYERS 16
 void
 computeSurfaceTransparency(
 				float		i_matteOpacityMode,
@@ -36,92 +36,24 @@ shader maya_layeredShader
 [[ string help = "Maya LayeredShader"]]
 (
 	// Inputs
-	/*uniform*/	int			i_compositingFlag			= 0,
-	/*uniform*/ int			i_mtoer_nlayers				= 0,
+	/*uniform*/	int			i_compositingFlag										= 0,
+	/*uniform*/ int			i_mtoer_nlayers											= 0,
 
 				// inputs[].color
-				color		i_inputs_color_0			= color(-99),
-				color		i_inputs_color_1			= color(-99),
-				color		i_inputs_color_2			= color(-99),
-				color		i_inputs_color_3			= color(-99),
-				color		i_inputs_color_4			= color(-99),
-				color		i_inputs_color_5			= color(-99),
-				color		i_inputs_color_6			= color(-99),
-				color		i_inputs_color_7			= color(-99),
-				color		i_inputs_color_8			= color(-99),
-				color		i_inputs_color_9			= color(-99),
-				color		i_inputs_color_10			= color(-99),
-				color		i_inputs_color_11			= color(-99),
-				color		i_inputs_color_12			= color(-99),
-				color		i_inputs_color_13			= color(-99),
-				color		i_inputs_color_14			= color(-99),
-				color		i_inputs_color_15			= color(-99),
+				color		i_array_inputs_color[LAYEREDSHADER_MAX_LAYERS]			= { color(-99) },
 				
 				//inputs[].transparency
-				color		i_inputs_transparency_0		= color(-99),
-				color		i_inputs_transparency_1		= color(-99),
-				color		i_inputs_transparency_2		= color(-99),
-				color		i_inputs_transparency_3		= color(-99),
-				color		i_inputs_transparency_4		= color(-99),
-				color		i_inputs_transparency_5		= color(-99),
-				color		i_inputs_transparency_6		= color(-99),
-				color		i_inputs_transparency_7		= color(-99),
-				color		i_inputs_transparency_8		= color(-99),
-				color		i_inputs_transparency_9		= color(-99),
-				color		i_inputs_transparency_10	= color(-99),
-				color		i_inputs_transparency_11	= color(-99),
-				color		i_inputs_transparency_12	= color(-99),
-				color		i_inputs_transparency_13	= color(-99),
-				color		i_inputs_transparency_14	= color(-99),
-				color		i_inputs_transparency_15	= color(-99),
+				color		i_array_inputs_transparency[LAYEREDSHADER_MAX_LAYERS]	= { color(-99) },
 				
-				float		i_matteOpacityMode			= 2.0,
-				float		i_matteOpacity				= 1.0,
+				float		i_matteOpacityMode										= 2.0,
+				float		i_matteOpacity											= 1.0,
 
 	// Outputs
-	output		color		o_outColor					= 0.0,
-	output		color		o_outTransparency			= 0.0
+	output		color		o_outColor												= 0.0,
+	output		color		o_outTransparency										= 0.0
 	)
 {
 	color transparency;
-	
-	color i_inputs_color[16] = {
-								i_inputs_color_0,
-								i_inputs_color_1,
-								i_inputs_color_2,
-								i_inputs_color_3,
-								i_inputs_color_4,
-								i_inputs_color_5,
-								i_inputs_color_6,
-								i_inputs_color_7,
-								i_inputs_color_8,
-								i_inputs_color_9,
-								i_inputs_color_10,
-								i_inputs_color_11,
-								i_inputs_color_12,
-								i_inputs_color_13,
-								i_inputs_color_14,
-								i_inputs_color_15
-							};
-							
-	color i_inputs_transparency[16] = {
-								i_inputs_transparency_0,
-								i_inputs_transparency_1,
-								i_inputs_transparency_2,
-								i_inputs_transparency_3,
-								i_inputs_transparency_4,
-								i_inputs_transparency_5,
-								i_inputs_transparency_6,
-								i_inputs_transparency_7,
-								i_inputs_transparency_8,
-								i_inputs_transparency_9,
-								i_inputs_transparency_10,
-								i_inputs_transparency_11,
-								i_inputs_transparency_12,
-								i_inputs_transparency_13,
-								i_inputs_transparency_14,
-								i_inputs_transparency_15
-							};
 	
 	/*uniform*/ int i;
 
@@ -130,8 +62,8 @@ shader maya_layeredShader
 
 	for( i = 0; i<i_mtoer_nlayers; i += 1 )
 	{
-		color trs = i_inputs_transparency[i];
-		color col = i_inputs_color[i];
+		color trs = i_array_inputs_transparency[i];
+		color col = i_array_inputs_color[i];
 		
 		//~ if(trs!=color(-99) || col!=color(-99))
 		//~ {
