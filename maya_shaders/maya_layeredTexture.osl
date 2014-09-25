@@ -9,19 +9,19 @@
 
 shader maya_layeredTexture(
 	// Inputs
-				color	i_inputs_color[LAYEREDTEXTURE_MAX_LAYERS]		= {0.0},
-				float	i_inputs_alpha[LAYEREDTEXTURE_MAX_LAYERS]		= {0.0},
-	/*uniform*/	float	i_inputs_blendMode[LAYEREDTEXTURE_MAX_LAYERS]	= {0.0},
-	/*uniform*/	float	i_inputs_isVisible[LAYEREDTEXTURE_MAX_LAYERS]	= {0.0},
-				float	i_alphaIsLuminance								= 1.0,
+				color	i_array_inputs_color[LAYEREDTEXTURE_MAX_LAYERS]		= {color(0.2,0.7,0.3), color(1.0,0.0,0.0), color(0.0) },
+				float	i_array_inputs_alpha[LAYEREDTEXTURE_MAX_LAYERS]		= {0.5, 1.0, 1.0},
+	/*uniform*/	int		i_array_inputs_blendMode[LAYEREDTEXTURE_MAX_LAYERS]	= {1,1,0},
+	/*uniform*/	int		i_array_inputs_isVisible[LAYEREDTEXTURE_MAX_LAYERS]	= {1,1,0},
+				int		i_alphaIsLuminance									= 0,
 
 	// Outputs
-	output		color	o_outColor										= 0.0,
-	output		float	o_outAlpha										= 0.0,
-	output		color	o_outTransparency								= 0.0
+	output		color	o_outColor											= 0.0,
+	output		float	o_outAlpha											= 0.0,
+	output		color	o_outTransparency									= 0.0
 	)
 {
-	int numLayers = arraylength( i_inputs_color );
+	int numLayers = arraylength( i_array_inputs_color );
 	int i;
 	
 	o_outColor = 0;
@@ -29,12 +29,12 @@ shader maya_layeredTexture(
 
 	for( i = numLayers - 1; i >= 0; i -= 1 )
 	{
-		if( i_inputs_isVisible[i] != 1.0 )
+		if( i_array_inputs_isVisible[i] != 1.0 )
 			continue;
 
-		color fc = i_inputs_color[i];
-		float fa = i_inputs_alpha[i];
-		float blend = i_inputs_blendMode[i];
+		color fc = i_array_inputs_color[i];
+		float fa = i_array_inputs_alpha[i];
+		float blend = i_array_inputs_blendMode[i];
 
 		if( blend == 0.0 ) /* None */
 		{
