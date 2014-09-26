@@ -5,9 +5,9 @@
 
 color colorRamp(
 	float   i_pos,
-	float   i_positions[3],
+	float   i_positions[],
 	int     i_interpolation[],
-	color   i_colorValues[3])
+	color   i_colorValues[])
 {
 	color result = color(0, 0, 0);
 	

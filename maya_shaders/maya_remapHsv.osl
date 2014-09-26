@@ -1,0 +1,79 @@
+// -------------for mtoer.xml------------------------------
+// <maya_remapHsv>
+	// <maya.name type="STRING">remapHsv</maya.name>
+// </maya_remapHsv>
+
+#include "ramp_utils.h"
+#define REMAP_MAX_POINTS 16
+
+shader maya_remapHsv
+[[ string help = "Maya ramapHsv"]]
+(
+	// Inputs
+				color	i_color											= 0.5,
+				float	i_inputMin										= 0.0,
+				float	i_inputMax										= 1.0,
+				float	i_outputMin										= 0.0,
+				float	i_outputMax										= 1.0,
+
+				float	i_array_hue_Position[REMAP_MAX_POINTS]			= {0,1,0.2,0.7,0.3,0},
+				float	i_array_hue_FloatValue[REMAP_MAX_POINTS]		= {0,1,0.6,0.3,0.8,0},
+	/*uniform*/	int		i_array_hue_Interp[REMAP_MAX_POINTS]			= {1,2,0,3,1},
+
+				float	i_array_saturation_Position[REMAP_MAX_POINTS]	= {0,1,0.2,0.7,0.3,0},
+				float	i_array_saturation_FloatValue[REMAP_MAX_POINTS]	= {0,1,0.2,0.5,0.7,0},
+	/*uniform*/	int		i_array_saturation_Interp[REMAP_MAX_POINTS]		= {1},
+
+				float	i_array_value_Position[REMAP_MAX_POINTS]		= {0,1,0.2,0.7,0.3,0},
+				float	i_array_value_FloatValue[REMAP_MAX_POINTS]		= {0,1,0.9,0.4,0.2,0},
+	/*uniform*/	int		i_array_value_Interp[REMAP_MAX_POINTS]			= {1},
+
+	// Outputs
+	output		color	o_outColor										= 0 
+	)
+{
+	// Apply input range
+	color c = (i_color - i_inputMin) / (i_inputMax - i_inputMin);
+
+	// Mimic maya's behavior when the input range is empty.
+	if( i_inputMin == i_inputMax )
+		c = 0;
+
+	// Convert to hsv
+	c = transformc( "hsv", c );
+
+	// Remap hue
+	float hue = floatRamp(
+		c[0],
+		i_array_hue_Position,
+		i_array_hue_Interp,
+		i_array_hue_FloatValue );
+
+	c[0] = hue;
+
+	// Remap saturation
+	float saturation = floatRamp(
+		c[1],
+		i_array_saturation_Position,
+		i_array_saturation_Interp,
+		i_array_saturation_FloatValue );
+
+	c[1] = saturation;
+
+	// Remap value
+	float value = floatRamp(
+		c[2],
+		i_array_value_Position,
+		i_array_value_Interp,
+		i_array_value_FloatValue );
+
+	c[2] =value ;
+
+	// Convert back to rgb
+	c = transformc( "hsv", "rgb", c );
+
+	// Apply output range
+	o_outColor = i_outputMin + c * (i_outputMax - i_outputMin);
+}
+
+
