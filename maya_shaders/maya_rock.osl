@@ -1,0 +1,77 @@
+#include "stdosl.h"
+#include "texture3d.h"
+#include "mayautil.h"
+
+shader maya_rock
+[[ string help = "Maya rock"]]
+(
+                    /* "rock" related parameters */
+                    color       i_color1 = color(0.235, 0, 0), 
+                    color       i_color2 = 1.0,
+                    float       i_grainSize = 0.01, 
+                    float       i_diffusion = 1.0, 
+                    float       i_mixRatio = 0.5,
+
+                    /* "Color Balance" related parameters */
+                    color       i_defaultColor = 0.5, 
+                    color       i_colorGain = 1.0, 
+                    color       i_colorOffset = 0.0,
+                    float       i_alphaGain = 1.0, 
+                    float       i_alphaOffset = 0.0,
+        /*uniform*/ int         i_alphaIsLuminance = 0,
+
+                    /* "Effects" related parameters */
+        /*uniform*/ int         i_invert = 0,
+                    int         i_local = 0,
+                    int         i_wrap = 1,
+                    float       i_blend = 0.0,
+
+                    /* geomtric inputs */
+                    matrix i_placementMatrix = matrix(   1.0, 0.0, 0.0, 0.0,
+                                                        0.0, 1.0, 0.0, 0.0,
+                                                        0.0, 0.0, 1.0, 0.0,
+                                                        0.0, 0.0, 0.0, 1.0),
+
+                    // Outputs
+                    //
+	output float o_outAlpha = 1.0,
+	output color o_outColor = 1.0)
+{
+	//extern point P;
+	
+	float outside;
+	float edgeDist;
+
+	point pp = transformP(i_blend, 
+		i_local, 
+		i_placementMatrix, 
+		i_wrap, edgeDist, 
+		outside );
+
+	if(outside < 1)
+	{
+		/* This is directly taken from mentalRib by Peter Quint and seems to work
+		   just fine. */
+		float mx = noise( "perlin", pp / (2*i_grainSize)) + i_mixRatio * 0.8 - 0.4;
+		mx = smoothstep( 0.5 * (1-i_diffusion), 1-0.5*(1-i_diffusion), mx );
+		mx = clamp( mx, 0, 1 );
+ 
+		o_outColor = mix( i_color1, i_color2, mx );
+		o_outAlpha = 1 - mx;
+ 
+		colorBalance( o_outColor, 
+			o_outAlpha, 
+			i_alphaIsLuminance, 
+			i_alphaGain, 
+			i_alphaOffset, 
+			i_colorGain, 
+			i_colorOffset, 
+			i_invert );
+	}
+	else
+	{
+		o_outColor = i_defaultColor;
+		o_outAlpha = 0;
+	}
+}
+
