@@ -1,0 +1,47 @@
+/* for mtoer.xml
+<maya_displacementShader>
+	<maya.name type="STRING">displacementShader</maya.name>
+</maya_displacementShader>
+*/
+
+shader displacementShader
+[[ string help = "Maya displacementShader"]]
+(
+	float	i_displacement			= 0.0,
+	float	i_scale					= 1.0,
+	vector	i_vectorDisplacement	= 0.0,
+	float	i_vectorEncoding		= 0.0,
+	int		i_vectorSpace 			= 1,
+	
+	output	color o_outC			= 0
+)
+{
+	closure color result;
+	if (raytype("displace"))
+	{
+	
+		if( isconnected(i_vectorDisplacement) == 0 ) //gray-scale displacing
+		{
+			float magnitude = i_displacement;
+			if( i_vectorEncoding == 1 )
+				magnitude -= 0.5;
+			if( magnitude != 0 ){
+				//~ result = displacement(P +magnitude*N, N);
+				displace(i_vectorSpace==0?"world":"object", magnitude);
+			}
+		}
+		else //vector displacing
+		{
+			vector vectorDisplacement = i_vectorDisplacement;
+			if(i_vectorEncoding == 1)
+				vectorDisplacement -= 0.5;
+	
+			if ( vectorDisplacement != 0 )
+			{
+				// todo : vector displacements
+			}
+		}
+	}
+}
+
+
