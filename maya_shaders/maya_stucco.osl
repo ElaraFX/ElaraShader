@@ -1,0 +1,72 @@
+#include "mayautil.h"
+#include "noise_utils.h"
+#include "texture3d.h"
+#include "stdosl.h"
+
+shader maya_stucco
+[[ string help = "Maya stucco"]]
+(
+                        /* "stucco" parameters */
+                        float       i_shaker = 20.0,
+                        color       i_channel1 = color(1.0, 0.0, 0.0),
+                        color       i_channel2 = color(0.0, 0.0, 1.0),
+                        
+                        //for output normal
+                        float       normalDepth = 1.0,
+                        float       normalMelt = 0.1,
+
+                        /* "Color Balance" related parameters */
+                        color       i_defaultColor = 0.5, 
+                        color       i_colorGain = 1.0, 
+                        color       i_colorOffset = 0.0,
+                        float       i_alphaGain = 1.0, 
+                        float       i_alphaOffset = 0.0,
+          /* uniform */ int         i_alphaIsLuminance = 0,
+
+                        /* "Effects" related parameters */
+          /* uniform */ int         i_invert = 0,
+                        int         i_local = 0, 
+                        int         i_wrap = 1, 
+                        int         i_blend = 0,
+
+                        /* geomtric inputs */
+                        matrix i_placementMatrix = matrix(  1.0, 0.0, 0.0, 0.0,
+                                                        0.0, 1.0, 0.0, 0.0,
+                                                        0.0, 0.0, 1.0, 0.0,
+                                                        0.0, 0.0, 0.0, 1.0),
+
+	/* outputs */
+	output color o_outColor = 1.0,
+	output float o_outAlpha = 1.0,
+    output vector o_outNormal = 0.0
+)
+{
+		
+	float outside;
+    float edgeDist;
+	point pp = transformP(i_blend, 
+		i_local, 
+		i_placementMatrix, 
+		i_wrap, edgeDist, 
+		outside );
+
+	if( outside < 1 )
+	{
+		/* uniform */ vector depth = vector(1, 10, 0);
+		o_outAlpha = 0.35 * fBm( pp, 0, i_shaker, depth, 0.5, 2.15, 0.5 ) + 0.5;
+		float mix_ratio = clamp( o_outAlpha * o_outAlpha, 0, 1 );
+    
+		o_outAlpha = clamp( o_outAlpha, 0, 1 );
+		o_outColor = mix( i_channel2, i_channel1, mix_ratio );
+        
+        o_outNormal = normalDepth * (pp + pow(o_outAlpha, normalMelt));
+	}
+	else
+	{
+		o_outColor = i_defaultColor;
+		o_outAlpha = 0;
+        o_outNormal = 0.0;
+	}
+}
+
+

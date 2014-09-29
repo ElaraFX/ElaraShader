@@ -1,0 +1,107 @@
+#include "texture3d.h"
+#include "mayautil.h"
+#include "noise_utils.h"
+
+shader maya_solidFractal
+[[ string help = "Maya solidFractal"]]
+(
+                            // Inputs
+                            //
+                            float           i_alphaGain = 1.0,
+              /* uniform */ int             i_alphaIsLuminance = 0,
+                            float           i_alphaOffset = 0.0,
+                            float           i_amplitude = 1.0,
+              /* uniform */ int             i_animated = 0,
+                            float           i_bias = 0.0,
+                            float           i_blend = 0.0,
+                            color           i_colorGain = 1.0,
+                            color           i_colorOffset = 0.0,
+                            color           i_defaultColor = 0.5,
+              /* uniform */ vector          i_depth = vector(0.0, 8.0, 0.0),
+                            float           i_filter = 1.0,
+                            float           i_filterOffset = 0.0,
+                            vector          i_filterSize = 0.0,
+              /* uniform */ float           i_frequencyRatio = 2.0,
+              /* uniform */ int             i_inflection = 0,
+              /* uniform */ int             i_invert = 0,
+              /* uniform */ int             i_local = 0,
+              /* uniform */ matrix          i_placementMatrix = matrix(  1.0, 0.0, 0.0, 0.0,
+                                                        0.0, 1.0, 0.0, 0.0,
+                                                        0.0, 0.0, 1.0, 0.0,
+                                                        0.0, 0.0, 0.0, 1.0),
+              /* uniform */ float           i_ratio = 0.707,
+              /* uniform */ float           i_threshold = 0.0,
+              /* uniform */ float           i_time = 0,
+              /* uniform */ float           i_timeRatio = 2.0,
+                            vector          i_ripples = 1.0,
+              /* uniform */ int             i_wrap = 1,
+
+	// Outputs
+	//
+	output color o_outColor = 1.0,
+	output float o_outAlpha = 1.0)
+{
+	float edgeDist;
+	float outside;
+	/* varying */ point pp = transformP(i_blend, 
+		i_local, 
+		i_placementMatrix, 
+		i_wrap, edgeDist, 
+		outside);
+
+	if(outside < 1)
+	{
+		/* uniform */ float time = 0;
+
+		if(i_animated > 0)
+		{
+			time = i_time * i_timeRatio;
+		}
+
+		float fractal;
+
+		if(i_inflection > 0)
+		{
+			fractal = fTurbulence(
+				pp, time, 
+				1, i_frequencyRatio, i_depth, i_ratio, i_ripples);
+		}
+		else
+		{
+			fractal = fBrownianNoise(
+				pp, time, 1, 
+				1, i_frequencyRatio, i_depth, i_ratio, i_ripples );
+		}
+
+		fractal += i_threshold;
+		
+		float sn = sign(fractal);
+
+		if(i_bias > 0.0)
+		{
+			fractal = sn * pow(abs(fractal), 1 - i_bias * 0.5);
+		}
+		else if(i_bias <  0.0)
+		{
+			fractal = sn * pow(abs(fractal), 1 / (1 + i_bias));
+		}
+
+		fractal *= i_amplitude;
+		o_outAlpha = clamp(fractal + i_threshold, 0, 1);
+		o_outColor = mix(0, 1, o_outAlpha);
+
+		colorBalance(o_outColor, 
+			o_outAlpha, 
+			i_alphaIsLuminance, 
+			i_alphaGain, 
+			i_alphaOffset, 
+			i_colorGain, 
+			i_colorOffset, 
+			i_invert);
+	}
+	else
+	{
+		o_outColor = i_defaultColor;
+		o_outAlpha = 0;
+	}
+}
