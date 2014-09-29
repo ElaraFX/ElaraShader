@@ -1,80 +1,89 @@
-#ifndef BUILTIN
-#define BUILTIN [[ int builtin = 1 ]]
-#endif
-
-closure color displacement(point P, normal N) BUILTIN;
-
 /* for mtoer.xml
 <maya_displacementShader>
 	<maya.name type="STRING">displacementShader</maya.name>
 </maya_displacementShader>
 */
 
-shader displacementShader
+
+#ifndef BUILTIN
+#define BUILTIN [[ int builtin = 1 ]]
+#endif
+#include "mayautil.h"
+
+closure color displacement(point P, normal N) BUILTIN;
+
+
+displacement maya_displacementShader
 [[ string help = "Maya displacementShader"]]
 (
 	float	i_displacement			= 0.0,
 	float	i_scale					= 1.0,
-	vector	i_vectorDisplacement	= 0.0,
+	color	i_vectorDisplacement	= 0.0,
 	float	i_vectorEncoding		= 0.0,
 	int		i_vectorSpace 			= 1,
+	color	tangent					= 0,
 	
 	output closure color result = 0
 )
 {
+	point PP = P;
+	vector NN = N;
 	string space = "world";
 	if(i_vectorSpace!=0)
 		space = "object";
 	if (raytype("displace"))
 	{
-		if( isconnected(i_vectorDisplacement) == 0 ) //gray-scale displacing
+		//~ if( isconnected(i_vectorDisplacement) == 0 ) //gray-scale displacing  
+		if( 0 ) //isconnected function is not working for elara at the momment
 		{
 			float magnitude = i_displacement;
 			if( i_vectorEncoding == 1 )
 				magnitude -= 0.5;
 			if( magnitude != 0 ){
-				//~ result = displacement(P +magnitude*N, N);
-				displace(i_vectorSpace==0?"world":"object", magnitude);
+				PP += magnitude*N*i_scale;
+				//displace(i_vectorSpace==0?"world":"object", magnitude);
 			}
 		}
 		else //vector displacing
 		{
-			vector vectorDisplacement = i_vectorDisplacement;
+			vector vectorDisplacement = vector(i_vectorDisplacement[0],i_vectorDisplacement[1],i_vectorDisplacement[2]);
 			if(i_vectorEncoding == 1)
 				vectorDisplacement -= 0.5;
 	
 			if ( vectorDisplacement != 0 )
 			{
-				vector basisx, basisy, basisz;
-				if(i_vectorSpace == 0 || i_vectorSpace == 1)
+				
+				vector basisx=0;
+				vector basisy=0;
+				vector basisz=0;
+				if(i_vectorSpace == 0 || i_vectorSpace == 1) // World and object space 
 				{
-					/* World and object space */
-					basisx = vector( 1, 0, 0);
-					basisy = vector( 0, 1, 0);
-					basisz = vector( 0, 0, 1);
+					basisx = vector("object", 0, 0, 1);
+					basisy = vector("object", 0, 1, 0);
+					basisz = vector("object", -1, 0, 0);
+					if(i_vectorSpace == 0){
+						// todo:  convert 3 basis into world space, so the displacement will no longer follow objects rotation or scale
+						basisx = transform("world", basisx);
+						basisy = transform("world", basisy);
+						basisz = transform("world", basisz);
+					}
 				}
 				else
 				{
-					/* Normalize basis vectors in the specified space */
-					basisx = transform( space, dPdu );
-					basisy = transform( space, N );
-					basisz = transform( space, dPdv );
-					
-					basisx = normalize( basisx );
-					basisy = normalize( basisy );
-					basisz = normalize( basisz );
+					basisx = normalize(dPdu) ;
+					basisy = normalize(N) ;
+					basisz = normalize(dPdv) ;
 					
 				}
-				basisx = transform( space, "current", basisx);
-				basisy = transform( space, "current", basisy);
-				basisz = transform( space, "current", basisz);
-				displace(basisx+basisy+basisz);
-				
+				PP += (
+							basisx*(vectorDisplacement[2])
+							+basisy*(vectorDisplacement[1] )
+							+basisz*(-vectorDisplacement[0])
+							)*i_scale;
 			}
 		}
+		NN = calculatenormal(PP);
 	}
-	result = displacement(P,N);
+	result = displacement(PP,NN);
 	Ci = result;
 }
-
-
