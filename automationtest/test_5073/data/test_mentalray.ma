@@ -1,6 +1,6 @@
 //Maya ASCII 2013 scene
 //Name: test_mentalray.ma
-//Last modified: Thu, Sep 25, 2014 06:13:19 PM
+//Last modified: Tue, Sep 30, 2014 03:51:13 PM
 //Codeset: 936
 file -rdi 1 -ns "test" -rfn "testRN" "K:/osl/testCase//test_5073/data/test.ma";
 file -rdi 2 -ns "input_color" -rfn "test:input_colorRN" "K:/osl/testCase//test_5073/data/input_color.ma";
@@ -41,9 +41,9 @@ file -rdi 3 -ns "object" -rfn "test:input_isVisible:objectRN" "K:/osl/testCase//
 file -rdi 2 -ns "object" -rfn "test:objectRN" "K:/osl/testCase//test_5073/data/object.ma";
 file -r -ns "test" -dr 1 -rfn "testRN" "K:/osl/testCase//test_5073/data/test.ma";
 requires maya "2013";
+requires "mtoer" "1.4.8";
 requires "3delight_for_maya2013" "7.0.28";
 requires "Mayatomr" "2013.0 - 3.10.1.11 ";
-requires "mtoer" "1.4.8";
 requires "stereoCamera" "10.0";
 currentUnit -l centimeter -a degree -t film;
 fileInfo "application" "maya";
@@ -116,10 +116,10 @@ createNode renderLayer -n "defaultRenderLayer";
 createNode reference -n "testRN";
 	setAttr ".ed" -type "dataReferenceEdits" 
 		"testRN"
-		"test:input_blendMode8RN" 0
 		"test:input_blendMode11RN" 0
-		"test:input_blendMode9RN" 0
+		"test:input_blendMode8RN" 0
 		"test:input_blendMode10RN" 0
+		"test:input_blendMode9RN" 0
 		"test:input_blendMode12RN" 0
 		"test:input_colorRN" 0
 		"test:input_blendMode4RN" 0
@@ -140,14 +140,14 @@ createNode reference -n "testRN";
 		"test:input_blendMode2:objectRN" 0
 		"test:input_blendMode4:objectRN" 0
 		"test:input_blendMode5:objectRN" 0
-		"test:input_blendMode7:objectRN" 0
-		"test:input_blendMode6:objectRN" 0
 		"test:input_alpha:objectRN" 0
+		"test:input_blendMode6:objectRN" 0
+		"test:input_blendMode7:objectRN" 0
 		"test:objectRN" 0
 		"test:input_alphaIsLuminance:objectRN" 0
 		"test:input_blendMode12:objectRN" 0
-		"test:input_blendMode10:objectRN" 0
 		"test:input_blendMode11:objectRN" 0
+		"test:input_blendMode10:objectRN" 0
 		"testRN" 0
 		"test:input_alphaRN" 0
 		"test:input_color:objectRN" 0
@@ -3379,7 +3379,9 @@ createNode script -n "sceneConfigurationScriptNode";
 	setAttr ".b" -type "string" "playbackOptions -min 1 -max 24 -ast 1 -aet 48 ";
 	setAttr ".st" 6;
 createNode mentalrayItemsList -s -n "mentalrayItemsList";
+	setAttr -s 17 ".opt";
 createNode mentalrayGlobals -s -n "mentalrayGlobals";
+	addAttr -ci true -h true -sn "sunAndSkyShader" -ln "sunAndSkyShader" -at "message";
 	setAttr ".rvb" 3;
 	setAttr ".ivb" no;
 createNode mentalrayOptions -s -n "miDefaultOptions";
@@ -3388,6 +3390,8 @@ createNode mentalrayOptions -s -n "miDefaultOptions";
 	addAttr -ci true -sn "name" -ln "name" -dt "string" -p "stringOptions";
 	addAttr -ci true -sn "value" -ln "value" -dt "string" -p "stringOptions";
 	addAttr -ci true -sn "type" -ln "type" -dt "string" -p "stringOptions";
+	setAttr ".minsp" 0;
+	setAttr ".maxsp" 2;
 	setAttr ".maxr" 2;
 	setAttr -s 28 ".stringOptions";
 	setAttr ".stringOptions[0].name" -type "string" "rast motion factor";
@@ -3481,6 +3485,158 @@ createNode delightRenderGlobals -n "delightRenderGlobals1";
 	addAttr -ci true -sn "version" -ln "version" -dt "string";
 	setAttr ".monitorColorProfile" -type "string" "srgb";
 	setAttr ".version" -type "string" "7.0.24";
+createNode mentalrayOptions -s -n "miContourPreset";
+createNode mentalrayOptions -s -n "Draft";
+	setAttr ".maxr" 2;
+createNode mentalrayOptions -s -n "DraftMotionBlur";
+	setAttr ".maxr" 2;
+	setAttr ".mb" 1;
+	setAttr ".tconr" 1;
+	setAttr ".tcong" 1;
+	setAttr ".tconb" 1;
+	setAttr ".tcona" 1;
+createNode mentalrayOptions -s -n "DraftRapidMotion";
+	setAttr ".scan" 3;
+	setAttr ".rapc" 1;
+	setAttr ".raps" 0.25;
+	setAttr ".maxr" 2;
+	setAttr ".mb" 1;
+	setAttr ".tconr" 1;
+	setAttr ".tcong" 1;
+	setAttr ".tconb" 1;
+	setAttr ".tcona" 1;
+createNode mentalrayOptions -s -n "Preview";
+	setAttr ".minsp" -1;
+	setAttr ".maxsp" 1;
+	setAttr ".fil" 1;
+	setAttr ".rflr" 2;
+	setAttr ".rfrr" 2;
+	setAttr ".maxr" 4;
+createNode mentalrayOptions -s -n "PreviewMotionblur";
+	setAttr ".minsp" -1;
+	setAttr ".maxsp" 1;
+	setAttr ".fil" 1;
+	setAttr ".rflr" 2;
+	setAttr ".rfrr" 2;
+	setAttr ".maxr" 4;
+	setAttr ".mb" 1;
+	setAttr ".tconr" 0.5;
+	setAttr ".tcong" 0.5;
+	setAttr ".tconb" 0.5;
+	setAttr ".tcona" 0.5;
+createNode mentalrayOptions -s -n "PreviewRapidMotion";
+	setAttr ".minsp" -1;
+	setAttr ".maxsp" 1;
+	setAttr ".fil" 1;
+	setAttr ".scan" 3;
+	setAttr ".rapc" 3;
+	setAttr ".rflr" 2;
+	setAttr ".rfrr" 2;
+	setAttr ".maxr" 4;
+	setAttr ".mb" 1;
+	setAttr ".tconr" 0.5;
+	setAttr ".tcong" 0.5;
+	setAttr ".tconb" 0.5;
+	setAttr ".tcona" 0.5;
+createNode mentalrayOptions -s -n "PreviewCaustics";
+	setAttr ".minsp" -1;
+	setAttr ".maxsp" 1;
+	setAttr ".fil" 1;
+	setAttr ".rflr" 2;
+	setAttr ".rfrr" 2;
+	setAttr ".maxr" 4;
+	setAttr ".ca" yes;
+	setAttr ".cc" 1;
+	setAttr ".cr" 1;
+createNode mentalrayOptions -s -n "PreviewGlobalIllum";
+	setAttr ".minsp" -1;
+	setAttr ".maxsp" 1;
+	setAttr ".fil" 1;
+	setAttr ".rflr" 2;
+	setAttr ".rfrr" 2;
+	setAttr ".maxr" 4;
+	setAttr ".gi" yes;
+	setAttr ".gc" 1;
+	setAttr ".gr" 1;
+createNode mentalrayOptions -s -n "PreviewFinalGather";
+	setAttr ".minsp" -1;
+	setAttr ".maxsp" 1;
+	setAttr ".fil" 1;
+	setAttr ".rflr" 2;
+	setAttr ".rfrr" 2;
+	setAttr ".maxr" 4;
+	setAttr ".fg" yes;
+createNode mentalrayOptions -s -n "Production";
+	setAttr ".minsp" 0;
+	setAttr ".maxsp" 2;
+	setAttr ".fil" 2;
+	setAttr ".rflr" 10;
+	setAttr ".rfrr" 10;
+	setAttr ".maxr" 20;
+createNode mentalrayOptions -s -n "ProductionMotionblur";
+	setAttr ".minsp" 0;
+	setAttr ".maxsp" 2;
+	setAttr ".fil" 2;
+	setAttr ".rflr" 10;
+	setAttr ".rfrr" 10;
+	setAttr ".maxr" 20;
+	setAttr ".mb" 2;
+createNode mentalrayOptions -s -n "ProductionRapidMotion";
+	setAttr ".minsp" 0;
+	setAttr ".maxsp" 2;
+	setAttr ".fil" 2;
+	setAttr ".scan" 3;
+	setAttr ".rapc" 8;
+	setAttr ".raps" 2;
+	setAttr ".rflr" 10;
+	setAttr ".rfrr" 10;
+	setAttr ".maxr" 20;
+	setAttr ".mb" 2;
+createNode mentalrayOptions -s -n "ProductionFineTrace";
+	setAttr ".conr" 0.019999999552965164;
+	setAttr ".cong" 0.019999999552965164;
+	setAttr ".conb" 0.019999999552965164;
+	setAttr ".minsp" 1;
+	setAttr ".maxsp" 2;
+	setAttr ".fil" 1;
+	setAttr ".filw" 0.75;
+	setAttr ".filh" 0.75;
+	setAttr ".jit" yes;
+createNode mentalrayOptions -s -n "ProductionRapidFur";
+	setAttr ".conr" 0.039999999105930328;
+	setAttr ".cong" 0.029999999329447746;
+	setAttr ".conb" 0.070000000298023224;
+	setAttr ".minsp" 0;
+	setAttr ".maxsp" 2;
+	setAttr ".fil" 1;
+	setAttr ".filw" 1.1449999809265137;
+	setAttr ".filh" 1.1449999809265137;
+	setAttr ".jit" yes;
+	setAttr ".scan" 3;
+	setAttr ".rapc" 3;
+	setAttr ".raps" 0.25;
+	setAttr ".ray" no;
+	setAttr ".shmth" 3;
+	setAttr ".shmap" 3;
+	setAttr ".mbsm" no;
+	setAttr ".bism" 0.019999999552965164;
+createNode mentalrayOptions -s -n "ProductionRapidHair";
+	setAttr ".conr" 0.039999999105930328;
+	setAttr ".cong" 0.029999999329447746;
+	setAttr ".conb" 0.070000000298023224;
+	setAttr ".minsp" 0;
+	setAttr ".maxsp" 2;
+	setAttr ".fil" 1;
+	setAttr ".filw" 1.1449999809265137;
+	setAttr ".filh" 1.1449999809265137;
+	setAttr ".jit" yes;
+	setAttr ".scan" 3;
+	setAttr ".rapc" 6;
+	setAttr ".ray" no;
+	setAttr ".shmth" 3;
+	setAttr ".shmap" 3;
+	setAttr ".mbsm" no;
+	setAttr ".bism" 0.019999999552965164;
 select -ne :time1;
 	setAttr ".o" 1;
 	setAttr ".unw" 1;
@@ -3506,11 +3662,12 @@ select -ne :renderGlobalsList1;
 select -ne :defaultRenderGlobals;
 	setAttr ".ren" -type "string" "mentalRay";
 	setAttr ".outf" 32;
+	setAttr ".ifp" -type "string" "test_mentalray";
 select -ne :defaultResolution;
-	setAttr ".w" 1024;
-	setAttr ".h" 1024;
+	setAttr ".w" 320;
+	setAttr ".h" 240;
 	setAttr ".pa" 1;
-	setAttr ".dar" 1;
+	setAttr ".dar" 1.3333333730697632;
 select -ne :defaultLightSet;
 	setAttr -s 19 ".dsm";
 select -ne :hardwareRenderGlobals;
@@ -3527,6 +3684,22 @@ connectAttr "layerManager.dli[0]" "defaultLayer.id";
 connectAttr "renderLayerManager.rlmi[0]" "defaultRenderLayer.rlid";
 connectAttr ":mentalrayGlobals.msg" ":mentalrayItemsList.glb";
 connectAttr ":miDefaultOptions.msg" ":mentalrayItemsList.opt" -na;
+connectAttr ":miContourPreset.msg" ":mentalrayItemsList.opt" -na;
+connectAttr ":Draft.msg" ":mentalrayItemsList.opt" -na;
+connectAttr ":DraftMotionBlur.msg" ":mentalrayItemsList.opt" -na;
+connectAttr ":DraftRapidMotion.msg" ":mentalrayItemsList.opt" -na;
+connectAttr ":Preview.msg" ":mentalrayItemsList.opt" -na;
+connectAttr ":PreviewMotionblur.msg" ":mentalrayItemsList.opt" -na;
+connectAttr ":PreviewRapidMotion.msg" ":mentalrayItemsList.opt" -na;
+connectAttr ":PreviewCaustics.msg" ":mentalrayItemsList.opt" -na;
+connectAttr ":PreviewGlobalIllum.msg" ":mentalrayItemsList.opt" -na;
+connectAttr ":PreviewFinalGather.msg" ":mentalrayItemsList.opt" -na;
+connectAttr ":Production.msg" ":mentalrayItemsList.opt" -na;
+connectAttr ":ProductionMotionblur.msg" ":mentalrayItemsList.opt" -na;
+connectAttr ":ProductionRapidMotion.msg" ":mentalrayItemsList.opt" -na;
+connectAttr ":ProductionFineTrace.msg" ":mentalrayItemsList.opt" -na;
+connectAttr ":ProductionRapidFur.msg" ":mentalrayItemsList.opt" -na;
+connectAttr ":ProductionRapidHair.msg" ":mentalrayItemsList.opt" -na;
 connectAttr ":miDefaultFramebuffer.msg" ":mentalrayItemsList.fb" -na;
 connectAttr ":miDefaultOptions.msg" ":mentalrayGlobals.opt";
 connectAttr ":miDefaultFramebuffer.msg" ":mentalrayGlobals.fb";

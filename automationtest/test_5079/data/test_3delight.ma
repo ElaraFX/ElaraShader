@@ -1,6 +1,6 @@
 //Maya ASCII 2013 scene
 //Name: test_3delight.ma
-//Last modified: Sat, Sep 27, 2014 02:08:29 AM
+//Last modified: Tue, Sep 30, 2014 04:09:47 PM
 //Codeset: 936
 file -rdi 1 -ns "test" -rfn "testRN" "D:/Projects/2014/osl/testCase//test_5079/data/test.ma";
 file -rdi 2 -ns "object" -rfn "test:objectRN" "D:/Projects/2014/osl/testCase//test_5079/data/object.ma";
@@ -28,9 +28,9 @@ file -rdi 2 -ns "value_Position" -rfn "test:value_PositionRN" "D:/Projects/2014/
 file -rdi 3 -ns "object" -rfn "test:value_Position:objectRN" "D:/Projects/2014/osl/testCase//test_5079/data/object.ma";
 file -r -ns "test" -dr 1 -rfn "testRN" "D:/Projects/2014/osl/testCase//test_5079/data/test.ma";
 requires maya "2013";
-requires "Mayatomr" "2013.0 - 3.10.1.11 ";
+requires "mtoer" "1.4.8";
 requires "3delight_for_maya2013" "7.0.28";
-requires "mtoer" "1.4.7";
+requires "Mayatomr" "2013.0 - 3.10.1.11 ";
 requires "stereoCamera" "10.0";
 currentUnit -l centimeter -a degree -t film;
 fileInfo "application" "maya";
@@ -41,7 +41,7 @@ fileInfo "osv" "Microsoft Windows 7 Ultimate Edition, 64-bit Windows 7 Service P
 createNode transform -s -n "persp";
 	setAttr ".v" no;
 	setAttr ".t" -type "double3" 28 21 28 ;
-	setAttr ".r" -type "double3" -27.938352729602379 44.999999999999972 -5.172681101354183e-014 ;
+	setAttr ".r" -type "double3" -27.938352729602379 44.999999999999964 -5.172681101354183e-014 ;
 createNode camera -s -n "perspShape" -p "persp";
 	addAttr -ci true -h true -sn "usedBy3dfm" -ln "usedBy3dfm" -at "message";
 	setAttr -k off ".v" no;
@@ -109,8 +109,8 @@ createNode reference -n "testRN";
 		"test:inputMaxRN" 0
 		"test:color_Interp:objectRN" 0
 		"test:color_ColorRN" 0
-		"test:color_Interp1:objectRN" 0
 		"test:inputMinRN" 0
+		"test:color_Interp1:objectRN" 0
 		"test:outputMin:objectRN" 0
 		"test:value_Position:objectRN" 0
 		"test:value_FloatValue:objectRN" 0
@@ -119,13 +119,13 @@ createNode reference -n "testRN";
 		"test:outputMax:objectRN" 0
 		"test:inputMax:objectRN" 0
 		"test:color_PositionRN" 0
-		"test:value_FloatValueRN" 0
 		"test:inputMin:objectRN" 0
+		"test:value_FloatValueRN" 0
 		"test:objectRN" 0
-		"test:value_PositionRN" 0
 		"test:outputMinRN" 0
-		"test:value_InterpRN" 0
+		"test:value_PositionRN" 0
 		"test:color_InterpRN1" 0
+		"test:value_InterpRN" 0
 		"test:color_InterpRN" 0
 		"testRN" 0
 		"test:color_Color:objectRN" 0
@@ -2699,6 +2699,7 @@ createNode delightRenderPass -n "renderPass";
 	setAttr ".ribFilename" -type "string" "3delight/<scene>/rib/<scene>_<pass>_#.<ext>";
 	setAttr ".netCacheDir" -type "string" "<default>";
 	setAttr ".statisticsFile" -type "string" "3delight/<scene>/<pass>_#.<ext>";
+	setAttr ".shadingRate" 0.25;
 	setAttr ".pointCloudFile" -type "string" "<scene>_<pass>_GI_#.<ext>";
 	setAttr ".preRenderMEL" -type "string" "";
 	setAttr ".postRenderMEL" -type "string" "";
@@ -2741,10 +2742,10 @@ select -ne :defaultRenderGlobals;
 	setAttr ".imfkey" -type "string" "png";
 	setAttr ".ifp" -type "string" "test_mentalray";
 select -ne :defaultResolution;
-	setAttr ".w" 1024;
-	setAttr ".h" 1024;
+	setAttr ".w" 320;
+	setAttr ".h" 240;
 	setAttr ".pa" 1;
-	setAttr ".dar" 1;
+	setAttr ".dar" 1.3333333730697632;
 select -ne :defaultLightSet;
 	setAttr -s 13 ".dsm";
 select -ne :hardwareRenderGlobals;

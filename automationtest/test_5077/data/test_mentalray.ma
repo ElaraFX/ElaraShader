@@ -1,6 +1,6 @@
 //Maya ASCII 2013 scene
 //Name: test_mentalray.ma
-//Last modified: Sun, Sep 21, 2014 02:11:37 PM
+//Last modified: Tue, Sep 30, 2014 03:58:21 PM
 //Codeset: 936
 file -rdi 1 -ns "test" -rfn "testRN" "D:/Projects/2014/osl/testCase//test_5077/data/test.ma";
 file -rdi 2 -ns "object" -rfn "test:objectRN" "D:/Projects/2014/osl/testCase//test_5077/data/object.ma";
@@ -50,8 +50,8 @@ file -rdi 2 -ns "red_Position_Value2" -rfn "test:red_Position_Value2RN" "D:/Proj
 file -rdi 3 -ns "object" -rfn "test:red_Position_Value2:objectRN" "D:/Projects/2014/osl/testCase//test_5077/data/object.ma";
 file -r -ns "test" -dr 1 -rfn "testRN" "D:/Projects/2014/osl/testCase//test_5077/data/test.ma";
 requires maya "2013";
+requires "mtoer" "1.4.8";
 requires "Mayatomr" "2013.0 - 3.10.1.11 ";
-requires "mtoer" "1.4.7";
 requires "stereoCamera" "10.0";
 currentUnit -l centimeter -a degree -t film;
 fileInfo "application" "maya";
@@ -125,8 +125,8 @@ createNode reference -n "testRN";
 	setAttr ".ed" -type "dataReferenceEdits" 
 		"testRN"
 		"test:red_Position_Value_Interp2RN" 0
-		"test:blue_Position_Value2:objectRN" 0
 		"test:colorRN" 0
+		"test:blue_Position_Value2:objectRN" 0
 		"test:green_FloatValue:objectRN" 0
 		"test:outputMin:objectRN" 0
 		"test:red_InterpRN" 0
@@ -148,8 +148,8 @@ createNode reference -n "testRN";
 		"test:blue_FloatValue:objectRN" 0
 		"test:green_Interp:objectRN" 0
 		"test:green_Position_Value2RN" 0
-		"test:green_Position_Value_Interp2RN" 0
 		"test:red_Interp:objectRN" 0
+		"test:green_Position_Value_Interp2RN" 0
 		"test:red_Position:objectRN" 0
 		"test:green_FloatValueRN" 0
 		"test:inputMinRN" 0
@@ -157,12 +157,12 @@ createNode reference -n "testRN";
 		"test:blue_FloatValueRN" 0
 		"test:red_FloatValue:objectRN" 0
 		"test:objectRN" 0
-		"test:green_PositionRN" 0
 		"test:red_FloatValueRN" 0
+		"test:green_PositionRN" 0
 		"test:color:objectRN" 0
 		"test:green_InterpRN" 0
-		"test:green_Position_Value2:objectRN" 0
 		"testRN" 0
+		"test:green_Position_Value2:objectRN" 0
 		"test:blue_Interp:objectRN" 0
 		"test:red_Position_Value2RN" 0
 		"test:green_Position:objectRN" 0
@@ -3883,7 +3883,9 @@ createNode eiOptions -s -n "defaultElaraRenderOptions";
 	setAttr ".ssssmp" 1;
 	setAttr ".vis" 1;
 createNode mentalrayItemsList -s -n "mentalrayItemsList";
+	setAttr -s 17 ".opt";
 createNode mentalrayGlobals -s -n "mentalrayGlobals";
+	addAttr -ci true -h true -sn "sunAndSkyShader" -ln "sunAndSkyShader" -at "message";
 	setAttr ".rvb" 3;
 	setAttr ".ivb" no;
 createNode mentalrayOptions -s -n "miDefaultOptions";
@@ -3892,6 +3894,8 @@ createNode mentalrayOptions -s -n "miDefaultOptions";
 	addAttr -ci true -sn "name" -ln "name" -dt "string" -p "stringOptions";
 	addAttr -ci true -sn "value" -ln "value" -dt "string" -p "stringOptions";
 	addAttr -ci true -sn "type" -ln "type" -dt "string" -p "stringOptions";
+	setAttr ".minsp" 0;
+	setAttr ".maxsp" 2;
 	setAttr ".maxr" 2;
 	setAttr -s 28 ".stringOptions";
 	setAttr ".stringOptions[0].name" -type "string" "rast motion factor";
@@ -4039,8 +4043,8 @@ createNode script -n "uiConfigurationScriptNode";
 		+ "                -imagePlane 1\n                -joints 1\n                -ikHandles 1\n                -deformers 1\n                -dynamics 1\n                -fluids 1\n                -hairSystems 1\n                -follicles 1\n                -nCloths 1\n                -nParticles 1\n                -nRigids 1\n                -dynamicConstraints 1\n                -locators 1\n                -manipulators 1\n                -dimensions 1\n                -handles 1\n                -pivots 1\n                -textures 1\n                -strokes 1\n                -motionTrails 1\n                -clipGhosts 1\n                -shadows 0\n                -displayMode \"centerEye\" \n                -viewColor 0 0 0 1 \n                $editorName;\nstereoCameraView -e -viewSelected 0 $editorName;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Stereo\")) -mbv $menusOkayInPanels  $panelName;\nstring $editorName = ($panelName+\"Editor\");\n            stereoCameraView -e \n                -camera \"persp\" \n"
 		+ "                -useInteractiveMode 0\n                -displayLights \"default\" \n                -displayAppearance \"wireframe\" \n                -activeOnly 0\n                -ignorePanZoom 0\n                -wireframeOnShaded 0\n                -headsUpDisplay 1\n                -selectionHiliteDisplay 1\n                -useDefaultMaterial 0\n                -bufferMode \"double\" \n                -twoSidedLighting 1\n                -backfaceCulling 0\n                -xray 0\n                -jointXray 0\n                -activeComponentsXray 0\n                -displayTextures 0\n                -smoothWireframe 0\n                -lineWidth 1\n                -textureAnisotropic 0\n                -textureHilight 1\n                -textureSampling 2\n                -textureDisplay \"modulate\" \n                -textureMaxSize 16384\n                -fogging 0\n                -fogSource \"fragment\" \n                -fogMode \"linear\" \n                -fogStart 0\n                -fogEnd 100\n                -fogDensity 0.1\n                -fogColor 0.5 0.5 0.5 1 \n"
 		+ "                -maxConstantTransparency 1\n                -objectFilterShowInHUD 1\n                -isFiltered 0\n                -colorResolution 4 4 \n                -bumpResolution 4 4 \n                -textureCompression 0\n                -transparencyAlgorithm \"frontAndBackCull\" \n                -transpInShadows 0\n                -cullingOverride \"none\" \n                -lowQualityLighting 0\n                -maximumNumHardwareLights 0\n                -occlusionCulling 0\n                -shadingModel 0\n                -useBaseRenderer 0\n                -useReducedRenderer 0\n                -smallObjectCulling 0\n                -smallObjectThreshold -1 \n                -interactiveDisableShadows 0\n                -interactiveBackFaceCull 0\n                -sortTransparent 1\n                -nurbsCurves 1\n                -nurbsSurfaces 1\n                -polymeshes 1\n                -subdivSurfaces 1\n                -planes 1\n                -lights 1\n                -cameras 1\n                -controlVertices 1\n"
-		+ "                -hulls 1\n                -grid 1\n                -imagePlane 1\n                -joints 1\n                -ikHandles 1\n                -deformers 1\n                -dynamics 1\n                -fluids 1\n                -hairSystems 1\n                -follicles 1\n                -nCloths 1\n                -nParticles 1\n                -nRigids 1\n                -dynamicConstraints 1\n                -locators 1\n                -manipulators 1\n                -dimensions 1\n                -handles 1\n                -pivots 1\n                -textures 1\n                -strokes 1\n                -motionTrails 1\n                -clipGhosts 1\n                -shadows 0\n                -displayMode \"centerEye\" \n                -viewColor 0 0 0 1 \n                $editorName;\nstereoCameraView -e -viewSelected 0 $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"delightExplorerPanel\" (localizedPanelLabel(\"3Delight Relationship Editor\")) `;\n"
-		+ "\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `scriptedPanel -unParent  -type \"delightExplorerPanel\" -l (localizedPanelLabel(\"3Delight Relationship Editor\")) -mbv $menusOkayInPanels `;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"3Delight Relationship Editor\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"delightShaderAssignmentPanel\" (localizedPanelLabel(\"3Delight Assignment\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `scriptedPanel -unParent  -type \"delightShaderAssignmentPanel\" -l (localizedPanelLabel(\"3Delight Assignment\")) -mbv $menusOkayInPanels `;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"3Delight Assignment\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\tif ($useSceneConfig) {\n"
+		+ "                -hulls 1\n                -grid 1\n                -imagePlane 1\n                -joints 1\n                -ikHandles 1\n                -deformers 1\n                -dynamics 1\n                -fluids 1\n                -hairSystems 1\n                -follicles 1\n                -nCloths 1\n                -nParticles 1\n                -nRigids 1\n                -dynamicConstraints 1\n                -locators 1\n                -manipulators 1\n                -dimensions 1\n                -handles 1\n                -pivots 1\n                -textures 1\n                -strokes 1\n                -motionTrails 1\n                -clipGhosts 1\n                -shadows 0\n                -displayMode \"centerEye\" \n                -viewColor 0 0 0 1 \n                $editorName;\nstereoCameraView -e -viewSelected 0 $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"delightShaderAssignmentPanel\" (localizedPanelLabel(\"3Delight Assignment\")) `;\n"
+		+ "\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `scriptedPanel -unParent  -type \"delightShaderAssignmentPanel\" -l (localizedPanelLabel(\"3Delight Assignment\")) -mbv $menusOkayInPanels `;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"3Delight Assignment\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"delightExplorerPanel\" (localizedPanelLabel(\"3Delight Relationship Editor\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `scriptedPanel -unParent  -type \"delightExplorerPanel\" -l (localizedPanelLabel(\"3Delight Relationship Editor\")) -mbv $menusOkayInPanels `;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"3Delight Relationship Editor\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\tif ($useSceneConfig) {\n"
 		+ "        string $configName = `getPanel -cwl (localizedPanelLabel(\"Current Layout\"))`;\n        if (\"\" != $configName) {\n\t\t\tpanelConfiguration -edit -label (localizedPanelLabel(\"Current Layout\")) \n\t\t\t\t-defaultImage \"vacantCell.xP:/\"\n\t\t\t\t-image \"\"\n\t\t\t\t-sc false\n\t\t\t\t-configString \"global string $gMainPane; paneLayout -e -cn \\\"single\\\" -ps 1 100 100 $gMainPane;\"\n\t\t\t\t-removeAllPanels\n\t\t\t\t-ap false\n\t\t\t\t\t(localizedPanelLabel(\"Persp View\")) \n\t\t\t\t\t\"modelPanel\"\n"
 		+ "\t\t\t\t\t\"$panelName = `modelPanel -unParent -l (localizedPanelLabel(\\\"Persp View\\\")) -mbv $menusOkayInPanels `;\\n$editorName = $panelName;\\nmodelEditor -e \\n    -camera \\\"test:persp1\\\" \\n    -useInteractiveMode 0\\n    -displayLights \\\"default\\\" \\n    -displayAppearance \\\"wireframe\\\" \\n    -activeOnly 0\\n    -ignorePanZoom 0\\n    -wireframeOnShaded 0\\n    -headsUpDisplay 1\\n    -selectionHiliteDisplay 1\\n    -useDefaultMaterial 0\\n    -bufferMode \\\"double\\\" \\n    -twoSidedLighting 1\\n    -backfaceCulling 0\\n    -xray 0\\n    -jointXray 0\\n    -activeComponentsXray 0\\n    -displayTextures 0\\n    -smoothWireframe 0\\n    -lineWidth 1\\n    -textureAnisotropic 0\\n    -textureHilight 1\\n    -textureSampling 2\\n    -textureDisplay \\\"modulate\\\" \\n    -textureMaxSize 16384\\n    -fogging 0\\n    -fogSource \\\"fragment\\\" \\n    -fogMode \\\"linear\\\" \\n    -fogStart 0\\n    -fogEnd 100\\n    -fogDensity 0.1\\n    -fogColor 0.5 0.5 0.5 1 \\n    -maxConstantTransparency 1\\n    -rendererName \\\"base_OpenGL_Renderer\\\" \\n    -objectFilterShowInHUD 1\\n    -isFiltered 0\\n    -colorResolution 256 256 \\n    -bumpResolution 512 512 \\n    -textureCompression 0\\n    -transparencyAlgorithm \\\"frontAndBackCull\\\" \\n    -transpInShadows 0\\n    -cullingOverride \\\"none\\\" \\n    -lowQualityLighting 0\\n    -maximumNumHardwareLights 1\\n    -occlusionCulling 0\\n    -shadingModel 0\\n    -useBaseRenderer 0\\n    -useReducedRenderer 0\\n    -smallObjectCulling 0\\n    -smallObjectThreshold -1 \\n    -interactiveDisableShadows 0\\n    -interactiveBackFaceCull 0\\n    -sortTransparent 1\\n    -nurbsCurves 1\\n    -nurbsSurfaces 1\\n    -polymeshes 1\\n    -subdivSurfaces 1\\n    -planes 1\\n    -lights 1\\n    -cameras 1\\n    -controlVertices 1\\n    -hulls 1\\n    -grid 1\\n    -imagePlane 1\\n    -joints 1\\n    -ikHandles 1\\n    -deformers 1\\n    -dynamics 1\\n    -fluids 1\\n    -hairSystems 1\\n    -follicles 1\\n    -nCloths 1\\n    -nParticles 1\\n    -nRigids 1\\n    -dynamicConstraints 1\\n    -locators 1\\n    -manipulators 1\\n    -dimensions 1\\n    -handles 1\\n    -pivots 1\\n    -textures 1\\n    -strokes 1\\n    -motionTrails 1\\n    -clipGhosts 1\\n    -shadows 0\\n    $editorName;\\nmodelEditor -e -viewSelected 0 $editorName\"\n"
 		+ "\t\t\t\t\t\"modelPanel -edit -l (localizedPanelLabel(\\\"Persp View\\\")) -mbv $menusOkayInPanels  $panelName;\\n$editorName = $panelName;\\nmodelEditor -e \\n    -camera \\\"test:persp1\\\" \\n    -useInteractiveMode 0\\n    -displayLights \\\"default\\\" \\n    -displayAppearance \\\"wireframe\\\" \\n    -activeOnly 0\\n    -ignorePanZoom 0\\n    -wireframeOnShaded 0\\n    -headsUpDisplay 1\\n    -selectionHiliteDisplay 1\\n    -useDefaultMaterial 0\\n    -bufferMode \\\"double\\\" \\n    -twoSidedLighting 1\\n    -backfaceCulling 0\\n    -xray 0\\n    -jointXray 0\\n    -activeComponentsXray 0\\n    -displayTextures 0\\n    -smoothWireframe 0\\n    -lineWidth 1\\n    -textureAnisotropic 0\\n    -textureHilight 1\\n    -textureSampling 2\\n    -textureDisplay \\\"modulate\\\" \\n    -textureMaxSize 16384\\n    -fogging 0\\n    -fogSource \\\"fragment\\\" \\n    -fogMode \\\"linear\\\" \\n    -fogStart 0\\n    -fogEnd 100\\n    -fogDensity 0.1\\n    -fogColor 0.5 0.5 0.5 1 \\n    -maxConstantTransparency 1\\n    -rendererName \\\"base_OpenGL_Renderer\\\" \\n    -objectFilterShowInHUD 1\\n    -isFiltered 0\\n    -colorResolution 256 256 \\n    -bumpResolution 512 512 \\n    -textureCompression 0\\n    -transparencyAlgorithm \\\"frontAndBackCull\\\" \\n    -transpInShadows 0\\n    -cullingOverride \\\"none\\\" \\n    -lowQualityLighting 0\\n    -maximumNumHardwareLights 1\\n    -occlusionCulling 0\\n    -shadingModel 0\\n    -useBaseRenderer 0\\n    -useReducedRenderer 0\\n    -smallObjectCulling 0\\n    -smallObjectThreshold -1 \\n    -interactiveDisableShadows 0\\n    -interactiveBackFaceCull 0\\n    -sortTransparent 1\\n    -nurbsCurves 1\\n    -nurbsSurfaces 1\\n    -polymeshes 1\\n    -subdivSurfaces 1\\n    -planes 1\\n    -lights 1\\n    -cameras 1\\n    -controlVertices 1\\n    -hulls 1\\n    -grid 1\\n    -imagePlane 1\\n    -joints 1\\n    -ikHandles 1\\n    -deformers 1\\n    -dynamics 1\\n    -fluids 1\\n    -hairSystems 1\\n    -follicles 1\\n    -nCloths 1\\n    -nParticles 1\\n    -nRigids 1\\n    -dynamicConstraints 1\\n    -locators 1\\n    -manipulators 1\\n    -dimensions 1\\n    -handles 1\\n    -pivots 1\\n    -textures 1\\n    -strokes 1\\n    -motionTrails 1\\n    -clipGhosts 1\\n    -shadows 0\\n    $editorName;\\nmodelEditor -e -viewSelected 0 $editorName\"\n"
@@ -4049,6 +4053,158 @@ createNode script -n "uiConfigurationScriptNode";
 createNode script -n "sceneConfigurationScriptNode";
 	setAttr ".b" -type "string" "playbackOptions -min 1 -max 24 -ast 1 -aet 48 ";
 	setAttr ".st" 6;
+createNode mentalrayOptions -s -n "miContourPreset";
+createNode mentalrayOptions -s -n "Draft";
+	setAttr ".maxr" 2;
+createNode mentalrayOptions -s -n "DraftMotionBlur";
+	setAttr ".maxr" 2;
+	setAttr ".mb" 1;
+	setAttr ".tconr" 1;
+	setAttr ".tcong" 1;
+	setAttr ".tconb" 1;
+	setAttr ".tcona" 1;
+createNode mentalrayOptions -s -n "DraftRapidMotion";
+	setAttr ".scan" 3;
+	setAttr ".rapc" 1;
+	setAttr ".raps" 0.25;
+	setAttr ".maxr" 2;
+	setAttr ".mb" 1;
+	setAttr ".tconr" 1;
+	setAttr ".tcong" 1;
+	setAttr ".tconb" 1;
+	setAttr ".tcona" 1;
+createNode mentalrayOptions -s -n "Preview";
+	setAttr ".minsp" -1;
+	setAttr ".maxsp" 1;
+	setAttr ".fil" 1;
+	setAttr ".rflr" 2;
+	setAttr ".rfrr" 2;
+	setAttr ".maxr" 4;
+createNode mentalrayOptions -s -n "PreviewMotionblur";
+	setAttr ".minsp" -1;
+	setAttr ".maxsp" 1;
+	setAttr ".fil" 1;
+	setAttr ".rflr" 2;
+	setAttr ".rfrr" 2;
+	setAttr ".maxr" 4;
+	setAttr ".mb" 1;
+	setAttr ".tconr" 0.5;
+	setAttr ".tcong" 0.5;
+	setAttr ".tconb" 0.5;
+	setAttr ".tcona" 0.5;
+createNode mentalrayOptions -s -n "PreviewRapidMotion";
+	setAttr ".minsp" -1;
+	setAttr ".maxsp" 1;
+	setAttr ".fil" 1;
+	setAttr ".scan" 3;
+	setAttr ".rapc" 3;
+	setAttr ".rflr" 2;
+	setAttr ".rfrr" 2;
+	setAttr ".maxr" 4;
+	setAttr ".mb" 1;
+	setAttr ".tconr" 0.5;
+	setAttr ".tcong" 0.5;
+	setAttr ".tconb" 0.5;
+	setAttr ".tcona" 0.5;
+createNode mentalrayOptions -s -n "PreviewCaustics";
+	setAttr ".minsp" -1;
+	setAttr ".maxsp" 1;
+	setAttr ".fil" 1;
+	setAttr ".rflr" 2;
+	setAttr ".rfrr" 2;
+	setAttr ".maxr" 4;
+	setAttr ".ca" yes;
+	setAttr ".cc" 1;
+	setAttr ".cr" 1;
+createNode mentalrayOptions -s -n "PreviewGlobalIllum";
+	setAttr ".minsp" -1;
+	setAttr ".maxsp" 1;
+	setAttr ".fil" 1;
+	setAttr ".rflr" 2;
+	setAttr ".rfrr" 2;
+	setAttr ".maxr" 4;
+	setAttr ".gi" yes;
+	setAttr ".gc" 1;
+	setAttr ".gr" 1;
+createNode mentalrayOptions -s -n "PreviewFinalGather";
+	setAttr ".minsp" -1;
+	setAttr ".maxsp" 1;
+	setAttr ".fil" 1;
+	setAttr ".rflr" 2;
+	setAttr ".rfrr" 2;
+	setAttr ".maxr" 4;
+	setAttr ".fg" yes;
+createNode mentalrayOptions -s -n "Production";
+	setAttr ".minsp" 0;
+	setAttr ".maxsp" 2;
+	setAttr ".fil" 2;
+	setAttr ".rflr" 10;
+	setAttr ".rfrr" 10;
+	setAttr ".maxr" 20;
+createNode mentalrayOptions -s -n "ProductionMotionblur";
+	setAttr ".minsp" 0;
+	setAttr ".maxsp" 2;
+	setAttr ".fil" 2;
+	setAttr ".rflr" 10;
+	setAttr ".rfrr" 10;
+	setAttr ".maxr" 20;
+	setAttr ".mb" 2;
+createNode mentalrayOptions -s -n "ProductionRapidMotion";
+	setAttr ".minsp" 0;
+	setAttr ".maxsp" 2;
+	setAttr ".fil" 2;
+	setAttr ".scan" 3;
+	setAttr ".rapc" 8;
+	setAttr ".raps" 2;
+	setAttr ".rflr" 10;
+	setAttr ".rfrr" 10;
+	setAttr ".maxr" 20;
+	setAttr ".mb" 2;
+createNode mentalrayOptions -s -n "ProductionFineTrace";
+	setAttr ".conr" 0.019999999552965164;
+	setAttr ".cong" 0.019999999552965164;
+	setAttr ".conb" 0.019999999552965164;
+	setAttr ".minsp" 1;
+	setAttr ".maxsp" 2;
+	setAttr ".fil" 1;
+	setAttr ".filw" 0.75;
+	setAttr ".filh" 0.75;
+	setAttr ".jit" yes;
+createNode mentalrayOptions -s -n "ProductionRapidFur";
+	setAttr ".conr" 0.039999999105930328;
+	setAttr ".cong" 0.029999999329447746;
+	setAttr ".conb" 0.070000000298023224;
+	setAttr ".minsp" 0;
+	setAttr ".maxsp" 2;
+	setAttr ".fil" 1;
+	setAttr ".filw" 1.1449999809265137;
+	setAttr ".filh" 1.1449999809265137;
+	setAttr ".jit" yes;
+	setAttr ".scan" 3;
+	setAttr ".rapc" 3;
+	setAttr ".raps" 0.25;
+	setAttr ".ray" no;
+	setAttr ".shmth" 3;
+	setAttr ".shmap" 3;
+	setAttr ".mbsm" no;
+	setAttr ".bism" 0.019999999552965164;
+createNode mentalrayOptions -s -n "ProductionRapidHair";
+	setAttr ".conr" 0.039999999105930328;
+	setAttr ".cong" 0.029999999329447746;
+	setAttr ".conb" 0.070000000298023224;
+	setAttr ".minsp" 0;
+	setAttr ".maxsp" 2;
+	setAttr ".fil" 1;
+	setAttr ".filw" 1.1449999809265137;
+	setAttr ".filh" 1.1449999809265137;
+	setAttr ".jit" yes;
+	setAttr ".scan" 3;
+	setAttr ".rapc" 6;
+	setAttr ".ray" no;
+	setAttr ".shmth" 3;
+	setAttr ".shmap" 3;
+	setAttr ".mbsm" no;
+	setAttr ".bism" 0.019999999552965164;
 select -ne :time1;
 	setAttr ".o" 1;
 	setAttr ".unw" 1;
@@ -4073,11 +4229,14 @@ select -ne :defaultRenderingList1;
 select -ne :renderGlobalsList1;
 select -ne :defaultRenderGlobals;
 	setAttr ".ren" -type "string" "mentalRay";
+	setAttr ".outf" 32;
+	setAttr ".imfkey" -type "string" "png";
+	setAttr ".ifp" -type "string" "test_mentalray";
 select -ne :defaultResolution;
-	setAttr ".w" 1024;
-	setAttr ".h" 1024;
+	setAttr ".w" 320;
+	setAttr ".h" 240;
 	setAttr ".pa" 1;
-	setAttr ".dar" 1;
+	setAttr ".dar" 1.3333333730697632;
 select -ne :defaultLightSet;
 	setAttr -s 22 ".dsm";
 select -ne :hardwareRenderGlobals;
@@ -4094,6 +4253,22 @@ connectAttr "layerManager.dli[0]" "defaultLayer.id";
 connectAttr "renderLayerManager.rlmi[0]" "defaultRenderLayer.rlid";
 connectAttr ":mentalrayGlobals.msg" ":mentalrayItemsList.glb";
 connectAttr ":miDefaultOptions.msg" ":mentalrayItemsList.opt" -na;
+connectAttr ":miContourPreset.msg" ":mentalrayItemsList.opt" -na;
+connectAttr ":Draft.msg" ":mentalrayItemsList.opt" -na;
+connectAttr ":DraftMotionBlur.msg" ":mentalrayItemsList.opt" -na;
+connectAttr ":DraftRapidMotion.msg" ":mentalrayItemsList.opt" -na;
+connectAttr ":Preview.msg" ":mentalrayItemsList.opt" -na;
+connectAttr ":PreviewMotionblur.msg" ":mentalrayItemsList.opt" -na;
+connectAttr ":PreviewRapidMotion.msg" ":mentalrayItemsList.opt" -na;
+connectAttr ":PreviewCaustics.msg" ":mentalrayItemsList.opt" -na;
+connectAttr ":PreviewGlobalIllum.msg" ":mentalrayItemsList.opt" -na;
+connectAttr ":PreviewFinalGather.msg" ":mentalrayItemsList.opt" -na;
+connectAttr ":Production.msg" ":mentalrayItemsList.opt" -na;
+connectAttr ":ProductionMotionblur.msg" ":mentalrayItemsList.opt" -na;
+connectAttr ":ProductionRapidMotion.msg" ":mentalrayItemsList.opt" -na;
+connectAttr ":ProductionFineTrace.msg" ":mentalrayItemsList.opt" -na;
+connectAttr ":ProductionRapidFur.msg" ":mentalrayItemsList.opt" -na;
+connectAttr ":ProductionRapidHair.msg" ":mentalrayItemsList.opt" -na;
 connectAttr ":miDefaultFramebuffer.msg" ":mentalrayItemsList.fb" -na;
 connectAttr ":miDefaultOptions.msg" ":mentalrayGlobals.opt";
 connectAttr ":miDefaultFramebuffer.msg" ":mentalrayGlobals.fb";

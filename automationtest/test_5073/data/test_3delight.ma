@@ -1,6 +1,6 @@
 //Maya ASCII 2013 scene
 //Name: test_3delight.ma
-//Last modified: Thu, Sep 25, 2014 06:12:47 PM
+//Last modified: Tue, Sep 30, 2014 03:50:11 PM
 //Codeset: 936
 file -rdi 1 -ns "test" -rfn "testRN" "K:/osl/testCase//test_5073/data/test.ma";
 file -rdi 2 -ns "input_color" -rfn "test:input_colorRN" "K:/osl/testCase//test_5073/data/input_color.ma";
@@ -41,9 +41,9 @@ file -rdi 3 -ns "object" -rfn "test:input_isVisible:objectRN" "K:/osl/testCase//
 file -rdi 2 -ns "object" -rfn "test:objectRN" "K:/osl/testCase//test_5073/data/object.ma";
 file -r -ns "test" -dr 1 -rfn "testRN" "K:/osl/testCase//test_5073/data/test.ma";
 requires maya "2013";
+requires "mtoer" "1.4.8";
 requires "3delight_for_maya2013" "7.0.28";
 requires "Mayatomr" "2013.0 - 3.10.1.11 ";
-requires "mtoer" "1.4.8";
 requires "stereoCamera" "10.0";
 currentUnit -l centimeter -a degree -t film;
 fileInfo "application" "maya";
@@ -54,7 +54,7 @@ fileInfo "osv" "Microsoft Windows 7 Ultimate Edition, 64-bit Windows 7 Service P
 createNode transform -s -n "persp";
 	setAttr ".v" no;
 	setAttr ".t" -type "double3" 4.3882155196321504 3.2911616397240873 4.3882155196321309 ;
-	setAttr ".r" -type "double3" -27.938352729602379 44.999999999999972 -5.172681101354183e-014 ;
+	setAttr ".r" -type "double3" -27.938352729602379 44.999999999999964 -5.172681101354183e-014 ;
 createNode camera -s -n "perspShape" -p "persp";
 	addAttr -ci true -h true -sn "usedBy3dfm" -ln "usedBy3dfm" -at "message";
 	setAttr -k off ".v" no;
@@ -119,10 +119,10 @@ createNode reference -n "testRN";
 	setAttr ".phl[1]" 0;
 	setAttr ".ed" -type "dataReferenceEdits" 
 		"testRN"
-		"test:input_blendMode11RN" 0
 		"test:input_blendMode8RN" 0
-		"test:input_blendMode10RN" 0
+		"test:input_blendMode11RN" 0
 		"test:input_blendMode9RN" 0
+		"test:input_blendMode10RN" 0
 		"test:input_blendMode12RN" 0
 		"test:input_colorRN" 0
 		"test:input_blendMode4RN" 0
@@ -143,14 +143,14 @@ createNode reference -n "testRN";
 		"test:input_blendMode2:objectRN" 0
 		"test:input_blendMode4:objectRN" 0
 		"test:input_blendMode5:objectRN" 0
-		"test:input_alpha:objectRN" 0
-		"test:input_blendMode6:objectRN" 0
 		"test:input_blendMode7:objectRN" 0
+		"test:input_blendMode6:objectRN" 0
+		"test:input_alpha:objectRN" 0
 		"test:objectRN" 0
 		"test:input_alphaIsLuminance:objectRN" 0
 		"test:input_blendMode12:objectRN" 0
-		"test:input_blendMode11:objectRN" 0
 		"test:input_blendMode10:objectRN" 0
+		"test:input_blendMode11:objectRN" 0
 		"testRN" 0
 		"test:input_alphaRN" 0
 		"test:input_color:objectRN" 0
@@ -690,175 +690,6 @@ createNode reference -n "testRN";
 		2 "test:input_blendMode9:object:lambert2SG" "miContourWidth" " 1.25"
 		2 "test:input_blendMode9:object:lambert2SG" "miContourRelativeWidth" " 0"
 		
-		"test:input_blendMode1:objectRN" 104
-		2 "|test:input_blendMode1:object:pPlane1" "miDeriveFromMaya" " 1"
-		2 "|test:input_blendMode1:object:pPlane1" "miHide" " 0"
-		2 "|test:input_blendMode1:object:pPlane1" "miVisible" " 2"
-		2 "|test:input_blendMode1:object:pPlane1" "miTrace" " 2"
-		2 "|test:input_blendMode1:object:pPlane1" "miShadow" " 2"
-		2 "|test:input_blendMode1:object:pPlane1" "miCaustic" " 5"
-		2 "|test:input_blendMode1:object:pPlane1" "miGlobillum" " 5"
-		2 "|test:input_blendMode1:object:pPlane1" "miExportGeoShader" " 0"
-		2 "|test:input_blendMode1:object:pPlane1" "miProxyRenderable" " 1"
-		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
-		"miOverrideCaustics" " 0"
-		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
-		"miCausticAccuracy" " 64"
-		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
-		"miCausticRadius" " 0"
-		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
-		"miOverrideGlobalIllumination" " 0"
-		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
-		"miGlobillumAccuracy" " 64"
-		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
-		"miGlobillumRadius" " 0"
-		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
-		"miOverrideFinalGather" " 0"
-		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
-		"miFinalGatherRays" " 1000"
-		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
-		"miFinalGatherMinRadius" " 0"
-		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
-		"miFinalGatherMaxRadius" " 0"
-		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
-		"miFinalGatherFilter" " 1"
-		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
-		"miFinalGatherView" " 0"
-		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
-		"miOverrideSamples" " 0"
-		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
-		"miMinSamples" " 0"
-		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
-		"miMaxSamples" " 2"
-		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
-		"miFinalGatherCast" " 1"
-		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
-		"miFinalGatherReceive" " 1"
-		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
-		"miTransparencyCast" " 1"
-		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
-		"miTransparencyReceive" " 1"
-		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
-		"miReflectionReceive" " 1"
-		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
-		"miRefractionReceive" " 1"
-		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
-		"miUpdateProxyBoundingBoxMode" " 0"
-		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
-		"miProxyBoundingBoxMin" " -type \"double3\" 0 0 0"
-		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
-		"miProxyBoundingBoxMax" " -type \"double3\" 0 0 0"
-		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
-		"miShadingSamplesOverride" " 0"
-		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
-		"miShadingSamples" " 0"
-		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
-		"miMaxDisplaceOverride" " 0"
-		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
-		"miMaxDisplace" " 0"
-		2 "|test:input_blendMode1:object:directionalLight1" "miDeriveFromMaya" " 1"
-		
-		2 "|test:input_blendMode1:object:directionalLight1" "miHide" " 0"
-		2 "|test:input_blendMode1:object:directionalLight1" "miVisible" " 2"
-		2 "|test:input_blendMode1:object:directionalLight1" "miTrace" " 2"
-		2 "|test:input_blendMode1:object:directionalLight1" "miShadow" " 2"
-		2 "|test:input_blendMode1:object:directionalLight1" "miCaustic" " 5"
-		2 "|test:input_blendMode1:object:directionalLight1" "miGlobillum" " 5"
-		2 "|test:input_blendMode1:object:directionalLight1" "miExportGeoShader" " 0"
-		
-		2 "|test:input_blendMode1:object:directionalLight1" "miProxyRenderable" " 1"
-		
-		2 "|test:input_blendMode1:object:directionalLight1|test:input_blendMode1:object:directionalLightShape1" 
-		"miExportMrLight" " 0"
-		2 "|test:input_blendMode1:object:directionalLight1|test:input_blendMode1:object:directionalLightShape1" 
-		"emitPhotons" " 0"
-		2 "|test:input_blendMode1:object:directionalLight1|test:input_blendMode1:object:directionalLightShape1" 
-		"energy" " -type \"float3\" 8000 8000 8000"
-		2 "|test:input_blendMode1:object:directionalLight1|test:input_blendMode1:object:directionalLightShape1" 
-		"photonIntensity" " 1"
-		2 "|test:input_blendMode1:object:directionalLight1|test:input_blendMode1:object:directionalLightShape1" 
-		"exponent" " 2"
-		2 "|test:input_blendMode1:object:directionalLight1|test:input_blendMode1:object:directionalLightShape1" 
-		"causticPhotons" " 10000"
-		2 "|test:input_blendMode1:object:directionalLight1|test:input_blendMode1:object:directionalLightShape1" 
-		"globIllPhotons" " 10000"
-		2 "|test:input_blendMode1:object:directionalLight1|test:input_blendMode1:object:directionalLightShape1" 
-		"shadowMap" " 0"
-		2 "|test:input_blendMode1:object:directionalLight1|test:input_blendMode1:object:directionalLightShape1" 
-		"smapResolution" " 256"
-		2 "|test:input_blendMode1:object:directionalLight1|test:input_blendMode1:object:directionalLightShape1" 
-		"smapSamples" " 1"
-		2 "|test:input_blendMode1:object:directionalLight1|test:input_blendMode1:object:directionalLightShape1" 
-		"smapSoftness" " 0"
-		2 "|test:input_blendMode1:object:directionalLight1|test:input_blendMode1:object:directionalLightShape1" 
-		"smapBias" " 0"
-		2 "|test:input_blendMode1:object:directionalLight1|test:input_blendMode1:object:directionalLightShape1" 
-		"smapLightName" " 0"
-		2 "|test:input_blendMode1:object:directionalLight1|test:input_blendMode1:object:directionalLightShape1" 
-		"smapSceneName" " 0"
-		2 "|test:input_blendMode1:object:directionalLight1|test:input_blendMode1:object:directionalLightShape1" 
-		"smapFrameExt" " 0"
-		2 "|test:input_blendMode1:object:directionalLight1|test:input_blendMode1:object:directionalLightShape1" 
-		"smapDetail" " 0"
-		2 "|test:input_blendMode1:object:directionalLight1|test:input_blendMode1:object:directionalLightShape1" 
-		"smapDetailSamples" " 0"
-		2 "|test:input_blendMode1:object:directionalLight1|test:input_blendMode1:object:directionalLightShape1" 
-		"smapDetailAccuracy" " 0"
-		2 "|test:input_blendMode1:object:directionalLight1|test:input_blendMode1:object:directionalLightShape1" 
-		"smapDetailAlpha" " 0"
-		2 "|test:input_blendMode1:object:directionalLight1|test:input_blendMode1:object:directionalLightShape1" 
-		"useShadowMapCamera" " 0"
-		2 "|test:input_blendMode1:object:directionalLight1|test:input_blendMode1:object:directionalLightShape1" 
-		"smapCameraAperture" " 1"
-		2 "|test:input_blendMode1:object:directionalLight1|test:input_blendMode1:object:directionalLightShape1" 
-		"smapCameraResolution" " 1"
-		2 "|test:input_blendMode1:object:directionalLight1|test:input_blendMode1:object:directionalLightShape1" 
-		"smapCameraAspect" " 1"
-		2 "test:input_blendMode1:object:defaultRenderLayer" "globalIllum" " 0"
-		2 "test:input_blendMode1:object:lambert2" "miRefractionBlur" " 0"
-		2 "test:input_blendMode1:object:lambert2" "miRefractionRays" " 1"
-		2 "test:input_blendMode1:object:lambert2" "miIrradiance" " -type \"float3\" 0 0 0"
-		
-		2 "test:input_blendMode1:object:lambert2" "miIrradianceColor" " -type \"float3\" 1 1 1"
-		
-		2 "test:input_blendMode1:object:lambert2" "miDeriveFromMaya" " 1"
-		2 "test:input_blendMode1:object:lambert2" "miRefractiveIndex" " 1"
-		2 "test:input_blendMode1:object:lambert2" "miRefractions" " 1"
-		2 "test:input_blendMode1:object:lambert2" "miAbsorbs" " 1"
-		2 "test:input_blendMode1:object:lambert2" "miDiffuse" " 0.8"
-		2 "test:input_blendMode1:object:lambert2" "miColor" " -type \"float3\" 0.5 0.5 0.5"
-		
-		2 "test:input_blendMode1:object:lambert2" "miTransparency" " -type \"float3\" 0 0 0"
-		
-		2 "test:input_blendMode1:object:lambert2" "miTranslucence" " 0"
-		2 "test:input_blendMode1:object:lambert2" "miTranslucenceFocus" " 0.5"
-		2 "test:input_blendMode1:object:lambert2" "miNormalCamera" " -type \"float3\" 0 0 0"
-		
-		2 "test:input_blendMode1:object:lambert2" "miFrameBufferWriteOperation" " 1"
-		
-		2 "test:input_blendMode1:object:lambert2" "miFrameBufferWriteFlags" " 0"
-		2 "test:input_blendMode1:object:lambert2" "miFrameBufferWriteFactor" " 1"
-		
-		2 "test:input_blendMode1:object:lambert2" "miRefractionBlurLimit" " 1"
-		2 "test:input_blendMode1:object:lambert2" "miScatterRadius" " 0"
-		2 "test:input_blendMode1:object:lambert2" "miScatterColor" " -type \"float3\" 0.5 0.5 0.5"
-		
-		2 "test:input_blendMode1:object:lambert2" "miScatterAccuracy" " 97"
-		2 "test:input_blendMode1:object:lambert2" "miScatterFalloff" " 0"
-		2 "test:input_blendMode1:object:lambert2" "miScatterLimit" " 1"
-		2 "test:input_blendMode1:object:lambert2" "miScatterCache" " 0"
-		2 "test:input_blendMode1:object:lambert2SG" "miExportMrMaterial" " 0"
-		2 "test:input_blendMode1:object:lambert2SG" "miOpaque" " 0"
-		2 "test:input_blendMode1:object:lambert2SG" "miCutAwayOpacity" " 0"
-		2 "test:input_blendMode1:object:lambert2SG" "miExportShadingEngine" " 1"
-		2 "test:input_blendMode1:object:lambert2SG" "miExportVolumeSampler" " 0"
-		2 "test:input_blendMode1:object:lambert2SG" "miContourEnable" " 0"
-		2 "test:input_blendMode1:object:lambert2SG" "miContourColor" " -type \"float3\" 1 1 1"
-		
-		2 "test:input_blendMode1:object:lambert2SG" "miContourAlpha" " 1"
-		2 "test:input_blendMode1:object:lambert2SG" "miContourWidth" " 1.25"
-		2 "test:input_blendMode1:object:lambert2SG" "miContourRelativeWidth" " 0"
-		
 		"test:input_blendMode0:objectRN" 104
 		2 "|test:input_blendMode0:object:pPlane1" "miDeriveFromMaya" " 1"
 		2 "|test:input_blendMode0:object:pPlane1" "miHide" " 0"
@@ -1027,6 +858,175 @@ createNode reference -n "testRN";
 		2 "test:input_blendMode0:object:lambert2SG" "miContourAlpha" " 1"
 		2 "test:input_blendMode0:object:lambert2SG" "miContourWidth" " 1.25"
 		2 "test:input_blendMode0:object:lambert2SG" "miContourRelativeWidth" " 0"
+		
+		"test:input_blendMode1:objectRN" 104
+		2 "|test:input_blendMode1:object:pPlane1" "miDeriveFromMaya" " 1"
+		2 "|test:input_blendMode1:object:pPlane1" "miHide" " 0"
+		2 "|test:input_blendMode1:object:pPlane1" "miVisible" " 2"
+		2 "|test:input_blendMode1:object:pPlane1" "miTrace" " 2"
+		2 "|test:input_blendMode1:object:pPlane1" "miShadow" " 2"
+		2 "|test:input_blendMode1:object:pPlane1" "miCaustic" " 5"
+		2 "|test:input_blendMode1:object:pPlane1" "miGlobillum" " 5"
+		2 "|test:input_blendMode1:object:pPlane1" "miExportGeoShader" " 0"
+		2 "|test:input_blendMode1:object:pPlane1" "miProxyRenderable" " 1"
+		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
+		"miOverrideCaustics" " 0"
+		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
+		"miCausticAccuracy" " 64"
+		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
+		"miCausticRadius" " 0"
+		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
+		"miOverrideGlobalIllumination" " 0"
+		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
+		"miGlobillumAccuracy" " 64"
+		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
+		"miGlobillumRadius" " 0"
+		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
+		"miOverrideFinalGather" " 0"
+		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
+		"miFinalGatherRays" " 1000"
+		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
+		"miFinalGatherMinRadius" " 0"
+		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
+		"miFinalGatherMaxRadius" " 0"
+		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
+		"miFinalGatherFilter" " 1"
+		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
+		"miFinalGatherView" " 0"
+		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
+		"miOverrideSamples" " 0"
+		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
+		"miMinSamples" " 0"
+		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
+		"miMaxSamples" " 2"
+		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
+		"miFinalGatherCast" " 1"
+		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
+		"miFinalGatherReceive" " 1"
+		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
+		"miTransparencyCast" " 1"
+		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
+		"miTransparencyReceive" " 1"
+		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
+		"miReflectionReceive" " 1"
+		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
+		"miRefractionReceive" " 1"
+		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
+		"miUpdateProxyBoundingBoxMode" " 0"
+		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
+		"miProxyBoundingBoxMin" " -type \"double3\" 0 0 0"
+		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
+		"miProxyBoundingBoxMax" " -type \"double3\" 0 0 0"
+		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
+		"miShadingSamplesOverride" " 0"
+		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
+		"miShadingSamples" " 0"
+		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
+		"miMaxDisplaceOverride" " 0"
+		2 "|test:input_blendMode1:object:pPlane1|test:input_blendMode1:object:pPlaneShape1" 
+		"miMaxDisplace" " 0"
+		2 "|test:input_blendMode1:object:directionalLight1" "miDeriveFromMaya" " 1"
+		
+		2 "|test:input_blendMode1:object:directionalLight1" "miHide" " 0"
+		2 "|test:input_blendMode1:object:directionalLight1" "miVisible" " 2"
+		2 "|test:input_blendMode1:object:directionalLight1" "miTrace" " 2"
+		2 "|test:input_blendMode1:object:directionalLight1" "miShadow" " 2"
+		2 "|test:input_blendMode1:object:directionalLight1" "miCaustic" " 5"
+		2 "|test:input_blendMode1:object:directionalLight1" "miGlobillum" " 5"
+		2 "|test:input_blendMode1:object:directionalLight1" "miExportGeoShader" " 0"
+		
+		2 "|test:input_blendMode1:object:directionalLight1" "miProxyRenderable" " 1"
+		
+		2 "|test:input_blendMode1:object:directionalLight1|test:input_blendMode1:object:directionalLightShape1" 
+		"miExportMrLight" " 0"
+		2 "|test:input_blendMode1:object:directionalLight1|test:input_blendMode1:object:directionalLightShape1" 
+		"emitPhotons" " 0"
+		2 "|test:input_blendMode1:object:directionalLight1|test:input_blendMode1:object:directionalLightShape1" 
+		"energy" " -type \"float3\" 8000 8000 8000"
+		2 "|test:input_blendMode1:object:directionalLight1|test:input_blendMode1:object:directionalLightShape1" 
+		"photonIntensity" " 1"
+		2 "|test:input_blendMode1:object:directionalLight1|test:input_blendMode1:object:directionalLightShape1" 
+		"exponent" " 2"
+		2 "|test:input_blendMode1:object:directionalLight1|test:input_blendMode1:object:directionalLightShape1" 
+		"causticPhotons" " 10000"
+		2 "|test:input_blendMode1:object:directionalLight1|test:input_blendMode1:object:directionalLightShape1" 
+		"globIllPhotons" " 10000"
+		2 "|test:input_blendMode1:object:directionalLight1|test:input_blendMode1:object:directionalLightShape1" 
+		"shadowMap" " 0"
+		2 "|test:input_blendMode1:object:directionalLight1|test:input_blendMode1:object:directionalLightShape1" 
+		"smapResolution" " 256"
+		2 "|test:input_blendMode1:object:directionalLight1|test:input_blendMode1:object:directionalLightShape1" 
+		"smapSamples" " 1"
+		2 "|test:input_blendMode1:object:directionalLight1|test:input_blendMode1:object:directionalLightShape1" 
+		"smapSoftness" " 0"
+		2 "|test:input_blendMode1:object:directionalLight1|test:input_blendMode1:object:directionalLightShape1" 
+		"smapBias" " 0"
+		2 "|test:input_blendMode1:object:directionalLight1|test:input_blendMode1:object:directionalLightShape1" 
+		"smapLightName" " 0"
+		2 "|test:input_blendMode1:object:directionalLight1|test:input_blendMode1:object:directionalLightShape1" 
+		"smapSceneName" " 0"
+		2 "|test:input_blendMode1:object:directionalLight1|test:input_blendMode1:object:directionalLightShape1" 
+		"smapFrameExt" " 0"
+		2 "|test:input_blendMode1:object:directionalLight1|test:input_blendMode1:object:directionalLightShape1" 
+		"smapDetail" " 0"
+		2 "|test:input_blendMode1:object:directionalLight1|test:input_blendMode1:object:directionalLightShape1" 
+		"smapDetailSamples" " 0"
+		2 "|test:input_blendMode1:object:directionalLight1|test:input_blendMode1:object:directionalLightShape1" 
+		"smapDetailAccuracy" " 0"
+		2 "|test:input_blendMode1:object:directionalLight1|test:input_blendMode1:object:directionalLightShape1" 
+		"smapDetailAlpha" " 0"
+		2 "|test:input_blendMode1:object:directionalLight1|test:input_blendMode1:object:directionalLightShape1" 
+		"useShadowMapCamera" " 0"
+		2 "|test:input_blendMode1:object:directionalLight1|test:input_blendMode1:object:directionalLightShape1" 
+		"smapCameraAperture" " 1"
+		2 "|test:input_blendMode1:object:directionalLight1|test:input_blendMode1:object:directionalLightShape1" 
+		"smapCameraResolution" " 1"
+		2 "|test:input_blendMode1:object:directionalLight1|test:input_blendMode1:object:directionalLightShape1" 
+		"smapCameraAspect" " 1"
+		2 "test:input_blendMode1:object:defaultRenderLayer" "globalIllum" " 0"
+		2 "test:input_blendMode1:object:lambert2" "miRefractionBlur" " 0"
+		2 "test:input_blendMode1:object:lambert2" "miRefractionRays" " 1"
+		2 "test:input_blendMode1:object:lambert2" "miIrradiance" " -type \"float3\" 0 0 0"
+		
+		2 "test:input_blendMode1:object:lambert2" "miIrradianceColor" " -type \"float3\" 1 1 1"
+		
+		2 "test:input_blendMode1:object:lambert2" "miDeriveFromMaya" " 1"
+		2 "test:input_blendMode1:object:lambert2" "miRefractiveIndex" " 1"
+		2 "test:input_blendMode1:object:lambert2" "miRefractions" " 1"
+		2 "test:input_blendMode1:object:lambert2" "miAbsorbs" " 1"
+		2 "test:input_blendMode1:object:lambert2" "miDiffuse" " 0.8"
+		2 "test:input_blendMode1:object:lambert2" "miColor" " -type \"float3\" 0.5 0.5 0.5"
+		
+		2 "test:input_blendMode1:object:lambert2" "miTransparency" " -type \"float3\" 0 0 0"
+		
+		2 "test:input_blendMode1:object:lambert2" "miTranslucence" " 0"
+		2 "test:input_blendMode1:object:lambert2" "miTranslucenceFocus" " 0.5"
+		2 "test:input_blendMode1:object:lambert2" "miNormalCamera" " -type \"float3\" 0 0 0"
+		
+		2 "test:input_blendMode1:object:lambert2" "miFrameBufferWriteOperation" " 1"
+		
+		2 "test:input_blendMode1:object:lambert2" "miFrameBufferWriteFlags" " 0"
+		2 "test:input_blendMode1:object:lambert2" "miFrameBufferWriteFactor" " 1"
+		
+		2 "test:input_blendMode1:object:lambert2" "miRefractionBlurLimit" " 1"
+		2 "test:input_blendMode1:object:lambert2" "miScatterRadius" " 0"
+		2 "test:input_blendMode1:object:lambert2" "miScatterColor" " -type \"float3\" 0.5 0.5 0.5"
+		
+		2 "test:input_blendMode1:object:lambert2" "miScatterAccuracy" " 97"
+		2 "test:input_blendMode1:object:lambert2" "miScatterFalloff" " 0"
+		2 "test:input_blendMode1:object:lambert2" "miScatterLimit" " 1"
+		2 "test:input_blendMode1:object:lambert2" "miScatterCache" " 0"
+		2 "test:input_blendMode1:object:lambert2SG" "miExportMrMaterial" " 0"
+		2 "test:input_blendMode1:object:lambert2SG" "miOpaque" " 0"
+		2 "test:input_blendMode1:object:lambert2SG" "miCutAwayOpacity" " 0"
+		2 "test:input_blendMode1:object:lambert2SG" "miExportShadingEngine" " 1"
+		2 "test:input_blendMode1:object:lambert2SG" "miExportVolumeSampler" " 0"
+		2 "test:input_blendMode1:object:lambert2SG" "miContourEnable" " 0"
+		2 "test:input_blendMode1:object:lambert2SG" "miContourColor" " -type \"float3\" 1 1 1"
+		
+		2 "test:input_blendMode1:object:lambert2SG" "miContourAlpha" " 1"
+		2 "test:input_blendMode1:object:lambert2SG" "miContourWidth" " 1.25"
+		2 "test:input_blendMode1:object:lambert2SG" "miContourRelativeWidth" " 0"
 		
 		"test:input_blendMode3:objectRN" 104
 		2 "|test:input_blendMode3:object:pPlane1" "miDeriveFromMaya" " 1"
@@ -3848,10 +3848,10 @@ select -ne :defaultRenderGlobals;
 	setAttr ".ren" -type "string" "_3delight";
 	setAttr ".outf" 32;
 select -ne :defaultResolution;
-	setAttr ".w" 1024;
-	setAttr ".h" 1024;
+	setAttr ".w" 320;
+	setAttr ".h" 240;
 	setAttr ".pa" 1;
-	setAttr ".dar" 1;
+	setAttr ".dar" 1.3333333730697632;
 select -ne :defaultLightSet;
 	setAttr -s 19 ".dsm";
 select -ne :hardwareRenderGlobals;

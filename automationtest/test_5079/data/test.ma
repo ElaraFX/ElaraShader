@@ -1,6 +1,6 @@
 //Maya ASCII 2013 scene
 //Name: test.ma
-//Last modified: Sat, Sep 27, 2014 02:05:22 AM
+//Last modified: Tue, Sep 30, 2014 04:08:05 PM
 //Codeset: 936
 file -rdi 1 -ns "object" -rfn "objectRN" "D:/Projects/2014/osl/testCase//test_5079/data/object.ma";
 file -rdi 1 -ns "color_Color" -rfn "color_ColorRN" "D:/Projects/2014/osl/testCase//test_5079/data/color_Color.ma";
@@ -38,8 +38,8 @@ file -r -ns "value_FloatValue" -dr 1 -rfn "value_FloatValueRN" "D:/Projects/2014
 file -r -ns "value_Interp" -dr 1 -rfn "value_InterpRN" "D:/Projects/2014/osl/testCase//test_5079/data/value_Interp.ma";
 file -r -ns "value_Position" -dr 1 -rfn "value_PositionRN" "D:/Projects/2014/osl/testCase//test_5079/data/value_Position.ma";
 requires maya "2013";
-requires "mtoer" "1.4.7";
 requires "stereoCamera" "10.0";
+requires "mtoer" "1.4.8";
 currentUnit -l centimeter -a degree -t film;
 fileInfo "application" "maya";
 fileInfo "product" "Maya 2013";
@@ -141,7 +141,6 @@ lockNode -l 1 ;
 createNode eiOptions -s -n "defaultElaraRenderOptions";
 	setAttr ".mver" 10407;
 	setAttr ".version" -type "string" "1.4.7";
-	setAttr ".maxsp" 4;
 	setAttr ".glosmp" 1;
 	setAttr ".difsmp" 1;
 	setAttr ".ssssmp" 1;
@@ -152,7 +151,7 @@ createNode reference -n "color_ColorRN";
 		"color_ColorRN" 0
 		"color_Color:objectRN" 0
 		"color_Color:objectRN" 1
-		2 "|color_Color:object:pPlane1" "translate" " -type \"double3\" 2.227285 0 2.245862";
+		2 "|color_Color:object:pPlane1" "translate" " -type \"double3\" 2.227285 0 1.937668";
 	setAttr ".ptag" -type "string" "";
 lockNode -l 1 ;
 createNode reference -n "color_InterpRN";
@@ -161,7 +160,7 @@ createNode reference -n "color_InterpRN";
 		"color_InterpRN" 0
 		"color_Interp:objectRN" 0
 		"color_Interp:objectRN" 1
-		2 "|color_Interp:object:pPlane1" "translate" " -type \"double3\" 3.348826 0 2.245862";
+		2 "|color_Interp:object:pPlane1" "translate" " -type \"double3\" 3.348826 0 1.937668";
 	setAttr ".ptag" -type "string" "";
 lockNode -l 1 ;
 createNode reference -n "color_InterpRN1";
@@ -170,25 +169,25 @@ createNode reference -n "color_InterpRN1";
 		"color_Interp1:objectRN" 0
 		"color_InterpRN1" 0
 		"color_Interp1:objectRN" 1
-		2 "|color_Interp1:object:pPlane1" "translate" " -type \"double3\" 4.487083 0 2.245862";
+		2 "|color_Interp1:object:pPlane1" "translate" " -type \"double3\" 4.487083 0 1.937668";
 	setAttr ".ptag" -type "string" "";
 lockNode -l 1 ;
 createNode reference -n "color_PositionRN";
 	setAttr ".ed" -type "dataReferenceEdits" 
 		"color_PositionRN"
-		"color_PositionRN" 0
 		"color_Position:objectRN" 0
+		"color_PositionRN" 0
 		"color_Position:objectRN" 1
-		2 "|color_Position:object:pPlane1" "translate" " -type \"double3\" 1.034356 0 2.238484";
+		2 "|color_Position:object:pPlane1" "translate" " -type \"double3\" 1.034356 0 1.93029";
 	setAttr ".ptag" -type "string" "";
 lockNode -l 1 ;
 createNode reference -n "inputMaxRN";
 	setAttr ".ed" -type "dataReferenceEdits" 
 		"inputMaxRN"
-		"inputMaxRN" 0
 		"inputMax:objectRN" 0
+		"inputMaxRN" 0
 		"inputMax:objectRN" 1
-		2 "|inputMax:object:pPlane1" "translate" " -type \"double3\" 2.151018 0 -0.532828";
+		2 "|inputMax:object:pPlane1" "translate" " -type \"double3\" 2.151018 0 -0.309356";
 	setAttr ".ptag" -type "string" "";
 lockNode -l 1 ;
 createNode reference -n "inputMinRN";
@@ -197,7 +196,7 @@ createNode reference -n "inputMinRN";
 		"inputMin:objectRN" 0
 		"inputMinRN" 0
 		"inputMin:objectRN" 1
-		2 "|inputMin:object:pPlane1" "translate" " -type \"double3\" 3.310702 0 -0.532828";
+		2 "|inputMin:object:pPlane1" "translate" " -type \"double3\" 3.310702 0 -0.309356";
 	setAttr ".ptag" -type "string" "";
 lockNode -l 1 ;
 createNode reference -n "outputMaxRN";
@@ -206,23 +205,23 @@ createNode reference -n "outputMaxRN";
 		"outputMaxRN" 0
 		"outputMax:objectRN" 0
 		"outputMax:objectRN" 1
-		2 "|outputMax:object:pPlane1" "translate" " -type \"double3\" 4.435745 0 -0.532828";
+		2 "|outputMax:object:pPlane1" "translate" " -type \"double3\" 4.435745 0 -0.309356";
 	setAttr ".ptag" -type "string" "";
 lockNode -l 1 ;
 createNode reference -n "outputMinRN";
 	setAttr ".ed" -type "dataReferenceEdits" 
 		"outputMinRN"
-		"outputMinRN" 0
 		"outputMin:objectRN" 0
+		"outputMinRN" 0
 		"outputMin:objectRN" 1
-		2 "|outputMin:object:pPlane1" "translate" " -type \"double3\" 1.00853 0 -0.558193";
+		2 "|outputMin:object:pPlane1" "translate" " -type \"double3\" 1.00853 0 -0.334721";
 	setAttr ".ptag" -type "string" "";
 lockNode -l 1 ;
 createNode reference -n "value_FloatValueRN";
 	setAttr ".ed" -type "dataReferenceEdits" 
 		"value_FloatValueRN"
-		"value_FloatValueRN" 0
 		"value_FloatValue:objectRN" 0
+		"value_FloatValueRN" 0
 		"value_FloatValue:objectRN" 1
 		2 "|value_FloatValue:object:pPlane1" "translate" " -type \"double3\" 2.166234 0 0.798613";
 	setAttr ".ptag" -type "string" "";
@@ -230,8 +229,8 @@ lockNode -l 1 ;
 createNode reference -n "value_InterpRN";
 	setAttr ".ed" -type "dataReferenceEdits" 
 		"value_InterpRN"
-		"value_InterpRN" 0
 		"value_Interp:objectRN" 0
+		"value_InterpRN" 0
 		"value_Interp:objectRN" 1
 		2 "|value_Interp:object:pPlane1" "translate" " -type \"double3\" 3.309558 0 0.798613";
 	setAttr ".ptag" -type "string" "";
@@ -275,8 +274,8 @@ createNode script -n "uiConfigurationScriptNode";
 		+ "                -ignoreDagHierarchy 0\n                -expandConnections 0\n                -showUpstreamCurves 1\n                -showUnitlessCurves 1\n                -showCompounds 1\n                -showLeafs 1\n                -showNumericAttrsOnly 0\n                -highlightActive 1\n                -autoSelectNewObjects 0\n                -doNotSelectNewObjects 0\n                -dropIsParent 1\n                -transmitFilters 0\n                -setFilter \"defaultSetFilter\" \n                -showSetMembers 1\n                -allowMultiSelection 1\n                -alwaysToggleSelect 0\n                -directSelect 0\n                -displayMode \"DAG\" \n                -expandObjects 0\n                -setsIgnoreFilters 1\n                -containersIgnoreFilters 0\n                -editAttrName 0\n                -showAttrValues 0\n                -highlightSecondary 0\n                -showUVAttrsOnly 0\n                -showTextureNodesOnly 0\n                -attrAlphaOrder \"default\" \n                -animLayerFilterOptions \"allAffecting\" \n"
 		+ "                -sortOrder \"none\" \n                -longNames 0\n                -niceNames 1\n                -showNamespace 1\n                -showPinIcons 0\n                -mapMotionTrails 0\n                $editorName;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\toutlinerPanel -edit -l (localizedPanelLabel(\"Outliner\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        outlinerEditor -e \n            -docTag \"isolOutln_fromSeln\" \n            -showShapes 0\n            -showReferenceNodes 1\n            -showReferenceMembers 1\n            -showAttributes 1\n            -showConnected 0\n            -showAnimCurvesOnly 0\n            -showMuteInfo 0\n            -organizeByLayer 1\n            -showAnimLayerWeight 1\n            -autoExpandLayers 1\n            -autoExpand 0\n            -showDagOnly 1\n            -showAssets 1\n            -showContainedOnly 1\n            -showPublishedAsConnected 0\n            -showContainerContents 1\n            -ignoreDagHierarchy 0\n            -expandConnections 0\n"
 		+ "            -showUpstreamCurves 1\n            -showUnitlessCurves 1\n            -showCompounds 1\n            -showLeafs 1\n            -showNumericAttrsOnly 0\n            -highlightActive 1\n            -autoSelectNewObjects 0\n            -doNotSelectNewObjects 0\n            -dropIsParent 1\n            -transmitFilters 0\n            -setFilter \"defaultSetFilter\" \n            -showSetMembers 1\n            -allowMultiSelection 1\n            -alwaysToggleSelect 0\n            -directSelect 0\n            -displayMode \"DAG\" \n            -expandObjects 0\n            -setsIgnoreFilters 1\n            -containersIgnoreFilters 0\n            -editAttrName 0\n            -showAttrValues 0\n            -highlightSecondary 0\n            -showUVAttrsOnly 0\n            -showTextureNodesOnly 0\n            -attrAlphaOrder \"default\" \n            -animLayerFilterOptions \"allAffecting\" \n            -sortOrder \"none\" \n            -longNames 0\n            -niceNames 1\n            -showNamespace 1\n            -showPinIcons 0\n            -mapMotionTrails 0\n"
-		+ "            $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\tif ($useSceneConfig) {\n\t\toutlinerPanel -e -to $panelName;\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"graphEditor\" (localizedPanelLabel(\"Graph Editor\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `scriptedPanel -unParent  -type \"graphEditor\" -l (localizedPanelLabel(\"Graph Editor\")) -mbv $menusOkayInPanels `;\n\n\t\t\t$editorName = ($panelName+\"OutlineEd\");\n            outlinerEditor -e \n                -showShapes 1\n                -showReferenceNodes 0\n                -showReferenceMembers 0\n                -showAttributes 1\n                -showConnected 1\n                -showAnimCurvesOnly 1\n                -showMuteInfo 0\n                -organizeByLayer 1\n                -showAnimLayerWeight 1\n                -autoExpandLayers 1\n                -autoExpand 1\n                -showDagOnly 0\n                -showAssets 1\n                -showContainedOnly 0\n                -showPublishedAsConnected 0\n"
-		+ "                -showContainerContents 0\n                -ignoreDagHierarchy 0\n                -expandConnections 1\n                -showUpstreamCurves 1\n                -showUnitlessCurves 1\n                -showCompounds 0\n                -showLeafs 1\n                -showNumericAttrsOnly 1\n                -highlightActive 0\n                -autoSelectNewObjects 1\n                -doNotSelectNewObjects 0\n                -dropIsParent 1\n                -transmitFilters 1\n                -setFilter \"0\" \n                -showSetMembers 0\n                -allowMultiSelection 1\n                -alwaysToggleSelect 0\n                -directSelect 0\n                -displayMode \"DAG\" \n                -expandObjects 0\n                -setsIgnoreFilters 1\n                -containersIgnoreFilters 0\n                -editAttrName 0\n                -showAttrValues 0\n                -highlightSecondary 0\n                -showUVAttrsOnly 0\n                -showTextureNodesOnly 0\n                -attrAlphaOrder \"default\" \n                -animLayerFilterOptions \"allAffecting\" \n"
+		+ "            $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"graphEditor\" (localizedPanelLabel(\"Graph Editor\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `scriptedPanel -unParent  -type \"graphEditor\" -l (localizedPanelLabel(\"Graph Editor\")) -mbv $menusOkayInPanels `;\n\n\t\t\t$editorName = ($panelName+\"OutlineEd\");\n            outlinerEditor -e \n                -showShapes 1\n                -showReferenceNodes 0\n                -showReferenceMembers 0\n                -showAttributes 1\n                -showConnected 1\n                -showAnimCurvesOnly 1\n                -showMuteInfo 0\n                -organizeByLayer 1\n                -showAnimLayerWeight 1\n                -autoExpandLayers 1\n                -autoExpand 1\n                -showDagOnly 0\n                -showAssets 1\n                -showContainedOnly 0\n                -showPublishedAsConnected 0\n                -showContainerContents 0\n"
+		+ "                -ignoreDagHierarchy 0\n                -expandConnections 1\n                -showUpstreamCurves 1\n                -showUnitlessCurves 1\n                -showCompounds 0\n                -showLeafs 1\n                -showNumericAttrsOnly 1\n                -highlightActive 0\n                -autoSelectNewObjects 1\n                -doNotSelectNewObjects 0\n                -dropIsParent 1\n                -transmitFilters 1\n                -setFilter \"0\" \n                -showSetMembers 0\n                -allowMultiSelection 1\n                -alwaysToggleSelect 0\n                -directSelect 0\n                -displayMode \"DAG\" \n                -expandObjects 0\n                -setsIgnoreFilters 1\n                -containersIgnoreFilters 0\n                -editAttrName 0\n                -showAttrValues 0\n                -highlightSecondary 0\n                -showUVAttrsOnly 0\n                -showTextureNodesOnly 0\n                -attrAlphaOrder \"default\" \n                -animLayerFilterOptions \"allAffecting\" \n"
 		+ "                -sortOrder \"none\" \n                -longNames 0\n                -niceNames 1\n                -showNamespace 1\n                -showPinIcons 1\n                -mapMotionTrails 1\n                $editorName;\n\n\t\t\t$editorName = ($panelName+\"GraphEd\");\n            animCurveEditor -e \n                -displayKeys 1\n                -displayTangents 0\n                -displayActiveKeys 0\n                -displayActiveKeyTangents 1\n                -displayInfinities 0\n                -autoFit 0\n                -snapTime \"integer\" \n                -snapValue \"none\" \n                -showResults \"off\" \n                -showBufferCurves \"off\" \n                -smoothness \"fine\" \n                -resultSamples 1\n                -resultScreenSamples 0\n                -resultUpdate \"delayed\" \n                -showUpstreamCurves 1\n                -stackedCurves 0\n                -stackedCurvesMin -1\n                -stackedCurvesMax 1\n                -stackedCurvesSpace 0.2\n                -displayNormalized 0\n"
 		+ "                -preSelectionHighlight 0\n                -constrainDrag 0\n                -classicMode 1\n                $editorName;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Graph Editor\")) -mbv $menusOkayInPanels  $panelName;\n\n\t\t\t$editorName = ($panelName+\"OutlineEd\");\n            outlinerEditor -e \n                -showShapes 1\n                -showReferenceNodes 0\n                -showReferenceMembers 0\n                -showAttributes 1\n                -showConnected 1\n                -showAnimCurvesOnly 1\n                -showMuteInfo 0\n                -organizeByLayer 1\n                -showAnimLayerWeight 1\n                -autoExpandLayers 1\n                -autoExpand 1\n                -showDagOnly 0\n                -showAssets 1\n                -showContainedOnly 0\n                -showPublishedAsConnected 0\n                -showContainerContents 0\n                -ignoreDagHierarchy 0\n                -expandConnections 1\n                -showUpstreamCurves 1\n"
 		+ "                -showUnitlessCurves 1\n                -showCompounds 0\n                -showLeafs 1\n                -showNumericAttrsOnly 1\n                -highlightActive 0\n                -autoSelectNewObjects 1\n                -doNotSelectNewObjects 0\n                -dropIsParent 1\n                -transmitFilters 1\n                -setFilter \"0\" \n                -showSetMembers 0\n                -allowMultiSelection 1\n                -alwaysToggleSelect 0\n                -directSelect 0\n                -displayMode \"DAG\" \n                -expandObjects 0\n                -setsIgnoreFilters 1\n                -containersIgnoreFilters 0\n                -editAttrName 0\n                -showAttrValues 0\n                -highlightSecondary 0\n                -showUVAttrsOnly 0\n                -showTextureNodesOnly 0\n                -attrAlphaOrder \"default\" \n                -animLayerFilterOptions \"allAffecting\" \n                -sortOrder \"none\" \n                -longNames 0\n                -niceNames 1\n                -showNamespace 1\n"
@@ -351,10 +350,10 @@ select -ne :defaultRenderGlobals;
 	setAttr ".outf" 32;
 	setAttr ".ifp" -type "string" "test";
 select -ne :defaultResolution;
-	setAttr ".w" 1024;
-	setAttr ".h" 1024;
+	setAttr ".w" 320;
+	setAttr ".h" 240;
 	setAttr ".pa" 1;
-	setAttr ".dar" 1;
+	setAttr ".dar" 1.3333333730697632;
 select -ne :defaultLightSet;
 	setAttr -s 13 ".dsm";
 select -ne :hardwareRenderGlobals;

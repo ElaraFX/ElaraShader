@@ -1,6 +1,6 @@
 //Maya ASCII 2013 scene
 //Name: test.ma
-//Last modified: Thu, Sep 25, 2014 06:00:20 PM
+//Last modified: Tue, Sep 30, 2014 03:47:53 PM
 //Codeset: 936
 file -rdi 1 -ns "input_color" -rfn "input_colorRN" "K:/osl/testCase//test_5073/data/input_color.ma";
 file -rdi 2 -ns "object" -rfn "input_color:objectRN" "K:/osl/testCase//test_5073/data/object.ma";
@@ -56,8 +56,8 @@ file -r -ns "input_alphaIsLuminance" -dr 1 -rfn "input_alphaIsLuminanceRN" "K:/o
 file -r -ns "input_isVisible" -dr 1 -rfn "input_isVisibleRN" "K:/osl/testCase//test_5073/data/input_isVisible.ma";
 file -r -ns "object" -dr 1 -rfn "objectRN" "K:/osl/testCase//test_5073/data/object.ma";
 requires maya "2013";
-requires "mtoer" "1.4.8";
 requires "stereoCamera" "10.0";
+requires "mtoer" "1.4.8";
 currentUnit -l centimeter -a degree -t film;
 fileInfo "application" "maya";
 fileInfo "product" "Maya 2013";
@@ -67,7 +67,7 @@ fileInfo "osv" "Microsoft Windows 7 Ultimate Edition, 64-bit Windows 7 Service P
 createNode transform -s -n "persp";
 	setAttr ".v" no;
 	setAttr ".t" -type "double3" 6.612205317046211 5.3156389939065161 5.5856416468151009 ;
-	setAttr ".r" -type "double3" -39.338352729601041 56.999999999999218 5.8397479375963123e-015 ;
+	setAttr ".r" -type "double3" -39.338352729601041 56.999999999999218 5.8397479375963115e-015 ;
 createNode camera -s -n "perspShape" -p "persp";
 	setAttr -k off ".v" no;
 	setAttr ".rnd" no;
@@ -228,7 +228,6 @@ lockNode -l 1 ;
 createNode eiOptions -s -n "defaultElaraRenderOptions";
 	setAttr ".mver" 10408;
 	setAttr ".version" -type "string" "1.4.8";
-	setAttr ".maxsp" 4;
 	setAttr ".glosmp" 1;
 	setAttr ".difsmp" 1;
 	setAttr ".ssssmp" 1;
@@ -245,8 +244,8 @@ lockNode -l 1 ;
 createNode reference -n "input_blendMode0RN";
 	setAttr ".ed" -type "dataReferenceEdits" 
 		"input_blendMode0RN"
-		"input_blendMode0RN" 0
 		"input_blendMode0:objectRN" 0
+		"input_blendMode0RN" 0
 		"input_blendMode0:objectRN" 1
 		2 "|input_blendMode0:object:pPlane1" "translate" " -type \"double3\" -2.352291 0 0.730261";
 	setAttr ".ptag" -type "string" "";
@@ -326,8 +325,8 @@ lockNode -l 1 ;
 createNode reference -n "input_blendMode9RN";
 	setAttr ".ed" -type "dataReferenceEdits" 
 		"input_blendMode9RN"
-		"input_blendMode9RN" 0
 		"input_blendMode9:objectRN" 0
+		"input_blendMode9RN" 0
 		"input_blendMode9:objectRN" 1
 		2 "|input_blendMode9:object:pPlane1" "translate" " -type \"double3\" 0.509387 0 1.898786";
 	setAttr ".ptag" -type "string" "";
@@ -353,8 +352,8 @@ lockNode -l 1 ;
 createNode reference -n "input_blendMode12RN";
 	setAttr ".ed" -type "dataReferenceEdits" 
 		"input_blendMode12RN"
-		"input_blendMode12RN" 0
 		"input_blendMode12:objectRN" 0
+		"input_blendMode12RN" 0
 		"input_blendMode12:objectRN" 1
 		2 "|input_blendMode12:object:pPlane1" "translate" " -type \"double3\" 1.851598 0 0.786741";
 	setAttr ".ptag" -type "string" "";
@@ -415,11 +414,12 @@ select -ne :renderGlobalsList1;
 select -ne :defaultRenderGlobals;
 	setAttr ".ren" -type "string" "elara";
 	setAttr ".outf" 32;
+	setAttr ".ifp" -type "string" "test";
 select -ne :defaultResolution;
-	setAttr ".w" 1024;
-	setAttr ".h" 1024;
+	setAttr ".w" 320;
+	setAttr ".h" 240;
 	setAttr ".pa" 1;
-	setAttr ".dar" 1;
+	setAttr ".dar" 1.3333333730697632;
 select -ne :defaultLightSet;
 	setAttr -s 19 ".dsm";
 select -ne :hardwareRenderGlobals;
