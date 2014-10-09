@@ -1,0 +1,86 @@
+/*-------------for mtoer.xml------------------------------
+ <maya_grid>
+	 <maya.name type="STRING">grid</maya.name>
+ </maya_grid>
+*/
+#include "mayautil.h"
+
+#define CONTRAST(c,d,f) mix((c + d) / 2, c, f)
+
+shader maya_grid
+[[ string help = "Maya Grid"]]
+(
+	//	Inputs
+	//
+				color	i_defaultColor		= 0.5,
+				float	i_alphaGain			= 1.0,
+	/*uniform*/	int		i_alphaIsLuminance	= 0,
+				float	i_alphaOffset		= 0,
+				color	i_colorGain			= 1.0,
+				color	i_colorOffset		= 0,
+	/*uniform*/	int		i_invert			= 0,
+
+				color	i_lineColor			= 1,
+				color	i_fillerColor		= 0,
+				float	i_uWidth			= 0.1,	
+				float	i_vWidth			= 0.1,
+				float	i_contrast			= 1.0,
+			
+				float	i_filter			= 1.0,
+				float	i_filterOffset		= 0.0,
+			
+				vector	i_uvCoord			= vector(0.0,0.0,0.0),
+	
+	//	Outputs
+	//
+	output		float	o_outAlpha			= 1.0,
+	output		color	o_outColor			= 0.0
+	)
+{
+	float dx = 1;
+	float dy = 1;
+	
+	float ss = i_uvCoord[0];
+	float tt = 1 - i_uvCoord[1];
+
+	if(ISUVDEFINED(ss, tt))
+	//~ if(0)
+	{
+		ss = mod(ss, WRAPMAX);
+		tt = mod(tt, WRAPMAX);
+    
+		/* compute 'ss' and 'tt' filter widths */
+		float dss = abs(Dx(ss) * dx) + abs(Dy(ss) * dy);
+		float dtt = abs(Dx(tt) * dx) + abs(Dy(tt) * dy);
+
+		/* Clamp the 'ss' and 'tt' filter widths to reasonable ranges
+           (there could be discontinuities in parametrisation) and 
+		   add in "Effects" filter values. We multiplie the i_filterOffset
+		   variable by 2 to match Maya's look */ 
+		dss = clamp( dss, 0, i_uWidth*0.5 ) * i_filter + i_filterOffset*2; 
+		dtt = clamp( dtt, 0, i_vWidth*0.5 ) * i_filter + i_filterOffset*2; 
+	
+		float f = filteredpulsetrain (i_uWidth, 1, ss+i_uWidth*0.5, dss)
+				* filteredpulsetrain (i_vWidth, 1, tt+i_vWidth*0.5, dtt);
+
+		color lc = CONTRAST(i_lineColor, i_fillerColor, i_contrast);
+		color fc = CONTRAST(i_fillerColor, i_lineColor, i_contrast);
+
+		o_outColor = mix(lc, fc,f);
+		o_outAlpha = 1-f; 
+		
+		colorBalance(o_outColor, 
+			o_outAlpha,
+			i_alphaIsLuminance,
+			i_alphaGain,
+			i_alphaOffset,
+			i_colorGain,
+			i_colorOffset,
+			i_invert);
+	} 
+	else {
+		o_outColor = i_defaultColor;
+		o_outAlpha = 1.0;
+	}
+}
+

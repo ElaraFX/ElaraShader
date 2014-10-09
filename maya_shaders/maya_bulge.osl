@@ -1,0 +1,62 @@
+/*-------------for mtoer.xml------------------------------
+ <maya_bulge>
+	 <maya.name type="STRING">bulge</maya.name>
+ </maya_bulge>
+*/
+#include "mayautil.h"
+
+shader maya_bulge
+[[ string help = "Maya Bulge"]]
+(
+	//	Inputs
+	//
+				float	i_alphaGain			= 1.0,
+	/*uniform*/	int		i_alphaIsLuminance	= 0,
+				float	i_alphaOffset		= 0.0,
+				color	i_colorGain			= 1.0,
+				color	i_colorOffset		= 0.0,
+				color	i_defaultColor		= 0.5,
+	/*uniform*/	int		i_invert			= 0,
+				vector	i_uvCoord			= vector(0,0,0),
+
+				float	i_uWidth			= 0.1,
+				float	i_vWidth			= 0.1,
+	
+	//	Outputs
+	//
+	output		float	o_outAlpha			= 1.0,
+	output		color	o_outColor			= 0.0
+	)
+{
+	float ss = i_uvCoord[0];
+	float tt = i_uvCoord[1];
+
+	if(ISUVDEFINED(ss, tt))
+	{
+		ss = mod(ss, WRAPMAX);
+		tt = mod(tt, WRAPMAX);
+    
+		float a = smoothstep(i_uWidth / 2, .5, ss) * 
+		(1 - smoothstep(0.5, 1 - (i_uWidth / 2), ss));
+		float b = smoothstep(i_vWidth / 2, .5, tt) * 
+		(1 - smoothstep(0.5, 1 - (i_vWidth / 2), tt));
+		o_outAlpha = sqrt(abs(a * b));
+		o_outColor = color(o_outAlpha);
+
+		colorBalance(o_outColor, 
+			o_outAlpha,
+			i_alphaIsLuminance,
+			i_alphaGain,
+			i_alphaOffset,
+			i_colorGain,
+			i_colorOffset,
+			i_invert);
+	}
+	else
+	{
+		o_outColor = i_defaultColor;
+		o_outAlpha = 1.0;
+	}
+}
+   
+
