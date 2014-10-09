@@ -91,12 +91,14 @@ node "options" "options" # "options"
 	scalar "light_cutoff" 0.000001
 	bool "path_cache" off
 	scalar "path_cache_density" 1.000000
-	int "path_cache_passes" 64
-	scalar "path_cache_radius" 1.000000
-	int "path_cache_points" 100
-	bool "path_cache_secondary_only" off
-	declare token "texture_searchpath" "E:/elaraShaderDev/sourceimages"
-	declare token "procedural_searchpath" "E:/elaraShaderDev/"
+	int "path_cache_passes" 20
+	scalar "path_cache_radius" 0.000000
+	int "path_cache_points" 10
+	int "path_cache_prefilter" 1
+	scalar "path_cache_merge" 0.000000
+	bool "hair_multiple_scatter" on
+	declare token "texture_searchpath" "C:/Users/123/Documents/maya/projects/default/sourceimages"
+	declare token "procedural_searchpath" "C:/Users/123/Documents/maya/projects/default/"
 	declare scalar "frame" 1.000000
 	declare token "render_layer" "defaultRenderLayer"
 	declare scalar "fps" 24.000000
@@ -3068,8 +3070,8 @@ node "maya_snow" "snow_color:snow1" # "osl_node"
 	int "i_blend" 0
 	vector "i_normalCamera" 0.000000 0.000000 1.000000
 	param_link "i_placementMatrix" "snow_color:place3dTexture1" "i_worldInverseMatrix"
-	color "o_outColor" 0.826813 0.903872 0.137164
-	scalar "o_outAlpha" 0.826813
+	color "o_outColor" 0.000000 0.444945 0.792000
+	scalar "o_outAlpha" 0.000000
 end
 node "maya_lambert" "snow_color:snow1Material" # "osl_node"
 	color "i_ambientColor" 0.000000 0.000000 0.000000
@@ -6062,8 +6064,8 @@ node "maya_snow" "snow_threshold:snow1" # "osl_node"
 	int "i_blend" 0
 	vector "i_normalCamera" 0.000000 0.000000 1.000000
 	param_link "i_placementMatrix" "snow_threshold:place3dTexture1" "i_worldInverseMatrix"
-	color "o_outColor" 0.537185 0.743113 0.366549
-	scalar "o_outAlpha" 0.537185
+	color "o_outColor" 0.000000 0.444945 0.792000
+	scalar "o_outAlpha" 0.000000
 end
 node "maya_lambert" "snow_threshold:snow1Material" # "osl_node"
 	color "i_ambientColor" 0.000000 0.000000 0.000000
@@ -9056,8 +9058,8 @@ node "maya_snow" "snow_depthDecay:snow1" # "osl_node"
 	int "i_blend" 0
 	vector "i_normalCamera" 0.000000 0.000000 1.000000
 	param_link "i_placementMatrix" "snow_depthDecay:place3dTexture1" "i_worldInverseMatrix"
-	color "o_outColor" 0.361523 0.645610 0.505674
-	scalar "o_outAlpha" 0.361523
+	color "o_outColor" 0.000000 0.444945 0.792000
+	scalar "o_outAlpha" 0.000000
 end
 node "maya_lambert" "snow_depthDecay:snow1Material" # "osl_node"
 	color "i_ambientColor" 0.000000 0.000000 0.000000
@@ -12050,8 +12052,8 @@ node "maya_snow" "snow_thickness:snow1" # "osl_node"
 	int "i_blend" 0
 	vector "i_normalCamera" 0.000000 0.000000 1.000000
 	param_link "i_placementMatrix" "snow_thickness:place3dTexture1" "i_worldInverseMatrix"
-	color "o_outColor" 0.440489 0.689441 0.443132
-	scalar "o_outAlpha" 0.440489
+	color "o_outColor" 0.000000 0.444945 0.792000
+	scalar "o_outAlpha" 0.000000
 end
 node "maya_lambert" "snow_thickness:snow1Material" # "osl_node"
 	color "i_ambientColor" 0.000000 0.000000 0.000000
@@ -12141,7 +12143,7 @@ node "outvar" "outvar_beauty_alpha" # "outvar"
 	bool "filter" on
 end
 node "output" "output_beauty" # "output"
-	token "filename" "E:/elaraShaderDev/images/beauty/test.png"
+	token "filename" "C:/Users/123/Documents/maya/projects/default/images/beauty/test.png"
 	enum "data_type" "rgba"
 		ref[] "var_list" 1  #2
 		"outvar_beauty"
@@ -12198,7 +12200,7 @@ node "outvar" "output_default_alpha" # "outvar"
 	bool "filter" on
 end
 node "output" "output_default" # "output"
-	token "filename" "E:/elaraShaderDev/images/test.png"
+	token "filename" "C:/Users/123/Documents/maya/projects/default/images/test.png"
 	enum "data_type" "rgba"
 		ref[] "var_list" 1  #2
 		"output_default_color"
@@ -12226,9 +12228,9 @@ node "camera" "perspShape" # "camera"
 	ref "lens_shader" ""
 	scalar "focal" 35.000000
 	scalar "aperture" 36.000000
-	scalar "aspect" 1.333333
-	int "res_x" 640
-	int "res_y" 480
+	scalar "aspect" 1.333000
+	int "res_x" 320
+	int "res_y" 240
 	int "window_xmin" -2147483648
 	int "window_xmax" 2147483647
 	int "window_ymin" -2147483648
