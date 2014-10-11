@@ -1,6 +1,6 @@
 //Maya ASCII 2013 scene
 //Name: test.ma
-//Last modified: Wed, Sep 17, 2014 08:31:06 PM
+//Last modified: Wed, Sep 17, 2014 08:45:12 PM
 //Codeset: 936
 file -rdi 1 -ns "brownian" -rfn "brownianRN" "E:/OSLShader/ElaraShader/automationtest/test_5066/data/brownian.ma";
 file -rdi 1 -ns "brownian_increment" -rfn "brownian_incrementRN" "E:/OSLShader/ElaraShader/automationtest/test_5066/data/brownian_increment.ma";

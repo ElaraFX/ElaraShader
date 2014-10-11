@@ -1,6 +1,10 @@
 //Maya ASCII 2013 scene
 //Name: test.ma
+<<<<<<< HEAD
+//Last modified: Mon, Sep 29, 2014 10:30:16 PM
+=======
 //Last modified: Wed, Oct 08, 2014 02:42:06 PM
+>>>>>>> 345b18fccda9d26fccfb57141ce99bd4107a6ff5
 //Codeset: 936
 file -rdi 1 -ns "solid_fractal_threshold" -rfn "solid_fractal_thresholdRN" "E:/OSLShader/ElaraShader/automationtest/test_5082/data/solid_fractal_threshold.ma";
 file -rdi 1 -ns "solid_fractal_amplitude" -rfn "solid_fractal_amplitudeRN" "E:/OSLShader/ElaraShader/automationtest/test_5082/data/solid_fractal_amplitude.ma";
