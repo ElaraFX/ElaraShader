@@ -1,6 +1,6 @@
 //Maya ASCII 2013 scene
 //Name: test.ma
-//Last modified: Tue, Sep 30, 2014 12:53:46 AM
+//Last modified: Fri, Oct 24, 2014 05:58:20 PM
 //Codeset: 936
 file -rdi 1 -ns "object" -rfn "objectRN" "K:/osl/testCase//test_5087/data/object.ma";
 file -rdi 1 -ns "scale" -rfn "scaleRN" "K:/osl/testCase//test_5087/data/scale.ma";
@@ -23,7 +23,6 @@ file -r -ns "vectorEncoding" -dr 1 -rfn "vectorEncodingRN" "K:/osl/testCase//tes
 file -r -ns "vectorSpace" -dr 1 -rfn "vectorSpaceRN" "K:/osl/testCase//test_5087/data/vectorSpace.ma";
 file -r -ns "vectorSpace2" -dr 1 -rfn "vectorSpace2RN" "K:/osl/testCase//test_5087/data/vectorSpace2.ma";
 requires maya "2013";
-requires "Mayatomr" "2013.0 - 3.10.1.11 ";
 requires "mtoer" "1.4.7";
 requires "stereoCamera" "10.0";
 currentUnit -l centimeter -a degree -t film;
@@ -404,10 +403,10 @@ select -ne :renderGlobalsList1;
 select -ne :defaultRenderGlobals;
 	setAttr ".ren" -type "string" "elara";
 select -ne :defaultResolution;
-	setAttr ".w" 512;
-	setAttr ".h" 512;
+	setAttr ".w" 320;
+	setAttr ".h" 240;
 	setAttr ".pa" 1;
-	setAttr ".dar" 1;
+	setAttr ".dar" 1.3333333730697632;
 select -ne :defaultLightSet;
 	setAttr -s 24 ".dsm";
 select -ne :hardwareRenderGlobals;

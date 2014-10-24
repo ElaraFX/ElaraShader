@@ -21,7 +21,7 @@ displacement maya_displacementShader
 	color	i_vectorDisplacement	= 0.0,
 	float	i_vectorEncoding		= 0.0,
 	int		i_vectorSpace 			= 1,
-	color	tangent					= 0,
+	color	i_tangent					= 0,
 	
 	output closure color result = 0
 )
@@ -33,15 +33,14 @@ displacement maya_displacementShader
 		space = "object";
 	if (raytype("displace"))
 	{
-		//~ if( isconnected(i_vectorDisplacement) == 0 ) //gray-scale displacing  
-		if( 0 ) //isconnected function is not working for elara at the momment
+		if( isconnected(i_vectorDisplacement) == 0 ) //gray-scale displacing  
+		//~ if( 0 ) //isconnected function is not working for elara at the momment - it is working now, solved
 		{
 			float magnitude = i_displacement;
 			if( i_vectorEncoding == 1 )
 				magnitude -= 0.5;
 			if( magnitude != 0 ){
 				PP += magnitude*N*i_scale;
-				//displace(i_vectorSpace==0?"world":"object", magnitude);
 			}
 		}
 		else //vector displacing
@@ -56,24 +55,33 @@ displacement maya_displacementShader
 				vector basisx=0;
 				vector basisy=0;
 				vector basisz=0;
-				if(i_vectorSpace == 0 || i_vectorSpace == 1) // World and object space 
+				if( 1 ) //not using custom tangent (Neither Mentalray nor 3delight)
+				//~ if( isconnected(i_tangent) == 0 ) //not using custom tangent
 				{
-					basisx = vector("object", 0, 0, 1);
-					basisy = vector("object", 0, 1, 0);
-					basisz = vector("object", -1, 0, 0);
-					if(i_vectorSpace == 0){
-						// todo:  convert 3 basis into world space, so the displacement will no longer follow objects rotation or scale
-						basisx = transform("world", basisx);
-						basisy = transform("world", basisy);
-						basisz = transform("world", basisz);
+					if(i_vectorSpace == 0 || i_vectorSpace == 1) // World and object space 
+					{
+						basisx = vector("object", 0, 0, 1);
+						basisy = vector("object", 0, 1, 0);
+						basisz = vector("object", -1, 0, 0);
+						if(i_vectorSpace == 0){
+							// todo:  convert 3 basis into world space, so the displacement will no longer follow objects rotation or scale
+							basisx = transform("world", basisx);
+							basisy = transform("world", basisy);
+							basisz = transform("world", basisz);
+						}
+					}
+					else
+					{
+						basisx = normalize(dPdu) ;
+						basisy = normalize(N) ;
+						basisz = normalize(dPdv) ;
 					}
 				}
-				else
+				else // using custom tangent (disabled)
 				{
-					basisx = normalize(dPdu) ;
+					basisx = normalize(vector("world",i_tangent[0], i_tangent[1], i_tangent[2]));
 					basisy = normalize(N) ;
-					basisz = normalize(dPdv) ;
-					
+					basisz = normalize(cross(basisx,basisy));
 				}
 				PP += (
 							basisx*(vectorDisplacement[2])
