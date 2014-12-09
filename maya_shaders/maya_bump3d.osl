@@ -1,0 +1,87 @@
+#include "mayautil.h"
+#include "stdosl.h"
+
+#define NEW_BUMP
+
+void do_bump_map(
+	float i_bumpValue,
+	float i_bumpDepth,
+	normal i_normalCamera,
+	output normal o_outNormal )
+{
+	//vector dPdu;
+    //vector dPdv;
+
+	float depth = abs(i_bumpDepth);
+	float offset = clamp(i_bumpValue * i_bumpDepth, -depth, depth);
+
+#ifndef NEW_BUMP /* old bump implementation */
+	/*
+		These scale factors are a bit experimental. The constant is to roughly
+		match maya's bump mapping. The part about dPdu/dPdv ensures that the
+		bump's scale does not depend on the underlying parametrization of the
+		patch (the use of Du and Dv below introduce that) and that it happens
+		in object space. Note that maya's handling of object space appears to
+		be slightly broken since an enlarged sphere will have the same bump as
+		a sphere with its control points moved outwards by a scale, somehow.
+	*/
+	float uscale = 1.0 / (length(transform("object", dPdu)) * 6.0);
+	float vscale = 1.0 / (length(transform("object", dPdv)) * 6.0);
+
+	vector gu = vector(1, 0, Du(offset) * uscale);
+	vector gv = vector(0, 1, Dv(offset) * vscale);
+	normal n = normal(gu ^ gv);
+	
+	vector basisz = normalize(i_normalCamera);
+	vector basisx = normalize((basisz ^ dPdu) ^ basisz);
+	vector basisy = normalize((basisz ^ dPdv) ^ basisz);
+
+	o_outNormal = normal(
+		n[0] * basisx +n[1] * basisy + n[2] * basisz);
+
+	o_outNormal = normalize(o_outNormal);
+#else
+
+	//point P;
+	//extern normal Ng;
+	
+	normal Nn = normalize(i_normalCamera);
+	normal Ngn = normalize(Ng);
+	normal Noffset = Nn - Ngn;
+	
+	float scale = 1.0;
+	
+	point Pp =
+		transform("world", P) +
+		normalize(transform("world", Ngn)) * offset * scale;
+
+    Nn = -transform("shader", calculatenormal(Pp));    
+	Nn = normalize(Nn);
+	o_outNormal = normalize(Nn + Noffset);
+
+#endif
+}
+
+shader maya_bump3d
+[[ string help = "Maya Bump3d"]]
+(
+                // Inputs
+                float i_bumpValue = 1.0,
+                float i_bumpDepth = 0.5,
+                float i_bumpFilter = 1.0,
+                float i_bumpFilterOffset = 0.0,
+                normal i_normalCamera = normal(0, 0, 1),
+
+	// Outputs
+	output normal o_outNormal = normal(0, 0, 1)
+)
+{
+	do_bump_map(
+		i_bumpValue,
+		i_bumpDepth,
+		i_normalCamera,
+		o_outNormal );
+}
+
+
+
