@@ -1,6 +1,6 @@
 //Maya ASCII 2013 scene
 //Name: test_3delight.ma
-//Last modified: Tue, Sep 30, 2014 12:50:57 AM
+//Last modified: Fri, Oct 24, 2014 05:57:47 PM
 //Codeset: 936
 file -rdi 1 -ns "test" -rfn "testRN" "K:/osl/testCase//test_5087/data/test.ma";
 file -rdi 2 -ns "object" -rfn "test:objectRN" "K:/osl/testCase//test_5087/data/object.ma";
@@ -104,32 +104,19 @@ createNode reference -n "testRN";
 	setAttr ".phl[8]" 0;
 	setAttr ".ed" -type "dataReferenceEdits" 
 		"testRN"
-		"test:vectorSpace2:objectRN" 1
-		2 "test:vectorSpace2:object:displacementShader1" "_3delight_displacementBound" 
-		" 1"
-		"test:tangent:objectRN" 1
-		2 "test:tangent:object:displacementShader1" "_3delight_displacementBound" 
-		" 1"
+		"test:vectorSpace2:objectRN" 0
+		"test:tangent:objectRN" 0
 		"test:scaleRN" 0
 		"test:vectorEncodingRN" 0
-		"test:scale:objectRN" 1
-		2 "test:scale:object:displacementShader1" "_3delight_displacementBound" " 1"
-		
-		"test:vectorEncoding:objectRN" 1
-		2 "test:vectorEncoding:object:displacementShader1" "_3delight_displacementBound" 
-		" 1"
+		"test:scale:objectRN" 0
+		"test:vectorEncoding:objectRN" 0
 		"test:vectorDisplacementRN" 0
 		"test:tangentRN" 0
 		"test:vectorSpaceRN" 0
 		"test:vectorSpace2RN" 0
-		"test:vectorSpace:objectRN" 1
-		2 "test:vectorSpace:object:displacementShader1" "_3delight_displacementBound" 
-		" 1"
-		"test:objectRN" 1
-		2 "test:object:displacementShader1" "_3delight_displacementBound" " 1"
-		"test:vectorDisplacement:objectRN" 1
-		2 "test:vectorDisplacement:object:displacementShader1" "_3delight_displacementBound" 
-		" 1"
+		"test:vectorSpace:objectRN" 0
+		"test:objectRN" 0
+		"test:vectorDisplacement:objectRN" 0
 		"testRN" 0
 		"test:vectorSpace2:objectRN" 1
 		2 "test:vectorSpace2:object:displacementShader1" "_3delight_displacementBound" 
@@ -184,9 +171,9 @@ createNode reference -n "testRN";
 		2 "|test:lights|test:directionalLight1|test:directionalLightShape1" "intensity" 
 		" 0.9"
 		2 "|test:lights|test:directionalLight2|test:directionalLightShape2" "intensity" 
-		" 2"
+		" 0.67"
 		2 "|test:lights|test:directionalLight3|test:directionalLightShape3" "intensity" 
-		" 1"
+		" 0.333"
 		5 3 "testRN" "|test:persp1|test:perspShape2.usedBy3dfm" "testRN.placeHolderList[8]" 
 		"";
 	setAttr ".ptag" -type "string" "";
@@ -977,10 +964,10 @@ select -ne :renderGlobalsList1;
 select -ne :defaultRenderGlobals;
 	setAttr ".ren" -type "string" "_3delight";
 select -ne :defaultResolution;
-	setAttr ".w" 1024;
-	setAttr ".h" 1024;
+	setAttr ".w" 320;
+	setAttr ".h" 240;
 	setAttr ".pa" 1;
-	setAttr ".dar" 1;
+	setAttr ".dar" 1.3329999446868896;
 select -ne :defaultLightSet;
 	setAttr -s 24 ".dsm";
 select -ne :hardwareRenderGlobals;

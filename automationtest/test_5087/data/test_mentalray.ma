@@ -1,6 +1,6 @@
 //Maya ASCII 2013 scene
 //Name: test_mentalray.ma
-//Last modified: Tue, Sep 30, 2014 12:52:57 AM
+//Last modified: Fri, Oct 24, 2014 05:57:05 PM
 //Codeset: 936
 file -rdi 1 -ns "test" -rfn "testRN" "K:/osl/testCase//test_5087/data/test.ma";
 file -rdi 2 -ns "object" -rfn "test:objectRN" "K:/osl/testCase//test_5087/data/object.ma";
@@ -119,9 +119,9 @@ createNode reference -n "testRN";
 		2 "|test:lights|test:directionalLight1|test:directionalLightShape1" "intensity" 
 		" 0.9"
 		2 "|test:lights|test:directionalLight2|test:directionalLightShape2" "intensity" 
-		" 2"
+		" 0.67"
 		2 "|test:lights|test:directionalLight3|test:directionalLightShape3" "intensity" 
-		" 1"
+		" 0.333"
 		"test:tangent:objectRN" 1
 		2 "|test:tangent:object:objects" "isCollapsed" " 1"
 		"test:scale:objectRN" 2
@@ -155,8 +155,8 @@ createNode mentalrayOptions -s -n "miDefaultOptions";
 	addAttr -ci true -sn "name" -ln "name" -dt "string" -p "stringOptions";
 	addAttr -ci true -sn "value" -ln "value" -dt "string" -p "stringOptions";
 	addAttr -ci true -sn "type" -ln "type" -dt "string" -p "stringOptions";
-	setAttr ".minsp" -1;
-	setAttr ".maxsp" 1;
+	setAttr ".minsp" 0;
+	setAttr ".maxsp" 2;
 	setAttr ".maxr" 2;
 	setAttr -s 28 ".stringOptions";
 	setAttr ".stringOptions[0].name" -type "string" "rast motion factor";
@@ -532,10 +532,10 @@ select -ne :renderGlobalsList1;
 select -ne :defaultRenderGlobals;
 	setAttr ".ren" -type "string" "mentalRay";
 select -ne :defaultResolution;
-	setAttr ".w" 1024;
-	setAttr ".h" 1024;
+	setAttr ".w" 320;
+	setAttr ".h" 240;
 	setAttr ".pa" 1;
-	setAttr ".dar" 1;
+	setAttr ".dar" 1.3333333730697632;
 select -ne :defaultLightSet;
 	setAttr -s 24 ".dsm";
 select -ne :hardwareRenderGlobals;
