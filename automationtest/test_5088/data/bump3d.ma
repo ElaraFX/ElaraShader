@@ -1,6 +1,6 @@
 //Maya ASCII 2013 scene
 //Name: bump3d.ma
-//Last modified: Fri, Oct 10, 2014 10:42:37 PM
+//Last modified: Thu, Dec 11, 2014 08:51:15 PM
 //Codeset: 936
 requires maya "2013";
 requires "mtoer" "1.4.8";
@@ -13,7 +13,7 @@ fileInfo "osv" "Microsoft Windows 7 Ultimate Edition, 64-bit Windows 7 Service P
 createNode transform -s -n "persp";
 	setAttr ".v" no;
 	setAttr ".t" -type "double3" 28 21 28 ;
-	setAttr ".r" -type "double3" -27.938352729602379 44.999999999999972 -5.172681101354183e-014 ;
+	setAttr ".r" -type "double3" -27.938352729602379 44.999999999999964 -5.172681101354183e-014 ;
 createNode camera -s -n "perspShape" -p "persp";
 	setAttr -k off ".v" no;
 	setAttr ".fl" 34.999999999999993;
@@ -80,8 +80,6 @@ createNode mesh -n "pSphereShape1" -p "pSphere1";
 	setAttr ".covm[0]"  0 1 1;
 	setAttr ".cdvm[0]"  0 1 1;
 createNode place3dTexture -n "place3dTexture1";
-	setAttr ".t" -type "double3" -1.0119078481807264e-006 0 -1.5178617722710896e-006 ;
-	setAttr ".s" -type "double3" 8.4885008007577358 8.4885008007577358 8.4885008007577358 ;
 createNode lightLinker -s -n "lightLinker1";
 	setAttr -s 3 ".lnk";
 	setAttr -s 3 ".slnk";
@@ -90,23 +88,12 @@ createNode displayLayer -n "defaultLayer";
 createNode renderLayerManager -n "renderLayerManager";
 createNode renderLayer -n "defaultRenderLayer";
 	setAttr ".g" yes;
-createNode bump3d -n "bump3d1";
 createNode blinn -n "blinn1";
+	setAttr ".c" -type "float3" 1 0.57303333 0 ;
 createNode shadingEngine -n "blinn1SG";
 	setAttr ".ihi" 0;
 	setAttr ".ro" yes;
 createNode materialInfo -n "materialInfo1";
-createNode projection -n "projection1";
-	setAttr ".ail" yes;
-	setAttr ".ua" 60.594059565279743;
-	setAttr ".va" 32.079207975564913;
-	setAttr ".t" 0;
-	setAttr ".vt1" -type "float2" 0.5 0.5 ;
-	setAttr ".vt2" -type "float2" 0.5 0.5 ;
-	setAttr ".vt3" -type "float2" 0.5 0.5 ;
-createNode checker -n "checker1";
-createNode place2dTexture -n "place2dTexture1";
-	setAttr ".re" -type "float2" 4 4 ;
 createNode script -n "uiConfigurationScriptNode";
 	setAttr ".b" -type "string" (
 		"// Maya Mel UI Configuration File.\n//\n//  This script is machine generated.  Edit at your own risk.\n//\n//\n\nglobal string $gMainPane;\nif (`paneLayout -exists $gMainPane`) {\n\n\tglobal int $gUseScenePanelConfig;\n\tint    $useSceneConfig = $gUseScenePanelConfig;\n\tint    $menusOkayInPanels = `optionVar -q allowMenusInPanels`;\tint    $nVisPanes = `paneLayout -q -nvp $gMainPane`;\n\tint    $nPanes = 0;\n\tstring $editorName;\n\tstring $panelName;\n\tstring $itemFilterName;\n\tstring $panelConfig;\n\n\t//\n\t//  get current state of the UI\n\t//\n\tsceneUIReplacement -update $gMainPane;\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"modelPanel\" (localizedPanelLabel(\"Top View\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `modelPanel -unParent -l (localizedPanelLabel(\"Top View\")) -mbv $menusOkayInPanels `;\n\t\t\t$editorName = $panelName;\n            modelEditor -e \n                -camera \"top\" \n                -useInteractiveMode 0\n                -displayLights \"default\" \n                -displayAppearance \"wireframe\" \n"
@@ -177,6 +164,9 @@ createNode polySphere -n "polySphere1";
 createNode polyNormal -n "polyNormal1";
 	setAttr ".ics" -type "componentList" 1 "f[*]";
 	setAttr ".unm" no;
+createNode brownian -n "brownian1";
+	setAttr ".ail" yes;
+createNode bump3d -n "bump3d1";
 select -ne :time1;
 	setAttr ".o" 1;
 	setAttr ".unw" 1;
@@ -193,7 +183,7 @@ select -ne :lightList1;
 select -ne :postProcessList1;
 	setAttr -s 2 ".p";
 select -ne :defaultRenderUtilityList1;
-	setAttr -s 3 ".u";
+	setAttr -s 2 ".u";
 select -ne :defaultRenderingList1;
 select -ne :renderGlobalsList1;
 select -ne :defaultRenderGlobals;
@@ -214,24 +204,20 @@ relationship "shadowLink" ":lightLinker1" ":initialParticleSE.message" ":default
 relationship "shadowLink" ":lightLinker1" "blinn1SG.message" ":defaultLightSet.message";
 connectAttr "layerManager.dli[0]" "defaultLayer.id";
 connectAttr "renderLayerManager.rlmi[0]" "defaultRenderLayer.rlid";
-connectAttr "projection1.oa" "bump3d1.bv";
 connectAttr "bump3d1.o" "blinn1.n";
 connectAttr "blinn1.oc" "blinn1SG.ss";
 connectAttr "pSphereShape1.iog" "blinn1SG.dsm" -na;
 connectAttr "blinn1SG.msg" "materialInfo1.sg";
 connectAttr "blinn1.msg" "materialInfo1.m";
-connectAttr "checker1.oc" "projection1.im";
-connectAttr "place3dTexture1.wim" "projection1.pm";
-connectAttr "place2dTexture1.o" "checker1.uv";
-connectAttr "place2dTexture1.ofs" "checker1.fs";
 connectAttr "polySphere1.out" "polyNormal1.ip";
+connectAttr "place3dTexture1.wim" "brownian1.pm";
+connectAttr "brownian1.oa" "bump3d1.bv";
 connectAttr "blinn1SG.pa" ":renderPartition.st" -na;
 connectAttr "blinn1.msg" ":defaultShaderList1.s" -na;
-connectAttr "checker1.msg" ":defaultTextureList1.tx" -na;
+connectAttr "brownian1.msg" ":defaultTextureList1.tx" -na;
 connectAttr "directionalLightShape1.ltd" ":lightList1.l" -na;
+connectAttr "place3dTexture1.msg" ":defaultRenderUtilityList1.u" -na;
 connectAttr "bump3d1.msg" ":defaultRenderUtilityList1.u" -na;
-connectAttr "projection1.msg" ":defaultRenderUtilityList1.u" -na;
-connectAttr "place2dTexture1.msg" ":defaultRenderUtilityList1.u" -na;
 connectAttr "defaultRenderLayer.msg" ":defaultRenderingList1.r" -na;
 connectAttr "directionalLight1.iog" ":defaultLightSet.dsm" -na;
 // End of bump3d.ma
