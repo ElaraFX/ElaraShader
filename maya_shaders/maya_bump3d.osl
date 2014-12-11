@@ -46,18 +46,17 @@ void do_bump_map(
 	//extern normal Ng;
 	
 	normal Nn = normalize(i_normalCamera);
-	normal Ngn = normalize(Ng);
+	normal Ngn = normalize(N);
 	normal Noffset = Nn - Ngn;
 	
 	float scale = 1.0;
 	
 	point Pp =
-		transform("world", P) +
-		normalize(transform("world", Ngn)) * offset * scale;
+		P + Ngn * offset * scale;
 
-    Nn = -transform("shader", calculatenormal(Pp));    
+    Nn = -calculatenormal(Pp);    
 	Nn = normalize(Nn);
-	o_outNormal = normalize(Nn + Noffset);
+	o_outNormal = -normalize(Nn + Noffset);
 
 #endif
 }
