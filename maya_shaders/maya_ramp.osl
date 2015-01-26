@@ -9,8 +9,16 @@ shader maya_ramp
     //
                 float               i_alphaGain = 1.0,
                 float               i_alphaOffset = 0.0,
-                float               i_colorPositions[3] = {0.0, 0.5, 1.0},  /*  */
-                color               i_colors[3] = {color(1, 0, 0), color(0, 1, 0), color(0, 0, 1)},  /* {color(1, 0, 0), color(0, 1, 0), color(0, 0, 1)} */
+                float               i_colorPositions[16] = {0.0, 0.0, 0.0, 0.0, 
+                                                            0.0, 0.0, 0.0, 0.0, 
+                                                            0.0, 0.0, 0.0, 0.0, 
+                                                            0.0, 0.0, 0.0, 0.0},  /* set to zero */
+                                                            
+                color               i_colors[16] = {color(1, 0, 0), color(0, 1, 0), color(0, 0, 1), color(0, 0, 1), 
+                                                    color(1, 0, 0), color(0, 1, 0), color(0, 0, 1), color(0, 0, 1), 
+                                                    color(1, 0, 0), color(0, 1, 0), color(0, 0, 1), color(0, 0, 1), 
+                                                    color(1, 0, 0), color(0, 1, 0), color(0, 0, 1), color(0, 0, 1) 
+                                                    },  /* {color(1, 0, 0), color(0, 1, 0), color(0, 0, 1)} */
                 color               i_colorGain = 1.0,
                 color               i_colorOffset = 0.0,
                 color               i_defaultColor = 0.5,
